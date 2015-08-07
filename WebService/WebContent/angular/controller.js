@@ -1,11 +1,10 @@
-var selfieMyappAdmin = angular.module('admin',  []);
 
-selfieMyappAdmin.value('session', '');
-
-selfieMyappAdmin.controller('adminCtrl', ['$scope','$http', '$location', '$window',
-                          function ($scope, $http, $location, $window , session) {
+angular.module('admin',  ['ngCookies'])
+.controller('adminCtrl', ['$scope','$http', '$location', '$window','$cookies',
+                          function ($scope, $http, $location, $window, $cookies ) {
 	$scope.error = "";
-	$scope.session = "";
+	this.session = "";
+	
 	$scope.login = function()
 	{	
 		$http.post('http://localhost/WebService/selfieCode/service/login?user='+$scope.usuario+'&pass='+$scope.password).
@@ -15,7 +14,32 @@ selfieMyappAdmin.controller('adminCtrl', ['$scope','$http', '$location', '$windo
 		    // when the response is available
 			  if(response.data.result != 'login inexistente')
 			  {
-				  this.session = response.data.result;
+				 $cookies.put('session', response.data.result)
+				 $window.location.assign('http://localhost/WebService/pages/admin.html');
+			  }
+			  else
+			  {
+				  $scope.error = response.data.result;
+				  $scope.session = "";
+			  }
+				
+		  }, function(response) {
+		    // called asynchronously if an error occurs
+		    // or server returns response with an error status.
+		  });
+	}
+	
+	$scope.showList = function()
+	{	
+		console.log($cookies.get('session'));
+		$http.post('http://localhost/WebService/selfieCode/service/login?session='+this.session).
+		  then(function(response) {
+			 
+		    // this callback will be called asynchronously
+		    // when the response is available
+			  if(response.data.result != 'login inexistente')
+			  {
+				 this.session = response.data.result;
 				 $window.location.assign('http://localhost/WebService/pages/admin.html');
 			  }
 			  else
@@ -59,6 +83,32 @@ selfieMyappAdmin.controller('adminCtrl', ['$scope','$http', '$location', '$windo
 	
 var selfieMyappDev = angular.module('dev',  []);
 selfieMyappDev.controller('devCtrl', ['$scope','$http', '$location', '$window',
+                                      function ($scope, $http, $location, $window, session) {
+            	$scope.error = "";
+            	$scope.session = "";
+            	            	
+            	$scope.cadastroDev = function()
+            	{
+            		var user = JSON.stringify($scope.usuario);
+            		$http({
+            		  method: 'POST',
+            		  url:'http://localhost/WebService/selfieCode/service/cadastroDev?usuario='+ user
+            		}).
+            		  then(function(response) {
+            			 
+            		    // this callback will be called asynchronously
+            		    // when the response is available
+            			console.log("result" + response);
+            				
+            		  }, function(response) {
+            		    // called asynchronously if an error occurs
+            		    // or server returns response with an error status.
+            		  });
+            	}
+            }]);
+
+var selfieMyappDev = angular.module('proj',  []);
+selfieMyappDev.controller('projCtrl', ['$scope','$http', '$location', '$window',
                                       function ($scope, $http, $location, $window, session) {
             	$scope.error = "";
             	$scope.session = "";

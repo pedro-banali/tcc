@@ -14,6 +14,8 @@
 	<!-- Angular Core CSS -->
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-cookies.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.js"></script>
 	<script src="../angular/app.js"></script>
 	<script src="../angular/controller.js"></script>
 	
@@ -286,19 +288,16 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-files-o fa-fw"></i>Cadastrar Projeto</a>
+                            <a href="cadastro-projeto.html"><i class="fa fa-files-o fa-fw"></i>Cadastrar Projeto</a>
                         </li>
                         <li>
                             <a href="cadastro-desenvolvedor.html"><i class="fa fa-user fa-fw"></i>Cadastrar Desenvolvedor</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-user fa-fw"></i>Dados Desenvolvedor<span class="fa arrow"></span></a>
+                            <a href="#" ng-click="showList()"><i class="fa fa-user fa-fw" ></i>Dados Desenvolvedor<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="flot.html">Miguel</a>
-                                </li>
-                                <li>
-                                    <a href="morris.html">Jose</a>
+                                <li data-ng-repeat="i in usuarios">
+                                    <a href="flot.html">{{i.name}}</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
