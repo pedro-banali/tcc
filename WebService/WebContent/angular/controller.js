@@ -15,7 +15,7 @@ angular.module('admin',  ['ngCookies'])
 			  if(response.data.result != 'login inexistente')
 			  {
 				 $cookies.put('session', response.data.result)
-				 $window.location.assign('http://localhost/WebService/pages/admin.html');
+				 $window.location.assign('http://localhost/WebService/pages/admin.html#/admin-default');
 			  }
 			  else
 			  {
@@ -40,7 +40,7 @@ angular.module('admin',  ['ngCookies'])
 			  if(response.data.result != 'login inexistente')
 			  {
 				 this.session = response.data.result;
-				 $window.location.assign('http://localhost/WebService/pages/admin.html');
+				 $window.location.assign('http://localhost/WebService/pages/admin-default');
 			  }
 			  else
 			  {
