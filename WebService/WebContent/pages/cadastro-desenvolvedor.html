@@ -15,19 +15,29 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-8 col-md-offset-2">
-                                    <form role="form" ng-submit="cadastroDev()" >
+                                    <form role="form" ng-submit="cadastroDev()" name="myForm" novalidate >
                                         <div class="form-group">
                                             <label>Nome</label>
-                                            <input class="form-control" ng-model="usuario.nome" name="nome">
-                                            <p class="help-block">Example block-level help text here.</p>
+                                            <input class="form-control" type="text" ng-model="usuario.nome" name="nome" required ng-minlength="3" ng-maxlength="50">
+								           <p ng-show="myForm.nome.$error.minlength" class="help-block">Nome &eacute; muito curto.</p>
+								           <p ng-show="myForm.nome.$error.maxlength" class="help-block">Nome &eacute; muito longo.</p>
+
+ 											
                                         </div>
                                         <div class="form-group">
                                             <label>CPF</label>
-                                            <input class="form-control" name="cpf" ng-model="usuario.cpf" placeholder="CPF">
+                                            <input class="form-control" type="number" name="cpf" ng-model="usuario.cpf" placeholder="CPF" required ng-minlength="11" ng-maxlength="11">
+                                            <span style="color:red"  ng-show="myForm.cpf.$dirty && myForm.cpf.$invalid">
+ 												<span ng-show="myForm.cpf.$error.required">CPF &eacute; obrigat&oacute;rio.</span>
+ 											</span>
+ 											<p ng-show="myForm.cpf.$error.minlength" class="help-block">Cpf &eacute; muito curto.</p>
+								           	<p ng-show="myForm.cpf.$error.maxlength" class="help-block">Cpf &eacute; muito longo.</p>
                                         </div>
                                         <div class="form-group">
                                             <label>Login</label>
-                                            <input class="form-control" name="login" ng-model="usuario.login" placeholder="Login">
+                                            <input class="form-control" type="text" name="login" ng-model="usuario.login" placeholder="Login" required ng-minlength="6" ng-maxlength="10" >
+                                        	<p ng-show="myForm.login.$error.minlength" class="help-block">Login &eacute; muito curto.</p>
+								           	<p ng-show="myForm.login.$error.maxlength" class="help-block">Login &eacute; muito longo.</p>
                                         </div>
                                         <div class="form-group">
                                             <label>Senha Tempor&aacute;ria</label>
@@ -51,7 +61,7 @@
 	                                        	<option ng-repeat="n in projetos" ></option>
 	                                        </select>
                                         </div>
-                                        <button type="submit" class="btn btn-default">Cadastrar</button>
+                                        <button type="submit" class="btn btn-default" ng-disabled="!myForm.$valid">Cadastrar</button>
                                         <button type="reset" class="btn btn-default">Cancelar</button>
                                     </form>
                                 </div>

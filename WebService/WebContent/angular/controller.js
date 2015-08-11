@@ -63,21 +63,22 @@ angular.module('admin',  ['ngCookies'])
 	
 	$scope.cadastroDev = function()
 	{
+
 		var user = JSON.stringify($scope.usuario);
-		$http({
-		  method: 'POST',
-		  url:'http://localhost/WebService/selfieCode/service/cadastroDev?usuario='+ user
-		}).
-		  then(function(response) {
-			 
-		    // this callback will be called asynchronously
-		    // when the response is available
-			console.log("result" + response);
-				
-		  }, function(response) {
-		    // called asynchronously if an error occurs
-		    // or server returns response with an error status.
-		  });
+//		$http({
+//		  method: 'POST',
+//		  url:'http://localhost/WebService/selfieCode/service/cadastroDev?usuario='+ user
+//		}).
+//		  then(function(response) {
+//			 
+//		    // this callback will be called asynchronously
+//		    // when the response is available
+//			console.log("result" + response);
+//				
+//		  }, function(response) {
+//		    // called asynchronously if an error occurs
+//		    // or server returns response with an error status.
+//		  });
 	}
 }]);
 	
