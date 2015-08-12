@@ -41,11 +41,12 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Senha Tempor&aacute;ria</label>
-                                            <input class="form-control" name="senha" ng-model="usuario.senha" placeholder="Digite senha">
+                                            <input class="form-control" name="senha" ng-model="usuario.senha" placeholder="Digite senha" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Data de Nascimento</label>
-                                             <input class="form-control" name="senha" ng-model="usuario.data"  placeholder="dd/mm/yyyy">
+                                            <input class="form-control" name="dataNascimento" ng-model="usuario.data" required placeholder="dd/mm/yyyy" ng-minlength="10" ng-maxlength="10">
+                                        	<p ng-show="myForm.dataNascimento.$error.minlength || myForm.dataNascimento.$error.maxlength" class="help-block">Data Inv&aacute;lida </p>
                                         </div>
                                         <div class="form-group">
                                         	<fieldset disabled>
@@ -57,8 +58,9 @@
                                         </div>
                                         <div class="form-group">
 	                                    	<label for="disabledSelect">Projeto</label>
-	                                        <select id="disabledSelect" name="projeto" ng-model="usuario.projeto"  class="form-control">
-	                                        	<option ng-repeat="n in projetos" ></option>
+	                                        <select id="disabledSelect" name="projeto" ng-model="usuario.projeto" required class="form-control">
+<!-- 	                                        	<option ng-repeat="n in projetos" ></option> -->
+													<option value="teste">Teste</option>
 	                                        </select>
                                         </div>
                                         <button type="submit" class="btn btn-default" ng-disabled="!myForm.$valid">Cadastrar</button>
