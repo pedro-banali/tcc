@@ -13,6 +13,14 @@ angular.module('selfiecode', [
           templateUrl: 'cadastro-projeto.html',
           controller: 'devCtrl'
         }).
+      when('/atribuir', {
+            templateUrl: 'atribuir-dev-proj.html',
+            controller: 'adminCtrl'
+          }).
+      when('/excluir-dev', {
+              templateUrl: 'excluir-dev.html',
+              controller: 'adminCtrl'
+            }).
       otherwise({
     	  templateUrl: 'admin-default.html',
     	  controller: 'adminCtrl'

@@ -1,0 +1,48 @@
+		<div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Atribuir</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           Atribuir Desenvolvedor a Projeto
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2">
+                                    <form role="form" ng-submit="" name="myForm" >
+                                        <div class="form-group">
+                                            <label>Desenvolvedor</label>
+                                            <select class="form-control" name="dev" ng-model="atribuicao.dev" required>
+	                                                <option value="1">Desenvolvendo</option>
+	                                                <option value="2">Finalizado</option>
+	                                                <option value="3">Aguardando</option>
+	                                        </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Projeto</label>
+                                            <select class="form-control" name="proj" ng-model="atribuicao.proj" required>
+	                                                <option value="1">Desenvolvendo</option>
+	                                                <option value="2">Finalizado</option>
+	                                                <option value="3">Aguardando</option>
+	                                        </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-default" ng-disabled="!myForm.$valid">Cadastrar</button>
+                                        <button type="reset" class="btn btn-default">Cancelar</button>
+                                    </form>
+                                </div>
+                                <!-- /.col-lg-6 (nested) -->
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
