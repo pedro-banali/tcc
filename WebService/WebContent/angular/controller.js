@@ -80,6 +80,24 @@ angular.module('admin',  ['ngCookies'])
 //		    // or server returns response with an error status.
 //		  });
 	}
+	
+	$scope.teste = function()
+	{
+		$http({
+			  method: 'GET',
+			  url:'http://localhost:8080/WebService/selfieCode/service/cadastroDev',
+			  headers: { 'usuario': 'pedro'},
+			}).then(function(response) {
+				 
+			    // this callback will be called asynchronously
+			    // when the response is available
+				console.log("result" + response);
+					
+			  }, function(response) {
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			  });
+	}
 }]);
 	
 var selfieMyappDev = angular.module('dev',  []);

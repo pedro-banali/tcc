@@ -126,10 +126,11 @@ public class WebService {
 	
 	
 	@Path("cadastroDev")
-	@POST
+	//@POST
+	@GET
 	//@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response cadastroDev(@QueryParam("usuario") String usuario ) throws JSONException {
+	public Response cadastroDev(@HeaderParam("usuario") String usuario ) throws JSONException {
 		
 		String result = "" + usuario;
 		System.out.println(usuario);
