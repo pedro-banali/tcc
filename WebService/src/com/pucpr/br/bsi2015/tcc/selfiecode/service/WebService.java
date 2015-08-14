@@ -86,6 +86,8 @@ public class WebService {
 				md.update(tempo.getBytes(Charset.forName("UTF-8")));
 				loginResult = String.format(Locale.ROOT, "%032x", new BigInteger(1, md.digest()));
 				jsonObject.put("result", loginResult);
+				jsonObject.put("username", "teste");
+
 			} catch (NoSuchAlgorithmException e) {
 				throw new IllegalStateException(e);
 			}

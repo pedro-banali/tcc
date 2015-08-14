@@ -1,32 +1,33 @@
 
 angular.module('admin',  ['ngCookies'])
-.controller('adminCtrl', ['$scope','$http', '$location', '$window','$cookies',
-                          function ($scope, $http, $location, $window, $cookies ) {
+.controller('adminCtrl', ['$scope','$http', '$location', '$window','$cookies', 'authenticationSvc',
+                          function ($scope, $http, $location, $window, $cookies , authenticationSvc) {
 	$scope.error = "";
 	this.session = "";
 	
 	$scope.login = function()
 	{	
-		$http.post('http://localhost/WebService/selfieCode/service/login?user='+$scope.usuario+'&pass='+$scope.password).
-		  then(function(response) {
-			 
-		    // this callback will be called asynchronously
-		    // when the response is available
-			  if(response.data.result != 'login inexistente')
-			  {
-				 $cookies.put('session', response.data.result)
-				 $window.location.assign('http://localhost/WebService/pages/admin.html#/admin-default');
-			  }
-			  else
-			  {
-				  $scope.error = response.data.result;
-				  $scope.session = "";
-			  }
-				
-		  }, function(response) {
-		    // called asynchronously if an error occurs
-		    // or server returns response with an error status.
-		  });
+		authenticationSvc.login($scope.usuario, $scope.password);
+//		$http.post('http://localhost/WebService/selfieCode/service/login?user='+$scope.usuario+'&pass='+$scope.password).
+//		  then(function(response) {
+//			 
+//		    // this callback will be called asynchronously
+//		    // when the response is available
+//			  if(response.data.result != 'login inexistente')
+//			  {
+//				 $cookies.put('session', response.data.result)
+//				 $window.location.assign('http://localhost/WebService/pages/admin.html#/admin-default');
+//			  }
+//			  else
+//			  {
+//				  $scope.error = response.data.result;
+//				  $scope.session = "";
+//			  }
+//				
+//		  }, function(response) {
+//		    // called asynchronously if an error occurs
+//		    // or server returns response with an error status.
+//		  });
 	}
 	
 	$scope.showList = function()

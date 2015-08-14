@@ -89,9 +89,9 @@ var app = angular.module('selfiecode', [
               }
           }
       });
-  }])
+  }]);
   
-  .run(["$rootScope", "$location", function ($rootScope, $location) {
+  app.run(["$rootScope", "$location", function ($rootScope, $location) {
 
     $rootScope.$on("$routeChangeSuccess", function (userInfo) {
         console.log(userInfo);
@@ -102,18 +102,33 @@ var app = angular.module('selfiecode', [
         	window.location.assign("index.html")
         }
     });
-}])
+}]);
 
-.factory("authenticationSvc", ["$http","$q","$window",function ($http, $q, $window) {
+app.factory("authenticationSvc", ["$http","$q","$window",function ($http, $q, $window) {
     var userInfo;
     console.log($q);
     function login(userName, password) {
         var deferred = $q.defer();
-
-        $http.post("/api/login", { userName: userName, password: password })
-            .then(function (result) {
+        $http.post('http://localhost/WebService/selfieCode/service/login?user='+userName+'&pass='+password).
+//		  then(function(response) {
+//			 
+//		    // this callback will be called asynchronously
+//		    // when the response is available
+//			
+//			  else
+//			  {
+//				  $scope.error = response.data.result;
+//				  $scope.session = "";
+//			  }
+//				
+//		  }, function(response) {
+//		    // called asynchronously if an error occurs
+//		    // or server returns response with an error status.
+//		  });
+//        $http.post("/api/login", { userName: userName, password: password })
+            then(function (result) {
                 userInfo = {
-                    accessToken: result.data.access_token,
+                    accessToken: result.data.result,
                     userName: result.data.userName
                 };
                 $window.sessionStorage["userInfo"] = JSON.stringify(userInfo);
