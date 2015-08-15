@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import com.pucpr.br.bsi2015.tcc.selfiecode.dao.DicaDAO;
 import com.pucpr.br.bsi2015.tcc.selfiecode.dao.MetricaDAO;
 import com.pucpr.br.bsi2015.tcc.selfiecode.dao.UsuarioDAO;
+import com.pucpr.br.bsi2015.tcc.selfiecode.model.Desenvolvedor;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Dica;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Metrica;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.TipoUsuario;
@@ -90,16 +91,16 @@ public class SelfieCodeBC {
 	public boolean cadastrarDev(JSONObject u)
 	{
 		
-		Usuario us = new Usuario();
+		Desenvolvedor us = new Desenvolvedor();
 
 		TipoUsuario tu = new TipoUsuario();
 		
 		us.setNome(u.getString("nome"));
+		us.setLogin(u.getString("login"));
 		us.setCpf(u.getLong("cpf"));
 		us.setDataNascimento(new Date(u.getString("data")));
-		
+		us.setSenha(u.getString("nome"));
 		tu.setId(3);
-
 		us.setTipoUsuario(tu);
 		us.setDataCadastro(new Date());
 
