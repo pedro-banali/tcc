@@ -5,11 +5,9 @@ import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
@@ -18,17 +16,17 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.pucpr.br.bsi2015.tcc.selfiecode.controller.SelfieCodeBC;
-import com.pucpr.br.bsi2015.tcc.selfiecode.model.Dica;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Metrica;
-
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import com.pucpr.br.bsi2015.tcc.selfiecode.model.Usuario;
+import com.pucpr.br.bsi2015.tcc.selfiecode.session.SessionController;
 
 @Path("service")
 public class WebService {
@@ -66,15 +64,15 @@ public class WebService {
 	@POST
 	@Produces("application/json")
 	public Response login(@QueryParam("user") String user, @QueryParam("pass") String pass) throws JSONException {
-
+		SessionController sc = SessionController.getInstance();
 		JSONObject jsonObject = new JSONObject();
-		boolean loginStatus;
+		Usuario loginStatus;
 		String loginResult;
 		SelfieCodeBC sbc = SelfieCodeBC.getInstance();
 
 		loginStatus = sbc.login(user, pass);
 
-		if (loginStatus) {
+		if (loginStatus != null) {
 			
 			MessageDigest md;
 			Date date = new Date();
@@ -86,7 +84,11 @@ public class WebService {
 				md.update(tempo.getBytes(Charset.forName("UTF-8")));
 				loginResult = String.format(Locale.ROOT, "%032x", new BigInteger(1, md.digest()));
 				jsonObject.put("result", loginResult);
-				jsonObject.put("username", "teste");
+				jsonObject.put("username", loginStatus.getNome());
+				jsonObject.put("tipo", loginStatus.getTipoUsuario().getId());
+				
+				sc.addSession(loginResult, loginStatus);
+				
 
 			} catch (NoSuchAlgorithmException e) {
 				throw new IllegalStateException(e);
@@ -98,6 +100,18 @@ public class WebService {
 		}
 
 		String result = "" + jsonObject;
+		return Response.status(200).entity(result).build();
+	}
+	
+	@Path("logout")
+	@POST
+	@Produces("application/json")
+	public Response logout(@HeaderParam("key") String key) throws JSONException {
+		SessionController sc = SessionController.getInstance();
+		
+		boolean r = sc.deleteSession(key);
+		
+		String result = "" + r;
 		return Response.status(200).entity(result).build();
 	}
 	
@@ -128,15 +142,41 @@ public class WebService {
 	
 	
 	@Path("cadastroDev")
-	//@POST
-	@GET
+	@POST
+	//@GET
 	//@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response cadastroDev(@HeaderParam("usuario") String usuario ) throws JSONException {
+	public Response cadastroDev(@HeaderParam("usuario") String usuario, @HeaderParam("key") String key ) throws JSONException {
+		SessionController sc = SessionController.getInstance();
+
+		JSONObject jsonObject = new JSONObject(usuario);
+
+		SelfieCodeBC sbc = SelfieCodeBC.getInstance();
+		
+		Usuario u = sc.getUser(key);
+		sbc.cadastrarDev(jsonObject);
+
+		
 		
 		String result = "" + usuario;
 		System.out.println(usuario);
 		return Response.status(200).entity(result).build();
 		//return ;
+	}
+	
+	@Path("listarDev")
+	@POST
+	@Produces("application/json")
+	public Response listarDev(@HeaderParam("key") String key) throws JSONException {
+		SessionController sc = SessionController.getInstance();
+		JSONArray list;
+		JSONObject jSon = new JSONObject();
+		Usuario usuario = sc.getUser(key);
+		SelfieCodeBC sbc = SelfieCodeBC.getInstance();
+		List<Usuario> uss = sbc.listarDesenvolvedores(usuario);
+		
+		list = new JSONArray(uss);
+		jSon.put("devs", list);
+		return Response.status(200).entity(jSon.toString()).build();
 	}
 }

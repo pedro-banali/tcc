@@ -1,6 +1,7 @@
 package com.pucpr.br.bsi2015.tcc.selfiecode.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,9 +11,10 @@ import org.json.JSONObject;
 import com.pucpr.br.bsi2015.tcc.selfiecode.dao.DicaDAO;
 import com.pucpr.br.bsi2015.tcc.selfiecode.dao.MetricaDAO;
 import com.pucpr.br.bsi2015.tcc.selfiecode.dao.UsuarioDAO;
-import com.pucpr.br.bsi2015.tcc.selfiecode.model.Usuario;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Dica;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Metrica;
+import com.pucpr.br.bsi2015.tcc.selfiecode.model.TipoUsuario;
+import com.pucpr.br.bsi2015.tcc.selfiecode.model.Usuario;
 
 public class SelfieCodeBC {
 	
@@ -28,7 +30,7 @@ public class SelfieCodeBC {
 		return selfieCodeBC;	
 	}
 	
-	public boolean login(String usuario, String senha)
+	public Usuario login(String usuario, String senha)
 	{
 		
 		Usuario u = new Usuario();
@@ -73,4 +75,38 @@ public class SelfieCodeBC {
 		return metricas;
 	}
 	
+	public List<Usuario> listarDesenvolvedores(Usuario u)
+	{
+		
+		
+		
+		UsuarioDAO uDao = new UsuarioDAO();
+		
+		return uDao.listarDev(u);
+		
+		//return true;
+	}
+
+	public boolean cadastrarDev(JSONObject u)
+	{
+		
+		Usuario us = new Usuario();
+
+		TipoUsuario tu = new TipoUsuario();
+		
+		us.setNome(u.getString("nome"));
+		us.setCpf(u.getLong("cpf"));
+		us.setDataNascimento(new Date(u.getString("data")));
+		
+		tu.setId(3);
+
+		us.setTipoUsuario(tu);
+		us.setDataCadastro(new Date());
+
+		UsuarioDAO uDao = new UsuarioDAO();
+		
+		//return uDao.cadastrarDev(u);
+		
+		return true;
+	}
 }

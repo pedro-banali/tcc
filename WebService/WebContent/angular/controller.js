@@ -1,58 +1,32 @@
 
 angular.module('admin',  ['ngCookies'])
-.controller('adminCtrl', ['$scope','$http', '$location', '$window','$cookies', 'authenticationSvc',
-                          function ($scope, $http, $location, $window, $cookies , authenticationSvc) {
+.controller('adminCtrl', ['$scope','$http', '$location', '$window','$cookies', 'authenticationSvc', 'managerSrvc',
+                          function ($scope, $http, $location, $window, $cookies , authenticationSvc, managerSrvc) {
 	$scope.error = "";
-	this.session = "";
+	$scope.toSearch = false;
 	
 	$scope.login = function()
 	{	
 		authenticationSvc.login($scope.usuario, $scope.password);
-//		$http.post('http://localhost/WebService/selfieCode/service/login?user='+$scope.usuario+'&pass='+$scope.password).
-//		  then(function(response) {
-//			 
-//		    // this callback will be called asynchronously
-//		    // when the response is available
-//			  if(response.data.result != 'login inexistente')
-//			  {
-//				 $cookies.put('session', response.data.result)
-//				 $window.location.assign('http://localhost/WebService/pages/admin.html#/admin-default');
-//			  }
-//			  else
-//			  {
-//				  $scope.error = response.data.result;
-//				  $scope.session = "";
-//			  }
-//				
-//		  }, function(response) {
-//		    // called asynchronously if an error occurs
-//		    // or server returns response with an error status.
-//		  });
+		
 	}
 	
 	$scope.showList = function()
 	{	
-		console.log($cookies.get('session'));
-		$http.post('http://localhost/WebService/selfieCode/service/login?session='+this.session).
-		  then(function(response) {
-			 
-		    // this callback will be called asynchronously
-		    // when the response is available
-			  if(response.data.result != 'login inexistente')
-			  {
-				 this.session = response.data.result;
-				 $window.location.assign('http://localhost/WebService/pages/admin-default');
-			  }
-			  else
-			  {
-				  $scope.error = response.data.result;
-				  $scope.session = "";
-			  }
-				
-		  }, function(response) {
-		    // called asynchronously if an error occurs
-		    // or server returns response with an error status.
-		  });
+		
+		if(!$scope.toSearch)
+		{
+			$scope.toSearch = true;
+			managerSrvc.list(authenticationSvc.getUserInfo().accessToken, function(result) {  // this is only run after $http completes
+			       $scope.usuarios = result;
+			       console.log("scope" + $scope.usuarios);
+			    });
+			
+		}
+		else
+		{
+			$scope.toSearch = false;
+		}
 	}
 	
 	$scope.validate = function()
@@ -66,20 +40,21 @@ angular.module('admin',  ['ngCookies'])
 	{
 
 		var user = JSON.stringify($scope.usuario);
-//		$http({
-//		  method: 'POST',
-//		  url:'http://localhost/WebService/selfieCode/service/cadastroDev?usuario='+ user
-//		}).
-//		  then(function(response) {
-//			 
-//		    // this callback will be called asynchronously
-//		    // when the response is available
-//			console.log("result" + response);
-//				
-//		  }, function(response) {
-//		    // called asynchronously if an error occurs
-//		    // or server returns response with an error status.
-//		  });
+		$http({
+		  method: 'POST',
+		  url:'http://localhost/WebService/selfieCode/service/cadastroDev',
+		  headers: { 'usuario': user , 'key': authenticationSvc.getUserInfo().accessToken }
+		}).
+		  then(function(response) {
+			 
+		    // this callback will be called asynchronously
+		    // when the response is available
+			console.log("result" + response);
+				
+		  }, function(response) {
+		    // called asynchronously if an error occurs
+		    // or server returns response with an error status.
+		  });
 	}
 	
 	$scope.teste = function()

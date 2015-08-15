@@ -110,29 +110,22 @@ app.factory("authenticationSvc", ["$http","$q","$window",function ($http, $q, $w
     function login(userName, password) {
         var deferred = $q.defer();
         $http.post('http://localhost/WebService/selfieCode/service/login?user='+userName+'&pass='+password).
-//		  then(function(response) {
-//			 
-//		    // this callback will be called asynchronously
-//		    // when the response is available
-//			
-//			  else
-//			  {
-//				  $scope.error = response.data.result;
-//				  $scope.session = "";
-//			  }
-//				
-//		  }, function(response) {
-//		    // called asynchronously if an error occurs
-//		    // or server returns response with an error status.
-//		  });
-//        $http.post("/api/login", { userName: userName, password: password })
             then(function (result) {
                 userInfo = {
                     accessToken: result.data.result,
-                    userName: result.data.userName
+                    userName: result.data.username,
+                    type: result.data.tipo
                 };
                 $window.sessionStorage["userInfo"] = JSON.stringify(userInfo);
                 deferred.resolve(userInfo);
+                if(userInfo.type <= 2)
+                {
+                	$window.location.assign("http://localhost/WebService/pages/admin.html");
+                }
+                else
+                {
+                	$window.location.assign("http://localhost/WebService/pages/admin.html");
+                }
             }, function (error) {
                 deferred.reject(error);
             });
@@ -145,9 +138,9 @@ app.factory("authenticationSvc", ["$http","$q","$window",function ($http, $q, $w
 
         $http({
             method: "POST",
-            url: "/api/logout",
+            url: "http://localhost/WebService/selfieCode/service/logout",
             headers: {
-                "access_token": userInfo.accessToken
+                "key": userInfo.accessToken
             }
         }).then(function (result) {
             userInfo = null;
@@ -175,5 +168,38 @@ app.factory("authenticationSvc", ["$http","$q","$window",function ($http, $q, $w
         login: login,
         logout: logout,
         getUserInfo: getUserInfo
+    };
+}]);
+
+app.factory("managerSrvc", ["$http","$window",function ($http, $window) {
+   
+   
+    function list(key, callback) {
+       
+    	 $http({
+             method: "POST",
+             url: 'http://localhost/WebService/selfieCode/service/listarDev',
+             headers: {
+                 "key": key
+             }
+    	 	}).
+            then(function (result) {
+            	console.log("function" + result.data);
+            	callback(result.data);
+            }, function (error) {
+                
+            });
+    }
+
+    
+    function init() {
+        if ($window.sessionStorage["userInfo"]) {
+            userInfo = JSON.parse($window.sessionStorage["userInfo"]);
+        }
+    }
+    init();
+
+    return {
+    	list: list
     };
 }]);
