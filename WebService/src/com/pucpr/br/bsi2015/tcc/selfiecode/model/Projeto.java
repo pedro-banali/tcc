@@ -3,6 +3,7 @@ package com.pucpr.br.bsi2015.tcc.selfiecode.model;
 import java.util.Date;
 
 public class Projeto {
+	private int id;
 	private String nome;
 	private String descricao;
 	private String status;
@@ -52,5 +53,13 @@ public class Projeto {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

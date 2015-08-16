@@ -10,10 +10,12 @@ import org.json.JSONObject;
 
 import com.pucpr.br.bsi2015.tcc.selfiecode.dao.DicaDAO;
 import com.pucpr.br.bsi2015.tcc.selfiecode.dao.MetricaDAO;
+import com.pucpr.br.bsi2015.tcc.selfiecode.dao.ProjetoDAO;
 import com.pucpr.br.bsi2015.tcc.selfiecode.dao.UsuarioDAO;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Desenvolvedor;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Dica;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Metrica;
+import com.pucpr.br.bsi2015.tcc.selfiecode.model.Projeto;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.TipoUsuario;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Usuario;
 
@@ -84,6 +86,16 @@ public class SelfieCodeBC {
 		UsuarioDAO uDao = new UsuarioDAO();
 		
 		return uDao.listarDev(u);
+		
+		//return true;
+	}
+	
+	public List<Projeto> listarProjetos(Usuario u)
+	{
+			
+		ProjetoDAO pDao = new ProjetoDAO();
+		
+		return pDao.selectProjetos(u);
 		
 		//return true;
 	}

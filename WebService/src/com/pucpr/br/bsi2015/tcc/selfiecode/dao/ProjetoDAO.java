@@ -1,6 +1,5 @@
 package com.pucpr.br.bsi2015.tcc.selfiecode.dao;
 
-import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,12 +32,13 @@ public class ProjetoDAO {
 			PreparedStatement preparedStatement;
 			try {
 				preparedStatement = cf.prepareStatement(selectSQL);
-				JOptionPane.showMessageDialog(null, BigInteger.valueOf(7700147981l));
+				//JOptionPane.showMessageDialog(null, BigInteger.valueOf(7700147981l));
 				preparedStatement.setLong(1, 7700147981l);
 				//preparedStatement.setString(1, "Pedro Henrique Banali");
 				ResultSet rs = preparedStatement.executeQuery();
 				while (rs.next()) {
 					projeto = new Projeto();
+					projeto.setId(rs.getInt("ID_PROJETO"));
 					projeto.setNome(rs.getString("NomeProjeto"));
 					projeto.setDescricao(rs.getString("Descricao"));
 					projeto.setDataInicio(rs.getDate("Inicio"));
@@ -59,5 +59,7 @@ public class ProjetoDAO {
 		}
 		return projetos;
 	}
+
+
 	
 }

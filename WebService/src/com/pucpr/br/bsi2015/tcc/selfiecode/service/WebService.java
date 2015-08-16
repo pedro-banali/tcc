@@ -25,6 +25,7 @@ import org.json.JSONObject;
 
 import com.pucpr.br.bsi2015.tcc.selfiecode.controller.SelfieCodeBC;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Metrica;
+import com.pucpr.br.bsi2015.tcc.selfiecode.model.Projeto;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Usuario;
 import com.pucpr.br.bsi2015.tcc.selfiecode.session.SessionController;
 
@@ -177,6 +178,22 @@ public class WebService {
 		
 		list = new JSONArray(uss);
 		jSon.put("devs", list);
+		return Response.status(200).entity(jSon.toString()).build();
+	}
+	
+	@Path("listarProj")
+	@POST
+	@Produces("application/json")
+	public Response listarProj(@HeaderParam("key") String key) throws JSONException {
+		SessionController sc = SessionController.getInstance();
+		JSONArray list;
+		JSONObject jSon = new JSONObject();
+		Usuario usuario = sc.getUser(key);
+		SelfieCodeBC sbc = SelfieCodeBC.getInstance();
+		List<Projeto> upp = sbc.listarProjetos(usuario);
+		
+		list = new JSONArray(upp);
+		jSon.put("proj", list);
 		return Response.status(200).entity(jSon.toString()).build();
 	}
 }

@@ -191,15 +191,33 @@ app.factory("managerSrvc", ["$http","$window",function ($http, $window) {
             });
     }
 
-    
-    function init() {
-        if ($window.sessionStorage["userInfo"]) {
-            userInfo = JSON.parse($window.sessionStorage["userInfo"]);
-        }
-    }
-    init();
-
     return {
     	list: list
     };
+}]);
+
+app.factory("projectSvc", ["$http","$window",function ($http, $window) {
+    	   
+    	   
+        function list(key, callback) {
+           
+        	 $http({
+                 method: "POST",
+                 url: 'http://localhost/WebService/selfieCode/service/listarProj',
+                 headers: {
+                     "key": key
+                 }
+        	 	}).
+                then(function (result) {
+                	console.log("function" + result.data);
+                	callback(result.data);
+                }, function (error) {
+                    
+                });
+        }
+
+        
+        return {
+        	list: list
+        };
 }]);

@@ -1,7 +1,7 @@
 
 angular.module('admin',  ['ngCookies'])
-.controller('adminCtrl', ['$scope','$http', '$location', '$window','$cookies', 'authenticationSvc', 'managerSrvc',
-                          function ($scope, $http, $location, $window, $cookies , authenticationSvc, managerSrvc) {
+.controller('adminCtrl', ['$scope','$http', '$location', '$window','$cookies', 'authenticationSvc', 'managerSrvc', 'projectSvc',
+                          function ($scope, $http, $location, $window, $cookies , authenticationSvc, managerSrvc, projectSvc) {
 	$scope.error = "";
 	$scope.toSearch = false;
 	
@@ -73,6 +73,14 @@ angular.module('admin',  ['ngCookies'])
 			    // called asynchronously if an error occurs
 			    // or server returns response with an error status.
 			  });
+	}
+	
+	$scope.listarProj = function()
+	{
+		projectSvc.list(authenticationSvc.getUserInfo().accessToken, function(result) {  // this is only run after $http completes
+		       $scope.projetos = result;
+		       console.log("scope" + $scope.usuarios);
+		    });
 	}
 }]);
 	
