@@ -197,4 +197,28 @@ public class WebService {
 		jSon.put("proj", list);
 		return Response.status(200).entity(jSon.toString()).build();
 	}
+	
+	@Path("cadastroProj")
+	@POST
+	//@GET
+	//@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response cadastroProj(@HeaderParam("projeto") String projeto, @HeaderParam("key") String key ) throws JSONException {
+		SessionController sc = SessionController.getInstance();
+		boolean result;
+		JSONObject jsonObject = new JSONObject(projeto);
+
+		SelfieCodeBC sbc = SelfieCodeBC.getInstance();
+		
+		Usuario u = sc.getUser(key);
+		result = sbc.cadastrarDev(jsonObject, u );
+
+		
+		jsonObject = new JSONObject();
+		jsonObject.put("result", result);
+		
+
+		return Response.status(200).entity(jsonObject.toString()).build();
+		//return ;
+	}
 }

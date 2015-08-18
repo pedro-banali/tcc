@@ -1,6 +1,7 @@
 package com.pucpr.br.bsi2015.tcc.selfiecode.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -61,6 +62,46 @@ public class ProjetoDAO {
 		return projetos;
 	}
 	
+	public boolean inserirGerProj(Usuario usuario, Projeto proj) {
+
+		Connection cf = ConnectionFactory.getConnection();
+		projetos = new ArrayList<Projeto>();
+		
+		if(cf == null)
+			JOptionPane.showConfirmDialog(null, "ERRRROUUU");
+		else
+		{
+			
+			String selectSQL = "INSERT INTO USUARIO_PROJETO ( FK_USUARIO, FK_PROJETO) VALUES (?, ?)";
+			
+			PreparedStatement preparedStatement;
+			try {
+				
+			
+				preparedStatement = cf.prepareStatement(selectSQL);
+				
+				preparedStatement.setLong(1, usuario.getCpf());
+				preparedStatement.setInt(2, proj.getId());
+				
+				int rs = preparedStatement.executeUpdate();
+				if(rs > 0)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+	
 	public void inserDevProj(Desenvolvedor usuario) {
 		Projeto projeto;
 		
@@ -95,6 +136,49 @@ public class ProjetoDAO {
 				e.printStackTrace();
 			}
 		}
+
+	}
+	
+	public boolean inserirProjeto(Projeto proj) {
+		
+		java.sql.Date dataIni = new Date(proj.getDataInicio().getTime());
+		java.sql.Date dataFim = new Date(proj.getDataFim().getTime());
+		
+		Connection cf = ConnectionFactory.getConnection();
+		
+		if(cf == null)
+			JOptionPane.showConfirmDialog(null, "ERRRROUUU");
+		else
+		{
+			
+			String selectSQL = "INSERT INTO PROJETO ( NomeProjeto, Descricao, Inicio, Fim, Status_projeto  ) VALUES (?, ?, ?, ?, ? )";
+			
+			PreparedStatement preparedStatement;
+			try {
+				preparedStatement = cf.prepareStatement(selectSQL);
+				preparedStatement.setString(1, proj.getNome());
+				preparedStatement.setString(2, proj.getDescricao());
+				preparedStatement.setDate(3, dataIni);
+				preparedStatement.setDate(4, dataFim);
+				preparedStatement.setString(5, proj.getStatus());
+				
+				int rs = preparedStatement.executeUpdate();
+				
+				if(rs > 0)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return false;
 
 	}
 

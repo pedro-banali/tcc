@@ -136,4 +136,27 @@ public class SelfieCodeBC {
 		
 		return result;
 	}
+	
+	public boolean cadastrarProj(JSONObject p, Usuario g)
+	{
+		
+		SessionController sc = SessionController.getInstance();
+
+		Projeto proj = new Projeto();
+		
+		proj.setNome(p.getString("nome"));
+		proj.setDataInicio(new Date(p.getString("inicio")));
+		proj.setDataFim(new Date(p.getString("fim")));
+		proj.setStatus(p.getString("status"));
+		proj.setDescricao(p.getString("descricao"));
+		TipoUsuario tu = new TipoUsuario();
+
+
+		ProjetoDAO pDao = new ProjetoDAO();			
+		
+		boolean result = pDao.inserirProjeto(proj);
+		pDao.inserirGerProj(g, proj);
+		
+		return result;
+	}
 }
