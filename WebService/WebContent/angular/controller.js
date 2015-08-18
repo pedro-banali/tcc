@@ -52,7 +52,7 @@ angular.module('admin',  ['ngCookies'])
 			    // this callback will be called asynchronously
 			    // when the response is available
 				console.log("result" + response);
-				if(response.data == true)
+				if(response.data.result == true)
 				{
 					$scope.usuario = {};
 					$scope.sucesso  = true;

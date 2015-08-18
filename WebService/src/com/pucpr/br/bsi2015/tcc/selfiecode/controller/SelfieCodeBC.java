@@ -126,11 +126,12 @@ public class SelfieCodeBC {
 
 		DesenvolvedorDAO dDao = new DesenvolvedorDAO();
 		ProjetoDAO pDao = new ProjetoDAO();
+		UsuarioDAO uDao = new UsuarioDAO();
 		
-		
+			
 		
 		boolean result = dDao.cadastrarDev(ds);
-		
+		uDao.insertTipo(ds);
 		pDao.inserDevProj(ds);
 		
 		return result;

@@ -16,6 +16,14 @@
                             <div class="row">
                                 <div class="col-md-8 col-md-offset-2">
                                     <form role="form" ng-submit="cadastroDev()" name="myForm" novalidate >
+                                    	<div class="alert alert-success alert-dismissable" ng-show="sucesso" >
+			                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			                                Cadastro efetuado com sucesso.
+			                            </div>
+			                            <div class="alert alert-danger alert-dismissable" ng-show="errorInvalid" >
+			                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			                                Formul&aacute;rio incorreto .
+			                            </div>
                                         <div class="form-group">
                                             <label>Nome</label>
                                             <input class="form-control" type="text" ng-model="usuario.nome" name="nome" required ng-minlength="3" ng-maxlength="50">
@@ -62,8 +70,6 @@
 	                                        	<option ng-repeat="n in projetos.proj" value="{{n.id}}" > {{n.nome}}</option>
 	                                        </select>
                                         </div>
-                                        <p ng-show="errorInvalid" class="help-block">Formul&aacute;rio incorreto </p>
-                                        <p ng-show="sucesso" class="help-block">Cadastro efetuado com sucesso </p>
                                         <button type="submit" class="btn btn-default" ng-disabled="!myForm.$valid">Cadastrar</button>
                                         <button type="reset" class="btn btn-default">Cancelar</button>
                                     </form>
