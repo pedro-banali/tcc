@@ -149,19 +149,20 @@ public class WebService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response cadastroDev(@HeaderParam("usuario") String usuario, @HeaderParam("key") String key ) throws JSONException {
 		SessionController sc = SessionController.getInstance();
-
+		boolean result;
 		JSONObject jsonObject = new JSONObject(usuario);
 
 		SelfieCodeBC sbc = SelfieCodeBC.getInstance();
 		
 		Usuario u = sc.getUser(key);
-		sbc.cadastrarDev(jsonObject);
+		result = sbc.cadastrarDev(jsonObject, u );
 
 		
+		jsonObject = new JSONObject();
+		jsonObject.put("result", result);
 		
-		String result = "" + usuario;
-		System.out.println(usuario);
-		return Response.status(200).entity(result).build();
+
+		return Response.status(200).entity(jsonObject.toString()).build();
 		//return ;
 	}
 	

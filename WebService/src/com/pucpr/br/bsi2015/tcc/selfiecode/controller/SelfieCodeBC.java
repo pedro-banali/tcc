@@ -8,6 +8,7 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.pucpr.br.bsi2015.tcc.selfiecode.dao.DesenvolvedorDAO;
 import com.pucpr.br.bsi2015.tcc.selfiecode.dao.DicaDAO;
 import com.pucpr.br.bsi2015.tcc.selfiecode.dao.MetricaDAO;
 import com.pucpr.br.bsi2015.tcc.selfiecode.dao.ProjetoDAO;
@@ -18,6 +19,7 @@ import com.pucpr.br.bsi2015.tcc.selfiecode.model.Metrica;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Projeto;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.TipoUsuario;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Usuario;
+import com.pucpr.br.bsi2015.tcc.selfiecode.session.SessionController;
 
 public class SelfieCodeBC {
 	
@@ -100,26 +102,37 @@ public class SelfieCodeBC {
 		//return true;
 	}
 
-	public boolean cadastrarDev(JSONObject u)
+	public boolean cadastrarDev(JSONObject u, Usuario g)
 	{
 		
-		Desenvolvedor us = new Desenvolvedor();
-
+		SessionController sc = SessionController.getInstance();
+		Desenvolvedor ds = new Desenvolvedor();
+		Projeto proj = new Projeto();
 		TipoUsuario tu = new TipoUsuario();
+		List<Projeto> projs = new ArrayList<Projeto>();
 		
-		us.setNome(u.getString("nome"));
-		us.setLogin(u.getString("login"));
-		us.setCpf(u.getLong("cpf"));
-		us.setDataNascimento(new Date(u.getString("data")));
-		us.setSenha(u.getString("nome"));
+		ds.setNome(u.getString("nome"));
+		ds.setLogin(u.getString("login"));
+		ds.setCpf(u.getLong("cpf"));
+		ds.setDataNascimento(new Date(u.getString("data")));
+		ds.setSenha(u.getString("nome"));
 		tu.setId(3);
-		us.setTipoUsuario(tu);
-		us.setDataCadastro(new Date());
+		ds.setTipoUsuario(tu);
+		ds.setDataCadastro(new Date());
+		ds.setGerente(g);
+		proj.setId(u.getInt("projeto"));
+		projs.add(proj);
+		ds.setProjetos(projs);
 
-		UsuarioDAO uDao = new UsuarioDAO();
+		DesenvolvedorDAO dDao = new DesenvolvedorDAO();
+		ProjetoDAO pDao = new ProjetoDAO();
 		
-		//return uDao.cadastrarDev(u);
 		
-		return true;
+		
+		boolean result = dDao.cadastrarDev(ds);
+		
+		pDao.inserDevProj(ds);
+		
+		return result;
 	}
 }

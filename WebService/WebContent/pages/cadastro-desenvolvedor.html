@@ -40,8 +40,8 @@
 								           	<p ng-show="myForm.login.$error.maxlength" class="help-block">Login &eacute; muito longo.</p>
                                         </div>
                                         <div class="form-group">
-                                            <label>Senha Tempor&aacute;ria</label>
-                                            <input class="form-control" name="senha" ng-model="usuario.senha" placeholder="Digite senha" required>
+                                            <label>Senha</label>
+                                            <input class="form-control" type="password" name="senha" ng-model="usuario.senha" placeholder="Digite senha" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Data de Nascimento</label>
@@ -62,6 +62,8 @@
 	                                        	<option ng-repeat="n in projetos.proj" value="{{n.id}}" > {{n.nome}}</option>
 	                                        </select>
                                         </div>
+                                        <p ng-show="errorInvalid" class="help-block">Formul&aacute;rio incorreto </p>
+                                        <p ng-show="sucesso" class="help-block">Cadastro efetuado com sucesso </p>
                                         <button type="submit" class="btn btn-default" ng-disabled="!myForm.$valid">Cadastrar</button>
                                         <button type="reset" class="btn btn-default">Cancelar</button>
                                     </form>

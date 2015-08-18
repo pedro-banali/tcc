@@ -3,6 +3,7 @@ package com.pucpr.br.bsi2015.tcc.selfiecode.model;
 import java.util.List;
 
 public class Desenvolvedor extends Usuario {
+	private Usuario gerente;
 	private String nivelProgramador;
 	private List<Treino> treinos;
 	private List<Projeto> projetos;
@@ -29,6 +30,14 @@ public class Desenvolvedor extends Usuario {
 
 	public void setProjetos(List<Projeto> projetos) {
 		this.projetos = projetos;
+	}
+
+	public Usuario getGerente() {
+		return gerente;
+	}
+
+	public void setGerente(Usuario g) {
+		this.gerente = g;
 	}
 	
 }

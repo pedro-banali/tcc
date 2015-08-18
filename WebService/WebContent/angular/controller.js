@@ -40,40 +40,34 @@ angular.module('admin',  ['ngCookies'])
 	{
 
 		var user = JSON.stringify($scope.usuario);
-		$http({
-		  method: 'POST',
-		  url:'http://localhost/WebService/selfieCode/service/cadastroDev',
-		  headers: { 'usuario': user , 'key': authenticationSvc.getUserInfo().accessToken }
-		}).
-		  then(function(response) {
-			 
-		    // this callback will be called asynchronously
-		    // when the response is available
-			console.log("result" + response);
-				
-		  }, function(response) {
-		    // called asynchronously if an error occurs
-		    // or server returns response with an error status.
-		  });
-	}
-	
-	$scope.teste = function()
-	{
-		$http({
-			  method: 'GET',
-			  url:'http://localhost:8080/WebService/selfieCode/service/cadastroDev',
-			  headers: { 'usuario': 'pedro'},
-			}).then(function(response) {
+		if(!myForm.$valid)
+		{
+			$http({
+			  method: 'POST',
+			  url:'http://localhost/WebService/selfieCode/service/cadastroDev',
+			  headers: { 'usuario': user , 'key': authenticationSvc.getUserInfo().accessToken }
+			}).
+			  then(function(response) {
 				 
 			    // this callback will be called asynchronously
 			    // when the response is available
 				console.log("result" + response);
-					
+				if(response.data == true)
+				{
+					$scope.usuario = {};
+					$scope.sucesso  = true;
+				}
 			  }, function(response) {
 			    // called asynchronously if an error occurs
 			    // or server returns response with an error status.
 			  });
+		}
+		else
+		{
+			$scope.errorValid = true;
+		}
 	}
+	
 	
 	$scope.listarProj = function()
 	{

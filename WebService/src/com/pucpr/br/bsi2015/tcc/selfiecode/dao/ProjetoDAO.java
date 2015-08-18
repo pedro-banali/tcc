@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import com.pucpr.br.bsi2015.tcc.selfiecode.connection.ConnectionFactory;
+import com.pucpr.br.bsi2015.tcc.selfiecode.model.Desenvolvedor;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Projeto;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Usuario;
 
@@ -58,6 +59,43 @@ public class ProjetoDAO {
 			}
 		}
 		return projetos;
+	}
+	
+	public void inserDevProj(Desenvolvedor usuario) {
+		Projeto projeto;
+		
+
+		Connection cf = ConnectionFactory.getConnection();
+		projetos = new ArrayList<Projeto>();
+		
+		if(cf == null)
+			JOptionPane.showConfirmDialog(null, "ERRRROUUU");
+		else
+		{
+			
+			String selectSQL = "INSERT INTO USUARIO_PROJETO ( FK_USUARIO, FK_PROJETO) VALUES (?, ?)";
+			
+			PreparedStatement preparedStatement;
+			try {
+				for (int i = 0; i < usuario.getProjetos().size(); i++) {
+					
+					projeto = usuario.getProjetos().get(i);
+					
+					preparedStatement = cf.prepareStatement(selectSQL);
+					
+					preparedStatement.setLong(1, usuario.getCpf());
+					preparedStatement.setInt(2, (projeto.getId()));
+					
+					preparedStatement.executeUpdate();
+					
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 
