@@ -1,6 +1,6 @@
 
 angular.module('admin',  ['ngCookies'])
-.controller('adminCtrl', ['$scope','$http', '$location', '$window','$cookies', 'authenticationSvc', 'managerSrvc', 'projectSvc',
+.controller('adminCtrl', ['$scope','$http', '$location', '$window','$cookies', '$routeParams', 'authenticationSvc', 'managerSrvc', 'projectSvc',
                           function ($scope, $http, $location, $window, $cookies , authenticationSvc, managerSrvc, projectSvc) {
 	$scope.error = "";
 	$scope.toSearch = false;
@@ -75,6 +75,38 @@ angular.module('admin',  ['ngCookies'])
 		       $scope.projetos = result;
 		       console.log("scope" + $scope.usuarios);
 		    });
+	}
+	
+	$scope.cadastroProj = function()
+	{
+
+		var projeto = JSON.stringify($scope.projeto);
+		if(!myForm.$valid)
+		{
+			$http({
+			  method: 'POST',
+			  url:'http://localhost/WebService/selfieCode/service/cadastroProj',
+			  headers: { 'projeto': projeto , 'key': authenticationSvc.getUserInfo().accessToken }
+			}).
+			  then(function(response) {
+				 
+			    // this callback will be called asynchronously
+			    // when the response is available
+				console.log("result" + response);
+				if(response.data.result == true)
+				{
+					$scope.projeto = {};
+					$scope.sucesso  = true;
+				}
+			  }, function(response) {
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			  });
+		}
+		else
+		{
+			$scope.errorValid = true;
+		}
 	}
 }]);
 	

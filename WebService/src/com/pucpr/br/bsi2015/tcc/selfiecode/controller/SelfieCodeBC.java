@@ -19,7 +19,6 @@ import com.pucpr.br.bsi2015.tcc.selfiecode.model.Metrica;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Projeto;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.TipoUsuario;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Usuario;
-import com.pucpr.br.bsi2015.tcc.selfiecode.session.SessionController;
 
 public class SelfieCodeBC {
 	
@@ -105,7 +104,6 @@ public class SelfieCodeBC {
 	public boolean cadastrarDev(JSONObject u, Usuario g)
 	{
 		
-		SessionController sc = SessionController.getInstance();
 		Desenvolvedor ds = new Desenvolvedor();
 		Projeto proj = new Projeto();
 		TipoUsuario tu = new TipoUsuario();
@@ -140,7 +138,6 @@ public class SelfieCodeBC {
 	public boolean cadastrarProj(JSONObject p, Usuario g)
 	{
 		
-		SessionController sc = SessionController.getInstance();
 
 		Projeto proj = new Projeto();
 		
