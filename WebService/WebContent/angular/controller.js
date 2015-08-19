@@ -11,6 +11,12 @@ angular.module('admin',  ['ngCookies'])
 		
 	}
 	
+	$scope.logout = function()
+	{	
+		authenticationSvc.logout();
+		
+	}
+	
 	$scope.showList = function()
 	{	
 		
@@ -81,8 +87,8 @@ angular.module('admin',  ['ngCookies'])
 }]);
 	
 var selfieMyappDev = angular.module('dev',  []);
-selfieMyappDev.controller('devCtrl', ['$scope','$http', '$location', '$window',
-                                      function ($scope, $http, $location, $window, session) {
+selfieMyappDev.controller('devCtrl', ['$scope','$http', '$location', '$window','$cookies', '$routeParams', 'authenticationSvc', 'managerSrvc', 'projectSvc',
+                                      function ($scope, $http, $location, $window, $cookies , $routeParams, authenticationSvc, managerSrvc, projectSvc) {
 
             	            	
             	$scope.cadastroDev = function()

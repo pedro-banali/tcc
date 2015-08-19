@@ -113,7 +113,7 @@ public class SelfieCodeBC {
 		ds.setLogin(u.getString("login"));
 		ds.setCpf(u.getLong("cpf"));
 		ds.setDataNascimento(new Date(u.getString("data")));
-		ds.setSenha(u.getString("nome"));
+		ds.setSenha(u.getString("senha"));
 		tu.setId(3);
 		ds.setTipoUsuario(tu);
 		ds.setDataCadastro(new Date());

@@ -1,5 +1,4 @@
 var app = angular.module('selfiecode', [
-  'ui.grid',
   'ngRoute',
   'admin',
   'dev'
@@ -114,7 +113,7 @@ var app = angular.module('selfiecode', [
 
     $rootScope.$on("$routeChangeError", function (event, current, previous, eventObj) {
         if (eventObj.authenticated === false) {
-        	window.location.assign("index.html")
+        	window.location.assign("index.html");
         }
     });
 }]);
@@ -161,6 +160,7 @@ app.factory("authenticationSvc", ["$http","$q","$window",function ($http, $q, $w
             userInfo = null;
             $window.sessionStorage["userInfo"] = null;
             deferred.resolve(result);
+            $window.location.assign("index.html")
         }, function (error) {
             deferred.reject(error);
         });

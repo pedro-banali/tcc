@@ -6,9 +6,11 @@ import java.sql.SQLException;
 
 public class ConnectionFactory {
 	private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
-	private static final String DB_CONNECTION = "jdbc:mysql://192.168.112.129:3306/selfieCode";
+//	private static final String DB_CONNECTION = "jdbc:mysql://192.168.112.129:3306/selfieCode";
+	private static final String DB_CONNECTION = "jdbc:mysql://localhost:3306/selfieCode";
 	private static final String DB_USER = "root";
-	private static final String DB_PASSWORD = "tcc@051526";
+//	private static final String DB_PASSWORD = "tcc@051526";
+	private static final String DB_PASSWORD = "tcc@6274262";
 	
 	public static Connection getConnection()
 	{

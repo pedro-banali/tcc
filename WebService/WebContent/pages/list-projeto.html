@@ -13,8 +13,21 @@
                            Visualizar Projetos
                         </div>
                         <div class="panel-body">
-                            <div class="row">
-                               <div id="grid1" ui-grid="{ data: projetos.proj }" class="grid"></div>
+                      	<div class="row">
+	                      	<div data-ng-repeat="i in projetos.proj" class="col-md-8 col-md-offset-2">
+		                       	<div class="panel panel-info">
+			                      	<div class="panel-heading">
+			                          {{i.nome}}
+			                     	</div>
+			                      	<div class="panel-body">
+			                          <p>{{i.descricao}}</p>
+			                      	</div>
+			                      	<div class="panel-footer">
+			                          Panel Footer
+			                      	</div>
+		                 		</div>
+	                        </div>
+                       	</div>
                                 <!-- /.col-lg-6 (nested) -->
                             </div>
                             <!-- /.row (nested) -->
