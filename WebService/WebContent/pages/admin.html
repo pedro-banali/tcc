@@ -11,6 +11,12 @@
 
     <title>SelfieCode Login</title>
 	
+	<!-- Grid -->
+	<script src="http://ui-grid.info/docs/grunt-scripts/csv.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/pdfmake.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/vfs_fonts.js"></script>
+    <script src="http://ui-grid.info/release/ui-grid.js"></script>
+	
 	<!-- Angular Core CSS -->
 	
 
@@ -26,6 +32,9 @@
 
     <!-- Custom CSS -->
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    
+    <!-- Css Grid -->
+    <link rel="stylesheet" href="http://ui-grid.info/release/ui-grid.css" type="text/css">
 
     <!-- Morris Charts CSS -->
     <link href="../bower_components/morrisjs/morris.css" rel="stylesheet">
@@ -290,7 +299,7 @@
                                   <a href="#/page-project">Cadastrar</a>
                               </li>
                               <li>
-                                  <a href="#">Visualizar</a>
+                                  <a href="#/listar-proj" ng-click="listarProj()">Visualizar</a>
                               </li>
                               <li>
                                   <a href="#">Alterar</a>
@@ -360,7 +369,10 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.js"></script>
 	<script src="../angular/app.js"></script>
 	<script src="../angular/controller.js"></script>
+	
+	
 
+   
 </body>
 
 </html>

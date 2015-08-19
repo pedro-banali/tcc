@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import com.mysql.jdbc.Statement;
 import com.pucpr.br.bsi2015.tcc.selfiecode.connection.ConnectionFactory;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Desenvolvedor;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Projeto;
@@ -155,7 +156,7 @@ public class ProjetoDAO {
 			
 			PreparedStatement preparedStatement;
 			try {
-				preparedStatement = cf.prepareStatement(selectSQL);
+				preparedStatement = cf.prepareStatement(selectSQL, Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setString(1, proj.getNome());
 				preparedStatement.setString(2, proj.getDescricao());
 				preparedStatement.setDate(3, dataIni);
@@ -163,7 +164,11 @@ public class ProjetoDAO {
 				preparedStatement.setString(5, proj.getStatus());
 				
 				int rs = preparedStatement.executeUpdate();
+				ResultSet rsKeys = preparedStatement.getGeneratedKeys();
 				
+				if (rsKeys.next()) {
+				    proj.setId(rsKeys.getInt(1));
+				}
 				if(rs > 0)
 				{
 					return true;

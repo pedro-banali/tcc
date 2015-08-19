@@ -182,6 +182,8 @@ public class WebService {
 		return Response.status(200).entity(jSon.toString()).build();
 	}
 	
+	
+	
 	@Path("listarProj")
 	@POST
 	@Produces("application/json")
@@ -211,7 +213,7 @@ public class WebService {
 		SelfieCodeBC sbc = SelfieCodeBC.getInstance();
 		
 		Usuario u = sc.getUser(key);
-		result = sbc.cadastrarDev(jsonObject, u );
+		result = sbc.cadastrarProj(jsonObject, u );
 
 		
 		jsonObject = new JSONObject();

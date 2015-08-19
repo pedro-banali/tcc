@@ -1,4 +1,5 @@
 var app = angular.module('selfiecode', [
+  'ui.grid',
   'ngRoute',
   'admin',
   'dev'
@@ -7,7 +8,7 @@ var app = angular.module('selfiecode', [
     $routeProvider.
       when('/page-dev', {
         templateUrl: 'cadastro-desenvolvedor.html',
-        controller: 'adminCtrl',
+        controller: 'devCtrl',
         resolve: {
             auth: function ($q, authenticationSvc) {
                 var userInfo = authenticationSvc.getUserInfo();
@@ -21,7 +22,7 @@ var app = angular.module('selfiecode', [
       }).
       when('/page-project', {
           templateUrl: 'cadastro-projeto.html',
-          controller: 'devCtrl',
+          controller: 'adminCtrl',
           resolve: {
               auth: function ($q, authenticationSvc) {
                   var userInfo = authenticationSvc.getUserInfo();
@@ -47,7 +48,21 @@ var app = angular.module('selfiecode', [
                 }
             }
           }).
-      when('/excluir-dev', {
+          when('/listar-proj', {
+              templateUrl: 'list-projeto.html',
+              controller: 'adminCtrl',
+              resolve: {
+                  auth: function ($q, authenticationSvc) {
+                      var userInfo = authenticationSvc.getUserInfo();
+                      if (userInfo) {
+                          return $q.when(userInfo);
+                      } else {
+                          return $q.reject({ authenticated: false });
+                      }
+                  }
+              }
+            }).
+            when('/excluir-dev', {
               templateUrl: 'excluir-dev.html',
               controller: 'adminCtrl',
               resolve: {
