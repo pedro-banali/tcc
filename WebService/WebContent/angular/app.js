@@ -89,6 +89,20 @@ var app = angular.module('selfiecode', [
                 }
             }
           }).
+          when('/listar-dev', {
+              templateUrl: 'list-dev.html',
+              controller: 'devCtrl',
+              resolve: {
+                  auth: function ($q, authenticationSvc) {
+                      var userInfo = authenticationSvc.getUserInfo();
+                      if (userInfo) {
+                          return $q.when(userInfo);
+                      } else {
+                          return $q.reject({ authenticated: false });
+                      }
+                  }
+              }
+            }).
       otherwise({
     	  templateUrl: 'admin-default.html',
     	  controller: 'adminCtrl',

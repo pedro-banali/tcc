@@ -11,12 +11,7 @@
 
     <title>SelfieCode Login</title>
 	
-	<!-- Grid -->
-	<script src="http://ui-grid.info/docs/grunt-scripts/csv.js"></script>
-    <script src="http://ui-grid.info/docs/grunt-scripts/pdfmake.js"></script>
-    <script src="http://ui-grid.info/docs/grunt-scripts/vfs_fonts.js"></script>
-    <script src="http://ui-grid.info/release/ui-grid.js"></script>
-	
+
 	<!-- Angular Core CSS -->
 	
 
@@ -33,8 +28,7 @@
     <!-- Custom CSS -->
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
     
-    <!-- Css Grid -->
-    <link rel="stylesheet" href="http://ui-grid.info/release/ui-grid.css" type="text/css">
+
 
     <!-- Morris Charts CSS -->
     <link href="../bower_components/morrisjs/morris.css" rel="stylesheet">
@@ -51,7 +45,7 @@
 
 </head>
 
-<body ng-app="selfiecode"  ng-controller="adminCtrl" onloadstart="validate()"> 
+<body ng-app="selfiecode"  ng-controller="adminCtrl"> 
 
     <div id="wrapper">
 
@@ -302,12 +296,6 @@
                                   <a href="#/listar-proj" ng-click="listarProj()">Visualizar</a>
                               </li>
                               <li>
-                                  <a href="#">Alterar</a>
-                              </li>
-                              <li>
-                                  <a href="#">Excluir</a>
-                              </li>
-                              <li>
                                   <a href="#/atribuir">Atribuir Desenvolvedor</a>
                               </li>
                               
@@ -320,13 +308,7 @@
                                    <a href="#/page-dev">Cadastrar</a>
                                </li>
                                <li>
-                                   <a href="#">Visualizar</a>
-                               </li>
-                               <li>
-                                   <a href="#">Alterar</a>
-                               </li>
-                               <li>
-                                   <a href="#/excluir-dev">Excluir</a>
+                                     <a href="#/listar-dev">Visualizar</a>
                                </li>
                         	</ul>
                         </li>

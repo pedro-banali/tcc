@@ -43,8 +43,6 @@ angular.module('admin',  ['ngCookies'])
 	}
 	
 	
-	
-	
 	$scope.listarProj = function()
 	{
 		projectSvc.list(authenticationSvc.getUserInfo().accessToken, function(result) {  // this is only run after $http completes
@@ -87,8 +85,8 @@ angular.module('admin',  ['ngCookies'])
 }]);
 	
 var selfieMyappDev = angular.module('dev',  []);
-selfieMyappDev.controller('devCtrl', ['$scope','$http', '$location', '$window','$cookies', '$routeParams', 'authenticationSvc', 'managerSrvc', 'projectSvc',
-                                      function ($scope, $http, $location, $window, $cookies , $routeParams, authenticationSvc, managerSrvc, projectSvc) {
+selfieMyappDev.controller('devCtrl', ['$scope','$http', '$location', '$window', '$routeParams', 'authenticationSvc', 'managerSrvc', 'projectSvc',
+                                      function ($scope, $http, $location, $window , $routeParams, authenticationSvc, managerSrvc, projectSvc) {
 
             	            	
             	$scope.cadastroDev = function()
@@ -121,6 +119,19 @@ selfieMyappDev.controller('devCtrl', ['$scope','$http', '$location', '$window','
             		{
             			$scope.errorValid = true;
             		}
+            	}
+            	
+            	$scope.listarDev = function()
+            	{
+            		managerSrvc.list(authenticationSvc.getUserInfo().accessToken, function(result) {  // this is only run after $http completes
+            		       $scope.usuarios = result;
+            		       console.log("scope" + $scope.usuarios);
+            		    });
+            	}
+            	
+            	$scope.deletarDev = function(id)
+            	{
+            		alert(id);
             	}
             }]);
 

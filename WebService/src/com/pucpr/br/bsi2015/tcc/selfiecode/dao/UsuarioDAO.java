@@ -84,7 +84,8 @@ public List<Usuario> listarDev(Usuario usuario) {
 					+ " FROM USUARIO as U, USUARIO_TIPO as UT, TIPO_USUARIO as TU"
 					+ " WHERE U.CPF = UT.FK_CPF "
 					+ " AND TU.ID_TIPO_USUARIO = UT.FK_TIPO_USUARIO "
-					+ " AND U.Gerente = ?";
+					+ " AND U.Gerente = ? "
+					+ " AND UT.FK_TIPO_USUARIO = 3";
 
 			PreparedStatement preparedStatement;
 			try {
@@ -102,7 +103,7 @@ public List<Usuario> listarDev(Usuario usuario) {
 					u.setNome(rs.getString("Nome"));
 					u.setCpf(rs.getLong("Cpf"));
 					u.setDataNascimento(rs.getDate("Nascimento"));
-					
+					u.setLogin(rs.getString("Login"));
 					tu.setId(rs.getInt("FK_TIPO_USUARIO"));
 					tu.setDescricaoUsuario(rs.getString("DESCRICAO"));
 					

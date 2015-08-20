@@ -1,7 +1,7 @@
 
-            <div class="row" ng-init="listarProj()">
+            <div class="row" ng-init="listarDev()">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Cadastro</h1>
+                    <h1 class="page-header">Desenvolvedores</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -10,17 +10,20 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                           Visualizar Projetos
+                           Visualizar Desenvolvedores
                         </div>
                         <div class="panel-body">
                       	<div class="row">
-	                      	<div data-ng-repeat="i in projetos.proj" class="col-md-8 col-md-offset-2">
+	                      	<div data-ng-repeat="i in usuarios.devs" class="col-md-8 col-md-offset-2">
 		                       	<div class="panel panel-info">
 			                      	<div class="panel-heading">
-			                          {{i.nome}}
+			                          {{i.nome}} <button type="button" class="close" ng-click="deletarDev(i.cpf)" data-dismiss="alert" aria-hidden="true">&times;</button>
 			                     	</div>
 			                      	<div class="panel-body">
-			                          <p>{{i.descricao}}</p>
+				                      	<p><span>CPF: </span>{{i.cpf}}</p>
+				                        <p><span>Data de Nascimento: </span>{{i.dataNascimento}}</p>
+				                        <p><span>Login:</span> {{i.login}}</p>
+				                        <p><span>Data de Cadastro: </span>{{i.dataCadastro}}</p>
 			                      	</div>
 <!-- 			                      	<div class="panel-footer"> -->
 <!-- 			                          Panel Footer -->
