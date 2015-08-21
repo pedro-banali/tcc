@@ -35,7 +35,7 @@ var app = angular.module('selfiecode', [
               }
           }
         }).
-      when('/atribuir', {
+        when('/atribuir', {
             templateUrl: 'atribuir-dev-proj.html',
             controller: 'adminCtrl',
             resolve: {
@@ -48,77 +48,91 @@ var app = angular.module('selfiecode', [
                     }
                 }
             }
-          }).
-          when('/listar-proj', {
-              templateUrl: 'list-projeto.html',
-              controller: 'adminCtrl',
-              resolve: {
-                  auth: function ($q, authenticationSvc) {
-                      var userInfo = authenticationSvc.getUserInfo();
-                      if (userInfo) {
-                          return $q.when(userInfo);
-                      } else {
-                          return $q.reject({ authenticated: false });
-                      }
-                  }
-              }
-            }).
-            when('/excluir-dev', {
-              templateUrl: 'excluir-dev.html',
-              controller: 'adminCtrl',
-              resolve: {
-                  auth: function ($q, authenticationSvc) {
-                      var userInfo = authenticationSvc.getUserInfo();
-                      if (userInfo) {
-                          return $q.when(userInfo);
-                      } else {
-                          return $q.reject({ authenticated: false });
-                      }
-                  }
-              }
-            }).
-        when('/index', {
-            templateUrl: 'index.html',
-            controller: 'adminCtrl',
-            resolve: {
-                auth: function ($q, authenticationSvc) {
-                    var userInfo = authenticationSvc.getUserInfo();
-                    if (userInfo) {
-                        return $q.when(userInfo);
-                    } else {
-                        return $q.reject({ authenticated: false });
-                    }
-                }
-            }
-          }).
-          when('/listar-dev', {
-              templateUrl: 'list-dev.html',
-              controller: 'devCtrl',
-              resolve: {
-                  auth: function ($q, authenticationSvc) {
-                      var userInfo = authenticationSvc.getUserInfo();
-                      if (userInfo) {
-                          return $q.when(userInfo);
-                      } else {
-                          return $q.reject({ authenticated: false });
-                      }
-                  }
-              }
-            }).
-      otherwise({
-    	  templateUrl: 'admin-default.html',
-    	  controller: 'adminCtrl',
-          resolve: {
-              auth: function ($q, authenticationSvc) {
-                  var userInfo = authenticationSvc.getUserInfo();
-                  if (userInfo) {
-                      return $q.when(userInfo);
-                  } else {
-                      return $q.reject({ authenticated: false });
-                  }
-              }
-          }
-      });
+		  }).
+		  when('/listar-proj', {
+		  templateUrl: 'list-projeto.html',
+		  controller: 'adminCtrl',
+		  resolve: {
+		      auth: function ($q, authenticationSvc) {
+		          var userInfo = authenticationSvc.getUserInfo();
+		          if (userInfo) {
+		              return $q.when(userInfo);
+		          } else {
+		              return $q.reject({ authenticated: false });
+		          }
+			    }
+			  }
+		  }).
+		  when('/excluir-dev', {
+			  templateUrl: 'excluir-dev.html',
+			  controller: 'adminCtrl',
+			  resolve: {
+			      auth: function ($q, authenticationSvc) {
+			          var userInfo = authenticationSvc.getUserInfo();
+			          if (userInfo) {
+			              return $q.when(userInfo);
+			          } else {
+			              return $q.reject({ authenticated: false });
+			          }
+			      }
+			  }
+	         }).
+	         when('/index', {
+	            templateUrl: 'index.html',
+	            controller: 'adminCtrl',
+	            resolve: {
+	                auth: function ($q, authenticationSvc) {
+	                    var userInfo = authenticationSvc.getUserInfo();
+	                    if (userInfo) {
+	                        return $q.when(userInfo);
+	                    } else {
+	                        return $q.reject({ authenticated: false });
+	                    }
+	                }
+	            }
+	          }).
+	          when('/listar-dev', {
+	              templateUrl: 'list-dev.html',
+	              controller: 'devCtrl',
+	              resolve: {
+	                  auth: function ($q, authenticationSvc) {
+	                      var userInfo = authenticationSvc.getUserInfo();
+	                      if (userInfo) {
+	                          return $q.when(userInfo);
+	                      } else {
+	                          return $q.reject({ authenticated: false });
+	                      }
+	                  }
+	              }
+	            }).
+	            when('/edit-proj/:proj', {
+	                templateUrl: 'edit-projeto.html',
+	                controller:  'projCtrl',
+	                resolve: {
+	                    auth: function ($q, authenticationSvc) {
+	                        var userInfo = authenticationSvc.getUserInfo();
+	                        if (userInfo) {
+	                            return $q.when(userInfo);
+	                        } else {
+	                            return $q.reject({ authenticated: false });
+	                        }
+	                    }
+	                }
+	              }).
+		      otherwise({
+		    	  templateUrl: 'admin-default.html',
+		    	  controller: 'adminCtrl',
+		          resolve: {
+		              auth: function ($q, authenticationSvc) {
+		                  var userInfo = authenticationSvc.getUserInfo();
+		                  if (userInfo) {
+		                      return $q.when(userInfo);
+		                  } else {
+		                      return $q.reject({ authenticated: false });
+		                  }
+		              }
+		          }
+		      });
   }]);
   
   app.run(["$rootScope", "$location", function ($rootScope, $location) {

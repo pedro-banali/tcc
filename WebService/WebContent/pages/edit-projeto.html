@@ -1,0 +1,70 @@
+		<div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Cadastro</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           Cadastro de Projeto
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2">
+                                    <form role="form" ng-submit="cadastroProj()" name="myForm" >
+                                    	<div class="alert alert-success alert-dismissable" ng-show="sucesso" >
+			                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			                                Cadastro efetuado com sucesso.
+			                            </div>
+			                            <div class="alert alert-danger alert-dismissable" ng-show="errorInvalid" >
+			                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			                                Formul&aacute;rio incorreto .
+			                            </div>
+                                        <div class="form-group">
+                                            <label>Nome</label>
+                                            <input class="form-control" ng-model="projeto.nome" name="nome" required ng-minlength="5" ng-maxlength="10"> 
+                                            <p ng-show="myForm.nome.$error.minlength" class="help-block">Nome &eacute; muito curto.</p>
+								           	<p ng-show="myForm.nome.$error.maxlength" class="help-block">Nome &eacute; muito longo.</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Status</label>
+                                            <select class="form-control" name="status" ng-model="projeto.status" required>
+	                                                <option value="1">Desenvolvendo</option>
+	                                                <option value="2">Finalizado</option>
+	                                                <option value="3">Aguardando</option>
+	                                        </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Inicio do Projeto</label>
+                                            <input class="form-control" name="inicio" ng-model="projeto.inicio" required placeholder="dd/mm/yyyy" ng-pattern='/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/' ng-minlength="10" ng-maxlength="10">
+                                        	<p ng-show="myForm.inicio.$error.minlength || myForm.inicio.$error.maxlength || myForm.inicio.$error.pattern" class="help-block">Data Inv&aacute;lida </p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Fim do Projeto</label>
+                                            <input class="form-control" name="fim" ng-model="projeto.fim"  required placeholder="dd/mm/yyyy" ng-pattern='/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/' ng-minlength="10" ng-maxlength="10">
+                                        	<p ng-show="myForm.fim.$error.minlength || myForm.fim.$error.maxlength || myForm.fim.$error.pattern" class="help-block">Data Inv&aacute;lida </p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Descri&ccedil;&atilde;o</label>
+                                            <textarea class="form-control" name="descricao" ng-model="projeto.descricao" required>
+                                            
+                                        	</textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-default" ng-disabled="!myForm.$valid">Cadastrar</button>
+                                        <button type="reset" class="btn btn-default">Cancelar</button>
+                                    </form>
+                                </div>
+                                <!-- /.col-lg-6 (nested) -->
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
