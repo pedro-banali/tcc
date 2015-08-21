@@ -13,26 +13,36 @@
                            Visualizar Desenvolvedores
                         </div>
                         <div class="panel-body">
-                      	<div class="row">
-	                      	<div data-ng-repeat="i in usuarios.devs" class="col-md-8 col-md-offset-2">
-		                       	<div class="panel panel-info">
-			                      	<div class="panel-heading">
-			                          {{i.nome}} <button type="button" class="close" ng-click="deletarDev(i.cpf)" data-dismiss="alert" aria-hidden="true">&times;</button>
-			                     	</div>
-			                      	<div class="panel-body">
-				                      	<p><span>CPF: </span>{{i.cpf}}</p>
-				                        <p><span>Data de Nascimento: </span>{{i.dataNascimento}}</p>
-				                        <p><span>Login:</span> {{i.login}}</p>
-				                        <p><span>Data de Cadastro: </span>{{i.dataCadastro}}</p>
-			                      	</div>
-<!-- 			                      	<div class="panel-footer"> -->
-<!-- 			                          Panel Footer -->
-<!-- 			                      	</div> -->
-		                 		</div>
-	                        </div>
-                       	</div>
-                                <!-- /.col-lg-6 (nested) -->
-                            </div>
+	                      	<div class="row">
+		                      	<div class="col-md-8 col-md-offset-2">
+		                   			<div class="alert alert-success alert-dismissable" ng-show="sucesso" >
+		                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		                                Usu&aacute;rio removido com sucesso.
+		                            </div>
+									<div class="alert alert-danger alert-dismissable" ng-show="errorInvalid" >
+		                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		                               Ocorreu um erro inesperado .
+		                            </div>
+			                      	<div data-ng-repeat="i in usuarios.devs">
+				                       	<div class="panel panel-info">
+					                      	<div class="panel-heading">
+					                          {{i.nome}} <button type="button" class="close" ng-click="open(i)" data-dismiss="alert" aria-hidden="true">&times;</button>
+					                     	</div>
+					                      	<div class="panel-body">
+						                      	<p><span>CPF: </span>{{i.cpf}}</p>
+						                        <p><span>Data de Nascimento: </span>{{i.dataNascimento | date: 'dd/MM/yyyy'}}</p>
+						                        <p><span>Login:</span> {{i.login}}</p>
+						                        <p><span>Data de Cadastro: </span>{{i.dataCadastro | date: 'dd/MM/yyyy'}}</p>
+					                      	</div>
+		<!-- 			                      	<div class="panel-footer"> -->
+		<!-- 			                          Panel Footer -->
+		<!-- 			                      	</div> -->
+				                 		</div>
+			                        </div>
+	                       		</div>
+	                                <!-- /.col-lg-6 (nested) -->
+							</div>
+						</div>
                             <!-- /.row (nested) -->
                         </div>
                         <!-- /.panel-body -->
@@ -42,3 +52,19 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
+         
+	    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Deseja deletar o Usu&aacute;rio</h3>
+        </div>
+        <div class="modal-body">
+			<p>CPF: <b>{{ usuario.cpf }}</b></p>
+            <p>Nome: <b>{{ usuario.nome }}</b></p>
+			<p>Data de Nascimento: <b>{{ usuario.dataNascimento | date: 'dd/MM/yyyy' }}</b></p>
+			
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="clickedOkay()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="clickedCancel()">Cancel</button>
+        </div>
+		</script>

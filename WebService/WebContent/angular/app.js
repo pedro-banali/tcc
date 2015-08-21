@@ -1,7 +1,9 @@
 var app = angular.module('selfiecode', [
+  'ngAnimate', 'ui.bootstrap',
   'ngRoute',
   'admin',
-  'dev'
+  'dev',
+  'modal'
 ]).config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
@@ -214,6 +216,16 @@ app.factory("managerSrvc", ["$http","$window",function ($http, $window) {
     	 	}).
             then(function (result) {
             	console.log("function" + result.data);
+            	var devs = result.data.devs;
+            	
+            	for(var i = 0; i < devs.length; i++)
+        		{
+            		devs[i].dataNascimento = new Date(devs[i].dataNascimento);
+            		devs[i].dataNascimento.setDate(devs[i].dataNascimento.getDate()+1);
+            		devs[i].dataCadastro = new Date(devs[i].dataCadastro);
+            		devs[i].dataCadastro.setDate(devs[i].dataCadastro.getDate()+1);
+        		}
+            	
             	callback(result.data);
             }, function (error) {
                 
@@ -250,3 +262,4 @@ app.factory("projectSvc", ["$http","$window",function ($http, $window) {
         	list: list
         };
 }]);
+

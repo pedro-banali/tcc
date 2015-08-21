@@ -1,7 +1,7 @@
 
 angular.module('admin',  ['ngCookies'])
-.controller('adminCtrl', ['$scope','$http', '$location', '$window','$cookies', '$routeParams', 'authenticationSvc', 'managerSrvc', 'projectSvc',
-                          function ($scope, $http, $location, $window, $cookies , $routeParams, authenticationSvc, managerSrvc, projectSvc) {
+.controller('adminCtrl', ['$scope','$http', '$location', '$window','$cookies', '$routeParams', 'authenticationSvc', 'managerSrvc', 'projectSvc',  '$modal',
+                          function ($scope, $http, $location, $window, $cookies , $routeParams, authenticationSvc, managerSrvc, projectSvc, $modal) {
 	$scope.error = "";
 	$scope.toSearch = false;
 	
@@ -82,11 +82,53 @@ angular.module('admin',  ['ngCookies'])
 			$scope.errorValid = true;
 		}
 	}
+	
+	$scope.open = function(projeto)
+	{
+		$scope.projeto = projeto;
+		var modalInstance = $modal.open({
+			 templateUrl: 'myModalContent.html',
+             controller: 'MyModalInstanceController',
+		      scope: $scope
+		    });
+		
+		 modalInstance.result.then(
+   		      function(result) {
+   		    	var projeto = JSON.stringify($scope.projeto);
+   		        //Happy path - The user clicked okay.
+   		    	$http({
+      			  method: 'POST',
+      			  url:'http://localhost/WebService/selfieCode/service/excluirProj',
+      			  headers: { 'projeto': projeto , 'key': authenticationSvc.getUserInfo().accessToken }
+      			}).
+      			  then(function(response) {
+      				 
+      			    // this callback will be called asynchronously
+      			    // when the response is available
+      				console.log("result" + response);
+      				if(response.data.result == true)
+      				{
+      					$scope.proj = {};
+      					$scope.sucesso  = true;
+      					$scope.listarProj();
+      				}
+      				else
+      				{
+      					$scope.errorInvalid  = true;
+      				}
+      			  }, function(response) {
+      			    // called asynchronously if an error occurs
+      			    // or server returns response with an error status.
+      			  });
+   		      }, function(err) {
+   		        //Sad path - The user probably canceled.
+   		    });
+	}
 }]);
 	
 var selfieMyappDev = angular.module('dev',  []);
-selfieMyappDev.controller('devCtrl', ['$scope','$http', '$location', '$window', '$routeParams', 'authenticationSvc', 'managerSrvc', 'projectSvc',
-                                      function ($scope, $http, $location, $window , $routeParams, authenticationSvc, managerSrvc, projectSvc) {
+selfieMyappDev.controller('devCtrl', ['$scope','$http', '$location', '$window', '$routeParams', 'authenticationSvc', 'managerSrvc', 'projectSvc', '$modal',
+                                      function ($scope, $http, $location, $window , $routeParams, authenticationSvc, managerSrvc, projectSvc, $modal) {
 
             	            	
             	$scope.cadastroDev = function()
@@ -129,11 +171,66 @@ selfieMyappDev.controller('devCtrl', ['$scope','$http', '$location', '$window', 
             		    });
             	}
             	
-            	$scope.deletarDev = function(id)
+            	$scope.open = function(usuario)
             	{
-            		alert(id);
+            		$scope.usuario = usuario;
+            		var modalInstance = $modal.open({
+            			 templateUrl: 'myModalContent.html',
+                         controller: 'MyModalInstanceController',
+            		      scope: $scope
+            		    });
+            		
+            		 modalInstance.result.then(
+               		      function(result) {
+               		    	var user = JSON.stringify($scope.usuario);
+               		        //Happy path - The user clicked okay.
+               		    	$http({
+                  			  method: 'POST',
+                  			  url:'http://localhost/WebService/selfieCode/service/excluirDev',
+                  			  headers: { 'usuario': user , 'key': authenticationSvc.getUserInfo().accessToken }
+                  			}).
+                  			  then(function(response) {
+                  				 
+                  			    // this callback will be called asynchronously
+                  			    // when the response is available
+                  				console.log("result" + response);
+                  				if(response.data.result == true)
+                  				{
+                  					$scope.usuario = {};
+                  					$scope.sucesso  = true;
+                  					$scope.listarDev();
+                  				}
+                  				else
+                  				{
+                  					$scope.errorInvalid  = true;
+                  				}
+                  			  }, function(response) {
+                  			    // called asynchronously if an error occurs
+                  			    // or server returns response with an error status.
+                  			  });
+               		      }, function(err) {
+               		        //Sad path - The user probably canceled.
+               		    });
             	}
+            	 
             }]);
+
+var selfieMyappModal = angular.module('modal',  []);
+selfieMyappDev.controller('MyModalInstanceController', ["$scope", "$modalInstance", function($scope, $modalInstance)
+                                 {
+                                   $scope.clickedOkay = function() {
+                                     //Happy path.
+                                     $modalInstance.close("someul data");
+                                     // Calling $modalInstance.dismiss() takes us down the sad path.
+                                   };
+                                   
+                                   $scope.clickedCancel = function() {
+                                       //Happy path.
+                                       $modalInstance.dismiss();
+                                       // Calling $modalInstance.dismiss() takes us down the sad path.
+                                     };
+                                   
+                                 }]);
 
 var selfieMyappDev = angular.module('proj',  []);
 selfieMyappDev.controller('projCtrl', ['$scope','$http', '$location', '$window',

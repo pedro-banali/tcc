@@ -31,7 +31,7 @@ public class ProjetoDAO {
 			JOptionPane.showConfirmDialog(null, "ERRRROUUU");
 		else
 		{
-			String selectSQL = "SELECT * FROM USUARIO_PROJETO, PROJETO where FK_PROJETO = ID_PROJETO AND FK_USUARIO = ? LIMIT 0, 1000;";
+			String selectSQL = "SELECT * FROM USUARIO_PROJETO, PROJETO where FK_PROJETO = ID_PROJETO AND FK_USUARIO = ?  AND Ativo = 0";
 			PreparedStatement preparedStatement;
 			try {
 				preparedStatement = cf.prepareStatement(selectSQL);
@@ -185,6 +185,38 @@ public class ProjetoDAO {
 		}
 		return false;
 
+	}
+
+	public boolean excluirProj(Projeto proj) {
+		Connection cf = ConnectionFactory.getConnection();
+		 
+		if(cf == null)
+			JOptionPane.showConfirmDialog(null, "ERRRROUUU");
+		else
+		{
+			String selectSQL = "UPDATE PROJETO SET Ativo= 1 WHERE ID_PROJETO = ?";
+
+
+			PreparedStatement preparedStatement;
+			try {
+				preparedStatement = cf.prepareStatement(selectSQL);
+
+				preparedStatement.setLong(1, proj.getId());
+				
+				int rs = preparedStatement.executeUpdate();
+				cf.close();
+				if(rs > 0)
+					return true;
+				else
+					return false;
+				
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return false;
 	}
 
 

@@ -85,7 +85,8 @@ public List<Usuario> listarDev(Usuario usuario) {
 					+ " WHERE U.CPF = UT.FK_CPF "
 					+ " AND TU.ID_TIPO_USUARIO = UT.FK_TIPO_USUARIO "
 					+ " AND U.Gerente = ? "
-					+ " AND UT.FK_TIPO_USUARIO = 3";
+					+ " AND UT.FK_TIPO_USUARIO = 3"
+					+ " AND U.Ativo = 0";
 
 			PreparedStatement preparedStatement;
 			try {

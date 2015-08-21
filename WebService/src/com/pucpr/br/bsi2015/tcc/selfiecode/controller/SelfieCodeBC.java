@@ -156,4 +156,27 @@ public class SelfieCodeBC {
 		
 		return result;
 	}
+
+	public boolean excluirDev(JSONObject u, Usuario g) {
+		Desenvolvedor ds = new Desenvolvedor();
+		
+		ds.setNome(u.getString("nome"));
+		ds.setLogin(u.getString("login"));
+		ds.setCpf(u.getLong("cpf"));
+
+
+
+		DesenvolvedorDAO dDao = new DesenvolvedorDAO();
+		return dDao.excluirDev(ds);
+	}
+	
+	public boolean excluirProj(JSONObject p, Usuario g) {
+		Projeto proj = new Projeto();
+		ProjetoDAO pDao = new ProjetoDAO();
+		
+		proj.setId(p.getInt("id"));
+
+
+		return pDao.excluirProj(proj);
+	}
 }

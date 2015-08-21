@@ -182,6 +182,37 @@ public class WebService {
 		return Response.status(200).entity(jSon.toString()).build();
 	}
 	
+	@Path("excluirDev")
+	@POST
+	@Produces("application/json")
+	public Response excluirDev(@HeaderParam("usuario") String usuario, @HeaderParam("key") String key) throws JSONException {
+		SessionController sc = SessionController.getInstance();
+		
+		JSONObject jSon = new JSONObject(usuario);
+		Usuario u = sc.getUser(key);
+		SelfieCodeBC sbc = SelfieCodeBC.getInstance();
+		boolean uss = sbc.excluirDev(jSon, u);
+		
+;
+		jSon.put("result", uss);
+		return Response.status(200).entity(jSon.toString()).build();
+	}
+	
+	@Path("excluirProj")
+	@POST
+	@Produces("application/json")
+	public Response excluirProj(@HeaderParam("projeto") String projeto, @HeaderParam("key") String key) throws JSONException {
+		SessionController sc = SessionController.getInstance();
+		
+		JSONObject jSon = new JSONObject(projeto);
+		Usuario u = sc.getUser(key);
+		SelfieCodeBC sbc = SelfieCodeBC.getInstance();
+		boolean uss = sbc.excluirProj(jSon, u);
+		
+;
+		jSon.put("result", uss);
+		return Response.status(200).entity(jSon.toString()).build();
+	}
 	
 	
 	@Path("listarProj")
