@@ -3,6 +3,7 @@ var app = angular.module('selfiecode', [
   'ngRoute',
   'admin',
   'dev',
+  'proj',
   'modal'
 ]).config(['$routeProvider',
   function($routeProvider) {
@@ -251,9 +252,23 @@ app.factory("managerSrvc", ["$http","$window",function ($http, $window) {
     };
 }]);
 
-app.factory("projectSvc", ["$http","$window",function ($http, $window) {
+app.factory("projectSvc", ["$http","$window", "authenticationSvc", function ($http, $window, authenticationSvc ) {
     	   
-    	   
+    	var projetos;   
+    	
+    	function teste(x)
+    	{
+    		
+    	}
+    	
+    	function getProjetos()
+    	{
+    		if(!projetos)
+    			list(authenticationSvc.getUserInfo().accessToken, teste );
+    		
+    		return projetos;
+    	}
+    	
         function list(key, callback) {
            
         	 $http({
@@ -265,6 +280,7 @@ app.factory("projectSvc", ["$http","$window",function ($http, $window) {
         	 	}).
                 then(function (result) {
                 	console.log("function" + result.data);
+                	projetos = result.data;
                 	callback(result.data);
                 }, function (error) {
                     
@@ -273,7 +289,8 @@ app.factory("projectSvc", ["$http","$window",function ($http, $window) {
 
         
         return {
-        	list: list
+        	list: list,
+        	projetos: getProjetos
         };
 }]);
 

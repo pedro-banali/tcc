@@ -233,10 +233,24 @@ selfieMyappDev.controller('MyModalInstanceController', ["$scope", "$modalInstanc
                                  }]);
 
 var selfieMyappDev = angular.module('proj',  []);
-selfieMyappDev.controller('projCtrl', ['$scope','$http', '$location', '$window',
-                                      function ($scope, $http, $location, $window, session) {
+selfieMyappDev.controller('projCtrl', ['$scope','$http', '$location', '$window', '$routeParams', 'projectSvc',
+                                      function ($scope, $http, $location, $window, $routeParams, projectSvc) {
             	$scope.error = "";
             	$scope.session = "";
+            	$scope.projeto = "";
+            	
+            	$scope.getProjeto = function()
+            	{
+            		var projetos = projectSvc.projetos();
+            		for(var i = 0; i < projetos.proj.length; i++)
+            		{
+            			if($routeParams.id == projetos.proj[i].projetoId)
+            			{
+            				$scope.projeto = projetos.proj[i];
+            				return;
+            			}
+            		}
+            	}
             	            	
             	$scope.cadastroDev = function()
             	{
