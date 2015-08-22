@@ -106,6 +106,50 @@ public class DesenvolvedorDAO {
 		return false;
 	}
 
+	public boolean editarDev(Desenvolvedor u, long cpf) {
+		// TODO Auto-generated method stub
+
+		Connection cf = ConnectionFactory.getConnection();
+
+		java.sql.Date dataSql = new java.sql.Date(u.getDataNascimento().getTime());
+		if (cf == null)
+			JOptionPane.showConfirmDialog(null, "ERRRROUUU");
+		else {
+			String selectSQL = "UPDATE USUARIO SET CPF = ? , Nome = ?, Nascimento = ?, Login = ? WHERE CPF=?";
+			
+			PreparedStatement preparedStatement;
+			
+			try {
+				preparedStatement = cf.prepareStatement(selectSQL);
+				
+				cf.setAutoCommit(false);
+				
+
+				preparedStatement.setLong(1, u.getCpf());
+				preparedStatement.setString(2, u.getNome());
+				preparedStatement.setDate(3, dataSql);
+				
+				preparedStatement.setString(4, u.getLogin());
+				preparedStatement.setLong(5, cpf);
+
+				// preparedStatement.setString(1, "Pedro Henrique Banali");
+
+				int rs = preparedStatement.executeUpdate();
+				cf.commit();
+				cf.close();
+				if (rs > 0)
+					return true;
+				else
+					return false;
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+	
 	public boolean excluirDev(Desenvolvedor u) {
 		// TODO Auto-generated method stub
 

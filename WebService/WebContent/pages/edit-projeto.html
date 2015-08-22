@@ -17,11 +17,12 @@
                                     <form role="form" ng-submit="atualizarProj()" name="myForm" >
                                     	<div class="alert alert-success alert-dismissable" ng-show="sucesso" >
 			                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			                                Cadastro efetuado com sucesso.
+			                                Altera&ccedil;&atilde;o efetuada com sucesso.
 			                            </div>
 			                            <div class="alert alert-danger alert-dismissable" ng-show="errorInvalid" >
 			                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			                                Formul&aacute;rio incorreto .
+			                                <span ng-if="errorMsg.length == 0"> Formul&aacute;rio incorreto .</span>
+			                                <span ng-if="errorMsg != ''"> Projeto inexistente.</span>
 			                            </div>
                                         <div class="form-group">
                                             <label>Nome</label>
@@ -39,13 +40,13 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Inicio do Projeto</label>
-                                            <input class="form-control" name="inicio" ng-model="projeto.dataInicio | date: 'dd/MM/yyyy'" required placeholder="dd/mm/yyyy" ng-pattern='/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/' ng-minlength="10" ng-maxlength="10">
-                                        	<p ng-show="myForm.dataInicio.$error.minlength || myForm.dataInicio.$error.maxlength || myForm.dataInicio.$error.pattern" class="help-block">Data Inv&aacute;lida </p>
+                                            <input class="form-control" name="inicio" ng-model="projeto.inicio" required placeholder="dd/mm/yyyy" ng-pattern='/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/' ng-minlength="10" ng-maxlength="10">
+                                        	<p ng-show="myForm.inicio.$error.minlength || myForm.inicio.$error.maxlength || myForm.inicio.$error.pattern" class="help-block">Data Inv&aacute;lida </p>
                                         </div>
                                         <div class="form-group">
                                             <label>Fim do Projeto</label>
-                                            <input class="form-control" name="fim" ng-model="projeto.dataFim | date: 'dd/MM/yyyy'"  required placeholder="dd/mm/yyyy" ng-pattern='/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/' ng-minlength="10" ng-maxlength="10">
-                                        	<p ng-show="myForm.dataFim.$error.minlength || myForm.dataFim.$error.maxlength || myForm.dataFim.$error.pattern" class="help-block">Data Inv&aacute;lida </p>
+                                            <input class="form-control" name="fim" ng-model="projeto.fim"  required placeholder="dd/mm/yyyy" ng-pattern='/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/' ng-minlength="10" ng-maxlength="10">
+                                        	<p ng-show="myForm.fim.$error.minlength || myForm.fim.$error.maxlength || myForm.fim.$error.pattern" class="help-block">Data Inv&aacute;lida </p>
                                         </div>
                                         <div class="form-group">
                                             <label>Descri&ccedil;&atilde;o</label>
@@ -53,8 +54,8 @@
                                             
                                         	</textarea>
                                         </div>
-                                        <button type="submit" class="btn btn-default" ng-disabled="!myForm.$valid">Cadastrar</button>
-                                        <button type="reset" class="btn btn-default">Cancelar</button>
+                                        <button type="submit" class="btn btn-default" ng-disabled="!myForm.$valid">Alterar</button>
+                                        <button type="reset" class="btn btn-default" ng-click="go('/listar-proj')">Cancelar</button>
                                     </form>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->

@@ -4,6 +4,7 @@ var app = angular.module('selfiecode', [
   'admin',
   'dev',
   'proj',
+  'atr',
   'modal'
 ]).config(['$routeProvider',
   function($routeProvider) {
@@ -38,7 +39,7 @@ var app = angular.module('selfiecode', [
         }).
         when('/atribuir', {
             templateUrl: 'atribuir-dev-proj.html',
-            controller: 'adminCtrl',
+            controller: 'atbCtrl',
             resolve: {
                 auth: function ($q, authenticationSvc) {
                     var userInfo = authenticationSvc.getUserInfo();
@@ -120,6 +121,20 @@ var app = angular.module('selfiecode', [
 	                    }
 	                }
 	              }).
+		          when('/edit-dev/:cpf', {
+		                templateUrl: 'edit-desenvolvedor.html',
+		                controller:  'devCtrl',
+		                resolve: {
+		                    auth: function ($q, authenticationSvc) {
+		                        var userInfo = authenticationSvc.getUserInfo();
+		                        if (userInfo) {
+		                            return $q.when(userInfo);
+		                        } else {
+		                            return $q.reject({ authenticated: false });
+		                        }
+		                    }
+		                }
+		              }).
 		      otherwise({
 		    	  templateUrl: 'admin-default.html',
 		    	  controller: 'adminCtrl',
@@ -236,9 +251,14 @@ app.factory("managerSrvc", ["$http","$window",function ($http, $window) {
             	for(var i = 0; i < devs.length; i++)
         		{
             		devs[i].dataNascimento = new Date(devs[i].dataNascimento);
+            		
             		devs[i].dataNascimento.setDate(devs[i].dataNascimento.getDate()+1);
+            		devs[i].dataNascimento = devs[i].dataNascimento.toLocaleDateString();
+            		
             		devs[i].dataCadastro = new Date(devs[i].dataCadastro);
+            		
             		devs[i].dataCadastro.setDate(devs[i].dataCadastro.getDate()+1);
+            		devs[i].dataCadastro = devs[i].dataCadastro.toLocaleDateString();
         		}
             	
             	callback(result.data);
@@ -254,19 +274,24 @@ app.factory("managerSrvc", ["$http","$window",function ($http, $window) {
 
 app.factory("projectSvc", ["$http","$window", "authenticationSvc", function ($http, $window, authenticationSvc ) {
     	   
-    	var projetos;   
-    	
-    	function teste(x)
-    	{
-    		
-    	}
-    	
+    	//var projetos = listKey(authenticationSvc.getUserInfo().accessToken);   
+    	    	
     	function getProjetos()
-    	{
-    		if(!projetos)
-    			list(authenticationSvc.getUserInfo().accessToken, teste );
+    	{   	
+    		return  $http({
+                method: "POST",
+                url: 'http://localhost/WebService/selfieCode/service/listarProj',
+                headers: {
+                    "key": authenticationSvc.getUserInfo()
+                }
+       	 	}).
+               then(function (result) {
+               	projetos = result.data;
+               	return result.data;
+               }, function (error) {
+                   
+               });
     		
-    		return projetos;
     	}
     	
         function list(key, callback) {
@@ -279,15 +304,13 @@ app.factory("projectSvc", ["$http","$window", "authenticationSvc", function ($ht
                  }
         	 	}).
                 then(function (result) {
-                	console.log("function" + result.data);
                 	projetos = result.data;
                 	callback(result.data);
                 }, function (error) {
                     
                 });
         }
-
-        
+              
         return {
         	list: list,
         	projetos: getProjetos

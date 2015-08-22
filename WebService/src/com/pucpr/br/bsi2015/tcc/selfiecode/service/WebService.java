@@ -166,6 +166,55 @@ public class WebService {
 		//return ;
 	}
 	
+	@Path("atribuir")
+	@POST
+	//@GET
+	//@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response atribuir(@HeaderParam("atribuicao") String atribuicao, @HeaderParam("key") String key ) throws JSONException {
+		SessionController sc = SessionController.getInstance();
+		boolean result;
+		JSONObject a = new JSONObject(atribuicao);
+
+		SelfieCodeBC sbc = SelfieCodeBC.getInstance();
+		
+		Usuario u = sc.getUser(key);
+		result = sbc.atribuirDev(a, key);
+
+		
+		a = new JSONObject();
+
+		a.put("result", result);
+		
+
+		return Response.status(200).entity(a.toString()).build();
+		//return ;
+	}
+	
+	@Path("editDev")
+	@POST
+	//@GET
+	//@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response editDev(@HeaderParam("usuario") String usuario, @HeaderParam("key") String key ) throws JSONException {
+		SessionController sc = SessionController.getInstance();
+		boolean result;
+		JSONObject jsonObject = new JSONObject(usuario);
+
+		SelfieCodeBC sbc = SelfieCodeBC.getInstance();
+		
+		Usuario u = sc.getUser(key);
+		result = sbc.editDev(jsonObject, u );
+
+		
+		jsonObject = new JSONObject();
+		jsonObject.put("result", result);
+		
+
+		return Response.status(200).entity(jsonObject.toString()).build();
+		//return ;
+	}
+	
 	@Path("listarDev")
 	@POST
 	@Produces("application/json")
@@ -245,6 +294,30 @@ public class WebService {
 		
 		Usuario u = sc.getUser(key);
 		result = sbc.cadastrarProj(jsonObject, u );
+
+		
+		jsonObject = new JSONObject();
+		jsonObject.put("result", result);
+		
+
+		return Response.status(200).entity(jsonObject.toString()).build();
+		//return ;
+	}
+	
+	@Path("editProj")
+	@POST
+	//@GET
+	//@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response editProj(@HeaderParam("projeto") String projeto, @HeaderParam("key") String key ) throws JSONException {
+		SessionController sc = SessionController.getInstance();
+		boolean result;
+		JSONObject jsonObject = new JSONObject(projeto);
+
+		SelfieCodeBC sbc = SelfieCodeBC.getInstance();
+		
+		Usuario u = sc.getUser(key);
+		result = sbc.editarProj(jsonObject, u );
 
 		
 		jsonObject = new JSONObject();

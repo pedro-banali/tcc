@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import com.pucpr.br.bsi2015.tcc.selfiecode.connection.ConnectionFactory;
+import com.pucpr.br.bsi2015.tcc.selfiecode.model.Projeto;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.TipoUsuario;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Usuario;
 
@@ -75,7 +76,7 @@ public List<Usuario> listarDev(Usuario usuario) {
 		Usuario u;
 		TipoUsuario tu;
 		List<Usuario> usuarios = new ArrayList<Usuario>();
-		
+	
 		if(cf == null)
 			JOptionPane.showConfirmDialog(null, "ERRRROUUU");
 		else
@@ -111,11 +112,13 @@ public List<Usuario> listarDev(Usuario usuario) {
 					u.setTipoUsuario(tu);
 					u.setDataCadastro(rs.getDate("DATA_CADASTRO"));
 					preparedStatement = cf.prepareStatement(selectSQL);
-					
+
 					usuarios.add(u);
 					
 									
 				}
+				
+			
 				cf.close();
 				return usuarios;
 			} catch (SQLException e) {

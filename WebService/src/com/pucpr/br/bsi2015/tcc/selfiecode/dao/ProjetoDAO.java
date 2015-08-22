@@ -44,8 +44,8 @@ public class ProjetoDAO {
 					projeto.setId(rs.getInt("ID_PROJETO"));
 					projeto.setNome(rs.getString("NomeProjeto"));
 					projeto.setDescricao(rs.getString("Descricao"));
-					projeto.setDataInicio(rs.getDate("Inicio"));
-					projeto.setDataFim(rs.getDate("Fim"));
+					projeto.setInicio(rs.getDate("Inicio"));
+					projeto.setFim(rs.getDate("Fim"));
 					projeto.setStatus(rs.getString("Status_projeto"));
 					
 					System.out.println(projeto.getNome());
@@ -103,7 +103,7 @@ public class ProjetoDAO {
 		return false;
 	}
 	
-	public void inserDevProj(Desenvolvedor usuario) {
+	public int inserDevProj(Desenvolvedor usuario) {
 		Projeto projeto;
 		
 
@@ -132,18 +132,22 @@ public class ProjetoDAO {
 					
 				}
 				
+				return 0;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				return 1;
+				//e.printStackTrace();
 			}
+
 		}
+		return 1;
 
 	}
 	
 	public boolean inserirProjeto(Projeto proj) {
 		
-		java.sql.Date dataIni = new Date(proj.getDataInicio().getTime());
-		java.sql.Date dataFim = new Date(proj.getDataFim().getTime());
+		java.sql.Date dataIni = new Date(proj.getInicio().getTime());
+		java.sql.Date dataFim = new Date(proj.getFim().getTime());
 		
 		Connection cf = ConnectionFactory.getConnection();
 		
@@ -162,6 +166,54 @@ public class ProjetoDAO {
 				preparedStatement.setDate(3, dataIni);
 				preparedStatement.setDate(4, dataFim);
 				preparedStatement.setString(5, proj.getStatus());
+				
+				int rs = preparedStatement.executeUpdate();
+				ResultSet rsKeys = preparedStatement.getGeneratedKeys();
+				
+				if (rsKeys.next()) {
+				    proj.setId(rsKeys.getInt(1));
+				}
+				if(rs > 0)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return false;
+
+	}
+	
+	public boolean alterarProjeto(Projeto proj) {
+		
+		java.sql.Date dataIni = new Date(proj.getInicio().getTime());
+		java.sql.Date dataFim = new Date(proj.getFim().getTime());
+		
+		Connection cf = ConnectionFactory.getConnection();
+		
+		if(cf == null)
+			JOptionPane.showConfirmDialog(null, "ERRRROUUU");
+		else
+		{
+			
+			String selectSQL = "UPDATE PROJETO SET NomeProjeto = ?, Descricao = ?, Inicio = ?, Fim= ?, Status_projeto = ? WHERE ID_PROJETO = ? ";
+			
+			PreparedStatement preparedStatement;
+			try {
+				preparedStatement = cf.prepareStatement(selectSQL, Statement.RETURN_GENERATED_KEYS);
+				preparedStatement.setString(1, proj.getNome());
+				preparedStatement.setString(2, proj.getDescricao());
+				preparedStatement.setDate(3, dataIni);
+				preparedStatement.setDate(4, dataFim);
+				preparedStatement.setString(5, proj.getStatus());
+				preparedStatement.setInt(6, proj.getId());
 				
 				int rs = preparedStatement.executeUpdate();
 				ResultSet rsKeys = preparedStatement.getGeneratedKeys();

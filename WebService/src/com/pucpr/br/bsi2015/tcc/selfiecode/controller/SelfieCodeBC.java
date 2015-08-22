@@ -1,5 +1,7 @@
 package com.pucpr.br.bsi2015.tcc.selfiecode.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -112,7 +114,7 @@ public class SelfieCodeBC {
 		ds.setNome(u.getString("nome"));
 		ds.setLogin(u.getString("login"));
 		ds.setCpf(u.getLong("cpf"));
-		ds.setDataNascimento(new Date(u.getString("data")));
+		ds.setDataNascimento(new Date(u.getString("dataNascimento")));
 		ds.setSenha(u.getString("senha"));
 		tu.setId(3);
 		ds.setTipoUsuario(tu);
@@ -135,15 +137,35 @@ public class SelfieCodeBC {
 		return result;
 	}
 	
+	public boolean editDev(JSONObject u, Usuario g)
+	{
+		
+		Desenvolvedor ds = new Desenvolvedor();
+		
+		ds.setNome(u.getString("nome"));
+		ds.setLogin(u.getString("login"));
+		ds.setCpf(u.getLong("cpfNovo"));
+		ds.setDataNascimento(new Date(u.getString("dataNascimento")));
+
+
+		DesenvolvedorDAO dDao = new DesenvolvedorDAO();	
+			
+		boolean result = dDao.editarDev(ds, u.getLong("cpf"));
+		
+		return result;
+	}
+	
 	public boolean cadastrarProj(JSONObject p, Usuario g)
 	{
 		
 
 		Projeto proj = new Projeto();
+	
 		
 		proj.setNome(p.getString("nome"));
-		proj.setDataInicio(new Date(p.getString("inicio")));
-		proj.setDataFim(new Date(p.getString("fim")));
+		proj.setInicio(new Date(p.getString("inicio")));
+		proj.setFim(new Date(p.getString("fim")));
+		
 		proj.setStatus(p.getString("status"));
 		proj.setDescricao(p.getString("descricao"));
 		TipoUsuario tu = new TipoUsuario();
@@ -153,6 +175,41 @@ public class SelfieCodeBC {
 		
 		boolean result = pDao.inserirProjeto(proj);
 		pDao.inserirGerProj(g, proj);
+		
+		return result;
+	}
+	
+	public boolean editarProj(JSONObject p, Usuario g)
+	{
+		
+
+		Projeto proj = new Projeto();
+		proj.setId(p.getInt("id"));
+		proj.setNome(p.getString("nome"));
+		SimpleDateFormat sm = new SimpleDateFormat("dd/MM/yyyy");
+	    // myDate is the java.util.Date in yyyy-mm-dd format
+	    // Converting it into String using formatter
+		Date inicio = null;
+		Date fim = null;
+		try {
+			inicio = sm.parse(p.getString("inicio"));
+			fim = sm.parse(p.getString("fim"));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		proj.setInicio(inicio);
+		proj.setFim(fim);
+		proj.setStatus(p.getString("status"));
+		proj.setDescricao(p.getString("descricao"));
+
+		ProjetoDAO pDao = new ProjetoDAO();			
+		
+		boolean result = pDao.alterarProjeto(proj);
+
 		
 		return result;
 	}
@@ -179,4 +236,30 @@ public class SelfieCodeBC {
 
 		return pDao.excluirProj(proj);
 	}
+	
+	public boolean atribuirDev(JSONObject a,  String key)
+	{
+		
+		Desenvolvedor ds = new Desenvolvedor();
+		Projeto proj = new Projeto();
+		List<Projeto> projetos = new ArrayList<Projeto>();
+		
+		boolean result = true;
+		
+		proj.setId(a.getInt("proj"));
+		projetos.add(proj);
+		ds.setCpf(a.getLong("dev"));
+		ds.setProjetos(projetos);
+		
+		ProjetoDAO pDao = new ProjetoDAO();
+
+		int rP = pDao.inserDevProj(ds);
+		
+		if(rP > 0)
+			result = false;
+		
+		return result;
+	}
+
+
 }

@@ -7,8 +7,8 @@ public class Projeto {
 	private String nome;
 	private String descricao;
 	private String status;
-	private Date dataInicio;
-	private Date dataFim;
+	private Date inicio;
+	private Date fim;
 	private int tempoParaColeta;
 	
 	public Projeto()
@@ -28,17 +28,17 @@ public class Projeto {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public Date getDataInicio() {
-		return dataInicio;
+	public Date getInicio() {
+		return inicio;
 	}
-	public void setDataInicio(Date dataInicio) {
-		this.dataInicio = dataInicio;
+	public void setInicio(Date dataInicio) {
+		this.inicio = dataInicio;
 	}
-	public Date getDataFim() {
-		return dataFim;
+	public Date getFim() {
+		return fim;
 	}
-	public void setDataFim(Date dataFim) {
-		this.dataFim = dataFim;
+	public void setFim(Date dataFim) {
+		this.fim = dataFim;
 	}
 	public int getTempoParaColeta() {
 		return tempoParaColeta;

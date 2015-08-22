@@ -1,4 +1,4 @@
-		<div class="row">
+		<div class="row" ng-init="listarDev(); listarProj();">
                 <div class="col-lg-12">
                     <h1 class="page-header">Atribuir</h1>
                 </div>
@@ -14,21 +14,25 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-8 col-md-offset-2">
-                                    <form role="form" ng-submit="" name="myForm" >
+                                	<div class="alert alert-success alert-dismissable" ng-show="sucesso" >
+		                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		                                Usu&aacute;rio atribuido com sucesso.
+		                            </div>
+									<div class="alert alert-danger alert-dismissable" ng-show="errorInvalid" >
+		                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		                              {{errorMsg}} .
+		                            </div>
+                                    <form role="form" ng-submit="atribuir()" name="myForm" >
                                         <div class="form-group">
                                             <label>Desenvolvedor</label>
                                             <select class="form-control" name="dev" ng-model="atribuicao.dev" required>
-	                                                <option value="1">Desenvolvendo</option>
-	                                                <option value="2">Finalizado</option>
-	                                                <option value="3">Aguardando</option>
+	                                               <option ng-repeat="n in usuarios.devs" value="{{n.cpf}}" > {{n.nome}}</option>
 	                                        </select>
                                         </div>
                                         <div class="form-group">
                                             <label>Projeto</label>
                                             <select class="form-control" name="proj" ng-model="atribuicao.proj" required>
-	                                                <option value="1">Desenvolvendo</option>
-	                                                <option value="2">Finalizado</option>
-	                                                <option value="3">Aguardando</option>
+	                                              <option ng-repeat="n in projetos.proj" value="{{n.id}}" > {{n.nome}}</option>
 	                                        </select>
                                         </div>
                                         <button type="submit" class="btn btn-default" ng-disabled="!myForm.$valid">Cadastrar</button>
