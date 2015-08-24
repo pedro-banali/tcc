@@ -1,10 +1,12 @@
 var app = angular.module('selfiecode', [
-  'ngAnimate', 'ui.bootstrap',
+  'ngAnimate', 
+  'ui.bootstrap',
   'ngRoute',
   'admin',
   'dev',
   'proj',
   'atr',
+  'devInfo',
   'modal'
 ]).config(['$routeProvider',
   function($routeProvider) {
@@ -134,7 +136,21 @@ var app = angular.module('selfiecode', [
 		                        }
 		                    }
 		                }
-		              }).
+		              }).        
+		              when('/dev-info/:cpf', {
+		                  templateUrl: 'dev-projeto-info.html',
+		                  controller: 'devInfoCtrl',
+		                  resolve: {
+		                      auth: function ($q, authenticationSvc) {
+		                          var userInfo = authenticationSvc.getUserInfo();
+		                          if (userInfo) {
+		                              return $q.when(userInfo);
+		                          } else {
+		                              return $q.reject({ authenticated: false });
+		                          }
+		                      }
+		                  }
+		      		  }).
 		      otherwise({
 		    	  templateUrl: 'admin-default.html',
 		    	  controller: 'adminCtrl',
@@ -310,9 +326,27 @@ app.factory("projectSvc", ["$http","$window", "authenticationSvc", function ($ht
                     
                 });
         }
-              
+        
+        function listCpf(cpf, key, callback) {
+            
+       	 $http({
+                method: "POST",
+                url: 'http://localhost/WebService/selfieCode/service/listarProjCpf',
+                headers: {
+                	"cpf": cpf,
+                    "key": key
+                }
+       	 	}).
+               then(function (result) {
+               	projetos = result.data;
+               	callback(result.data);
+               }, function (error) {
+                   
+               });
+       }      
         return {
         	list: list,
+        	listCpf: listCpf,
         	projetos: getProjetos
         };
 }]);

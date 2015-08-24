@@ -18,6 +18,12 @@ import com.pucpr.br.bsi2015.tcc.selfiecode.model.Usuario;
 
 public class ProjetoDAO {
 	
+//	SELECT * FROM CODIGO_METRICA CM, CODIGOFONTE CF, METRICA M 
+//	WHERE CF.ID_CODIGO = CM.FK_ID_CODIGO
+//	AND CM.FK_ID_METRICA = M.ID_METRICA
+//	AND CF.FK_US_PROJ = 12
+//	ORDER BY FK_ID_CODIGO;
+	
 	private List<Projeto> projetos;
 	
 	public List<Projeto> selectProjetos(Usuario usuario) {
@@ -31,12 +37,13 @@ public class ProjetoDAO {
 			JOptionPane.showConfirmDialog(null, "ERRRROUUU");
 		else
 		{
-			String selectSQL = "SELECT * FROM USUARIO_PROJETO, PROJETO where FK_PROJETO = ID_PROJETO AND FK_USUARIO = ?  AND Ativo = 0";
+			String selectSQL = "SELECT * FROM USUARIO_PROJETO, PROJETO where FK_PROJETO = ID_PROJETO AND FK_USUARIO = ? AND Ativo = 0";
 			PreparedStatement preparedStatement;
 			try {
 				preparedStatement = cf.prepareStatement(selectSQL);
 				//JOptionPane.showMessageDialog(null, BigInteger.valueOf(7700147981l));
-				preparedStatement.setLong(1, 7700147981l);
+				//preparedStatement.setLong(1, 7700147981l);
+				preparedStatement.setLong(1, usuario.getCpf());
 				//preparedStatement.setString(1, "Pedro Henrique Banali");
 				ResultSet rs = preparedStatement.executeQuery();
 				while (rs.next()) {

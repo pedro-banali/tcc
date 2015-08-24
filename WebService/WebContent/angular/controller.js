@@ -407,3 +407,17 @@ selfieMyappDev.controller('projCtrl', ['$scope','$http', '$location', '$window',
             		  $location.path( path );
             	};
             }]);
+
+var selfieMyappDevInfo = angular.module('devInfo',  []);
+selfieMyappDev.controller('devInfoCtrl', ['$scope','$http', '$location', '$window', '$routeParams', 'projectSvc','authenticationSvc',
+                                      function ($scope, $http, $location, $window, $routeParams, projectSvc, authenticationSvc) {
+				
+				$scope.listarProj = function()
+				{
+					projectSvc.listCpf($routeParams.cpf, authenticationSvc.getUserInfo().accessToken, function(result) {  // this is only run after $http completes
+					       $scope.projetos = result;
+					       console.log("scope" + $scope.usuarios);
+					    });
+				}
+				
+            }]);

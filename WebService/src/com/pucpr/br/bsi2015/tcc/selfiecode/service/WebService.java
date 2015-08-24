@@ -280,6 +280,24 @@ public class WebService {
 		return Response.status(200).entity(jSon.toString()).build();
 	}
 	
+	@Path("listarProjCpf")
+	@POST
+	@Produces("application/json")
+	public Response listarProjCpf(@HeaderParam("cpf") long cpf, @HeaderParam("key") String key) throws JSONException {
+		SessionController sc = SessionController.getInstance();
+		JSONArray list;
+		JSONObject jSon = new JSONObject();
+		//Usuario usuario = sc.getUser(key);
+		Usuario usuario = new Usuario();
+		usuario.setCpf(cpf);
+		SelfieCodeBC sbc = SelfieCodeBC.getInstance();
+		List<Projeto> upp = sbc.listarProjetos(usuario);
+		
+		list = new JSONArray(upp);
+		jSon.put("proj", list);
+		return Response.status(200).entity(jSon.toString()).build();
+	}
+	
 	@Path("cadastroProj")
 	@POST
 	//@GET
