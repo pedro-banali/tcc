@@ -192,6 +192,49 @@ public class ProjetoDAO {
 
 	}
 	
+	public int checkDevProj(Desenvolvedor usuario) {
+		Projeto projeto;
+		
+
+		Connection cf = ConnectionFactory.getConnection();
+		projetos = new ArrayList<Projeto>();
+		
+		if(cf == null)
+			JOptionPane.showConfirmDialog(null, "ERRRROUUU");
+		else
+		{
+			
+			String selectSQL = "SELECT * FROM USUARIO_PROJETO WHERE FK_USUARIO = ? AND FK_PROJETO = ?";
+			
+			PreparedStatement preparedStatement;
+			try {
+				for (int i = 0; i < usuario.getProjetos().size(); i++) {
+					
+					projeto = usuario.getProjetos().get(i);
+					
+					preparedStatement = cf.prepareStatement(selectSQL);
+					
+					preparedStatement.setLong(1, usuario.getCpf());
+					preparedStatement.setInt(2, (projeto.getId()));
+					
+					ResultSet rs = preparedStatement.executeQuery();
+					while(rs.next())
+						return 0;
+					
+				}
+				
+				return 1;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				return 1;
+				//e.printStackTrace();
+			}
+
+		}
+		return 1;
+
+	}
+	
 	public boolean inserirProjeto(Projeto proj) {
 		
 		java.sql.Date dataIni = new Date(proj.getInicio().getTime());

@@ -255,10 +255,17 @@ public class SelfieCodeBC {
 		ds.setProjetos(projetos);
 		
 		ProjetoDAO pDao = new ProjetoDAO();
-
-		int rP = pDao.inserDevProj(ds);
+		
+		int rP = pDao.checkDevProj(ds);
 		
 		if(rP > 0)
+		{
+			rP = pDao.inserDevProj(ds);
+		
+			if(rP > 0)
+				result = false;
+		}
+		else
 			result = false;
 		
 		return result;

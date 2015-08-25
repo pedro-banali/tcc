@@ -313,7 +313,7 @@ app.factory("projectSvc", ["$http","$window", "authenticationSvc", function ($ht
                 method: "POST",
                 url: 'http://localhost/WebService/selfieCode/service/listarProj',
                 headers: {
-                    "key": authenticationSvc.getUserInfo()
+                    "key": authenticationSvc.getUserInfo().accessToken
                 }
        	 	}).
                then(function (result) {
