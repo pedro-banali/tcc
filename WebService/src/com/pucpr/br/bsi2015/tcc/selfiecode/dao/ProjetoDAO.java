@@ -70,6 +70,47 @@ public class ProjetoDAO {
 		return projetos;
 	}
 	
+	public Projeto selectProjeto(Projeto proj) {
+		Projeto projeto = null;
+		
+
+		Connection cf = ConnectionFactory.getConnection();
+		projetos = new ArrayList<Projeto>();
+		
+		if(cf == null)
+			JOptionPane.showConfirmDialog(null, "ERRRROUUU");
+		else
+		{
+			String selectSQL = "SELECT * FROM PROJETO where  ID_PROJETO = ? AND Ativo = 0";
+			PreparedStatement preparedStatement;
+			try {
+				preparedStatement = cf.prepareStatement(selectSQL);
+				//JOptionPane.showMessageDialog(null, BigInteger.valueOf(7700147981l));
+				//preparedStatement.setLong(1, 7700147981l);
+				preparedStatement.setInt(1, proj.getId());
+				//preparedStatement.setString(1, "Pedro Henrique Banali");
+				ResultSet rs = preparedStatement.executeQuery();
+				while (rs.next()) {
+					projeto = new Projeto();
+					projeto.setId(rs.getInt("ID_PROJETO"));
+					projeto.setNome(rs.getString("NomeProjeto"));
+					projeto.setDescricao(rs.getString("Descricao"));
+					projeto.setInicio(rs.getDate("Inicio"));
+					projeto.setFim(rs.getDate("Fim"));
+					projeto.setStatus(rs.getString("Status_projeto"));
+
+				
+									
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return projeto;
+	}
+	
 	public boolean inserirGerProj(Usuario usuario, Projeto proj) {
 
 		Connection cf = ConnectionFactory.getConnection();

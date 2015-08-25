@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Metrica {
 	
+	private int id;
 	private float valorMetrica;
 	private String nomeMetrica;
 	private String sigla;
@@ -51,6 +52,14 @@ public class Metrica {
 
 	public void setDicas(List<Dica> dicas) {
 		this.dicas = dicas;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	

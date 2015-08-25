@@ -7,7 +7,8 @@ var app = angular.module('selfiecode', [
   'proj',
   'atr',
   'devInfo',
-  'modal'
+  'modal',
+  'devGraph'
 ]).config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
@@ -140,6 +141,20 @@ var app = angular.module('selfiecode', [
 		              when('/dev-info/:cpf', {
 		                  templateUrl: 'dev-projeto-info.html',
 		                  controller: 'devInfoCtrl',
+		                  resolve: {
+		                      auth: function ($q, authenticationSvc) {
+		                          var userInfo = authenticationSvc.getUserInfo();
+		                          if (userInfo) {
+		                              return $q.when(userInfo);
+		                          } else {
+		                              return $q.reject({ authenticated: false });
+		                          }
+		                      }
+		                  }
+		      		  }).
+		              when('/dev-graph/:cpf/:proj', {
+		                  templateUrl: 'dev-projeto-graph.html',
+		                  controller: 'devGraphCtrl',
 		                  resolve: {
 		                      auth: function ($q, authenticationSvc) {
 		                          var userInfo = authenticationSvc.getUserInfo();

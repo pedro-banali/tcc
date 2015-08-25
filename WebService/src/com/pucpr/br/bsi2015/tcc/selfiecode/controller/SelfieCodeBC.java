@@ -7,14 +7,17 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.pucpr.br.bsi2015.tcc.selfiecode.dao.CodigoFonteDAO;
 import com.pucpr.br.bsi2015.tcc.selfiecode.dao.DesenvolvedorDAO;
 import com.pucpr.br.bsi2015.tcc.selfiecode.dao.DicaDAO;
 import com.pucpr.br.bsi2015.tcc.selfiecode.dao.MetricaDAO;
 import com.pucpr.br.bsi2015.tcc.selfiecode.dao.ProjetoDAO;
 import com.pucpr.br.bsi2015.tcc.selfiecode.dao.UsuarioDAO;
+import com.pucpr.br.bsi2015.tcc.selfiecode.model.CodigoFonte;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Desenvolvedor;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Dica;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Metrica;
@@ -259,6 +262,50 @@ public class SelfieCodeBC {
 			result = false;
 		
 		return result;
+	}
+
+	public JSONArray exibirMetricas(JSONObject usuario, JSONObject projeto, Usuario u) {
+		// TODO Auto-generated method stub
+		Desenvolvedor ds = new Desenvolvedor();
+		Projeto proj = new Projeto();
+		List<Projeto> projetos = new ArrayList<Projeto>();
+		List<CodigoFonte> cfs;
+		boolean result = true;
+		CodigoFonte cf = new CodigoFonte();
+		List<Metrica> metricas = new ArrayList<Metrica>();
+		Metrica metrica;
+		
+		proj.setId(projeto.getInt("proj"));
+		
+		//seleciona Dev
+		DesenvolvedorDAO dDao = new DesenvolvedorDAO();
+		ds.setCpf(usuario.getLong("dev"));
+		
+		ds = dDao.selectDev(ds);
+		
+
+		//seleciona Projeto
+		ProjetoDAO pDao = new ProjetoDAO();
+		
+		proj = pDao.selectProjeto(proj);
+		
+		projetos.add(proj);
+		ds.setProjetos(projetos);
+		
+		CodigoFonteDAO cDao = new CodigoFonteDAO();
+		cfs = cDao.selectCodigosFonte( ds , proj);
+		proj.setCodigoFonte(cfs);
+		
+		MetricaDAO mDao = new MetricaDAO();
+		
+		for (int i = 0; i < cfs.size(); i++) {
+			cf = cfs.get(i);
+			metricas = mDao.selectMetricas(cfs.get(i));
+			cf.setMetricas(metricas);
+			metricas = null;
+		}
+		
+		return new JSONArray(cfs);
 	}
 
 

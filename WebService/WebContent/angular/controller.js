@@ -411,13 +411,581 @@ selfieMyappDev.controller('projCtrl', ['$scope','$http', '$location', '$window',
 var selfieMyappDevInfo = angular.module('devInfo',  []);
 selfieMyappDev.controller('devInfoCtrl', ['$scope','$http', '$location', '$window', '$routeParams', 'projectSvc','authenticationSvc',
                                       function ($scope, $http, $location, $window, $routeParams, projectSvc, authenticationSvc) {
-				
+				$scope.cpf = $routeParams.cpf;
 				$scope.listarProj = function()
 				{
-					projectSvc.listCpf($routeParams.cpf, authenticationSvc.getUserInfo().accessToken, function(result) {  // this is only run after $http completes
+					projectSvc.listCpf($scope.cpf, authenticationSvc.getUserInfo().accessToken, function(result) {  // this is only run after $http completes
 					       $scope.projetos = result;
 					       console.log("scope" + $scope.usuarios);
 					    });
 				}
+				
+            }]);
+
+var selfieMyappDevInfo = angular.module('devGraph',  []);
+selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$window', '$routeParams', 'projectSvc','authenticationSvc',
+                                      function ($scope, $http, $location, $window, $routeParams, projectSvc, authenticationSvc) {
+				$scope.cpf = $routeParams.cpf;
+				$scope.proj = $routeParams.proj;
+				
+				$scope.verificarChart = function()
+				{
+					var p = {"proj": $scope.proj };
+					var d = {"dev": $scope.cpf };
+					var proj = JSON.stringify(p);
+					var usuario = JSON.stringify(d);
+            		$http({
+            		  method: 'POST',
+            		  url:'http://localhost/WebService/selfieCode/service/exibirMetricas',
+            		  headers:
+            		  {
+            			 'usuario': usuario, 'projeto': proj , 'key': authenticationSvc.getUserInfo().accessToken 
+            		  }
+            		}).
+            		  then(function(response) {
+            			 
+            		    // this callback will be called asynchronously
+            		    // when the response is available
+            			console.log("result" + response);
+            			if(response.data)
+            			{
+            				$scope.response = response.data;
+            				console.log(response);
+            				var ccm= [];
+            				var wmc= [];
+            				var lcom= [];
+            				var nbd= [];
+            				var dit= [];
+            				var noc= [];
+            				var norm= [];
+            				var six= [];
+            				var mloc= [];
+            				var nac= [];
+            				var nsf= [];
+            				var nsm= [];
+            				var par= [];
+            				var noi= [];
+            				var nop= [];
+            				var ca= [];
+            				var ce = [];
+            				var ins = [];
+            				var abs = [];
+            				for(var i = 0; i < response.data.length; i++)
+            				{
+            					var fu = response.data[i];
+            					var dateS = fu.dataColecao.split('-');
+            					
+            					//var date =  new Intl.DateTimeFormat(new Date(dateS[0]+"/"+(dateS[1] - 1)+"/"+dateS[2]));
+            					var date =  new Date(dateS[0], (dateS[1] - 1) , dateS[2]);
+            					
+            					//date.format('dd/MM/yyyy');
+            					//date = formatDate(date);
+            					//date = new Date(date);
+            					var val = [];
+            					
+            					for(var k = 0; k <fu.metricas.length; k++)
+            					{
+            						var metrica = fu.metricas[k];
+            						switch (metrica.sigla)
+            						{
+            							case "CCM":
+            								ccm.push({
+            									x: date,
+            							 		y: metrica.valorMetrica
+            								})
+            								break;
+            							case "WMC":
+            								wmc.push({
+            									x: date,
+            							 		y: metrica.valorMetrica
+            								})
+            								break;
+            							case "LCOM*":
+            								lcom.push({
+            									x: date,
+            							 		y: metrica.valorMetrica
+            								})
+            								break;
+            							case "NBD":
+            								nbd.push({
+            									x: date,
+            							 		y: metrica.valorMetrica
+            								})
+            								break;
+            							case "DIT":
+            								dit.push({
+            									x: date,
+            							 		y: metrica.valorMetrica
+            								})
+            								break;
+            							case "NOC":
+            								noc.push({
+            									x: date,
+            							 		y: metrica.valorMetrica
+            								})
+            								break;
+            							case "NORM":
+            								norm.push({
+            									x: date,
+            							 		y: metrica.valorMetrica
+            								})
+            								break;
+            							case "SIX":
+            								six.push({
+            									x: date,
+            							 		y: metrica.valorMetrica
+            								})
+            								break;
+            							case "MLOC":
+            								mloc.push({
+            									x: date,
+            							 		y: metrica.valorMetrica
+            								})
+            								break;
+            							case "NAC":
+            								nac.push({
+            									x: date,
+            							 		y: metrica.valorMetrica
+            								})
+            								break;
+            							case "NSF":
+            								nsf.push({
+            									x: date,
+            							 		y: metrica.valorMetrica
+            								})
+            								break;
+            							case "NSM":
+            								nsm.push({
+            									x: date,
+            							 		y: metrica.valorMetrica
+            								})
+            								break;
+            							case "PAR":
+            								par.push({
+            									x: date,
+            							 		y: metrica.valorMetrica
+            								})
+            								break;
+            							case "NOI":
+            								noi.push({
+            									x: date,
+            							 		y: metrica.valorMetrica
+            								})
+            								break;
+            							case "NOP":
+            								nop.push({
+            									x: date,
+            							 		y: metrica.valorMetrica
+            								})
+            								break;
+            							case "Ca":
+            								ca.push({
+            									x: date,
+            							 		y: metrica.valorMetrica
+            								})
+            								break;
+            							case "Ce":
+            								ce.push({
+            									x: date,
+            							 		y: metrica.valorMetrica
+            								})
+            								break;
+            							case "I":
+            								ins.push({
+	        									x: date,
+	        							 		y: metrica.valorMetrica
+	        								})
+            								break;
+            							case "A":
+            								abs.push({
+	        									x: date,
+	        							 		y: metrica.valorMetrica
+	        								})
+            								break;
+            								
+            						}
+            					}
+
+            				}
+            				
+  
+              				var data = []
+            				var dataSeries = { type: "line" };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = wmc;
+            			    data.push(dataSeries);
+            				
+            			    var dataSeries = { type: "line" };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = ccm;
+            			    data.push(dataSeries);
+            			    
+            			    var dataSeries = { type: "line" };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = lcom;
+            			    data.push(dataSeries);
+            			    
+            				$scope.ccm = new CanvasJS.Chart("ccmContainer", {
+            					zoomEnabled: true,      
+            					title:{
+            						text: "Métricas CCM" 
+            					},
+            					axisX :{
+            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						labelAngle: -30,
+            						interval: 1,
+            					},
+            					axisY :{
+            						includeZero: false
+            					},
+            					legend: {
+            						horizontalAlign: "right",
+            						verticalAlign: "center"        
+            					},
+            					data: data,
+            				});
+
+            				$scope.ccm.render();
+            				
+            				var data = []
+            				var dataSeries = { type: "line" };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = wmc;
+            			    data.push(dataSeries);
+            				
+            				$scope.wmc = new CanvasJS.Chart("wmcContainer", {
+            					zoomEnabled: true,      
+            					title:{
+            						text: "Métricas WMC" 
+            					},
+            					axisX :{
+            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						labelAngle: -30,
+            						interval: 1,
+            					},
+            					axisY :{
+            						includeZero: false
+            					},
+            					legend: {
+            						horizontalAlign: "right",
+            						verticalAlign: "center"        
+            					},
+            					data: data,
+            				});
+
+            				$scope.wmc.render();
+            				
+            				var data = []
+            				var dataSeries = { type: "line" };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = lcom;
+            			    data.push(dataSeries);
+            				
+            				$scope.lcom = new CanvasJS.Chart("lcomContainer", {
+            					zoomEnabled: true,      
+            					title:{
+            						text: "Métricas LCOM" 
+            					},
+            					axisX :{
+            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						labelAngle: -30,
+            						interval: 1,
+            					},
+            					axisY :{
+            						includeZero: false
+            					},
+            					legend: {
+            						horizontalAlign: "right",
+            						verticalAlign: "center"        
+            					},
+            					data: data,
+            				});
+
+            				$scope.lcom.render();
+            				
+               				var data = []
+            				var dataSeries = { type: "line" };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = nbd;
+            			    data.push(dataSeries);
+            				
+            			    CanvasJS.addColorSet("color",
+            		                [//colorSet Array
+            		                 "#cccccc",
+            		                 "#EC5657",
+            		                 "#1BCDD1",
+            		                 "#8FAABB",
+            		                 "#B08BEB",
+            		                 "#3EA0DD",
+            		                 "#F5A52A",
+            		                 "#23BFAA",
+            		                 "#FAA586",
+            		                 "#EB8CC6",             
+            		                ]);
+            			    
+            				$scope.nbd = new CanvasJS.Chart("nbdContainer", {
+            					zoomEnabled: true, 
+            					colorSet: "color",
+            					title:{
+            						text: "Métricas NBD" 
+            					},
+            					axisX :{
+            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						labelAngle: -30,
+            						interval: 1,
+            						intervalType: "day"
+            					},
+            					axisY :{
+            						includeZero: false
+            					},
+            					legend: {
+            						horizontalAlign: "right",
+            						verticalAlign: "center"        
+            					},
+            					data: data,
+            				});
+
+            				$scope.lcom.render();
+            				
+            				var data = []
+            				var dataSeries = { type: "line" };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = nbd;
+            			    data.push(dataSeries);
+            				
+            				$scope.nbd = new CanvasJS.Chart("nbdContainer", {
+            					zoomEnabled: true,      
+            					title:{
+            						text: "Métricas NBD" 
+            					},
+            					axisX :{
+            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						labelAngle: -30,
+            						interval: 1,
+            					},
+            					axisY :{
+            						includeZero: false
+            					},
+            					legend: {
+            						horizontalAlign: "right",
+            						verticalAlign: "center"        
+            					},
+            					data: data,
+            				});
+
+            				$scope.nbd.render();
+            				
+            				var data = []
+            				var dataSeries = { type: "line" };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = dit;
+            			    data.push(dataSeries);
+            				
+            				$scope.dit = new CanvasJS.Chart("ditContainer", {
+            					zoomEnabled: true,      
+            					title:{
+            						text: "Métricas DIT" 
+            					},
+            					axisX :{
+            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						labelAngle: -30,
+            						interval: 1,
+            					},
+            					axisY :{
+            						includeZero: false
+            					},
+            					legend: {
+            						horizontalAlign: "right",
+            						verticalAlign: "center"        
+            					},
+            					data: data,
+            				});
+
+            				$scope.dit.render();
+            				
+            				
+            				var data = []
+            				var dataSeries = { type: "line" };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = noc;
+            			    data.push(dataSeries);
+            				
+            				$scope.noc = new CanvasJS.Chart("nocContainer", {
+            					zoomEnabled: true,      
+            					title:{
+            						text: "Métricas NOC" 
+            					},
+            					axisX :{
+            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						labelAngle: -30,
+            						interval: 1,
+            					},
+            					axisY :{
+            						includeZero: false
+            					},
+            					legend: {
+            						horizontalAlign: "right",
+            						verticalAlign: "center"        
+            					},
+            					data: data,
+            				});
+
+            				$scope.noc.render();
+            				
+            				var data = []
+            				var dataSeries = { type: "line" };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = norm;
+            			    data.push(dataSeries);
+            				
+            				$scope.norm = new CanvasJS.Chart("normContainer", {
+            					zoomEnabled: true,      
+            					title:{
+            						text: "Métricas NORM" 
+            					},
+            					axisX :{
+            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						labelAngle: -30,
+            						interval: 1,
+            					},
+            					axisY :{
+            						includeZero: false
+            					},
+            					legend: {
+            						horizontalAlign: "right",
+            						verticalAlign: "center"        
+            					},
+            					data: data,
+            				});
+
+            				$scope.norm.render();
+            				
+            				var data = []
+            				var dataSeries = { type: "line" };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = six;
+            			    data.push(dataSeries);
+            			    
+
+            				$scope.six = new CanvasJS.Chart("sixContainer", {
+            					zoomEnabled: true,     
+            					colorSet: "color",
+            					title:{
+            						text: "Métricas SIX" 
+            					},
+            					axisX :{
+            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						labelAngle: -30,
+            						interval: 1,
+            					},
+            					axisY :{
+            						includeZero: false
+            					},
+            					legend: {
+            						horizontalAlign: "right",
+            						verticalAlign: "center"        
+            					},
+            					data: data,
+            				});
+
+            				$scope.six.render();
+            				
+
+            				var data = []
+            				var dataSeries = { type: "line" };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = mloc;
+            			    data.push(dataSeries);
+            			    
+
+            				$scope.mloc = new CanvasJS.Chart("mlocContainer", {
+            					zoomEnabled: true,     
+            					colorSet: "color",
+            					title:{
+            						text: "Métricas MLOC" 
+            					},
+            					axisX :{
+            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						labelAngle: -30,
+            						interval: 1,
+            					},
+            					axisY :{
+            						includeZero: false
+            					},
+            					legend: {
+            						horizontalAlign: "right",
+            						verticalAlign: "center"        
+            					},
+            					data: data,
+            				});
+
+            				$scope.mloc.render();
+            				
+              				var data = []
+            				var dataSeries = { type: "line" };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = nac;
+            			    data.push(dataSeries);
+            			    
+
+            				$scope.nac = new CanvasJS.Chart("nacContainer", {
+            					zoomEnabled: true,     
+            					colorSet: "color",
+            					title:{
+            						text: "Métricas NAC" 
+            					},
+            					axisX :{
+            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						labelAngle: -30,
+            						interval: 1,
+            					},
+            					axisY :{
+            						includeZero: false
+            					},
+            					legend: {
+            						horizontalAlign: "right",
+            						verticalAlign: "center"        
+            					},
+            					data: data,
+            				});
+
+            				$scope.nac.render();
+            				
+              				var data = []
+            				var dataSeries = { type: "line" };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = nsf;
+            			    data.push(dataSeries);
+            			    
+
+            				$scope.nsf = new CanvasJS.Chart("nsfContainer", {
+            					zoomEnabled: true,     
+            					colorSet: "color",
+            					title:{
+            						text: "Métricas NSF" 
+            					},
+            					axisX :{
+            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						labelAngle: -30,
+            						interval: 1,
+            					},
+            					axisY :{
+            						includeZero: false
+            					},
+            					legend: {
+            						horizontalAlign: "right",
+            						verticalAlign: "center"        
+            					},
+            					data: data,
+            				});
+
+            				$scope.nsf.render();            				
+            				
+            			}
+            		  }, function(response) {
+            		    // called asynchronously if an error occurs
+            		    // or server returns response with an error status.
+            		  });
+            	}
 				
             }]);

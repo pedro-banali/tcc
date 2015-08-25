@@ -345,4 +345,30 @@ public class WebService {
 		return Response.status(200).entity(jsonObject.toString()).build();
 		//return ;
 	}
+	
+	@Path("exibirMetricas")
+	@POST
+	//@GET
+	//@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response exibirMetricas(@HeaderParam("usuario") String usuario ,@HeaderParam("projeto") String projeto, @HeaderParam("key") String key ) throws JSONException {
+		SessionController sc = SessionController.getInstance();
+		JSONArray result;
+		JSONObject jSonProjeto = new JSONObject(projeto);
+		JSONObject jSonUsuario = new JSONObject(usuario);
+		JSONObject jsonObject;
+		
+		SelfieCodeBC sbc = SelfieCodeBC.getInstance();
+		
+		Usuario u = sc.getUser(key);
+		result = sbc.exibirMetricas( jSonUsuario, jSonProjeto, u );
+
+		
+		jsonObject = new JSONObject();
+		jsonObject.put("result", result);
+		
+
+		return Response.status(200).entity(result.toString()).build();
+		//return ;
+	}
 }

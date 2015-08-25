@@ -1,6 +1,7 @@
 package com.pucpr.br.bsi2015.tcc.selfiecode.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Projeto {
 	private int id;
@@ -10,6 +11,7 @@ public class Projeto {
 	private Date inicio;
 	private Date fim;
 	private int tempoParaColeta;
+	private List<CodigoFonte> codigoFonte;
 	
 	public Projeto()
 	{
@@ -61,5 +63,13 @@ public class Projeto {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public List<CodigoFonte> getCodigoFonte() {
+		return codigoFonte;
+	}
+
+	public void setCodigoFonte(List<CodigoFonte> codigoFonte) {
+		this.codigoFonte = codigoFonte;
 	}
 }
