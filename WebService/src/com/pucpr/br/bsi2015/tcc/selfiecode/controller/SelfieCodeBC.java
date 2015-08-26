@@ -113,7 +113,7 @@ public class SelfieCodeBC {
 		Projeto proj = new Projeto();
 		TipoUsuario tu = new TipoUsuario();
 		List<Projeto> projs = new ArrayList<Projeto>();
-		
+		boolean result;
 		ds.setNome(u.getString("nome"));
 		ds.setLogin(u.getString("login"));
 		ds.setCpf(u.getLong("cpf"));
@@ -132,10 +132,14 @@ public class SelfieCodeBC {
 		UsuarioDAO uDao = new UsuarioDAO();
 		
 			
-		
-		boolean result = dDao.cadastrarDev(ds);
-		uDao.insertTipo(ds);
-		pDao.inserDevProj(ds);
+		if(dDao.selectDev(ds) == null)
+		{
+			result = dDao.cadastrarDev(ds);
+			uDao.insertTipo(ds);
+			pDao.inserDevProj(ds);
+		}
+		else
+			result = false;
 		
 		return result;
 	}

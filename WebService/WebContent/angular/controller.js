@@ -153,6 +153,12 @@ selfieMyappDev.controller('devCtrl', ['$scope','$http', '$location', '$window', 
             					$scope.usuario = {};
             					$scope.sucesso  = true;
             				}
+            				else
+            				{
+            					$scope.errorMsg = 'Usuário já está neste projeto';
+            					$scope.sucesso  = false;
+            					$scope.errorInvalid  = true;
+            				}
             			  }, function(response) {
             			    // called asynchronously if an error occurs
             			    // or server returns response with an error status.
@@ -334,6 +340,7 @@ selfieMyappDev.controller('atbCtrl', ['$scope','$http', '$location', '$window', 
                 				else
                 				{
                 					$scope.errorMsg = 'Usuário já está neste projeto';
+                					$scope.sucesso  = false;
                 					$scope.errorInvalid  = true;
                 				}
                 			  }, function(response) {

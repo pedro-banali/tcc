@@ -155,8 +155,12 @@ public class WebService {
 		SelfieCodeBC sbc = SelfieCodeBC.getInstance();
 		
 		Usuario u = sc.getUser(key);
+		
 		result = sbc.cadastrarDev(jsonObject, u );
 
+		
+		
+		
 		
 		jsonObject = new JSONObject();
 		jsonObject.put("result", result);
