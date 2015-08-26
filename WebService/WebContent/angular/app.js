@@ -17,6 +17,7 @@ var app = angular.module('selfiecode', [
         controller: 'devCtrl',
         resolve: {
             auth: function ($q, authenticationSvc) {
+            	authenticationSvc.verifySession();
                 var userInfo = authenticationSvc.getUserInfo();
                 if (userInfo) {
                     return $q.when(userInfo);
@@ -31,7 +32,9 @@ var app = angular.module('selfiecode', [
           controller: 'adminCtrl',
           resolve: {
               auth: function ($q, authenticationSvc) {
+            	  authenticationSvc.verifySession();
                   var userInfo = authenticationSvc.getUserInfo();
+                  
                   if (userInfo) {
                       return $q.when(userInfo);
                   } else {
@@ -45,6 +48,7 @@ var app = angular.module('selfiecode', [
             controller: 'atbCtrl',
             resolve: {
                 auth: function ($q, authenticationSvc) {
+                	authenticationSvc.verifySession();
                     var userInfo = authenticationSvc.getUserInfo();
                     if (userInfo) {
                         return $q.when(userInfo);
@@ -59,6 +63,7 @@ var app = angular.module('selfiecode', [
 		  controller: 'adminCtrl',
 		  resolve: {
 		      auth: function ($q, authenticationSvc) {
+		    	  authenticationSvc.verifySession();
 		          var userInfo = authenticationSvc.getUserInfo();
 		          if (userInfo) {
 		              return $q.when(userInfo);
@@ -73,6 +78,7 @@ var app = angular.module('selfiecode', [
 			  controller: 'adminCtrl',
 			  resolve: {
 			      auth: function ($q, authenticationSvc) {
+			    	  authenticationSvc.verifySession();
 			          var userInfo = authenticationSvc.getUserInfo();
 			          if (userInfo) {
 			              return $q.when(userInfo);
@@ -86,7 +92,9 @@ var app = angular.module('selfiecode', [
 	            templateUrl: 'index.html',
 	            controller: 'adminCtrl',
 	            resolve: {
+	            	
 	                auth: function ($q, authenticationSvc) {
+	                	authenticationSvc.verifySession();
 	                    var userInfo = authenticationSvc.getUserInfo();
 	                    if (userInfo) {
 	                        return $q.when(userInfo);
@@ -97,10 +105,12 @@ var app = angular.module('selfiecode', [
 	            }
 	          }).
 	          when('/listar-dev', {
+	        	 
 	              templateUrl: 'list-dev.html',
 	              controller: 'devCtrl',
 	              resolve: {
 	                  auth: function ($q, authenticationSvc) {
+	                	  authenticationSvc.verifySession();
 	                      var userInfo = authenticationSvc.getUserInfo();
 	                      if (userInfo) {
 	                          return $q.when(userInfo);
@@ -115,6 +125,7 @@ var app = angular.module('selfiecode', [
 	                controller:  'projCtrl',
 	                resolve: {
 	                    auth: function ($q, authenticationSvc) {
+	                    	authenticationSvc.verifySession();
 	                        var userInfo = authenticationSvc.getUserInfo();
 	                        if (userInfo) {
 	                            return $q.when(userInfo);
@@ -129,6 +140,7 @@ var app = angular.module('selfiecode', [
 		                controller:  'devCtrl',
 		                resolve: {
 		                    auth: function ($q, authenticationSvc) {
+		                    	 authenticationSvc.verifySession();
 		                        var userInfo = authenticationSvc.getUserInfo();
 		                        if (userInfo) {
 		                            return $q.when(userInfo);
@@ -143,6 +155,7 @@ var app = angular.module('selfiecode', [
 		                  controller: 'devInfoCtrl',
 		                  resolve: {
 		                      auth: function ($q, authenticationSvc) {
+		                    	  authenticationSvc.verifySession();
 		                          var userInfo = authenticationSvc.getUserInfo();
 		                          if (userInfo) {
 		                              return $q.when(userInfo);
@@ -157,6 +170,7 @@ var app = angular.module('selfiecode', [
 		                  controller: 'devGraphCtrl',
 		                  resolve: {
 		                      auth: function ($q, authenticationSvc) {
+		                    	  authenticationSvc.verifySession();
 		                          var userInfo = authenticationSvc.getUserInfo();
 		                          if (userInfo) {
 		                              return $q.when(userInfo);
@@ -223,7 +237,30 @@ app.factory("authenticationSvc", ["$http","$q","$window",function ($http, $q, $w
 
         return deferred.promise;
     }
+    
+    function verifySession(userName) {
+        var deferred = $q.defer();
+        $http({
+            method: "POST",
+            url: 'http://localhost/WebService/selfieCode/service/verifySession', 
+            headers: {
+                "key": userInfo.accessToken
+            }
+        	}).
+            then(function (result) {
 
+            	if(result.data.result == 'expired')
+        		{
+	                logout();
+        		}
+                
+            }, function (error) {
+                deferred.reject(error);
+            });
+
+        return deferred.promise;
+    }
+    
     function logout() {
         var deferred = $q.defer();
 
@@ -259,7 +296,8 @@ app.factory("authenticationSvc", ["$http","$q","$window",function ($http, $q, $w
     return {
         login: login,
         logout: logout,
-        getUserInfo: getUserInfo
+        getUserInfo: getUserInfo,
+        verifySession: verifySession,
     };
 }]);
 

@@ -332,15 +332,25 @@ selfieMyappDev.controller('atbCtrl', ['$scope','$http', '$location', '$window', 
                 			    // this callback will be called asynchronously
                 			    // when the response is available
                 				console.log("result" + response);
+                				$scope.alertsE = [];
+                				$scope.alertsS = [];
                 				if(response.data.result == true)
                 				{
-                					$scope.atribuicao = {};
-                					$scope.sucesso  = true;
+                					$scope.usuario = {};
+                					$scope.sucesso = [];
+                					$scope.sucesso.msg = 'Usuário atribuido com sucesso.';
+                					$scope.sucesso.type = 'success';
+                					$scope.alertsS.push($scope.sucesso);
+                					$scope.sucessoValid  = true;
+                					$scope.errorInvalid
                 				}
                 				else
                 				{
-                					$scope.errorMsg = 'Usuário já está neste projeto';
-                					$scope.sucesso  = false;
+                					$scope.errorMsg = [];
+                					$scope.errorMsg.msg = 'CPF ou Login já existente.';
+                					$scope.errorMsg.type = 'danger';
+                					$scope.alertsE.push($scope.errorMsg);
+                					//$scope.sucesso  = false;
                 					$scope.errorInvalid  = true;
                 				}
                 			  }, function(response) {
@@ -348,7 +358,14 @@ selfieMyappDev.controller('atbCtrl', ['$scope','$http', '$location', '$window', 
                 			    // or server returns response with an error status.
                 			  });
              		      }
-				
+				  	
+					$scope.closeAlertE = function(index) {
+					    $scope.alertsE.splice(index, 1);
+					};
+					
+					$scope.closeAlertS = function(index) {
+					    $scope.alertsS.splice(index, 1);
+					};
             }]);
 
 
@@ -617,25 +634,134 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             				
   
               				var data = []
-            				var dataSeries = { type: "line" };
+            				var dataSeries = { type: "spline", legendText: "WMC" , showInLegend: true };
+              				
             				var dataPoints = [];
             				dataSeries.dataPoints = wmc;
             			    data.push(dataSeries);
             				
-            			    var dataSeries = { type: "line" };
+            			    var dataSeries = { type: "spline", legendText: "CCM", showInLegend: true };
             				var dataPoints = [];
             				dataSeries.dataPoints = ccm;
             			    data.push(dataSeries);
             			    
-            			    var dataSeries = { type: "line" };
+            			    var dataSeries = { type: "spline" , legendText: "LCOM", showInLegend: true };
             				var dataPoints = [];
             				dataSeries.dataPoints = lcom;
             			    data.push(dataSeries);
             			    
+            			    var dataSeries = { type: "spline" , legendText: "NBD", showInLegend: true };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = nbd;
+            			    data.push(dataSeries);
+            			    
+            			    var dataSeries = { type: "spline" , legendText: "DIT", showInLegend: true };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = dit;
+            			    data.push(dataSeries);
+            			    
+            			    var dataSeries = { type: "spline" , legendText: "NOC", showInLegend: true };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = noc;
+            			    data.push(dataSeries);
+            			    
+            			    var dataSeries = { type: "spline" , legendText: "NORM", showInLegend: true };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = norm;
+            			    data.push(dataSeries);
+            			    
+            			    var dataSeries = { type: "spline" , legendText: "SIX", showInLegend: true };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = six;
+            			    data.push(dataSeries);
+            			    
+            			    var dataSeries = { type: "spline" , legendText: "MLOC", showInLegend: true };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = mloc;
+            			    data.push(dataSeries);
+            			    
+            			    var dataSeries = { type: "spline" , legendText: "NAC", showInLegend: true };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = nac;
+            			    data.push(dataSeries);
+            			    
+            			    var dataSeries = { type: "spline" , legendText: "NSF", showInLegend: true };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = nsf;
+            			    data.push(dataSeries);
+            			    
+            			    var dataSeries = { type: "spline" , legendText: "NSM", showInLegend: true };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = nsm;
+            			    data.push(dataSeries);
+            			    
+            			    var dataSeries = { type: "spline" , legendText: "PAR", showInLegend: true };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = par;
+            			    data.push(dataSeries);
+            			    
+            			    var dataSeries = { type: "spline" , legendText: "NOI", showInLegend: true };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = noi;
+            			    data.push(dataSeries);
+            			    
+            			    var dataSeries = { type: "spline" , legendText: "NOP", showInLegend: true };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = nop;
+            			    data.push(dataSeries);
+            			    
+            			    var dataSeries = { type: "spline" , legendText: "Ce", showInLegend: true };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = ca;
+            			    data.push(dataSeries);
+            			    
+            			    var dataSeries = { type: "spline" , legendText: "Ce", showInLegend: true };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = ce;
+            			    data.push(dataSeries);
+
+            			    var dataSeries = { type: "spline" , legendText: "I", showInLegend: true };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = ins;
+            			    data.push(dataSeries);
+            			    
+            			    var dataSeries = { type: "spline" , legendText: "A", showInLegend: true };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = abs;
+            			    data.push(dataSeries);
+            			    
+            				$scope.todas = new CanvasJS.Chart("allContainer", {
+            					zoomEnabled: true,      
+            					title:{
+            						text: "Todas as Métricas" 
+            					},
+            					axisX :{
+            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						labelAngle: -30,
+            						interval: 1,
+            					},
+            					axisY :{
+            						includeZero: false
+            					},
+            					legend: {
+            						horizontalAlign: "right",
+            						verticalAlign: "center"        
+            					},
+            					data: data,
+            				});
+
+            				$scope.todas.render();
+            				
+            				var data = [];
+            				var dataSeries = { type: "spline" };
+             				var dataPoints = [];
+             				dataSeries.dataPoints = ccm;
+             			    data.push(dataSeries);
+            				
             				$scope.ccm = new CanvasJS.Chart("ccmContainer", {
             					zoomEnabled: true,      
             					title:{
-            						text: "Métricas CCM" 
+            						text: "Métrica CCM" 
             					},
             					axisX :{
             						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
@@ -986,7 +1112,247 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             					data: data,
             				});
 
-            				$scope.nsf.render();            				
+            				$scope.nsf.render();  
+            				
+              				var data = []
+            				var dataSeries = { type: "line" };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = nsf;
+            			    data.push(dataSeries);
+            			    
+
+            				$scope.nsm = new CanvasJS.Chart("nsmContainer", {
+            					zoomEnabled: true,     
+            					colorSet: "color",
+            					title:{
+            						text: "Métricas NSM" 
+            					},
+            					axisX :{
+            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						labelAngle: -30,
+            						interval: 1,
+            					},
+            					axisY :{
+            						includeZero: false
+            					},
+            					legend: {
+            						horizontalAlign: "right",
+            						verticalAlign: "center"        
+            					},
+            					data: data,
+            				});
+
+            				$scope.nsm.render();   
+            				
+            				var data = []
+            				var dataSeries = { type: "line" };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = par;
+            			    data.push(dataSeries);
+            			    
+
+            				$scope.par = new CanvasJS.Chart("parContainer", {
+            					zoomEnabled: true,     
+            					colorSet: "color",
+            					title:{
+            						text: "Métricas PAR" 
+            					},
+            					axisX :{
+            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						labelAngle: -30,
+            						interval: 1,
+            					},
+            					axisY :{
+            						includeZero: false
+            					},
+            					legend: {
+            						horizontalAlign: "right",
+            						verticalAlign: "center"        
+            					},
+            					data: data,
+            				});
+
+            				$scope.par.render(); 
+            				
+            				var data = []
+            				var dataSeries = { type: "line" };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = noi;
+            			    data.push(dataSeries);
+            			    
+
+            				$scope.noi = new CanvasJS.Chart("noiContainer", {
+            					zoomEnabled: true,     
+            					colorSet: "color",
+            					title:{
+            						text: "Métricas NOI" 
+            					},
+            					axisX :{
+            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						labelAngle: -30,
+            						interval: 1,
+            					},
+            					axisY :{
+            						includeZero: false
+            					},
+            					legend: {
+            						horizontalAlign: "right",
+            						verticalAlign: "center"        
+            					},
+            					data: data,
+            				});
+
+            				$scope.noi.render(); 
+            				
+            				var data = []
+            				var dataSeries = { type: "line" };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = nop;
+            			    data.push(dataSeries);
+            			    
+
+            				$scope.nop = new CanvasJS.Chart("nopContainer", {
+            					zoomEnabled: true,     
+            					colorSet: "color",
+            					title:{
+            						text: "Métricas NOP" 
+            					},
+            					axisX :{
+            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						labelAngle: -30,
+            						interval: 1,
+            					},
+            					axisY :{
+            						includeZero: false
+            					},
+            					legend: {
+            						horizontalAlign: "right",
+            						verticalAlign: "center"        
+            					},
+            					data: data,
+            				});
+
+            				$scope.nop.render(); 
+            				
+            				var data = []
+            				var dataSeries = { type: "line" };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = ca;
+            			    data.push(dataSeries);
+            			    
+
+            				$scope.ca = new CanvasJS.Chart("caContainer", {
+            					zoomEnabled: true,     
+            					colorSet: "color",
+            					title:{
+            						text: "Métricas Ca" 
+            					},
+            					axisX :{
+            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						labelAngle: -30,
+            						interval: 1,
+            					},
+            					axisY :{
+            						includeZero: false
+            					},
+            					legend: {
+            						horizontalAlign: "right",
+            						verticalAlign: "center"        
+            					},
+            					data: data,
+            				});
+
+            				$scope.ca.render();
+            				
+            				var data = []
+            				var dataSeries = { type: "line" };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = ce;
+            			    data.push(dataSeries);
+            			    
+
+            				$scope.ce = new CanvasJS.Chart("ceContainer", {
+            					zoomEnabled: true,     
+            					colorSet: "color",
+            					title:{
+            						text: "Métricas Ce" 
+            					},
+            					axisX :{
+            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						labelAngle: -30,
+            						interval: 1,
+            					},
+            					axisY :{
+            						includeZero: false
+            					},
+            					legend: {
+            						horizontalAlign: "right",
+            						verticalAlign: "center"        
+            					},
+            					data: data,
+            				});
+
+            				$scope.ce.render();
+            				
+            				var data = []
+            				var dataSeries = { type: "line" };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = ins;
+            			    data.push(dataSeries);
+            			    
+
+            				$scope.ins = new CanvasJS.Chart("insContainer", {
+            					zoomEnabled: true,     
+            					colorSet: "color",
+            					title:{
+            						text: "Métricas I" 
+            					},
+            					axisX :{
+            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						labelAngle: -30,
+            						interval: 1,
+            					},
+            					axisY :{
+            						includeZero: false
+            					},
+            					legend: {
+            						horizontalAlign: "right",
+            						verticalAlign: "center"        
+            					},
+            					data: data,
+            				});
+
+            				$scope.ins.render();
+            				
+            				var data = []
+            				var dataSeries = { type: "line" };
+            				var dataPoints = [];
+            				dataSeries.dataPoints = abs;
+            			    data.push(dataSeries);
+            			    
+
+            				$scope.abs = new CanvasJS.Chart("absContainer", {
+            					zoomEnabled: true,     
+            					colorSet: "color",
+            					title:{
+            						text: "Métricas ABS" 
+            					},
+            					axisX :{
+            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						labelAngle: -30,
+            						interval: 1,
+            					},
+            					axisY :{
+            						includeZero: false
+            					},
+            					legend: {
+            						horizontalAlign: "right",
+            						verticalAlign: "center"        
+            					},
+            					data: data,
+            				});
+
+            				$scope.abs.render();
             				
             			}
             		  }, function(response) {

@@ -14,13 +14,11 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-8 col-md-offset-2">
-                                	<div class="alert alert-success alert-dismissable" ng-show="sucesso" >
-		                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		                                Usu&aacute;rio atribuido com sucesso.
+                                	<div class=>
+										<alert ng-repeat="alert in alertsS" type="{{sucesso.type}}" close="closeAlertS($index)">{{sucesso.msg}}</alert>
 		                            </div>
-									<div class="alert alert-danger alert-dismissable" ng-show="errorInvalid" >
-		                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		                              {{errorMsg}} .
+									<div>
+		                               <alert ng-repeat="alert in alertsE" type="{{errorMsg.type}}" close="closeAlertE($index)">{{errorMsg.msg}}</alert>
 		                            </div>
                                     <form role="form" ng-submit="atribuir()" name="myForm" >
                                         <div class="form-group">

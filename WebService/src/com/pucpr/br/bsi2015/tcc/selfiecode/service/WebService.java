@@ -170,6 +170,8 @@ public class WebService {
 		//return ;
 	}
 	
+	
+	
 	@Path("atribuir")
 	@POST
 	//@GET
@@ -189,6 +191,32 @@ public class WebService {
 		a = new JSONObject();
 
 		a.put("result", result);
+		
+
+		return Response.status(200).entity(a.toString()).build();
+		//return ;
+	}
+	
+	@Path("verifySession")
+	@POST
+	//@GET
+	//@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response verifySession(@HeaderParam("key") String key ) throws JSONException {
+		SessionController sc = SessionController.getInstance();
+
+		JSONObject a = new JSONObject();
+
+		
+		Usuario u = sc.getUser(key);
+		if(u == null)
+		{
+			a = new JSONObject();
+			a.put("result", "expired");
+		}
+		else
+			a.put("result", "valid");
+
 		
 
 		return Response.status(200).entity(a.toString()).build();
