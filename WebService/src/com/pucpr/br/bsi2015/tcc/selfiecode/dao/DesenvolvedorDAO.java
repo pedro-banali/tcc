@@ -117,6 +117,57 @@ public class DesenvolvedorDAO {
 		}
 		return null;
 	}
+	
+	public Usuario selectDevByLogin(Usuario usuario) {
+
+		Connection cf = ConnectionFactory.getConnection();
+		Usuario u = null;
+		TipoUsuario tu;
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+
+		if (cf == null)
+			JOptionPane.showConfirmDialog(null, "ERRRROUUU");
+		else {
+			String selectSQL = "SELECT U.CPF, U.NOME, U.Nascimento, U.Login, UT.DATA_CADASTRO, UT.FK_TIPO_USUARIO, TU.DESCRICAO"
+					+ " FROM USUARIO as U, USUARIO_TIPO as UT, TIPO_USUARIO as TU" + " WHERE U.CPF = UT.FK_CPF "
+					+ " AND TU.ID_TIPO_USUARIO = UT.FK_TIPO_USUARIO " + " AND U.Login = ?";
+
+			PreparedStatement preparedStatement;
+			try {
+				preparedStatement = cf.prepareStatement(selectSQL);
+
+				preparedStatement.setString(1, usuario.getLogin());
+
+				// preparedStatement.setString(1, "Pedro Henrique Banali");
+				ResultSet rs = preparedStatement.executeQuery();
+				while (rs.next()) {
+
+					u = new Usuario();
+					tu = new TipoUsuario();
+
+					u.setNome(rs.getString("Nome"));
+					u.setCpf(rs.getLong("Cpf"));
+					u.setDataNascimento(rs.getDate("Nascimento"));
+
+					tu.setId(rs.getInt("FK_TIPO_USUARIO"));
+					tu.setDescricaoUsuario(rs.getString("DESCRICAO"));
+
+					u.setTipoUsuario(tu);
+					u.setDataCadastro(rs.getDate("DATA_CADASTRO"));
+
+
+				
+
+				}
+				cf.close();
+				return u;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
 
 	public boolean cadastrarDev(Desenvolvedor u) {
 		// TODO Auto-generated method stub

@@ -155,7 +155,7 @@ selfieMyappDev.controller('devCtrl', ['$scope','$http', '$location', '$window', 
             				}
             				else
             				{
-            					$scope.errorMsg = 'Usuário já está neste projeto';
+            					$scope.errorMsg = 'CPF ou Login já existente.';
             					$scope.sucesso  = false;
             					$scope.errorInvalid  = true;
             				}

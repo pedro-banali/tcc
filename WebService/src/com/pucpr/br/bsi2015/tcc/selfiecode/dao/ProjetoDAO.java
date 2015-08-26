@@ -222,7 +222,7 @@ public class ProjetoDAO {
 						return 0;
 					
 				}
-				
+				cf.close();
 				return 1;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

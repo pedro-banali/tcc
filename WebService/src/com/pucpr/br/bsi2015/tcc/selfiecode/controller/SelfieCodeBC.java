@@ -132,14 +132,20 @@ public class SelfieCodeBC {
 		UsuarioDAO uDao = new UsuarioDAO();
 		
 			
-		if(dDao.selectDev(ds) == null)
+		if(dDao.selectDev(ds) != null)
+		{
+			result = false;
+		}
+		else if(dDao.selectDevByLogin(ds) != null)
+		{
+			result = false;
+		}
+		else
 		{
 			result = dDao.cadastrarDev(ds);
 			uDao.insertTipo(ds);
 			pDao.inserDevProj(ds);
 		}
-		else
-			result = false;
 		
 		return result;
 	}
