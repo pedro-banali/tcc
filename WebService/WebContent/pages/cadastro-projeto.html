@@ -49,9 +49,10 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Descri&ccedil;&atilde;o</label>
-                                            <textarea class="form-control" name="descricao" ng-model="projeto.descricao" required>
+                                            <textarea class="form-control" name="descricao" ng-model="projeto.descricao" required ng-maxlength="500">
                                             
                                         	</textarea>
+                                        	<p ng-show="myForm.fim.$error.maxlength" class="help-block">Descri&ccedil;&atilde;o muito longa </p>
                                         </div>
                                         <button type="submit" class="btn btn-default" ng-disabled="!myForm.$valid">Cadastrar</button>
                                         <button type="reset" class="btn btn-default">Cancelar</button>

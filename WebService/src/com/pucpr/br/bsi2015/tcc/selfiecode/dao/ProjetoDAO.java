@@ -247,7 +247,7 @@ public class ProjetoDAO {
 		else
 		{
 			
-			String selectSQL = "INSERT INTO PROJETO ( NomeProjeto, Descricao, Inicio, Fim, Status_projeto  ) VALUES (?, ?, ?, ?, ? )";
+			String selectSQL = "INSERT INTO PROJETO ( NomeProjeto, Descricao, Inicio, Fim, Status_projeto, Ativo  ) VALUES (?, ?, ?, ?, ?, 0 )";
 			
 			PreparedStatement preparedStatement;
 			try {

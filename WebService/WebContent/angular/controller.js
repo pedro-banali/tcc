@@ -8,7 +8,6 @@ angular.module('admin',  ['ngCookies'])
 	$scope.login = function()
 	{	
 		authenticationSvc.login($scope.usuario, $scope.password);
-		
 	}
 	
 	$scope.logout = function()
