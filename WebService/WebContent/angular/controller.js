@@ -70,7 +70,23 @@ angular.module('admin',  ['ngCookies'])
 				if(response.data.result == true)
 				{
 					$scope.projeto = {};
-					$scope.sucesso  = true;
+      				$scope.alertsS = [];
+    				$scope.sucesso = [];
+					$scope.sucesso.msg = 'Projeto cadastrado com sucesso.';
+					$scope.sucesso.type = 'success';
+					$scope.alertsS.push($scope.sucesso);
+				}
+				else
+				{
+					$scope.alertsE = [];
+     				  
+   				  	$scope.errorMsg = [];
+//         			$scope.errorMsg.msg = 'Usuário inexistente.';
+ 					$scope.errorMsg.type = 'danger';
+ 					
+					
+ 					$scope.errorMsg.msg = 'Ocorreu um erro inesperado';
+					$scope.alertsE.push($scope.errorMsg);
 				}
 			  }, function(response) {
 			    // called asynchronously if an error occurs
@@ -107,15 +123,26 @@ angular.module('admin',  ['ngCookies'])
       			    // when the response is available
       				console.log("result" + response);
       				if(response.data.result == true)
-      				{
-      					$scope.proj = {};
-      					$scope.sucesso  = true;
-      					$scope.listarProj();
-      				}
-      				else
-      				{
-      					$scope.errorInvalid  = true;
-      				}
+    				{
+    					$scope.projeto = {};
+          				$scope.alertsS = [];
+        				$scope.sucesso = [];
+    					$scope.sucesso.msg = 'Projeto excluído com sucesso.';
+    					$scope.sucesso.type = 'success';
+    					$scope.alertsS.push($scope.sucesso);
+    				}
+    				else
+    				{
+    					$scope.alertsE = [];
+         				  
+       				  	$scope.errorMsg = [];
+//             			$scope.errorMsg.msg = 'Usuário inexistente.';
+     					$scope.errorMsg.type = 'danger';
+     					
+    					
+     					$scope.errorMsg.msg = 'Projeto inexistente';
+    					$scope.alertsE.push($scope.errorMsg);
+    				}
       			  }, function(response) {
       			    // called asynchronously if an error occurs
       			    // or server returns response with an error status.
@@ -124,6 +151,14 @@ angular.module('admin',  ['ngCookies'])
    		        //Sad path - The user probably canceled.
    		    });
 	}
+	
+	$scope.closeAlertE = function(index) {
+	    $scope.alertsE.splice(index, 1);
+	};
+	
+	$scope.closeAlertS = function(index) {
+	    $scope.alertsS.splice(index, 1);
+	};
 }]);
 	
 var selfieMyappDev = angular.module('dev',  []);
@@ -150,13 +185,23 @@ selfieMyappDev.controller('devCtrl', ['$scope','$http', '$location', '$window', 
             				if(response.data.result == true)
             				{
             					$scope.usuario = {};
-            					$scope.sucesso  = true;
+                  				$scope.alertsS = [];
+                				$scope.sucesso = [];
+            					$scope.sucesso.msg = 'Usuário cadastrado com sucesso.';
+            					$scope.sucesso.type = 'success';
+            					$scope.alertsS.push($scope.sucesso);
             				}
             				else
             				{
-            					$scope.errorMsg = 'CPF ou Login já existente.';
-            					$scope.sucesso  = false;
-            					$scope.errorInvalid  = true;
+            					$scope.alertsE = [];
+               				  
+               				  	$scope.errorMsg = [];
+//                     			$scope.errorMsg.msg = 'Usuário inexistente.';
+             					$scope.errorMsg.type = 'danger';
+             					
+            					
+             					$scope.errorMsg.msg = 'CPF ou Login já existente.';
+            					$scope.alertsE.push($scope.errorMsg);
             				}
             			  }, function(response) {
             			    // called asynchronously if an error occurs
@@ -185,8 +230,12 @@ selfieMyappDev.controller('devCtrl', ['$scope','$http', '$location', '$window', 
 	            				return;
 	            			}
 	            		}
-	            		$scope.errorInvalid = true;
-	            		$scope.errorMsg = '1';
+	            		$scope.alertsE = [];
+       				  	$scope.errorValid = true;
+       				  	$scope.errorMsg = [];
+             			$scope.errorMsg.msg = 'Usuário inexistente.';
+     					$scope.errorMsg.type = 'danger';
+     					$scope.alertsE.push($scope.errorMsg);
             		});
             	}
             	
@@ -209,16 +258,39 @@ selfieMyappDev.controller('devCtrl', ['$scope','$http', '$location', '$window', 
             				{
             					$scope.usuario.cpf = $scope.usuario.cpfNovo;
             					$scope.sucesso  = true;
+            					
+                				$scope.alertsS = [];
+                				$scope.sucesso = [];
+            					$scope.sucesso.msg = 'Usuário alterado com sucesso.';
+            					$scope.sucesso.type = 'success';
+            					$scope.alertsS.push($scope.sucesso);
+            				}
+            				else
+            				{
+            					$scope.alertsE = [];
+               				  	$scope.errorValid = true;
+               				  	$scope.errorMsg = [];
+   	                  			$scope.errorMsg.msg = 'Usuário inexistente.';
+   	          					$scope.errorMsg.type = 'danger';
+   	          					$scope.alertsE.push($scope.errorMsg);
             				}
             			  }, function(response) {
             			    // called asynchronously if an error occurs
             			    // or server returns response with an error status.
+            				 
             			  });
             		}
             		else
             		{
+            			$scope.alertsE = [];
             			$scope.errorValid = true;
+            			$scope.errorMsg = [];
+            			$scope.errorMsg.msg = 'Usuário inexistente.';
+    					$scope.errorMsg.type = 'danger';
+    					$scope.alertsE.push($scope.errorMsg);
             		}
+            		
+            		
             	}
             	
             	$scope.go = function ( path ) {
@@ -256,24 +328,50 @@ selfieMyappDev.controller('devCtrl', ['$scope','$http', '$location', '$window', 
                   			    // this callback will be called asynchronously
                   			    // when the response is available
                   				console.log("result" + response);
-                  				if(response.data.result == true)
-                  				{
-                  					$scope.usuario = {};
-                  					$scope.sucesso  = true;
-                  					$scope.listarDev();
-                  				}
-                  				else
-                  				{
-                  					$scope.errorInvalid  = true;
-                  				}
+                  				$scope.alertsE = [];
+                				$scope.alertsS = [];
+                				if(response.data.result == true)
+                				{
+                					$scope.usuario = {};
+                					$scope.sucesso = [];
+                					$scope.sucesso.msg = 'Usuário excluído com sucesso.';
+                					$scope.sucesso.type = 'success';
+                					$scope.alertsS.push($scope.sucesso);
+                					$scope.sucessoValid  = true;
+                					$scope.errorInvalid
+                				}
+                				else
+                				{
+                					$scope.errorMsg = [];
+                					$scope.errorMsg.msg = 'Erro inesperado';
+                					$scope.errorMsg.type = 'danger';
+                					$scope.alertsE.push($scope.errorMsg);
+                					//$scope.sucesso  = false;
+                					$scope.errorInvalid  = true;
+                				}
+                				$scope.listarDev();
                   			  }, function(response) {
                   			    // called asynchronously if an error occurs
                   			    // or server returns response with an error status.
+                  				$scope.errorMsg.msg = 'Erro inesperado';
+            					$scope.errorMsg.type = 'danger';
+            					$scope.alertsE.push($scope.errorMsg);
+            					//$scope.sucesso  = false;
+            					$scope.errorInvalid  = true;
                   			  });
                		      }, function(err) {
                		        //Sad path - The user probably canceled.
                		    });
             	}
+            	
+			
+				$scope.closeAlertE = function(index) {
+				    $scope.alertsE.splice(index, 1);
+				};
+				
+				$scope.closeAlertS = function(index) {
+				    $scope.alertsS.splice(index, 1);
+				};
             	 
             }]);
 
@@ -393,9 +491,13 @@ selfieMyappDev.controller('projCtrl', ['$scope','$http', '$location', '$window',
             				return;
             			}
             		}
-            		$scope.errorInvalid = true;
-            		$scope.errorMsg = '1';
-            		alert($scope.errorMsg);
+            		$scope.alertsE = [];
+   				  	$scope.errorValid = true;
+   				  	$scope.errorMsg = [];
+         			$scope.errorMsg.msg = 'Projeto inexistente.';
+ 					$scope.errorMsg.type = 'danger';
+ 					$scope.alertsE.push($scope.errorMsg);
+
             		});
             		
             	}
@@ -417,9 +519,26 @@ selfieMyappDev.controller('projCtrl', ['$scope','$http', '$location', '$window',
             		    // when the response is available
             			console.log("result" + response);
             			if(response.data.result == true)
-            			{
-            				$scope.sucesso = true;
-            			}
+        				{
+        					$scope.usuario = {};
+        					$scope.sucesso = [];
+        					$scope.alertsS = [];
+        					$scope.sucesso.msg = 'Projeto alterado com sucesso.';
+        					$scope.sucesso.type = 'success';
+        					$scope.alertsS.push($scope.sucesso);
+        					$scope.sucessoValid  = true;
+        					$scope.errorInvalid
+        				}
+        				else
+        				{
+        					$scope.alertsE = [];
+        					$scope.errorMsg = [];
+        					$scope.errorMsg.msg = 'Ocorreu um erro inesperado.';
+        					$scope.errorMsg.type = 'danger';
+        					$scope.alertsE.push($scope.errorMsg);
+        					//$scope.sucesso  = false;
+        					$scope.errorInvalid  = true;
+        				}
             		  }, function(response) {
             		    // called asynchronously if an error occurs
             		    // or server returns response with an error status.
@@ -429,6 +548,14 @@ selfieMyappDev.controller('projCtrl', ['$scope','$http', '$location', '$window',
             	$scope.go = function ( path ) {
             		  $location.path( path );
             	};
+            	
+				$scope.closeAlertE = function(index) {
+				    $scope.alertsE.splice(index, 1);
+				};
+				
+				$scope.closeAlertS = function(index) {
+				    $scope.alertsS.splice(index, 1);
+				};
             }]);
 
 var selfieMyappDevInfo = angular.module('devInfo',  []);

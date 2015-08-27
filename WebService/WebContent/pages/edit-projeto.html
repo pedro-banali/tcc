@@ -15,14 +15,11 @@
                             <div class="row">
                                 <div class="col-md-8 col-md-offset-2">
                                     <form role="form" ng-submit="atualizarProj()" name="myForm" >
-                                    	<div class="alert alert-success alert-dismissable" ng-show="sucesso" >
-			                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			                                Altera&ccedil;&atilde;o efetuada com sucesso.
+                                      	<div>
+											<alert ng-repeat="alert in alertsS" type="{{sucesso.type}}" close="closeAlertS($index)">{{sucesso.msg}}</alert>
 			                            </div>
-			                            <div class="alert alert-danger alert-dismissable" ng-show="errorInvalid" >
-			                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			                                <span ng-if="errorMsg.length == 0"> Formul&aacute;rio incorreto .</span>
-			                                <span ng-if="errorMsg != ''"> Projeto inexistente.</span>
+										<div>
+			                               <alert ng-repeat="alert in alertsE" type="{{errorMsg.type}}" close="closeAlertE($index)">{{errorMsg.msg}}</alert>
 			                            </div>
                                         <div class="form-group">
                                             <label>Nome</label>
@@ -45,8 +42,9 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Fim do Projeto</label>
-                                            <input class="form-control" name="fim" ng-model="projeto.fim"  required placeholder="dd/mm/yyyy" ng-pattern='/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/' ng-minlength="10" ng-maxlength="10">
+                                            <input class="form-control" name="fim" ng-model="projeto.fim" ng-change="alert('a')"  required placeholder="dd/mm/yyyy" ng-pattern='/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/' ng-minlength="10" ng-maxlength="10">
                                         	<p ng-show="myForm.fim.$error.minlength || myForm.fim.$error.maxlength || myForm.fim.$error.pattern" class="help-block">Data Inv&aacute;lida </p>
+                                        	<p ng-show="myForm.fim" class="help-block">Data Inv&aacute;lida </p>
                                         </div>
                                         <div class="form-group">
                                             <label>Descri&ccedil;&atilde;o</label>
@@ -55,7 +53,7 @@
                                         	</textarea>
                                         </div>
                                         <button type="submit" class="btn btn-default" ng-disabled="!myForm.$valid">Alterar</button>
-                                        <button type="reset" class="btn btn-default" ng-click="go('/listar-proj')">Cancelar</button>
+                                        <button type="reset" class="btn btn-default" ng-click="go('/listar-proj')">Voltar</button>
                                     </form>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
