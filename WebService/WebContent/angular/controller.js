@@ -51,12 +51,25 @@ angular.module('admin',  ['ngCookies'])
 	}
 
 	
+	$scope.checkDates = function()
+	{
+		return $scope.projeto.dataFim < $scope.projeto.dataInicio;
+	}
+	
 	$scope.cadastroProj = function()
 	{
-
-		var projeto = JSON.stringify($scope.projeto);
+		
+		
 		if(!myForm.$valid)
 		{
+			
+			
+			
+			$scope.projeto.inicio = $scope.projeto.inicio.toLocaleDateString();
+			$scope.projeto.fim = $scope.projeto.fim.toLocaleDateString();
+
+			
+			var projeto = JSON.stringify($scope.projeto);
 			$http({
 			  method: 'POST',
 			  url:'http://localhost/WebService/selfieCode/service/cadastroProj',
@@ -130,6 +143,7 @@ angular.module('admin',  ['ngCookies'])
     					$scope.sucesso.msg = 'Projeto excluído com sucesso.';
     					$scope.sucesso.type = 'success';
     					$scope.alertsS.push($scope.sucesso);
+    					$scope.listarProj();
     				}
     				else
     				{
@@ -463,7 +477,7 @@ selfieMyappDev.controller('atbCtrl', ['$scope','$http', '$location', '$window', 
                 				else
                 				{
                 					$scope.errorMsg = [];
-                					$scope.errorMsg.msg = 'CPF ou Login já existente.';
+                					$scope.errorMsg.msg = 'Usuário já está cadastrado neste projeto.';
                 					$scope.errorMsg.type = 'danger';
                 					$scope.alertsE.push($scope.errorMsg);
                 					//$scope.sucesso  = false;

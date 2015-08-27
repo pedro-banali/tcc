@@ -42,10 +42,20 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Fim do Projeto</label>
-                                            <input class="form-control" name="fim" ng-model="projeto.fim" ng-change="alert('a')"  required placeholder="dd/mm/yyyy" ng-pattern='/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/' ng-minlength="10" ng-maxlength="10">
+                                            <input class="form-control" name="fim" ng-model="projeto.fim" required placeholder="dd/mm/yyyy" ng-pattern='/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/' ng-minlength="10" ng-maxlength="10">
                                         	<p ng-show="myForm.fim.$error.minlength || myForm.fim.$error.maxlength || myForm.fim.$error.pattern" class="help-block">Data Inv&aacute;lida </p>
-                                        	<p ng-show="myForm.fim" class="help-block">Data Inv&aacute;lida </p>
                                         </div>
+<!--                                         <div class="form-group"> -->
+<!--                                             <label>Inicio do Projeto</label> -->
+<!--                                             <input class="form-control" name="inicio" type="date" ng-model="projeto.inicio" required placeholder="dd/mm/yyyy" ng-minlength="10" ng-maxlength="10"> -->
+<!--                                         	<p ng-show="myForm.inicio.$error.minlength || myForm.inicio.$error.maxlength || myForm.inicio.$error.pattern" class="help-block errorSC">Data Inv&aacute;lida </p> -->
+<!--                                         </div> -->
+<!--                                         <div class="form-group"> -->
+<!--                                             <label>Fim do Projeto</label> -->
+<!--                                             <input class="form-control" name="fim" min="{{projeto.inicio}}" type="date" ng-model="projeto.fim"  required placeholder="dd/mm/yyyy"  ng-minlength="10" ng-maxlength="10"> -->
+<!--                                         	<p ng-show="myForm.fim.$error.minlength || myForm.fim.$error.maxlength" class="help-block errorSC">Data Inv&aacute;lida </p> -->
+<!--                                         	<p ng-show="myForm.fim.$error.min" class="help-block errorSC">Data do fim deve ser maior que inicio </p> -->
+<!--                                         </div> -->
                                         <div class="form-group">
                                             <label>Descri&ccedil;&atilde;o</label>
                                             <textarea class="form-control" name="descricao" ng-model="projeto.descricao" required>

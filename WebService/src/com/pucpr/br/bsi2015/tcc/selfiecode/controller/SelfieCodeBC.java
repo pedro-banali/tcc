@@ -168,18 +168,20 @@ public class SelfieCodeBC {
 		DesenvolvedorDAO dDao = new DesenvolvedorDAO();	
 		Usuario us = dDao.selectDev(ds);
 
-		if(us != null)
+		if(us != null && us.getCpf() != u.getLong("cpf"))
 		{
 			r.put("result", "existe");
 		}
-		else if( (us = dDao.selectDevInativo(ds))!= null)
-		{
-			r.put("result", "inativo");
-			r.put("usuario", us);
-		}
+//		else if( (us = dDao.selectDevInativo(ds))!= null)
+//		{
+//			r.put("result", "inativo");
+//			r.put("usuario", us);
+//		}
 		else
+		{
 			dDao.editarDev(ds, u.getLong("cpf"));
-		
+			r.put("result", true);
+		}
 		return r ;
 	}
 	
