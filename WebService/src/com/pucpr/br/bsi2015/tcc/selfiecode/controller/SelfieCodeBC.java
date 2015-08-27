@@ -140,6 +140,10 @@ public class SelfieCodeBC {
 		{
 			result = false;
 		}
+		else if(dDao.selectDevInativo(ds) != null)
+		{
+			result = false;
+		}
 		else
 		{
 			result = dDao.cadastrarDev(ds);
@@ -150,11 +154,11 @@ public class SelfieCodeBC {
 		return result;
 	}
 	
-	public boolean editDev(JSONObject u, Usuario g)
+	public JSONObject editDev(JSONObject u, Usuario g)
 	{
 		
 		Desenvolvedor ds = new Desenvolvedor();
-		
+		JSONObject r = new JSONObject();
 		ds.setNome(u.getString("nome"));
 		ds.setLogin(u.getString("login"));
 		ds.setCpf(u.getLong("cpfNovo"));
@@ -162,10 +166,21 @@ public class SelfieCodeBC {
 
 
 		DesenvolvedorDAO dDao = new DesenvolvedorDAO();	
-			
-		boolean result = dDao.editarDev(ds, u.getLong("cpf"));
+		Usuario us = dDao.selectDev(ds);
+
+		if(us != null)
+		{
+			r.put("result", "existe");
+		}
+		else if( (us = dDao.selectDevInativo(ds))!= null)
+		{
+			r.put("result", "inativo");
+			r.put("usuario", us);
+		}
+		else
+			dDao.editarDev(ds, u.getLong("cpf"));
 		
-		return result;
+		return r ;
 	}
 	
 	public boolean cadastrarProj(JSONObject p, Usuario g)

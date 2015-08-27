@@ -51,7 +51,7 @@
 <!--                                         </div> -->
                                         <div class="form-group">
                                             <label>Data de Nascimento</label>
-                                            <input class="form-control" name="dataNascimento" ng-model="usuario.dataNascimento" required placeholder="dd/mm/yyyy" ng-minlength="10" ng-maxlength="10">
+                                            <input class="form-control" name="dataNascimento" ng-model="usuario.dataNascimento" required placeholder="dd/mm/yyyy" ng-pattern='/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/' ui-mask="99/99/9999" ng-minlength="10" ng-maxlength="10">
                                         	<p ng-show="myForm.dataNascimento.$error.minlength || myForm.dataNascimento.$error.maxlength" class="help-block">Data Inv&aacute;lida </p>
                                         </div>
                                         <div class="form-group">

@@ -267,6 +267,24 @@ selfieMyappDev.controller('devCtrl', ['$scope','$http', '$location', '$window', 
             					$scope.sucesso.type = 'success';
             					$scope.alertsS.push($scope.sucesso);
             				}
+            				else if(response.data.result == 'existe')
+            				{
+
+               				  	$scope.errorValid = true;
+               				  	$scope.errorMsg = [];
+   	                  			$scope.errorMsg.msg = 'Este CPF já existe no sistema.';
+   	          					$scope.errorMsg.type = 'danger';
+   	          					$scope.alertsE.push($scope.errorMsg);
+            				}
+            				else if(response.data.result == 'inativo')
+            				{
+            					$scope.usuario = response.data.usuario;
+               				  	$scope.errorValid = true;
+               				  	$scope.errorMsg = [];
+   	                  			$scope.errorMsg.msg = 'Este CPF: usuario.cpf já existe no sistema, favor reativálo.';
+   	          					$scope.errorMsg.type = 'danger';
+   	          					$scope.alertsE.push($scope.errorMsg);
+            				}
             				else
             				{
 

@@ -8,7 +8,8 @@ var app = angular.module('selfiecode', [
   'atr',
   'devInfo',
   'modal',
-  'devGraph'
+  'devGraph',
+  'ui.mask'
 ]).config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.

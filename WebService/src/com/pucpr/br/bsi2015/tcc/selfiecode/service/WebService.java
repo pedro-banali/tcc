@@ -232,18 +232,14 @@ public class WebService {
 		SessionController sc = SessionController.getInstance();
 		boolean result;
 		JSONObject jsonObject = new JSONObject(usuario);
-
+		JSONObject jsonResponse;
 		SelfieCodeBC sbc = SelfieCodeBC.getInstance();
 		
 		Usuario u = sc.getUser(key);
-		result = sbc.editDev(jsonObject, u );
-
 		
-		jsonObject = new JSONObject();
-		jsonObject.put("result", result);
-		
+		jsonResponse = sbc.editDev(jsonObject, u );
 
-		return Response.status(200).entity(jsonObject.toString()).build();
+		return Response.status(200).entity(jsonResponse.toString()).build();
 		//return ;
 	}
 	
