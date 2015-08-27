@@ -182,10 +182,12 @@ selfieMyappDev.controller('devCtrl', ['$scope','$http', '$location', '$window', 
             			    // this callback will be called asynchronously
             			    // when the response is available
             				console.log("result" + response);
+            				$scope.alertsS = [];
+            				$scope.alertsE = [];
             				if(response.data.result == true)
             				{
             					$scope.usuario = {};
-                  				$scope.alertsS = [];
+                  				
                 				$scope.sucesso = [];
             					$scope.sucesso.msg = 'Usuário cadastrado com sucesso.';
             					$scope.sucesso.type = 'success';
@@ -193,7 +195,7 @@ selfieMyappDev.controller('devCtrl', ['$scope','$http', '$location', '$window', 
             				}
             				else
             				{
-            					$scope.alertsE = [];
+            					
                				  
                				  	$scope.errorMsg = [];
 //                     			$scope.errorMsg.msg = 'Usuário inexistente.';
@@ -254,12 +256,12 @@ selfieMyappDev.controller('devCtrl', ['$scope','$http', '$location', '$window', 
             			    // this callback will be called asynchronously
             			    // when the response is available
             				console.log("result" + response);
+            				$scope.alertsE = [];
+                			$scope.alertsS = [];
             				if(response.data.result == true)
             				{
             					$scope.usuario.cpf = $scope.usuario.cpfNovo;
-            					$scope.sucesso  = true;
             					
-                				$scope.alertsS = [];
                 				$scope.sucesso = [];
             					$scope.sucesso.msg = 'Usuário alterado com sucesso.';
             					$scope.sucesso.type = 'success';
@@ -267,7 +269,7 @@ selfieMyappDev.controller('devCtrl', ['$scope','$http', '$location', '$window', 
             				}
             				else
             				{
-            					$scope.alertsE = [];
+
                				  	$scope.errorValid = true;
                				  	$scope.errorMsg = [];
    	                  			$scope.errorMsg.msg = 'Usuário inexistente.';
@@ -338,7 +340,6 @@ selfieMyappDev.controller('devCtrl', ['$scope','$http', '$location', '$window', 
                 					$scope.sucesso.type = 'success';
                 					$scope.alertsS.push($scope.sucesso);
                 					$scope.sucessoValid  = true;
-                					$scope.errorInvalid
                 				}
                 				else
                 				{
@@ -518,11 +519,13 @@ selfieMyappDev.controller('projCtrl', ['$scope','$http', '$location', '$window',
             		    // this callback will be called asynchronously
             		    // when the response is available
             			console.log("result" + response);
+            			$scope.alertsE = [];
+            			$scope.alertsS = [];
             			if(response.data.result == true)
         				{
         					$scope.usuario = {};
         					$scope.sucesso = [];
-        					$scope.alertsS = [];
+        					
         					$scope.sucesso.msg = 'Projeto alterado com sucesso.';
         					$scope.sucesso.type = 'success';
         					$scope.alertsS.push($scope.sucesso);
@@ -531,7 +534,8 @@ selfieMyappDev.controller('projCtrl', ['$scope','$http', '$location', '$window',
         				}
         				else
         				{
-        					$scope.alertsE = [];
+        					
+        					
         					$scope.errorMsg = [];
         					$scope.errorMsg.msg = 'Ocorreu um erro inesperado.';
         					$scope.errorMsg.type = 'danger';
