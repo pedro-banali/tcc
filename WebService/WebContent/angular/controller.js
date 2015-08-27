@@ -280,13 +280,15 @@ selfieMyappDev.controller('devCtrl', ['$scope','$http', '$location', '$window', 
             					$scope.sucesso.msg = 'Usuário alterado com sucesso.';
             					$scope.sucesso.type = 'success';
             					$scope.alertsS.push($scope.sucesso);
+            					$scope.usuario = {};
+//            					$location.path("/page-dev");
             				}
             				else if(response.data.result == 'existe')
             				{
 
                				  	$scope.errorValid = true;
                				  	$scope.errorMsg = [];
-   	                  			$scope.errorMsg.msg = 'Este CPF já existe no sistema.';
+   	                  			$scope.errorMsg.msg = 'Este CPF ou Login já existe no sistema.';
    	          					$scope.errorMsg.type = 'danger';
    	          					$scope.alertsE.push($scope.errorMsg);
             				}
