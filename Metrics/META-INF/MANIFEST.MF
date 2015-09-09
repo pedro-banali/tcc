@@ -48,6 +48,7 @@ Require-Bundle: org.eclipse.jdt.ui,
  org.eclipse.ui.navigator.resources,
  org.apache.httpcomponents.httpcore,
  org.apache.commons.httpclient;bundle-version="3.1.0",
- org.apache.httpcomponents.httpclient;bundle-version="4.3.6"
+ org.apache.httpcomponents.httpclient;bundle-version="4.3.6",
+ org.eclipse.osgi
 Eclipse-AutoStart: true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7

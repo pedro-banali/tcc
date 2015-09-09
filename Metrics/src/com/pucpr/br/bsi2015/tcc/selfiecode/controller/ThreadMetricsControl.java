@@ -1,18 +1,6 @@
 package com.pucpr.br.bsi2015.tcc.selfiecode.controller;
 
-import org.eclipse.ui.IViewPart;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
-import org.hamcrest.core.IsInstanceOf;
-import org.json.JSONObject;
-
-import com.pucpr.br.bsi2015.tcc.selfiecode.ui.SFCView;
-
-import net.sourceforge.metrics.core.Log;
 import net.sourceforge.metrics.core.sources.AbstractMetricSource;
-import net.sourceforge.metrics.ui.MetricsView;
 
 public class ThreadMetricsControl extends Thread {
 	

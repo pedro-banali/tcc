@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Observable;
 
@@ -79,8 +81,13 @@ public class MetricsController extends Observable {
 		String result;
 		//String url = "http://192.168.112.129:8080/WebService/selfieCode/service/login?user="+usuario+"&pass="+password;
 		String url = "http://localhost/WebService/selfieCode/service/login?user="+usuario+"&pass="+password;
-		 
+		Date data ;
+		SimpleDateFormat df;
+		String nome;
+		String session;
+		LogController lc;
 		URL obj = new URL(url);
+		
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
  
 		// optional default is GET
@@ -112,7 +119,13 @@ public class MetricsController extends Observable {
 		if(!result.equals("login inexistente"))
 		{
 			session = result;
+			lc = LogController.getInstance();
+			data = new Date();
+			nome = jsonObject.getString("username");
+			df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+			lc.gerarLog("Usuário: " + nome + " logou " + df.format(data) + "\n");
 			return true;
+			
 		}
 		else			
 			return false;
@@ -121,12 +134,16 @@ public class MetricsController extends Observable {
 	
 	public String dicas(AbstractMetricSource c) throws Exception
 	{
+		Date data ;
+		SimpleDateFormat df;
 		JSONObject json = new JSONObject();
 		json.put("handle", c.getHandle());
 		json.put("values", c.getValues());
 		HttpClient client = new DefaultHttpClient();
 		String line = "";
 		String result = "";
+		LogController lc = LogController.getInstance();
+		
 		HttpPost post = new HttpPost("http://localhost/WebService/selfieCode/service/dicas");
 		 try {
 
@@ -134,7 +151,10 @@ public class MetricsController extends Observable {
 		      nameValuePairs.add(new BasicNameValuePair("json", json.toString()));
 		      nameValuePairs
 		          .add(new BasicNameValuePair("session", session));
-
+		      data = new Date();
+		      df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		      
+		      lc.gerarLog("Valores Coletados: " + json.toString() + " Data e hora: " + df.format(data));
 		      post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 		      HttpResponse response = client.execute(post);
 		      post.completed();
