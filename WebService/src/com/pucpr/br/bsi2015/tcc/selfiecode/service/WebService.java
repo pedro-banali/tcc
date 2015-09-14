@@ -1,5 +1,10 @@
 package com.pucpr.br.bsi2015.tcc.selfiecode.service;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
@@ -8,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
@@ -28,9 +34,14 @@ import com.pucpr.br.bsi2015.tcc.selfiecode.model.Metrica;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Projeto;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Usuario;
 import com.pucpr.br.bsi2015.tcc.selfiecode.session.SessionController;
+import com.sun.jersey.core.header.ContentDisposition;
+import com.sun.jersey.multipart.FormDataBodyPart;
+import com.sun.jersey.multipart.FormDataMultiPart;
 
 @Path("service")
 public class WebService {
+	
+	private static final String SERVER_UPLOAD_LOCATION_FOLDER = "C://selfieCode/";
 	@GET
 	@Produces("application/json")
 	public Response convertFtoC() throws JSONException {
@@ -46,20 +57,6 @@ public class WebService {
 		return Response.status(200).entity(result).build();
 	}
 
-	@Path("{f}")
-	@GET
-	@Produces("application/json")
-	public Response convertFtoCfromInput(@PathParam("f") float f) throws JSONException {
-
-		JSONObject jsonObject = new JSONObject();
-		float celsius;
-		celsius = (f - 32) * 5 / 9;
-		jsonObject.put("F Value", f);
-		jsonObject.put("C Value", celsius);
-
-		String result = "" + jsonObject;
-		return Response.status(200).entity(result).build();
-	}
 
 	@Path("login")
 	@POST
@@ -399,4 +396,52 @@ public class WebService {
 		return Response.status(200).entity(result.toString()).build();
 		//return ;
 	}
+	
+	@POST
+	@Path("/upload")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public Response uploadFile(FormDataMultiPart form) {
+
+		 FormDataBodyPart filePart = form.getField("file");
+
+		 ContentDisposition headerOfFilePart =  filePart.getContentDisposition();
+
+		 InputStream fileInputStream = filePart.getValueAs(InputStream.class);
+
+		 String filePath = SERVER_UPLOAD_LOCATION_FOLDER + headerOfFilePart.getFileName();
+
+		// save the file to the server
+		saveFile(fileInputStream, filePath);
+
+		String output = "File saved to server location using FormDataMultiPart : " + filePath;
+
+		return Response.status(200).entity(output).build();
+
+	}
+	
+	// save uploaded file to a defined location on the server
+		private void saveFile(InputStream uploadedInputStream, String serverLocation) {
+
+			try {
+				OutputStream outpuStream = new FileOutputStream(new File(
+						serverLocation));
+				int read = 0;
+				byte[] bytes = new byte[1024];
+
+				outpuStream = new FileOutputStream(new File(serverLocation));
+				while ((read = uploadedInputStream.read(bytes)) != -1) {
+					outpuStream.write(bytes, 0, read);
+				}
+
+				outpuStream.flush();
+				outpuStream.close();
+
+				uploadedInputStream.close();
+		} catch (IOException e) {
+
+				e.printStackTrace();
+			}
+
+		}
+
 }
