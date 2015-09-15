@@ -1,10 +1,5 @@
 package com.pucpr.br.bsi2015.tcc.selfiecode.service;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
@@ -19,7 +14,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -34,9 +28,8 @@ import com.pucpr.br.bsi2015.tcc.selfiecode.model.Metrica;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Projeto;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Usuario;
 import com.pucpr.br.bsi2015.tcc.selfiecode.session.SessionController;
-import com.sun.jersey.core.header.ContentDisposition;
-import com.sun.jersey.multipart.FormDataBodyPart;
-import com.sun.jersey.multipart.FormDataMultiPart;
+import com.sun.jersey.core.header.FormDataContentDisposition;
+
 
 @Path("service")
 public class WebService {
@@ -399,49 +392,46 @@ public class WebService {
 	
 	@POST
 	@Path("/upload")
-	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	public Response uploadFile(FormDataMultiPart form) {
+	//@Consumes(MediaType.MULTIPART_FORM_DATA)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	//@Consumes("multipart/form-data")
+	
+	public Response uploadFile(@FormParam("file") FormDataContentDisposition fileDisposition) {
 
-		 FormDataBodyPart filePart = form.getField("file");
+		String uploadedFileLocation = "d://uploaded/" + fileDisposition.getFileName();
+		
 
-		 ContentDisposition headerOfFilePart =  filePart.getContentDisposition();
-
-		 InputStream fileInputStream = filePart.getValueAs(InputStream.class);
-
-		 String filePath = SERVER_UPLOAD_LOCATION_FOLDER + headerOfFilePart.getFileName();
 
 		// save the file to the server
-		saveFile(fileInputStream, filePath);
+//		writeToFile(uploadedInputStream, uploadedFileLocation);
 
-		String output = "File saved to server location using FormDataMultiPart : " + filePath;
+		String output = "File saved to server location using FormDataMultiPart : " + uploadedFileLocation;
 
 		return Response.status(200).entity(output).build();
 
 	}
-	
-	// save uploaded file to a defined location on the server
-		private void saveFile(InputStream uploadedInputStream, String serverLocation) {
-
-			try {
-				OutputStream outpuStream = new FileOutputStream(new File(
-						serverLocation));
-				int read = 0;
-				byte[] bytes = new byte[1024];
-
-				outpuStream = new FileOutputStream(new File(serverLocation));
-				while ((read = uploadedInputStream.read(bytes)) != -1) {
-					outpuStream.write(bytes, 0, read);
-				}
-
-				outpuStream.flush();
-				outpuStream.close();
-
-				uploadedInputStream.close();
-		} catch (IOException e) {
-
-				e.printStackTrace();
-			}
-
-		}
+//	
+//	// save uploaded file to new location
+//		private void writeToFile(InputStream uploadedInputStream,
+//			String uploadedFileLocation) {
+//
+//			try {
+//				OutputStream out = new FileOutputStream(new File(
+//						uploadedFileLocation));
+//				int read = 0;
+//				byte[] bytes = new byte[1024];
+//
+//				out = new FileOutputStream(new File(uploadedFileLocation));
+//				while ((read = uploadedInputStream.read(bytes)) != -1) {
+//					out.write(bytes, 0, read);
+//				}
+//				out.flush();
+//				out.close();
+//			} catch (IOException e) {
+//
+//				e.printStackTrace();
+//			}
+//
+//		}
 
 }

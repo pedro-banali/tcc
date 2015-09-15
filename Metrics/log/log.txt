@@ -27,3 +27,9 @@ Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"0","
 Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"12","WMC":"1","NOM":"0","NOP":"1","MLOC":"8","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 09/09/2015 22:10:30
 Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"12","WMC":"1","NOM":"0","NOP":"1","MLOC":"8","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 09/09/2015 22:10:30
 Usuário: Pedro Henrique Banali logou 13/09/2015 22:38:32
+Usuário: Pedro Henrique Banali logou 14/09/2015 20:51:19
+Usuário: Pedro Henrique Banali logou 14/09/2015 21:01:59
+Usuário: Pedro Henrique Banali logou 14/09/2015 21:06:03
+Usuário: Pedro Henrique Banali logou 14/09/2015 21:07:04
+Usuário: Pedro Henrique Banali logou 14/09/2015 21:21:11
+Usuário: Pedro Henrique Banali logou 14/09/2015 21:36:43

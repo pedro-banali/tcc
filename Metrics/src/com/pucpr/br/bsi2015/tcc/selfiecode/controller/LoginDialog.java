@@ -122,7 +122,7 @@ public class LoginDialog {
 						}
 						else
 						{
-							MetricsController.getInstance().uploadFile(null);
+							//MetricsController.getInstance().uploadFile(null);
 							shell.close();
 
 						}
