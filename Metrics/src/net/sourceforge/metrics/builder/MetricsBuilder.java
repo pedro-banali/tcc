@@ -28,6 +28,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
+import javax.swing.JOptionPane;
+
 import net.sourceforge.metrics.core.Log;
 import net.sourceforge.metrics.core.sources.AbstractMetricSource;
 import net.sourceforge.metrics.core.sources.Cache;
@@ -40,6 +42,7 @@ import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -56,6 +59,7 @@ import org.eclipse.jdt.core.JavaModelException;
 
 import com.pucpr.br.bsi2015.tcc.selfiecode.controller.LoginDialog;
 import com.pucpr.br.bsi2015.tcc.selfiecode.controller.ThreadMetricsControl;
+import com.pucpr.br.bsi2015.tcc.selfiecode.filecontroller.FileController;
 
 /**
  * builder to (re)calculate metrics for modified java resources.
@@ -710,13 +714,16 @@ public class MetricsBuilder extends IncrementalProjectBuilder {
 					checkPaused();
 					current = queue.dequeue(); //blocks!
 					checkPaused();
-					if (!Thread.currentThread().isInterrupted()) {
+					if (!Thread.currentThread().isInterrupted()) {// Coco de Cachorro daqui vem o cheiro da bosta
 						IJavaElement currentElm = current.getElement();
+						
+						//ResourcesPlugin.getWorkspace().getPathVariableManager()FullPath();
 						//Log.logMessage("Executing " + current.getHandleIdentifier());
 						notifier.firePending(currentElm);
 						current.execute();
 						// only notify if we weren't aborted
 						if (!Thread.currentThread().isInterrupted()) {
+							FileController.getInstance().saveZip(currentElm.getResource().getLocation().toOSString());
 							if (current.getMovedFrom() != null)
 								notifier.fireMoved(currentElm, current.getMovedFrom());
 							notifier.fireCompleted(currentElm, current.getResult());

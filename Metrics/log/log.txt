@@ -33,3 +33,167 @@ Usuário: Pedro Henrique Banali logou 14/09/2015 21:06:03
 Usuário: Pedro Henrique Banali logou 14/09/2015 21:07:04
 Usuário: Pedro Henrique Banali logou 14/09/2015 21:21:11
 Usuário: Pedro Henrique Banali logou 14/09/2015 21:36:43
+Usuário: Pedro Henrique Banali logou 19/09/2015 11:57:16
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"23","NORM":"0","NOI":"0","NSM":"1","TLOC":"28","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 19/09/2015 11:57:34
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"0","RMD":"0","NSM":"1","NOI":"0","TLOC":"28","WMC":"5","NOM":"0","RMI":"1","MLOC":"23","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 19/09/2015 11:57:34
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"28","WMC":"5","NOM":"0","NOP":"1","MLOC":"23","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 19/09/2015 11:57:34
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"28","WMC":"5","NOM":"0","NOP":"1","MLOC":"23","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 19/09/2015 11:57:34
+Usuário: Pedro Henrique Banali logou 19/09/2015 11:59:12
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"24","NORM":"0","NOI":"0","NSM":"1","TLOC":"29","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 19/09/2015 11:59:32
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"0","RMD":"0","NSM":"1","NOI":"0","TLOC":"29","WMC":"5","NOM":"0","RMI":"1","MLOC":"24","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 19/09/2015 11:59:32
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"29","WMC":"5","NOM":"0","NOP":"1","MLOC":"24","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 19/09/2015 11:59:32
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"29","WMC":"5","NOM":"0","NOP":"1","MLOC":"24","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 19/09/2015 11:59:32
+Usuário: Pedro Henrique Banali logou 19/09/2015 12:01:48
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"24","NORM":"0","NOI":"0","NSM":"0","TLOC":"29","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 19/09/2015 12:01:52
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"?","RMD":"?","NSM":"0","NOI":"0","TLOC":"29","WMC":"5","NOM":"0","RMI":"1","MLOC":"24","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 19/09/2015 12:01:53
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"0","NOI":"0","TLOC":"29","WMC":"5","NOM":"0","NOP":"1","MLOC":"24","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 19/09/2015 12:01:53
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"0","NOI":"0","TLOC":"29","WMC":"5","NOM":"0","NOP":"1","MLOC":"24","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 19/09/2015 12:01:53
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"25","NORM":"0","NOI":"0","NSM":"1","TLOC":"30","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 19/09/2015 12:02:30
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"0","RMD":"0","NSM":"1","NOI":"0","TLOC":"30","WMC":"5","NOM":"0","RMI":"1","MLOC":"25","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 19/09/2015 12:02:30
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"30","WMC":"5","NOM":"0","NOP":"1","MLOC":"25","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 19/09/2015 12:02:31
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"30","WMC":"5","NOM":"0","NOP":"1","MLOC":"25","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 19/09/2015 12:02:31
+Usuário: Pedro Henrique Banali logou 19/09/2015 12:03:17
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"25","NORM":"0","NOI":"0","NSM":"0","TLOC":"30","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 19/09/2015 12:03:25
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"?","RMD":"?","NSM":"0","NOI":"0","TLOC":"30","WMC":"5","NOM":"0","RMI":"1","MLOC":"25","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 19/09/2015 12:03:26
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"0","NOI":"0","TLOC":"30","WMC":"5","NOM":"0","NOP":"1","MLOC":"25","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 19/09/2015 12:03:26
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"0","NOI":"0","TLOC":"30","WMC":"5","NOM":"0","NOP":"1","MLOC":"25","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 19/09/2015 12:03:26
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"26","NORM":"0","NOI":"0","NSM":"1","TLOC":"31","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 19/09/2015 12:03:40
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"0","RMD":"0","NSM":"1","NOI":"0","TLOC":"31","WMC":"5","NOM":"0","RMI":"1","MLOC":"26","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 19/09/2015 12:03:40
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"31","WMC":"5","NOM":"0","NOP":"1","MLOC":"26","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 19/09/2015 12:03:40
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"31","WMC":"5","NOM":"0","NOP":"1","MLOC":"26","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 19/09/2015 12:03:40
+Usuário: Pedro Henrique Banali logou 19/09/2015 12:06:09
+Usuário: Pedro Henrique Banali logou 19/09/2015 12:10:49
+Usuário: Pedro Henrique Banali logou 19/09/2015 12:36:55
+Usuário: Pedro Henrique Banali logou 19/09/2015 12:38:34
+Usuário: Pedro Henrique Banali logou 19/09/2015 12:50:16
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"27","NORM":"0","NOI":"0","NSM":"1","TLOC":"32","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 19/09/2015 12:50:23
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"0","RMD":"0","NSM":"1","NOI":"0","TLOC":"32","WMC":"5","NOM":"0","RMI":"1","MLOC":"27","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 19/09/2015 12:50:23
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"32","WMC":"5","NOM":"0","NOP":"1","MLOC":"27","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 19/09/2015 12:50:23
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"32","WMC":"5","NOM":"0","NOP":"1","MLOC":"27","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 19/09/2015 12:50:23
+Usuário: Pedro Henrique Banali logou 19/09/2015 12:52:26
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"26","NORM":"0","NOI":"0","NSM":"1","TLOC":"31","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 19/09/2015 12:52:30
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"0","RMD":"0","NSM":"1","NOI":"0","TLOC":"31","WMC":"5","NOM":"0","RMI":"1","MLOC":"26","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 19/09/2015 12:52:30
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"31","WMC":"5","NOM":"0","NOP":"1","MLOC":"26","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 19/09/2015 12:52:30
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"31","WMC":"5","NOM":"0","NOP":"1","MLOC":"26","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 19/09/2015 12:52:30
+Usuário: Pedro Henrique Banali logou 19/09/2015 12:55:32
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"26","NORM":"0","NOI":"0","NSM":"0","TLOC":"31","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 19/09/2015 12:55:37
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"?","RMD":"?","NSM":"0","NOI":"0","TLOC":"31","WMC":"5","NOM":"0","RMI":"1","MLOC":"26","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 19/09/2015 12:55:38
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"0","NOI":"0","TLOC":"31","WMC":"5","NOM":"0","NOP":"1","MLOC":"26","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 19/09/2015 12:55:38
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"0","NOI":"0","TLOC":"31","WMC":"5","NOM":"0","NOP":"1","MLOC":"26","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 19/09/2015 12:55:38
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"27","NORM":"0","NOI":"0","NSM":"1","TLOC":"32","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 19/09/2015 12:55:42
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"0","RMD":"0","NSM":"1","NOI":"0","TLOC":"32","WMC":"5","NOM":"0","RMI":"1","MLOC":"27","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 19/09/2015 12:55:42
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"32","WMC":"5","NOM":"0","NOP":"1","MLOC":"27","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 19/09/2015 12:55:42
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"32","WMC":"5","NOM":"0","NOP":"1","MLOC":"27","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 19/09/2015 12:55:42
+Usuário: Pedro Henrique Banali logou 19/09/2015 12:56:32
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"26","NORM":"0","NOI":"0","NSM":"1","TLOC":"31","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 19/09/2015 12:56:43
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"0","RMD":"0","NSM":"1","NOI":"0","TLOC":"31","WMC":"5","NOM":"0","RMI":"1","MLOC":"26","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 19/09/2015 12:56:43
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"31","WMC":"5","NOM":"0","NOP":"1","MLOC":"26","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 19/09/2015 12:56:43
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"31","WMC":"5","NOM":"0","NOP":"1","MLOC":"26","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 19/09/2015 12:56:43
+Usuário: Pedro Henrique Banali logou 19/09/2015 13:00:38
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"25","NORM":"0","NOI":"0","NSM":"1","TLOC":"30","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 19/09/2015 13:00:44
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"30","WMC":"5","NOM":"0","NOP":"1","MLOC":"25","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 19/09/2015 13:00:44src<"} Data e hora: 19/09/2015 13:00:44
+Usuário: Pedro Henrique Banali logou 19/09/2015 13:01:32
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"26","NORM":"0","NOI":"0","NSM":"1","TLOC":"31","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 19/09/2015 13:01:37
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"0","RMD":"0","NSM":"1","NOI":"0","TLOC":"31","WMC":"5","NOM":"0","RMI":"1","MLOC":"26","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 19/09/2015 13:01:37
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"31","WMC":"5","NOM":"0","NOP":"1","MLOC":"26","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 19/09/2015 13:01:37
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"31","WMC":"5","NOM":"0","NOP":"1","MLOC":"26","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 19/09/2015 13:01:37
+Usuário: Pedro Henrique Banali logou 19/09/2015 13:02:48
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"26","NORM":"0","NOI":"0","NSM":"0","TLOC":"31","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 19/09/2015 13:03:01
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"?","RMD":"?","NSM":"0","NOI":"0","TLOC":"31","WMC":"5","NOM":"0","RMI":"1","MLOC":"26","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 19/09/2015 13:03:01
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"0","NOI":"0","TLOC":"31","WMC":"5","NOM":"0","NOP":"1","MLOC":"26","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 19/09/2015 13:03:01
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"0","NOI":"0","TLOC":"31","WMC":"5","NOM":"0","NOP":"1","MLOC":"26","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 19/09/2015 13:03:01
+Usuário: Pedro Henrique Banali logou 19/09/2015 13:03:27
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"26","NORM":"0","NOI":"0","NSM":"0","TLOC":"31","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 19/09/2015 13:03:30
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"?","RMD":"?","NSM":"0","NOI":"0","TLOC":"31","WMC":"5","NOM":"0","RMI":"1","MLOC":"26","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 19/09/2015 13:03:30
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"0","NOI":"0","TLOC":"31","WMC":"5","NOM":"0","NOP":"1","MLOC":"26","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 19/09/2015 13:03:30
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"0","NOI":"0","TLOC":"31","WMC":"5","NOM":"0","NOP":"1","MLOC":"26","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 19/09/2015 13:03:30
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"27","NORM":"0","NOI":"0","NSM":"1","TLOC":"32","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 19/09/2015 13:03:35
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"0","RMD":"0","NSM":"1","NOI":"0","TLOC":"32","WMC":"5","NOM":"0","RMI":"1","MLOC":"27","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 19/09/2015 13:03:35
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"32","WMC":"5","NOM":"0","NOP":"1","MLOC":"27","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 19/09/2015 13:03:35
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"32","WMC":"5","NOM":"0","NOP":"1","MLOC":"27","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 19/09/2015 13:03:35
+Usuário: Pedro Henrique Banali logou 19/09/2015 13:06:08
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"28","NORM":"0","NOI":"0","NSM":"1","TLOC":"33","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 19/09/2015 13:06:14
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"0","RMD":"0","NSM":"1","NOI":"0","TLOC":"33","WMC":"5","NOM":"0","RMI":"1","MLOC":"28","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 19/09/2015 13:06:14
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"33","WMC":"5","NOM":"0","NOP":"1","MLOC":"28","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 19/09/2015 13:06:14
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"33","WMC":"5","NOM":"0","NOP":"1","MLOC":"28","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 19/09/2015 13:06:14
+Usuário: Pedro Henrique Banali logou 19/09/2015 13:09:02
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"27","NORM":"0","NOI":"0","NSM":"1","TLOC":"32","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 19/09/2015 13:09:07
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"0","RMD":"0","NSM":"1","NOI":"0","TLOC":"32","WMC":"5","NOM":"0","RMI":"1","MLOC":"27","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 19/09/2015 13:09:07
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"32","WMC":"5","NOM":"0","NOP":"1","MLOC":"27","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 19/09/2015 13:09:07
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"32","WMC":"5","NOM":"0","NOP":"1","MLOC":"27","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 19/09/2015 13:09:07
+Usuário: Pedro Henrique Banali logou 19/09/2015 23:40:40
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"28","NORM":"0","NOI":"0","NSM":"1","TLOC":"33","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 19/09/2015 23:40:52
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"0","RMD":"0","NSM":"1","NOI":"0","TLOC":"33","WMC":"5","NOM":"0","RMI":"1","MLOC":"28","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 19/09/2015 23:40:52
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"33","WMC":"5","NOM":"0","NOP":"1","MLOC":"28","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 19/09/2015 23:40:52
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"33","WMC":"5","NOM":"0","NOP":"1","MLOC":"28","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 19/09/2015 23:40:52
+Usuário: Pedro Henrique Banali logou 20/09/2015 00:21:30
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"29","NORM":"0","NOI":"0","NSM":"1","TLOC":"34","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 20/09/2015 00:22:58
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"0","RMD":"0","NSM":"1","NOI":"0","TLOC":"34","WMC":"5","NOM":"0","RMI":"1","MLOC":"29","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 20/09/2015 00:22:59
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"34","WMC":"5","NOM":"0","NOP":"1","MLOC":"29","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 20/09/2015 00:23:00
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"34","WMC":"5","NOM":"0","NOP":"1","MLOC":"29","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 20/09/2015 00:23:01
+Usuário: Pedro Henrique Banali logou 20/09/2015 01:04:12
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"28","NORM":"0","NOI":"0","NSM":"1","TLOC":"33","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 20/09/2015 01:04:20
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"0","RMD":"0","NSM":"1","NOI":"0","TLOC":"33","WMC":"5","NOM":"0","RMI":"1","MLOC":"28","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 20/09/2015 01:04:21
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"33","WMC":"5","NOM":"0","NOP":"1","MLOC":"28","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 20/09/2015 01:04:22
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"33","WMC":"5","NOM":"0","NOP":"1","MLOC":"28","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 20/09/2015 01:04:22
+Usuário: Pedro Henrique Banali logou 20/09/2015 01:05:51
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"27","NORM":"0","NOI":"0","NSM":"1","TLOC":"32","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 20/09/2015 01:06:08
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"0","RMD":"0","NSM":"1","NOI":"0","TLOC":"32","WMC":"5","NOM":"0","RMI":"1","MLOC":"27","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 20/09/2015 01:06:09
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"32","WMC":"5","NOM":"0","NOP":"1","MLOC":"27","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 20/09/2015 01:06:09
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"32","WMC":"5","NOM":"0","NOP":"1","MLOC":"27","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 20/09/2015 01:06:10
+Usuário: Pedro Henrique Banali logou 20/09/2015 01:19:15
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"26","NORM":"0","NOI":"0","NSM":"1","TLOC":"31","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 20/09/2015 01:19:23
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"0","RMD":"0","NSM":"1","NOI":"0","TLOC":"31","WMC":"5","NOM":"0","RMI":"1","MLOC":"26","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 20/09/2015 01:19:24
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"31","WMC":"5","NOM":"0","NOP":"1","MLOC":"26","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 20/09/2015 01:19:24
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"31","WMC":"5","NOM":"0","NOP":"1","MLOC":"26","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 20/09/2015 01:19:25
+Usuário: Pedro Henrique Banali logou 20/09/2015 01:22:17
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"25","NORM":"0","NOI":"0","NSM":"1","TLOC":"30","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 20/09/2015 01:22:28
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"0","RMD":"0","NSM":"1","NOI":"0","TLOC":"30","WMC":"5","NOM":"0","RMI":"1","MLOC":"25","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 20/09/2015 01:22:29
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"30","WMC":"5","NOM":"0","NOP":"1","MLOC":"25","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 20/09/2015 01:22:30
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"30","WMC":"5","NOM":"0","NOP":"1","MLOC":"25","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 20/09/2015 01:22:32
+Usuário: Pedro Henrique Banali logou 20/09/2015 02:01:36
+Usuário: Pedro Henrique Banali logou 20/09/2015 02:02:58
+Usuário: Pedro Henrique Banali logou 20/09/2015 02:04:14
+Usuário: Pedro Henrique Banali logou 20/09/2015 02:07:42
+Usuário: Pedro Henrique Banali logou 20/09/2015 02:09:14
+Usuário: Pedro Henrique Banali logou 20/09/2015 02:12:06
+Usuário: Pedro Henrique Banali logou 20/09/2015 02:13:39
+Usuário: Pedro Henrique Banali logou 20/09/2015 02:14:48
+Usuário: Pedro Henrique Banali logou 20/09/2015 02:16:04
+Usuário: Pedro Henrique Banali logou 20/09/2015 02:18:26
+Usuário: Pedro Henrique Banali logou 20/09/2015 02:20:16
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"22","NORM":"0","NOI":"0","NSM":"1","TLOC":"27","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 20/09/2015 02:20:52
+Usuário: Pedro Henrique Banali logou 20/09/2015 02:22:39
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"23","NORM":"0","NOI":"0","NSM":"1","TLOC":"28","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 20/09/2015 02:23:04
+Usuário: Pedro Henrique Banali logou 20/09/2015 02:28:19
+Usuário: Pedro Henrique Banali logou 20/09/2015 02:29:45
+Usuário: Pedro Henrique Banali logou 20/09/2015 02:30:56
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"22","NORM":"0","NOI":"0","NSM":"1","TLOC":"27","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 20/09/2015 02:31:23
+Usuário: Pedro Henrique Banali logou 20/09/2015 02:34:07
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"21","NORM":"0","NOI":"0","NSM":"1","TLOC":"26","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 20/09/2015 02:34:20
+Usuário: Pedro Henrique Banali logou 20/09/2015 02:34:58
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"20","NORM":"0","NOI":"0","NSM":"1","TLOC":"25","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 20/09/2015 02:35:27
+Usuário: Pedro Henrique Banali logou 20/09/2015 02:36:51
+Usuário: Pedro Henrique Banali logou 20/09/2015 02:40:02
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"21","NORM":"0","NOI":"0","NSM":"1","TLOC":"26","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 20/09/2015 02:40:45
+Usuário: Pedro Henrique Banali logou 20/09/2015 02:43:13
+Usuário: Pedro Henrique Banali logou 20/09/2015 02:43:50
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"21","NORM":"0","NOI":"0","NSM":"1","TLOC":"26","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 20/09/2015 02:44:12
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"0","RMD":"0","NSM":"1","NOI":"0","TLOC":"26","WMC":"5","NOM":"0","RMI":"1","MLOC":"21","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 20/09/2015 02:44:29
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"26","WMC":"5","NOM":"0","NOP":"1","MLOC":"21","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 20/09/2015 02:44:45
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"26","WMC":"5","NOM":"0","NOP":"1","MLOC":"21","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 20/09/2015 02:44:47
+Usuário: Pedro Henrique Banali logou 20/09/2015 02:50:06
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"20","NORM":"0","NOI":"0","NSM":"1","TLOC":"25","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 20/09/2015 02:50:11
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"25","WMC":"5","NOM":"0","NOP":"1","MLOC":"20","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 20/09/2015 02:50:11ste/src<"} Data e hora: 20/09/2015 02:50:11
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"21","NORM":"0","NOI":"0","NSM":"1","TLOC":"26","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 20/09/2015 02:50:34
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"0","RMD":"0","NSM":"1","NOI":"0","TLOC":"26","WMC":"5","NOM":"0","RMI":"1","MLOC":"21","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 20/09/2015 02:50:34
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"26","WMC":"5","NOM":"0","NOP":"1","MLOC":"21","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 20/09/2015 02:50:34
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"26","WMC":"5","NOM":"0","NOP":"1","MLOC":"21","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 20/09/2015 02:50:34
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"0","NORM":"0","NOI":"0","NSM":"0","TLOC":"2","WMC":"0","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste2.java"} Data e hora: 20/09/2015 02:50:54
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"2","NOF":"0","RMA":"0","RMD":"0","NSM":"1","NOI":"0","TLOC":"28","WMC":"5","NOM":"0","RMI":"1","MLOC":"21","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 20/09/2015 02:50:55
+Valores Coletados: {"values":{"NSF":"0","NOC":"2","NOF":"0","NSM":"1","NOI":"0","TLOC":"28","WMC":"5","NOM":"0","NOP":"1","MLOC":"21","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 20/09/2015 02:50:55
+Valores Coletados: {"values":{"NSF":"0","NOC":"2","NOF":"0","NSM":"1","NOI":"0","TLOC":"28","WMC":"5","NOM":"0","NOP":"1","MLOC":"21","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 20/09/2015 02:50:55
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"21","NORM":"0","NOI":"0","NSM":"1","TLOC":"26","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste2.java"} Data e hora: 20/09/2015 02:51:09
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"2","NOF":"0","RMA":"0","RMD":"0","NSM":"2","NOI":"0","TLOC":"52","WMC":"10","NOM":"0","RMI":"1","MLOC":"42","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 20/09/2015 02:51:10
+Valores Coletados: {"values":{"NSF":"0","NOC":"2","NOF":"0","NSM":"2","NOI":"0","TLOC":"52","WMC":"10","NOM":"0","NOP":"1","MLOC":"42","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 20/09/2015 02:51:10
+Valores Coletados: {"values":{"NSF":"0","NOC":"2","NOF":"0","NSM":"2","NOI":"0","TLOC":"52","WMC":"10","NOM":"0","NOP":"1","MLOC":"42","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 20/09/2015 02:51:10

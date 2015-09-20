@@ -1,0 +1,50 @@
+		<div class="row" ng-init="listarDev(); listarProj();">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Atribuir</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           Atribuir Desenvolvedor a Projeto
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2">
+                                	<div>
+										<alert ng-repeat="alert in alertsS" type="{{sucesso.type}}" close="closeAlertS($index)">{{sucesso.msg}}</alert>
+		                            </div>
+									<div>
+		                               <alert ng-repeat="alert in alertsE" type="{{errorMsg.type}}" close="closeAlertE($index)">{{errorMsg.msg}}</alert>
+		                            </div>
+                                    <form role="form" ng-submit="atribuir()" name="myForm" >
+                                        <div class="form-group">
+                                            <label>Desenvolvedor</label>
+                                            <select class="form-control" name="dev" ng-model="atribuicao.dev" required>
+	                                               <option ng-repeat="n in usuarios.devs" value="{{n.cpf}}" > {{n.nome}}</option>
+	                                        </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Projeto</label>
+                                            <select class="form-control" name="proj" ng-model="atribuicao.proj" required>
+	                                              <option ng-repeat="n in projetos.proj" value="{{n.id}}" > {{n.nome}}</option>
+	                                        </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-default" ng-disabled="!myForm.$valid">Cadastrar</button>
+                                        <button type="reset" class="btn btn-default">Cancelar</button>
+                                    </form>
+                                </div>
+                                <!-- /.col-lg-6 (nested) -->
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->

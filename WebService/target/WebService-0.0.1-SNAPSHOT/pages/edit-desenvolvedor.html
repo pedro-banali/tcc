@@ -1,0 +1,85 @@
+
+            <div class="row" ng-init="listarProj(); getUsuario()">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Cadastro</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           Atualizar Desenvolvedor
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2">
+                                    <form role="form" ng-submit="editDev()" name="myForm" novalidate >
+                                    	<div>
+											<alert ng-repeat="alert in alertsS" type="{{sucesso.type}}" close="closeAlertS($index)">{{sucesso.msg}}</alert>
+			                            </div>
+										<div>
+			                               <alert ng-repeat="alert in alertsE" type="{{errorMsg.type}}" close="closeAlertE($index)">{{errorMsg.msg}}</alert>
+			                            </div>
+                                        <div class="form-group">
+                                            <label>Nome</label>
+                                            <input class="form-control" type="text" ng-model="usuario.nome" name="nome" required ng-minlength="3" ng-maxlength="50">
+								           <p ng-show="myForm.nome.$error.minlength" class="help-block">Nome &eacute; muito curto.</p>
+								           <p ng-show="myForm.nome.$error.maxlength" class="help-block">Nome &eacute; muito longo.</p>
+
+ 											
+                                        </div>
+                                        <div class="form-group">
+                                            <label>CPF</label>
+                                            <input class="form-control" type="number" name="cpf" ng-model="usuario.cpfNovo" placeholder="CPF" required ng-minlength="11" ng-maxlength="11">
+                                            <span style="color:red"  ng-show="myForm.cpf.$dirty && myForm.cpf.$invalid">
+ 												<span ng-show="myForm.cpf.$error.required">CPF &eacute; obrigat&oacute;rio.</span>
+ 											</span>
+ 											<p ng-show="myForm.cpf.$error.minlength" class="help-block">Cpf &eacute; muito curto.</p>
+								           	<p ng-show="myForm.cpf.$error.maxlength" class="help-block">Cpf &eacute; muito longo.</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Login</label>
+                                            <input class="form-control" type="text" name="login" ng-model="usuario.login" placeholder="Login" required ng-minlength="6" ng-maxlength="10" >
+                                        	<p ng-show="myForm.login.$error.minlength" class="help-block">Login &eacute; muito curto.</p>
+								           	<p ng-show="myForm.login.$error.maxlength" class="help-block">Login &eacute; muito longo.</p>
+                                        </div>
+<!--                                         <div class="form-group"> -->
+<!--                                             <label>Senha</label> -->
+<!--                                             <input class="form-control" type="password" name="senha" ng-model="usuario.senha" placeholder="Digite senha" required> -->
+<!--                                         </div> -->
+                                        <div class="form-group">
+                                            <label>Data de Nascimento</label>
+                                            <input class="form-control" name="dataNascimento" ng-model="usuario.dataNascimento" required placeholder="dd/mm/yyyy" ng-pattern='/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/' ui-mask="99/99/9999" ng-minlength="10" ng-maxlength="10">
+                                        	<p ng-show="myForm.dataNascimento.$error.minlength || myForm.dataNascimento.$error.maxlength" class="help-block">Data Inv&aacute;lida </p>
+                                        </div>
+                                        <div class="form-group">
+                                        	<fieldset disabled>
+	                                            <label for="disabledSelect" >Tipo do Usu&aacute;rio</label>
+	                                            <select id="disabledSelect" class="form-control">
+	                                                <option value="3">Desenvolvedor</option>
+	                                            </select>
+                                            </fieldset>
+                                        </div>
+<!--                                         <div class="form-group"> -->
+<!-- 	                                    	<label for="disabledSelect">Projeto</label> -->
+<!-- 	                                        <select id="disabledSelect" name="projeto" ng-model="usuario.projeto" required class="form-control"> -->
+<!-- 	                                        	<option ng-repeat="n in projetos.proj" value="{{n.id}}" > {{n.nome}}</option> -->
+<!-- 	                                        </select> -->
+<!--                                         </div> -->
+                                        <button type="submit" class="btn btn-default" ng-disabled="!myForm.$valid">Atualizar</button>
+                                        <button type="reset" class="btn btn-default" ng-click="go('/listar-dev')">Cancelar</button>
+                                    </form>
+                                </div>
+                                <!-- /.col-lg-6 (nested) -->
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->

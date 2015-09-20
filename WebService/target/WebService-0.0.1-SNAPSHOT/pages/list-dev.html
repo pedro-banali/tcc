@@ -1,0 +1,69 @@
+
+            <div class="row" ng-init="listarDev()">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Desenvolvedores</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           Visualizar Desenvolvedores
+                        </div>
+                        <div class="panel-body">
+	                      	<div class="row">
+		                      	<div class="col-md-8 col-md-offset-2">
+									<div>
+										<alert ng-repeat="alert in alertsS" type="{{sucesso.type}}" close="closeAlertS($index)">{{sucesso.msg}}</alert>
+		                            </div>
+									<div>
+		                               <alert ng-repeat="alert in alertsE" type="{{errorMsg.type}}" close="closeAlertE($index)">{{errorMsg.msg}}</alert>
+		                            </div>
+			                      	<div data-ng-repeat="i in usuarios.devs">
+				                       	<div class="panel panel-info">
+					                      	<div class="panel-heading">
+					                          {{i.nome}} <button type="button" class="close" ng-click="open(i)" data-dismiss="alert" aria-hidden="true">&times;</button>
+					                     	</div>
+					                      	<div class="panel-body">
+						                      	<p><span>CPF: </span>{{i.cpf}}</p>
+						                        <p><span>Data de Nascimento: </span>{{i.dataNascimento | date: 'dd/MM/yyyy'}}</p>
+						                        <p><span>Login:</span> {{i.login}}</p>
+						                        <p><span>Data de Cadastro: </span>{{i.dataCadastro | date: 'dd/MM/yyyy'}}</p>
+						                        <a href="#/edit-dev/{{i.cpf}}" data-dismiss="alert" ><i class="fa fa-edit fa-fw">&nbsp;</i></a>
+					                      	</div>
+		<!-- 			                      	<div class="panel-footer"> -->
+		<!-- 			                          Panel Footer -->
+		<!-- 			                      	</div> -->
+				                 		</div>
+			                        </div>
+	                       		</div>
+	                                <!-- /.col-lg-6 (nested) -->
+							</div>
+						</div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+         
+	    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Deseja deletar o Usu&aacute;rio</h3>
+        </div>
+        <div class="modal-body">
+			<p>CPF: <b>{{ usuario.cpf }}</b></p>
+            <p>Nome: <b>{{ usuario.nome }}</b></p>
+			<p>Data de Nascimento: <b>{{ usuario.dataNascimento | date: 'dd/MM/yyyy' }}</b></p>
+			
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="clickedOkay()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="clickedCancel()">Cancel</button>
+        </div>
+		</script>

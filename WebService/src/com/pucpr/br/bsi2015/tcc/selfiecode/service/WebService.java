@@ -1,5 +1,7 @@
 package com.pucpr.br.bsi2015.tcc.selfiecode.service;
 
+import java.io.File;
+import java.io.InputStream;
 import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
@@ -9,6 +11,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.Encoded;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
@@ -29,6 +32,9 @@ import com.pucpr.br.bsi2015.tcc.selfiecode.model.Projeto;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Usuario;
 import com.pucpr.br.bsi2015.tcc.selfiecode.session.SessionController;
 import com.sun.jersey.core.header.FormDataContentDisposition;
+import com.sun.jersey.multipart.FormDataParam;
+
+import sun.misc.IOUtils;
 
 
 @Path("service")
@@ -392,21 +398,20 @@ public class WebService {
 	
 	@POST
 	@Path("/upload")
-	//@Consumes(MediaType.MULTIPART_FORM_DATA)
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	//@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	//@Consumes("multipart/form-data")
 	
-	public Response uploadFile(@FormParam("file") FormDataContentDisposition fileDisposition) {
+	public Response uploadFile(@FormDataParam("file") InputStream stream) {
 
-		String uploadedFileLocation = "d://uploaded/" + fileDisposition.getFileName();
-		
+		String uploadedFileLocation = "C://uploaded/" + stream.toString();
 
 
 		// save the file to the server
 //		writeToFile(uploadedInputStream, uploadedFileLocation);
-
+		//System.out.println(theFile.toString());
 		String output = "File saved to server location using FormDataMultiPart : " + uploadedFileLocation;
-
+		System.out.println(stream.toString());
 		return Response.status(200).entity(output).build();
 
 	}
