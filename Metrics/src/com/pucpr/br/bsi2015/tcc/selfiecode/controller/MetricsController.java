@@ -186,13 +186,13 @@ public class MetricsController extends Observable {
 
 	}
 
-	public String uploadFile(File f) throws Exception {
-		IWorkspace workspace = ResourcesPlugin.getWorkspace();  
-		workspace.getRoot().toString();
+	public String uploadFile(String path) throws Exception {
+		//IWorkspace workspace = ResourcesPlugin.getWorkspace();  
+		//workspace.getRoot().toString();
 		//get location of workspace (java.io.File)  
-		File workspaceDirectory = workspace.getRoot().getLocation().toFile();
+		//File workspaceDirectory = workspace.getRoot().getLocation().toFile();
 		
-		
+		File f = new File(path);
 		JSch jsch = new JSch();
         Session session = null;
         try {
@@ -204,7 +204,7 @@ public class MetricsController extends Observable {
             Channel channel = session.openChannel("sftp");
             channel.connect();
             ChannelSftp sftpChannel = (ChannelSftp) channel;
-            sftpChannel.put("C:\\Users\\pedro-banali\\Downloads\\boleto_poscomp2015.pdf", "www/remotefile.pdf");
+            sftpChannel.put(path, "www/" + f.getName());
             sftpChannel.exit();
             session.disconnect();
         } catch (JSchException e) {
@@ -212,72 +212,12 @@ public class MetricsController extends Observable {
         } catch (SftpException e) {
             e.printStackTrace();
         }
-		// InputStream stream =
-		// getClass().getClassLoader().getResourceAsStream("C:\\Users\\pedro-banali\\Downloads\\teste.txt");
-		// FormDataMultiPart formDataMultiPart = new FormDataMultiPart();
-		// FormDataMultiPart part = formDataMultiPart.field("file", stream,
-		// MediaType.TEXT_PLAIN_TYPE);
-		//
-		// WebResource resource =
-		// Client.create().resource("http://localhost/WebService/selfieCode/service/upload");
-		// String response =
-		// resource.type(MediaType.MULTIPART_FORM_DATA_TYPE).post(String.class,
-		// part);
-		// assertEquals("Hello, World", response);
-
-		// Date data;
-		// SimpleDateFormat df;
-		// JSONObject json = new JSONObject();
-		//
-		// HttpClient client = new DefaultHttpClient();
-		// String line = "";
-		// String result = "";
-		// LogController lc = LogController.getInstance();
-		//
-		// HttpPost post = new
-		// HttpPost("http://localhost/WebService/selfieCode/service/upload");
-		// MultipartEntity reqEntity = new MultipartEntity();
-		// post.setHeader("content-type", "multipart/form-data");
-		// reqEntity.addPart("file", new FileBody(new
-		// File("C:\\Users\\pedro-banali\\Downloads\\Titulo_13758581.pdf")));
-		//
-		// post.setEntity(reqEntity);
-		//
-		// HttpResponse response = client.execute(post);
-		// post.completed();
-		// BufferedReader rd = new BufferedReader(new
-		// InputStreamReader(response.getEntity().getContent()));
+		
 
 		return null;
 
 	}
-	
-	public static IProject  getCurrentProject(){   
 		
-		
-		 IProject project = null;
-		    ISelectionService selectionService = 
-		        PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService();
-
-		    ISelection selection = selectionService.getSelection();
-
-		    if(selection instanceof IStructuredSelection) {
-		        Object element = ((IStructuredSelection)selection).getFirstElement();
-
-		        if (element instanceof IResource) {
-		            project= ((IResource)element).getProject();
-		        } else if (element instanceof PackageFragmentRoot) {
-		            IJavaProject jProject = 
-		                ((PackageFragmentRoot)element).getJavaProject();
-		            project = jProject.getProject();
-		        } else if (element instanceof IJavaElement) {
-		            IJavaProject jProject= ((IJavaElement)element).getJavaProject();
-		            project = jProject.getProject();
-		        }
-		    }
-		    return project;
-    }
-	
 	public List<String> getDicas() {
 		return dicas;
 	}

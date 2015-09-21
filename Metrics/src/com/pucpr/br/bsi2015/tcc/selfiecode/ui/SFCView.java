@@ -122,10 +122,10 @@ public class SFCView extends ViewPart implements Observer {
 	/**
 	 * The constructor.
 	 */
-	public SFCView() {
-		Timer timer = new Timer();
-		timer.schedule(new MyTask(), 0, 1000*60);
-	}
+//	public SFCView() {
+//		Timer timer = new Timer();
+//		//timer.schedule(new MyTask(), 0, 1000*60);
+//	}
 
 	/**
 	 * This is a callback that will allow us to create the viewer and initialize
@@ -252,14 +252,6 @@ public class SFCView extends ViewPart implements Observer {
 		this.dicas.add((String) arg1);
 	}
 
-	class MyTask extends TimerTask {
-		public void run() {
-			MetricsController mc = MetricsController.getInstance();
-			dicas = mc.getDicas();
-			if(dicas.size() > 0)
-				refresh();
-				
-		}
-	}
+
 
 }

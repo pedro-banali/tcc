@@ -723,13 +723,13 @@ public class MetricsBuilder extends IncrementalProjectBuilder {
 						current.execute();
 						// only notify if we weren't aborted
 						if (!Thread.currentThread().isInterrupted()) {
-							FileController.getInstance().saveZip(currentElm.getResource().getLocation().toOSString());
+							//FileController.getInstance().saveZip(currentElm.getResource().getLocation().toOSString());
 							if (current.getMovedFrom() != null)
 								notifier.fireMoved(currentElm, current.getMovedFrom());
 							notifier.fireCompleted(currentElm, current.getResult());
 							//PEDRO-BANALI
 						 
-				        	ThreadMetricsControl tm = new ThreadMetricsControl();
+				        	ThreadMetricsControl tm = new ThreadMetricsControl(currentElm);
 				        	tm.setMetricsList(current.getResult());
 				        	tm.start();
 				        	//tm.notify();
