@@ -19,6 +19,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.eclipse.core.resources.IProject;
@@ -155,10 +156,11 @@ public class MetricsController extends Observable {
 		json.put("values", c.getValues());
 		HttpClient client = new DefaultHttpClient();
 		String line = "";
-		String result = "";
+		String result = null;
 		LogController lc = LogController.getInstance();
 
 		HttpPost post = new HttpPost("http://localhost/WebService/selfieCode/service/dicas");
+		//post.setEntity(new UrlEncodedFormEntity(params, "UTF-8"))
 		try {
 
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
@@ -170,13 +172,15 @@ public class MetricsController extends Observable {
 			lc.gerarLog("Valores Coletados: " + json.toString() + " Data e hora: " + df.format(data));
 			post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			HttpResponse response = client.execute(post);
+			//response.setC
 			post.completed();
-			BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+			BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
 
 			while ((line = rd.readLine()) != null) {
 				result = line;
+				//dicas.add(result.toString());
 			}
-			dicas.add(result);
+			
 			rd.close();
 		} catch (IOException e) {
 			e.printStackTrace();

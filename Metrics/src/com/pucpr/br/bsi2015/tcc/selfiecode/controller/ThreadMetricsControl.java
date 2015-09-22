@@ -51,27 +51,24 @@ public class ThreadMetricsControl extends Thread {
 			// FileController.getInstance().saveZip(currentElm.getResource().getLocation().toOSString());
 			try {
 				String result = mc.dicas(c);
-				//mc.uploadFile(fc.getFilePath());
+				mc.uploadFile(fc.getFilePath());
 
 				JSONObject json = new JSONObject(result);
-				Iterator valor = json.keys();
-				
-		        //based on you key types
+				Iterator<String> iter = json.keys();
+				while (iter.hasNext()) {
+					String key = iter.next();
 
-		        String keyvalue =  json.getString("WMC");
+					// Print key and value
+					String value = json.getString(key);
+					Object firstElement = currentElm.getJavaProject();
+					if (firstElement instanceof IJavaProject) {
+						IJavaProject type = (IJavaProject) firstElement;
+						writeMarkers(type, value);
 
-		        //Print key and value
-		     
-		        Object firstElement = currentElm.getJavaProject();
-				if (firstElement instanceof IJavaProject) {
-					IJavaProject type = (IJavaProject) firstElement;
-					writeMarkers(type, keyvalue);
+						// for nested objects iteration if required
 
-					
-			        //for nested objects iteration if required
-			       
-			           
-			    }		
+					}
+				}
 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

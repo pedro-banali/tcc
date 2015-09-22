@@ -3,6 +3,7 @@ package com.pucpr.br.bsi2015.tcc.selfiecode.service;
 import java.io.File;
 import java.io.InputStream;
 import java.math.BigInteger;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -115,7 +116,7 @@ public class WebService {
 	@Path("dicas")
 	@POST
 	//@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON )
 	public Response dicas(@FormParam("json") String json, @FormParam("session") String session ) throws JSONException {
 		
 		JSONObject jsonObject = new JSONObject(json);
@@ -133,6 +134,7 @@ public class WebService {
 		
 		
 		String result = "" + jsonResponse;
+		
 		return Response.status(200).entity(result).build();
 		//return ;
 	}
