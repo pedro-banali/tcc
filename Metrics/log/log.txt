@@ -90,7 +90,8 @@ Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"0","
 Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"31","WMC":"5","NOM":"0","NOP":"1","MLOC":"26","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 19/09/2015 12:56:43
 Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"31","WMC":"5","NOM":"0","NOP":"1","MLOC":"26","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 19/09/2015 12:56:43
 Usuário: Pedro Henrique Banali logou 19/09/2015 13:00:38
-Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"25","NORM":"0","NOI":"0","NSM":"1","TLOC":"30","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 19/09/2015 13:00:44
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"25","NORM":"0","NOI":"0","NSM":"1","TLOC":"30"
+     file:C:\Users\pedro\runtime-EclipseApplication\Teste\src\Teste.java25/26/2015 17:26:028:00:44
 Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"30","WMC":"5","NOM":"0","NOP":"1","MLOC":"25","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 19/09/2015 13:00:44src<"} Data e hora: 19/09/2015 13:00:44
 Usuário: Pedro Henrique Banali logou 19/09/2015 13:01:32
 Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"26","NORM":"0","NOI":"0","NSM":"1","TLOC":"31","WMC":"5","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 19/09/2015 13:01:37
@@ -366,8 +367,8 @@ Writing 'Teste2.java' to zip file20/20/2015 21:20:012
 Valores Coletados: {"values":{"NSF":"0","NOC":"2","NOF":"0","NSM":"2","NOI":"0","TLOC":"55","WMC":"10","NOM":"0","NOP":"1","MLOC":"45","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 20/09/2015 21:20:12
      file:C:\Desenvolvimento\runtime-EclipseApplication\Teste\src\Teste.java20/20/2015 21:20:012
      file:C:\Desenvolvimento\runtime-EclipseApplication\Teste\src\Teste2.java20/20/2015 21:20:012
----Creating zip file 20/20/2015 21:20:012
-Writing 'Teste.java' to zip file20/20/2015 21:20:012
+---Creating zip 
+Writing 'Teste.java' to zip file25/26/2015 17:26:028 file20/20/2015 21:20:012
 Writing 'Teste2.java' to zip file20/20/2015 21:20:012
 ---Done 20/20/2015 21:20:012
 Valores Coletados: {"values":{"NSF":"0","NOC":"2","NOF":"0","NSM":"2","NOI":"0","TLOC":"55","WMC":"10","NOM":"0","NOP":"1","MLOC":"45","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 20/09/2015 21:20:12
@@ -566,7 +567,7 @@ Writing 'Teste.java' to zip file20/05/2015 22:05:025
 Writing 'Teste2.java' to zip file20/05/2015 22:05:025
 ---Done 20/05/2015 22:05:025
 Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"2","NOF":"0","RMA":"0","RMD":"0","NSM":"2","NOI":"0","TLOC":"54","WMC":"10","NOM":"0","RMI":"1","MLOC":"44","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} 
-Writing 'Teste.java' to zip file21/24/2015 19:24:004C":"1","NOF":"0","RMA":"0","RMD":"0","NSM":"1","NOI":"0","TLOC":"14","WMC":"1","NOM":"0","RMI":"1","MLOC":"10","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 21/09/2015 19:13:22
+Writing 'Teste.java' to zip file25/26/2015 17:26:028C":"1","NOF":"0","RMA":"0","RMD":"0","NSM":"1","NOI":"0","TLOC":"14","WMC":"1","NOM":"0","RMI":"1","MLOC":"10","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 21/09/2015 19:13:22
 ---Done 21/13/2015 19:13:022
 Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"14","WMC":"1","NOM":"0","NOP":"1","MLOC":"10","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 21/09/2015 19:13:22
 ---Done 21/13/2015 19:13:022
@@ -756,8 +757,8 @@ Usuário: Pedro Henrique Banali logou 21/09/2015 22:49:41
      file:C:\Desenvolvimento\runtime-EclipseApplication\Teste\src\Teste2.java21/49/2015 22:49:049
 ---Creating zip file 21/49/2015 22:49:049
 Writing 'Teste.java' to zip file21/49/2015 22:49:049
-Writing 'Teste2.java' to zip file21/49/2015 22:49:049
----Done 21/49/2015 22:49:049
+Writing 'Teste2.java' t
+Writing 'Teste.java' to zip file25/34/2015 17:34:03349:049
      file:C:\Desenvolvimento\runtime-EclipseApplication\Teste\src\Teste.java21/49/2015 22:49:049
      file:C:\Desenvolvimento\runtime-EclipseApplication\Teste\src\Teste2.java21/49/2015 22:49:049
 ---Creating zip file 21/49/2015 22:49:049
@@ -957,3 +958,125 @@ Writing 'Teste.java' to zip file21/12/2015 23:12:037
 Writing 'Teste2.java' to zip file21/12/2015 23:12:037
 ---Done 21/12/2015 23:12:037
 Valores Coletados: {"values":{"NSF":"0","NOC":"2","NOF":"0","NSM":"2","NOI":"0","TLOC":"58","WMC":"10","NOM":"0","NOP":"1","MLOC":"48","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 21/09/2015 23:12:37
+Usuário: Pedro Henrique Banali logou 24/09/2015 19:50:30
+     file:C:\Users\pedro\runtime-EclipseApplication\Teste\src\Teste.java24/52/2015 19:52:048
+---Creating zip file 24/52/2015 19:52:048
+Writing 'Teste.java' to zip file24/52/2015 19:52:048
+---Done 24/52/2015 19:52:048
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"20","NORM":"0","NOI":"0","NSM":"1","TLOC":"25","WMC":"4","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 24/09/2015 19:52:48
+     file:C:\Users\pedro\runtime-EclipseApplication\Teste\src\Teste.java24/52/2015 19:52:048
+---Creating zip file 24/52/2015 19:52:048
+Writing 'Teste.java' to zip file24/52/2015 19:52:048
+     file:C:\Users\pedro\runtime-EclipseApplication\Teste\src\Teste.java24/52/2015 19:52:048
+---Creating zip file 24/52/2015 19:52:048
+Writing 'Teste.java' to zip file24/52/2015 19:52:048
+---Done 24/52/2015 19:52:048
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"25","WMC":"4","NOM":"0","NOP":"1","MLOC":"20","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 24/09/2015 19:52:48
+     file:C:\Users\pedro\runtime-EclipseApplication\Teste\src\Teste.java24/52/2015 19:52:048
+---Creating zip file 24/52/2015 19:52:049
+Writing 'Teste.java' to zip file24/52/2015 19:52:049
+---Done 24/52/2015 19:52:049
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"25","WMC":"4","NOM":"0","NOP":"1","MLOC":"20","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 24/09/2015 19:52:49
+     file:C:\Users\pedro\runtime-EclipseApplication\Teste\src\Teste.java24/53/2015 19:53:039
+---Creating zip file 24/53/2015 19:53:039
+Writing 'Teste.java' to zip file24/53/2015 19:53:039
+---Done 24/53/2015 19:53:039
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"21","NORM":"0","NOI":"0","NSM":"1","TLOC":"27","WMC":"4","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 24/09/2015 19:53:39
+     file:C:\Users\pedro\runtime-EclipseApplication\Teste\src\Teste.java24/53/2015 19:53:039
+---Creating zip file 24/53/2015 19:53:039
+Writing 'Teste.java' to zip file24/53/2015 19:53:039
+---Done 24/53/2015 19:53:039
+     file:C:\Users\pedro\runtime-EclipseApplication\Teste\src\Teste.java24/53/2015 19:53:039M":"1","NOI":"0","TLOC":"27","WMC":"4","NOM":"0","RMI":"1","MLOC":"21","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 24/09/2015 19:53:39
+---Creating zip file 24/53/2015 19:53:039
+Writing 'Teste.java' to zip file24/53/2015 19:53:039
+---Done 24/53/2015 19:53:039
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"27","WMC":"4","NOM":"0","NOP":"1","MLOC":"21","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 24/09/2015 19:53:39
+     file:C:\Users\pedro\runtime-EclipseApplication\Teste\src\Teste.java24/53/2015 19:53:039
+---Creating zip file 24/53/2015 19:53:039
+Writing 'Teste.java' to zip file24/53/2015 19:53:039
+---Done 24/53/2015 19:53:039
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"27","WMC":"4","NOM":"0","NOP":"1","MLOC":"21","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 24/09/2015 19:53:39
+     file:C:\Users\pedro\runtime-EclipseApplication\Teste\src\Teste.java24/53/2015 19:53:053
+---Creating zip file 24/53/2015 19:53:053
+Writing 'Teste.java' to zip file24/53/2015 19:53:053
+---Done 24/53/2015 19:53:053
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"21","NORM":"0","NOI":"0","NSM":"1","TLOC":"27","WMC":"4","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 24/09/2015 19:53:53
+     file:C:\Users\pedro\runtime-EclipseApplication\Teste\src\Teste.java24/53/2015 19:53:053
+---Creating zip file 24/53/2015 19:53:053
+Writing 'Teste.java' to zip file24/53/2015 19:53:053
+---Done 24/53/2015 19:53:053
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"0","RMD":"0","NSM":"1","NOI":"0","TLOC":"27","WMC":"4","NOM":"0","RMI":"1","MLOC":"21","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 24/09/2015 19:53:53
+     file:C:\Users\pedro\runtime-EclipseApplication\Teste\src\Teste.java24/53/2015 19:53:053
+---Creating zip file 24/53/2015 19:53:053
+     file:C:\Users\pedro\runtime-EclipseApplication\Teste\src\Teste.java24/53/2015 19:53:053
+---Creating zip file 24/53/2015 19:53:053
+---Done 24/53/2015 19:53:053
+Writing 'Teste.java' to zip file24/53/2015 19:53:053
+---Done 24/53/2015 19:53:053
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"27","WMC":"4","NOM":"0","NOP":"1","MLOC":"21","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 24/09/2015 19:53:53
+     file:C:\Users\pedro\runtime-EclipseApplication\Teste\src\Teste.java24/56/2015 19:56:040
+---Creating zip file 24/56/2015 19:56:040
+Writing 'Teste.java' to zip file24/56/2015 19:56:041
+---Done 24/56/2015 19:56:040
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"20","NORM":"0","NOI":"0","NSM":"1","TLOC":"26","WMC":"4","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 24/09/2015 19:56:41
+     file:C:\Users\pedro\runtime-EclipseApplication\Teste\src\Teste.java24/56/2015 19:56:041
+---Creating zip file 24/56/2015 19:56:041
+Writing 'Teste.java' to zip file24/56/2015 19:56:041
+---Done 24/56/2015 19:56:041
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"0","RMD":"0","NSM":"1","NOI":"0","TLOC":"26","WMC":"4","NOM":"0","RMI":"1","MLOC":"20","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 24/09/2015 19:56:41
+     file:C:\Users\pedro\runtime-EclipseApplication\Teste\src\Teste.java24/56/2015 19:56:041
+---Creating zip file 24/56/2015 19:56:041
+Writing 'Teste.java' to zip file24/56/2015 19:56:041
+     file:C:\Users\pedro\runtime-EclipseApplication\Teste\src\Teste.java24/56/2015 19:56:041
+---Creating zip file 24/56/2015 19:56:041NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"26","WMC":"4","NOM":"0","NOP":"1","MLOC":"20","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 24/09/2015 19:56:41
+Writing 'Teste.java' to zip file24/56/2015 19:56:041
+---Done 24/56/2015 19:56:041
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"26","WMC":"4","NOM":"0","NOP":"1","MLOC":"20","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 24/09/2015 19:56:41
+Usuário: Pedro Henrique Banali logou 25/09/2015 17:25:34
+     file:C:\Users\pedro\runtime-EclipseApplication\Teste\src\Teste.java25/26/2015 17:26:028
+---Creating zip file 25/26/2015 17:26:028
+Writing 'Teste.java' to zip file25/26/2015 17:26:028
+---Done 25/26/2015 17:26:028
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"21","NORM":"0","NOI":"0","NSM":"1","TLOC":"27","WMC":"4","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 25/09/2015 17:26:28
+     file:C:\Users\pedro\runtime-EclipseApplication\Teste\src\Teste.java25/26/2015 17:26:028
+---Creating zip file 25/26/2015 17:26:028
+     file:C:\Users\pedro\runtime-EclipseApplication\Teste\src\Teste.java25/26/2015 17:26:028
+---Creating zip file 25/26/2015 17:26:028
+---Done 25/26/2015 17:26:028
+---Creating zip file 25/26/2015 17:26:028
+Writing 'Teste.java' to zip file25/26/2015 17:26:028OF":"0","NSM":"1","NOI":"0","TLOC":"27","WMC":"4","NOM":"0","NOP":"1","MLOC":"21","NORM":"0","NSC":"0"},"handle":"=Teste/src"} Data e hora: 25/09/2015 17:26:28
+---Done 25/26/2015 17:26:028
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"27","WMC":"4","NOM":"0","NOP":"1","MLOC":"21","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 25/09/2015 17:26:28
+     file:C:\Users\pedro\runtime-EclipseApplication\Teste\src\Teste.java25/26/2015 17:26:057
+---Creating zip file 25/26/2015 17:26:057
+Writing 'Teste.java' to zip file25/26/2015 17:26:057
+---Done 25/26/2015 17:26:057
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","MLOC":"22","NORM":"0","NOI":"0","NSM":"1","TLOC":"28","WMC":"4","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 25/09/2015 17:26:57
+     file:C:\Users\pedro\runtime-EclipseApplication\Teste\src\Teste.java25/26/2015 17:26:057
+---Creating zip file 25/26/2015 17:26:057
+Writing 'Teste.java' to zip file25/26/2015 17:26:057
+---Done 25/26/2015 17:26:057
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"0","RMD":"0","NSM":"1","NOI":"0","TLOC":"28","WMC":"4","NOM":"0","RMI":"1","MLOC":"22","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 25/09/2015 17:26:58
+---Creating zip file 25/26/2015 17:26:058
+Writing 'Teste.java' to zip file25/26/2015 17:26:058
+---Done 25/26/2015 17:26:058
+     file:C:\Users\pedro\runtime-EclipseApplication\Teste\src\Teste.java25/26/2015 17:26:058
+---Creating zip file 25/26/2015 17:26:058
+Writing 'Teste.java' to zip file25/26/2015 17:26:058
+---Done 25/26/2015 17:26:058
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"28","WMC":"4","NOM":"0","NOP":"1","MLOC":"22","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 25/09/2015 17:26:58
+     file:C:\Users\pedro\runtime-EclipseApplication\Teste\src\Teste.java25/34/2015 17:34:032
+---Creating zip file 25/34/2015 17:34:033
+Writing 'Teste.java' to zip file25/34/2015 17:34:033
+---Done 25/34/2015 17:34:033
+     file:C:\Users\pedro\runtime-EclipseApplication\Teste\src\Teste.java25/34/2015 17:34:033,"NSM":"1","TLOC":"28","WMC":"4","NOM":"0","NSC":"0"},"handle":"=Teste/src<{Teste.java"} Data e hora: 25/09/2015 17:34:33
+---Creating zip file 25/34/2015 17:34:033
+Writing 'Teste.java' to zip file25/34/2015 17:34:033
+---Done 25/34/2015 17:34:033
+Valores Coletados: {"values":{"NSF":"0","CE":"0","NOC":"1","NOF":"0","RMA":"0","RMD":"0","NSM":"1","NOI":"0","TLOC":"28","WMC":"4","NOM":"0","RMI":"1","MLOC":"22","NORM":"0","CA":"0","NSC":"0"},"handle":"=Teste/src<"} Data e hora: 25/09/2015 17:34:33
+     file:C:\Users\pedro\runtime-EclipseApplication\Teste\src\Teste.java25/34/2015 17:34:033
+     file:C:\Users\pedro\runtime-EclipseApplication\Teste\src\Teste.java25/34/2015 17:34:033
+---Creating zip file 25/34/2015 17:34:033
+Writing 'Teste.java' to zip file25/34/2015 17:34:033
+---Done 25/34/2015 17:34:033
+Valores Coletados: {"values":{"NSF":"0","NOC":"1","NOF":"0","NSM":"1","NOI":"0","TLOC":"28","WMC":"4","NOM":"0","NOP":"1","MLOC":"22","NORM":"0","NSC":"0"},"handle":"=Teste"} Data e hora: 25/09/2015 17:34:334:33
