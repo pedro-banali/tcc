@@ -1,11 +1,9 @@
 package com.pucpr.br.bsi2015.tcc.selfiecode.controller;
 
 import java.util.Iterator;
-import java.util.Set;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
@@ -31,7 +29,9 @@ public class ThreadMetricsControl extends Thread {
 	//
 	public void run() {
 		System.out.println("Thread startou");
+		String fileName = "";
 
+		String info []  ; 
 		if (o == null) {
 			try {
 				wait();
@@ -44,13 +44,14 @@ public class ThreadMetricsControl extends Thread {
 			AbstractMetricSource c = (AbstractMetricSource) o;
 			FileController fc = new FileController();
 			// workspace.getRoot().getFullPath().toString();
-			fc.saveZip(ResourcesPlugin.getWorkspace().getRoot().getLocation().toString()
+			fileName = fc.saveZip(ResourcesPlugin.getWorkspace().getRoot().getLocation().toString()
 					+ currentElm.getJavaProject().getPath().toOSString() + "/src/");
 
 			MetricsController mc = MetricsController.getInstance();
 			// FileController.getInstance().saveZip(currentElm.getResource().getLocation().toOSString());
 			try {
-				String result = mc.dicas(c);
+				info = fileName.split("#:@:@:#");
+				String result = mc.dicas(c, info[0], info[1]);
 				mc.uploadFile(fc.getFilePath());
 
 				JSONObject json = new JSONObject(result);

@@ -26,6 +26,8 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.internal.core.PackageFragmentRoot;
@@ -36,6 +38,7 @@ import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.internal.Workbench;
 import org.json.JSONObject;
+import org.osgi.framework.Bundle;
 
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelSftp;
@@ -148,12 +151,14 @@ public class MetricsController extends Observable {
 
 	}
 
-	public String dicas(AbstractMetricSource c) throws Exception {
+	public String dicas(AbstractMetricSource c, String fileName, String date) throws Exception {
 		Date data;
 		SimpleDateFormat df;
 		JSONObject json = new JSONObject();
-		json.put("handle", c.getHandle());
+		json.put("handle", c.getPath());
 		json.put("values", c.getValues());
+		json.put("fileName", fileName);
+		json.put("date", date);
 		HttpClient client = new DefaultHttpClient();
 		String line = "";
 		String result = null;
@@ -166,10 +171,8 @@ public class MetricsController extends Observable {
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
 			nameValuePairs.add(new BasicNameValuePair("json", json.toString()));
 			nameValuePairs.add(new BasicNameValuePair("session", session));
-			data = new Date();
-			df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
-			lc.gerarLog("Valores Coletados: " + json.toString() + " Data e hora: " + df.format(data));
+			lc.gerarLog("Valores Coletados: " + json.toString() + " Data e hora: " + date);
 			post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			HttpResponse response = client.execute(post);
 			//response.setC
@@ -201,7 +204,9 @@ public class MetricsController extends Observable {
         Session session = null;
         try {
             //session = jsch.getSession("fileSaverFTP", "192.168.112.129", 22);
-        	jsch.addIdentity("MIIEogIBAAKCAQEAikdgc7Nwlj7PEpxLsvLH+Ng8+Vn/ywJaQS7ZVkuLa023WsYYe5Z7TSw0FJJs8/qXxURuk9beOUiopttGPUBbofF3kvpiqthUwDEq67cXIcT8E1EsBK1D9JK0yz2qv9a3gGz7U028UpACqdF6jHxcPkJ8vE6YCsbpMcJZSeUXVGIUgczkJE9YTpoPTQU7UySw90MDnNL7PPqBOOVTeFZSrhx0Rsa5J5lCBJrlyFVqeLJqVEIdt+oXpQ8k9fmobRAyGpmtCoJ72avEn0qYzua/plBDRllD+7kZRb5f1yr54tKdpd64jqKpVCnUe76w6JGUokg1k/HLZKX6tJm7fmxhLwIDAQABAoIBAGPOZwC76KyZQw8UvtK3x7yGH2R/IFCgLxLTRM2zkzrtCkW7q9owYGjwWdrrYTasjjU1Unbk5NsF5a0hoc3+EOWPixYMIYFcybc7BdbC/TBDpQowUYxCn0T9Sv9TUFZNHX/VqYWUGzSgezulVkXmURIjHTMxqy5EKfbfZ2EduLwPSz1VMXqZnKKvE+Q7ALCuXGuxpKU+KjYgVYC2me6xrpgy48VyzX0FX8HIZu6LOzwGGx2/vjzKznn6SUAeEhixRKsfvu8hF7q80CmD8eIVVAhJEJdXsi9bPJYT3hzqVmkt/pebxfWWH3SLkDEmkKZjLxyiocY6+A3IJEHZOQtRmBkCgYEAwLSK69zFWzz7CaoEtHs2zQOZxIyz3gC3Wa7vJTq9uEKaflcuSIBggMKk9mKDdd+urf2zHrA09yKcMdLTqX2/0Wik8G3KrDyASW8w6NRCecuINRyhPTxXZSwHmTy+DsEygCMhGSbloH06tFkvc89C5i+qByusEBcqgXCCY0JTrhMCgYEAt7JvEuQWz5G5DNwnCdMO6dWSDIx6Rog8v62zjnD31zDnn63OGX1jaE53fhw+hQ6Cy8SuWlp0nY77+9UCZ+k9ZWrpWCglJ3dvXQquh34KvHFTBJC/2WESPvwdHTjfiSazG2AJmlqdM47CuN8pKmEY7BGdtU44hmhtXVctKoXTM/UCgYAsAA1IVZxqfL4FMuDoJMoafZv6mPXo1tkGjT7ljUgMbojAGD/lJgri2463Az9pBq3n5GmltC4jz69CYRUbOi82LWKb0zXXpejU26KbRvv2u1ZaajMWvFRoMWl6v7fVvp89Ssgf6hW8U1u4GjUPiF+KF5AHGx2qft+htoLPDzH0KQKBgDD7/+qFsB+BuFrZif9wrJVmQh/eheyw/6INa8gcD7rua5WE/2SErzFtWyfh2Doa+H3l4KhvXpF1Q3SQBKg45gpZTAgaDG5NxwCEjK3MyogdoAmjn8UTwY3SJOFZ/SHRlAlEvsrORwUsmHg76fpHEiJBQFDMnv4YcrFlQcIJFZzRAoGAERAhLI53ukpAKVGxjaUtDebfv+pNbdKeCw9fpBCepYz/wJuc2wlVC0NqAKE2h5bgMsKzglM2sq8Hbpy90dGbv+3EZds1cKUF9q0SIPblDl1SMiMCB72kYw5uJVT9cA3bbhDt6U6QxmaS02nIWmA0s0DnpeB2pXisIbEm9x1X4oU=");
+        	Bundle bundle = Platform.getBundle("net.sourceforge.metrics");
+    		URL fileURL = bundle.getEntry("log/AWSKey.pem");
+        	jsch.addIdentity(FileLocator.resolve(fileURL).toURI().toString());
         	session = jsch.getSession("ubuntu", "ec2-52-88-229-56.us-west-2.compute.amazonaws.com", 22);
             session.setConfig("StrictHostKeyChecking", "no");
             //session.setPassword("file@051526");

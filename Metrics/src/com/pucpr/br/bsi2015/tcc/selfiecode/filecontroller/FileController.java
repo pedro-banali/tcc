@@ -19,7 +19,7 @@ public class FileController {
 	private String filePath = "";
 	private LogController log = LogController.getInstance();
 	
-	public void saveZip(String src)
+	public String saveZip(String src)
 	{
 		//String str = "C:/Desenvolvimento/runtime-EclipseApplication/Teste/src/teste.txt";
 //		int startIndex = src.indexOf("src\\");
@@ -40,7 +40,7 @@ public class FileController {
 //		src = src.replace(toBeReplaced, "");
 		
 		File directoryToZip = new File(src);
-
+		String fileName = "";
 		List<File> fileList = new ArrayList<File>();
 		try {
 			System.out.println("---Getting references to all files in: " + directoryToZip.getCanonicalPath());
@@ -52,8 +52,10 @@ public class FileController {
 		Date d = new Date();
 		DateFormat df = new SimpleDateFormat("dd/mm/yyyy HH:mm:sss");
 		log.gerarLog("---Creating zip file " + df.format(d));
-		writeZipFile(directoryToZip, fileList);
+		fileName = writeZipFile(directoryToZip, fileList);
 		log.gerarLog("---Done " + df.format(d));
+		return fileName;
+		
 	}
 
 	public void getAllFiles(File dir, List<File> fileList) {
@@ -70,13 +72,16 @@ public class FileController {
 					log.gerarLog("     file:" + file.getCanonicalPath() + df.format(d));
 				}
 			}
+			
 		} catch (IOException e) {
 			log.gerarLog("ERRO " + e.getMessage() + df.format(d));
 		}
 	}
+	
 
-	public void writeZipFile(File directoryToZip, List<File> fileList) {
+	public String writeZipFile(File directoryToZip, List<File> fileList) {
 		String fullPath = "";
+		String fileName = "";
 		Date d = new Date();
 		DateFormat df;
 		try {
@@ -85,6 +90,7 @@ public class FileController {
 			df = new SimpleDateFormat("yyyy-mm-dd-HH-mm-sss");
 			this.checkPath(path);
 			fullPath = path + directoryToZip.getName() + df.format(d) + ".zip";
+			fileName = directoryToZip.getName() + df.format(d) + ".zip";
 			FileOutputStream fos = new FileOutputStream(fullPath);
 			ZipOutputStream zos = new ZipOutputStream(fos);
 
@@ -96,7 +102,9 @@ public class FileController {
 
 			zos.close();
 			fos.close();
+			df = new SimpleDateFormat("dd/mm/yyyy HH:mm:sss");
 			this.filePath = fullPath;
+			return fileName + "#:@:@:#" + df.format(d);
 		} catch (FileNotFoundException e) {
 			df = new SimpleDateFormat("dd/mm/yyyy HH:mm:sss");
 			log.gerarLog("ERRO " + e.getMessage() + df.format(d));
@@ -104,6 +112,7 @@ public class FileController {
 			df = new SimpleDateFormat("dd/mm/yyyy HH:mm:sss");
 			log.gerarLog("ERRO " + e.getMessage() + df.format(d));
 		}
+		return fileName + "#:@:@:#";
 	}
 	
 	public void checkPath(String path)

@@ -17,5 +17,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/net.sourceforge.metrics/jsch-0.1.53.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

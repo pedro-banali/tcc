@@ -58,7 +58,7 @@ public class SelfieCodeBC {
 		List<Metrica> metricas = new ArrayList<Metrica>();
 		List<Dica> dicas = new ArrayList<Dica>();
 		Metrica m;
-		
+		CodigoFonte cf = new CodigoFonte();
 		MetricaDAO md = new MetricaDAO();
 		DicaDAO dd = new DicaDAO();
 		Iterator<String> iter = jsonObject.keys();
@@ -69,6 +69,8 @@ public class SelfieCodeBC {
 		        m = new Metrica();
 		        m.setSigla(key);
 		        m.setValorMetrica(value);
+		        
+		        cf.setMetricas(metricas);
 		       
 		        md.preencherIntervalos(m);
 		       	
@@ -80,7 +82,7 @@ public class SelfieCodeBC {
 		        // Something went wrong!
 		    }
 		}
-		
+		cf.setMetricas(metricas);
 		return metricas;
 	}
 	
