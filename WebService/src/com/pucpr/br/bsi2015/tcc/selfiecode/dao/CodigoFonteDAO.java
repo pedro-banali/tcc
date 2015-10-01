@@ -1,6 +1,7 @@
 package com.pucpr.br.bsi2015.tcc.selfiecode.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -67,6 +68,38 @@ public class CodigoFonteDAO {
 		return codigosFontes;
 	}
 	
+	public void inserirCodigoFonte(CodigoFonte cf)
+	{
+		Connection cff = ConnectionFactory.getConnection();
+		//java.sql.Date dataSql = new Date(u.getDataCadastro().getTime());
+		if(cf == null)
+			JOptionPane.showConfirmDialog(null, "ERRRROUUU");
+		else
+		{
+			String selectSQL = "INSERT INTO USUARIO_TIPO (FK_TIPO_USUARIO, FK_CPF, DATA_CADASTRO) VALUES (?, ?, ?)";
+
+
+			PreparedStatement preparedStatement;
+			try {
+				preparedStatement = cff.prepareStatement(selectSQL);
+
+//				preparedStatement.setInt(1, u.getTipoUsuario().getId());
+//				preparedStatement.setLong(2, u.getCpf());
+//				preparedStatement.setDate(3, dataSql);
+				
+				//preparedStatement.setString(1, "Pedro Henrique Banali");
+				int rs = preparedStatement.executeUpdate();
+							
+
+				cff.close();
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
 
 
 	

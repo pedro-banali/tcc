@@ -50,7 +50,7 @@ public class FileController {
 		}
 		getAllFiles(directoryToZip, fileList);
 		Date d = new Date();
-		DateFormat df = new SimpleDateFormat("dd/mm/yyyy HH:mm:sss");
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:sss");
 		log.gerarLog("---Creating zip file " + df.format(d));
 		fileName = writeZipFile(directoryToZip, fileList);
 		log.gerarLog("---Done " + df.format(d));
@@ -60,7 +60,7 @@ public class FileController {
 
 	public void getAllFiles(File dir, List<File> fileList) {
 		Date d = new Date();
-		DateFormat df = new SimpleDateFormat("dd/mm/yyyy HH:mm:sss");
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:sss");
 		try {
 			File[] files = dir.listFiles();
 			for (File file : files) {
@@ -102,11 +102,11 @@ public class FileController {
 
 			zos.close();
 			fos.close();
-			df = new SimpleDateFormat("dd/mm/yyyy HH:mm:sss");
+			df = new SimpleDateFormat("dd/MM/yyyy HH:mm:sss");
 			this.filePath = fullPath;
 			return fileName + "#:@:@:#" + df.format(d);
 		} catch (FileNotFoundException e) {
-			df = new SimpleDateFormat("dd/mm/yyyy HH:mm:sss");
+			df = new SimpleDateFormat("dd/MM/yyyy HH:mm:sss");
 			log.gerarLog("ERRO " + e.getMessage() + df.format(d));
 		} catch (IOException e) {
 			df = new SimpleDateFormat("dd/mm/yyyy HH:mm:sss");

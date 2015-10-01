@@ -37,7 +37,7 @@ public class LogController {
 		    String existente = loadFile();
 		    
 		    BufferedWriter writer = new BufferedWriter(new FileWriter( file)); 
-		    writer.write(existente + text);
+		    writer.write(existente + " " + text);
 		    
 		    writer.close(); 
  

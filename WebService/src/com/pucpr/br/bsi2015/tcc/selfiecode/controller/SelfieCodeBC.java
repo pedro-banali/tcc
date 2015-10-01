@@ -1,5 +1,6 @@
 package com.pucpr.br.bsi2015.tcc.selfiecode.controller;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -58,7 +59,7 @@ public class SelfieCodeBC {
 		List<Metrica> metricas = new ArrayList<Metrica>();
 		List<Dica> dicas = new ArrayList<Dica>();
 		Metrica m;
-		CodigoFonte cf = new CodigoFonte();
+		
 		MetricaDAO md = new MetricaDAO();
 		DicaDAO dd = new DicaDAO();
 		Iterator<String> iter = jsonObject.keys();
@@ -70,7 +71,6 @@ public class SelfieCodeBC {
 		        m.setSigla(key);
 		        m.setValorMetrica(value);
 		        
-		        cf.setMetricas(metricas);
 		       
 		        md.preencherIntervalos(m);
 		       	
@@ -82,8 +82,28 @@ public class SelfieCodeBC {
 		        // Something went wrong!
 		    }
 		}
-		cf.setMetricas(metricas);
+		
 		return metricas;
+	}
+	
+	public void salvarCodigoFonte(List<Metrica> metricas, String date, String fileName, String classe)
+	{
+		CodigoFonte cf = new CodigoFonte();
+		cf.setMetricas(metricas);
+		Date d ;
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:sss");
+		try {
+			d = df.parse(date);
+			cf.setDataColecao(d);
+			cf.setCodigoFonte(fileName);
+			cf.setNomeClasse(classe);
+			
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 	public List<Usuario> listarDesenvolvedores(Usuario u)

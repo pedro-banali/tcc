@@ -125,7 +125,10 @@ public class WebService {
 		JSONObject jsonValues = jsonObject.getJSONObject("values");
 		JSONObject jsonResponse = new JSONObject();
 		List<Metrica> metricas = sbc.dicas(jsonValues);
-		
+		String dateS = jsonObject.getString("date");
+		String fileName = jsonObject.getString("fileName");
+		String classe = jsonObject.getString("handle");
+		sbc.salvarCodigoFonte(metricas, dateS, fileName, classe);
 		for (int i = 0; i < metricas.size(); i++) {
 			for (int j = 0; j < metricas.get(i).getDicas().size(); j++) {
 				jsonResponse.put(metricas.get(i).getSigla(),  metricas.get(i).getDicas().get(j).getDescricao());
