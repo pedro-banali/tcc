@@ -51,7 +51,7 @@ public class ThreadMetricsControl extends Thread {
 			// FileController.getInstance().saveZip(currentElm.getResource().getLocation().toOSString());
 			try {
 				info = fileName.split("#:@:@:#");
-				String result = mc.dicas(c, info[0], info[1]);
+				String result = mc.dicas(c, info[0], info[1], currentElm);
 				mc.uploadFile(fc.getFilePath());
 
 				JSONObject json = new JSONObject(result);

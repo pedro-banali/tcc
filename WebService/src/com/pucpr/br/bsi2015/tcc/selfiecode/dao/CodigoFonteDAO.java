@@ -71,21 +71,23 @@ public class CodigoFonteDAO {
 	public void inserirCodigoFonte(CodigoFonte cf)
 	{
 		Connection cff = ConnectionFactory.getConnection();
-		//java.sql.Date dataSql = new Date(u.getDataCadastro().getTime());
+		java.sql.Date dataSql = new Date(cf.getDataColecao().getTime());
 		if(cf == null)
 			JOptionPane.showConfirmDialog(null, "ERRRROUUU");
 		else
 		{
-			String selectSQL = "INSERT INTO USUARIO_TIPO (FK_TIPO_USUARIO, FK_CPF, DATA_CADASTRO) VALUES (?, ?, ?)";
+			String selectSQL = "SELECT * FROM Projeto WHERE ";
+			String insertSQL = "INSERT INTO `selfiecode`.`CODIGOFONTE` (`CODIGOFONTE`, `DATA_COLECAO`, `NOME_CLASSE`, `FK_US_PROJ`) VALUES (? ?,?,?)";
 
 
 			PreparedStatement preparedStatement;
 			try {
 				preparedStatement = cff.prepareStatement(selectSQL);
 
-//				preparedStatement.setInt(1, u.getTipoUsuario().getId());
-//				preparedStatement.setLong(2, u.getCpf());
-//				preparedStatement.setDate(3, dataSql);
+				preparedStatement.setString(1, cf.getCodigoFonte());
+				preparedStatement.setDate(2, dataSql);
+				preparedStatement.setString(3, cf.getNomeClasse());
+				preparedStatement.setString(4, cf.getNomeClasse());
 				
 				//preparedStatement.setString(1, "Pedro Henrique Banali");
 				int rs = preparedStatement.executeUpdate();

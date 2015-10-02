@@ -151,7 +151,7 @@ public class MetricsController extends Observable {
 
 	}
 
-	public String dicas(AbstractMetricSource c, String fileName, String date) throws Exception {
+	public String dicas(AbstractMetricSource c, String fileName, String date, IJavaElement currentElm) throws Exception {
 		Date data;
 		SimpleDateFormat df;
 		JSONObject json = new JSONObject();
@@ -159,6 +159,7 @@ public class MetricsController extends Observable {
 		json.put("values", c.getValues());
 		json.put("fileName", fileName);
 		json.put("date", date);
+		json.put("projeto",currentElm.getJavaProject().getElementName());
 		HttpClient client = new DefaultHttpClient();
 		String line = "";
 		String result = null;
@@ -206,7 +207,7 @@ public class MetricsController extends Observable {
             //session = jsch.getSession("fileSaverFTP", "192.168.112.129", 22);
         	Bundle bundle = Platform.getBundle("net.sourceforge.metrics");
     		URL fileURL = bundle.getEntry("log/AWSKey.pem");
-        	jsch.addIdentity(FileLocator.resolve(fileURL).toURI().toString());
+        	jsch.addIdentity(FileLocator.resolve(fileURL).getPath());
         	session = jsch.getSession("ubuntu", "ec2-52-88-229-56.us-west-2.compute.amazonaws.com", 22);
             session.setConfig("StrictHostKeyChecking", "no");
             //session.setPassword("file@051526");
