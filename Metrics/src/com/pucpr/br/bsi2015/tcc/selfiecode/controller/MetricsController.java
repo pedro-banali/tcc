@@ -9,7 +9,9 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Observable;
 
 import javax.swing.JOptionPane;
@@ -37,6 +39,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.internal.Workbench;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.osgi.framework.Bundle;
 
@@ -105,12 +108,10 @@ public class MetricsController extends Observable {
 		Date data;
 		SimpleDateFormat df;
 		String nome;
-		String session;
 		LogController lc;
 		URL obj = new URL(url);
-
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-
+		SessionController sc = SessionController.getInstance();
 		// optional default is GET
 		con.setRequestMethod("POST");
 
@@ -135,13 +136,23 @@ public class MetricsController extends Observable {
 
 		// result = response.toString();
 		JSONObject jsonObject = new JSONObject(response.toString());
+		JSONArray projetos = new JSONArray();
 		result = jsonObject.getString("result");
 		if (!result.equals("login inexistente")) {
-			session = result;
+
 			lc = LogController.getInstance();
 			data = new Date();
 			nome = jsonObject.getString("username");
 			df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+			sc.getSession().setUserName(nome);
+			sc.getSession().setUserId(jsonObject.getInt("tipo"));
+			sc.getSession().setSessionId(result);
+			projetos = jsonObject.getJSONArray("projetos");
+			for (int i = 0; i < projetos.length(); i++) {
+				sc.getSession().getProjetos().put(projetos.getJSONObject(i).getInt("codigoProj"),
+						projetos.getJSONObject(i).getString("nome"));
+			}
 
 			lc.gerarLog("Usuário: " + nome + " logou " + df.format(data) + "\n");
 			return true;
@@ -151,22 +162,50 @@ public class MetricsController extends Observable {
 
 	}
 
-	public String dicas(AbstractMetricSource c, String fileName, String date, IJavaElement currentElm) throws Exception {
+	public String dicas(AbstractMetricSource c, String fileName, String date, IJavaElement currentElm)
+			throws Exception {
 		Date data;
 		SimpleDateFormat df;
 		JSONObject json = new JSONObject();
+		
 		json.put("handle", c.getPath());
 		json.put("values", c.getValues());
 		json.put("fileName", fileName);
 		json.put("date", date);
-		json.put("projeto",currentElm.getJavaProject().getElementName());
+		String projeto;
+		int r = 0;
+		Integer key;
+		String value;
+		SessionController sc = SessionController.getInstance();
+		Iterator entries = sc.getSession().getProjetos().entrySet().iterator();
+		json.put("sessionId", sc.getSession().getSessionId());
+		while (entries.hasNext()) {
+			Entry thisEntry = (Entry) entries.next();
+			key = (Integer) thisEntry.getKey();
+			value = (String) thisEntry.getValue();
+			if (currentElm.getJavaProject().getElementName().equals(value)) {
+				r = 1;
+				json.put("projId", key);
+			}
+			// ...
+		}
+//		for (int i = 0; i < sc.getSession().getProjetos().size(); i++) {
+//			projeto = sc.getSession().getProjetos().get(i);
+//			if (currentElm.getJavaProject().getElementName().equals(projeto)) {
+//				r = 1;
+//			}
+//		}
+		if (r == 0)
+			return "naoachou";
+
+		json.put("projeto", currentElm.getJavaProject().getElementName());
 		HttpClient client = new DefaultHttpClient();
 		String line = "";
 		String result = null;
 		LogController lc = LogController.getInstance();
 
 		HttpPost post = new HttpPost("http://localhost/WebService/selfieCode/service/dicas");
-		//post.setEntity(new UrlEncodedFormEntity(params, "UTF-8"))
+		// post.setEntity(new UrlEncodedFormEntity(params, "UTF-8"))
 		try {
 
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
@@ -176,15 +215,15 @@ public class MetricsController extends Observable {
 			lc.gerarLog("Valores Coletados: " + json.toString() + " Data e hora: " + date);
 			post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			HttpResponse response = client.execute(post);
-			//response.setC
+			// response.setC
 			post.completed();
 			BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
 
 			while ((line = rd.readLine()) != null) {
 				result = line;
-				//dicas.add(result.toString());
+				// dicas.add(result.toString());
 			}
-			
+
 			rd.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -195,41 +234,40 @@ public class MetricsController extends Observable {
 	}
 
 	public String uploadFile(String path) throws Exception {
-		//IWorkspace workspace = ResourcesPlugin.getWorkspace();  
-		//workspace.getRoot().toString();
-		//get location of workspace (java.io.File)  
-		//File workspaceDirectory = workspace.getRoot().getLocation().toFile();
-		
+		// IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		// workspace.getRoot().toString();
+		// get location of workspace (java.io.File)
+		// File workspaceDirectory = workspace.getRoot().getLocation().toFile();
+
 		File f = new File(path);
 		JSch jsch = new JSch();
-        Session session = null;
-        try {
-            //session = jsch.getSession("fileSaverFTP", "192.168.112.129", 22);
-        	Bundle bundle = Platform.getBundle("net.sourceforge.metrics");
-    		URL fileURL = bundle.getEntry("log/AWSKey.pem");
-        	jsch.addIdentity(FileLocator.resolve(fileURL).getPath());
-        	session = jsch.getSession("ubuntu", "ec2-52-88-229-56.us-west-2.compute.amazonaws.com", 22);
-            session.setConfig("StrictHostKeyChecking", "no");
-            //session.setPassword("file@051526");
-            session.connect();
+		Session session = null;
+		try {
+			// session = jsch.getSession("fileSaverFTP", "192.168.112.129", 22);
+			Bundle bundle = Platform.getBundle("net.sourceforge.metrics");
+			URL fileURL = bundle.getEntry("log/AWSKey.pem");
+			jsch.addIdentity(FileLocator.resolve(fileURL).getPath());
+			session = jsch.getSession("ubuntu", "ec2-52-88-229-56.us-west-2.compute.amazonaws.com", 22);
+			session.setConfig("StrictHostKeyChecking", "no");
+			// session.setPassword("file@051526");
+			session.connect();
 
-            Channel channel = session.openChannel("sftp");
-            channel.connect();
-            ChannelSftp sftpChannel = (ChannelSftp) channel;
-            sftpChannel.put(path, "www/" + f.getName());
-            sftpChannel.exit();
-            session.disconnect();
-        } catch (JSchException e) {
-            e.printStackTrace();  
-        } catch (SftpException e) {
-            e.printStackTrace();
-        }
-		
+			Channel channel = session.openChannel("sftp");
+			channel.connect();
+			ChannelSftp sftpChannel = (ChannelSftp) channel;
+			sftpChannel.put(path, "www/" + f.getName());
+			sftpChannel.exit();
+			session.disconnect();
+		} catch (JSchException e) {
+			e.printStackTrace();
+		} catch (SftpException e) {
+			e.printStackTrace();
+		}
 
 		return null;
 
 	}
-		
+
 	public List<String> getDicas() {
 		return dicas;
 	}

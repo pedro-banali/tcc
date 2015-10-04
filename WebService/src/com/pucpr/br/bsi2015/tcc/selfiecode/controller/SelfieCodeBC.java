@@ -86,7 +86,7 @@ public class SelfieCodeBC {
 		return metricas;
 	}
 	
-	public void salvarCodigoFonte(List<Metrica> metricas, String date, String fileName, String classe, String projeto)
+	public void salvarCodigoFonte(List<Metrica> metricas, String date, String fileName, String classe, int projId, String sessionId)
 	{
 		CodigoFonte cf = new CodigoFonte();
 		cf.setMetricas(metricas);
@@ -97,6 +97,8 @@ public class SelfieCodeBC {
 			cf.setDataColecao(d);
 			cf.setCodigoFonte(fileName);
 			cf.setNomeClasse(classe);
+			CodigoFonteDAO cfd = new CodigoFonteDAO();
+			int ret = cfd.inserirCodigoFonte(cf, projId, sessionId );
 			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block

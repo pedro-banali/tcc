@@ -192,7 +192,7 @@ public class LoginDialog {
 		final RowData rowData_2 = new RowData();
 		rowData_2.width = 170;
 		txt_Username.setLayoutData(rowData_2);
-		txt_Username.setText("PBANALI");
+		txt_Username.setText("DEVELO21");
 	}
 
 	private void createPwdLabel(Composite cmp_Login)

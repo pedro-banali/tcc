@@ -52,8 +52,20 @@ public class ThreadMetricsControl extends Thread {
 			try {
 				info = fileName.split("#:@:@:#");
 				String result = mc.dicas(c, info[0], info[1], currentElm);
-				mc.uploadFile(fc.getFilePath());
+				if(result.equals("naoachou"))
+				{
+					Object firstElement = currentElm.getJavaProject();
+					if (firstElement instanceof IJavaProject) {
+						IJavaProject type = (IJavaProject) firstElement;
+						writeMarkers(type, "Projeto inexistente não foi possivel verificar as métricas");
 
+						// for nested objects iteration if required
+
+					}
+					return;
+				}
+				//mc.uploadFile(fc.getFilePath());
+				
 				JSONObject json = new JSONObject(result);
 				Iterator<String> iter = json.keys();
 				while (iter.hasNext()) {

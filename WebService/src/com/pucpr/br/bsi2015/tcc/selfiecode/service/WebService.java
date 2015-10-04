@@ -7,6 +7,7 @@ import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -67,9 +68,10 @@ public class WebService {
 		Usuario loginStatus;
 		String loginResult;
 		SelfieCodeBC sbc = SelfieCodeBC.getInstance();
-
+		JSONArray ja = new JSONArray();
+		//List<String> lista =  new ArrayList<String>();
 		loginStatus = sbc.login(user, pass);
-
+		JSONObject jp = new JSONObject();
 		if (loginStatus != null) {
 			
 			MessageDigest md;
@@ -84,6 +86,17 @@ public class WebService {
 				jsonObject.put("result", loginResult);
 				jsonObject.put("username", loginStatus.getNome());
 				jsonObject.put("tipo", loginStatus.getTipoUsuario().getId());
+				List<Projeto> projs = sbc.listarProjetos(loginStatus);
+				//ja = new JSONArray(projs);
+				for (int i = 0; i < projs.size(); i++) {
+					jp = new JSONObject();
+					jp.put("nome", projs.get(i).getNome());
+					jp.put("codigoProj", projs.get(i).getId());
+
+				}
+				ja = new JSONArray();
+				ja.put(jp);
+				jsonObject.put("projetos", ja);
 				
 				sc.addSession(loginResult, loginStatus);
 				
@@ -129,7 +142,9 @@ public class WebService {
 		String fileName = jsonObject.getString("fileName");
 		String classe = jsonObject.getString("handle");
 		String projeto = jsonObject.getString("projeto");
-		sbc.salvarCodigoFonte(metricas, dateS, fileName, classe, projeto);
+		int projId = jsonObject.getInt("projId");
+		String sessionId = jsonObject.getString("sessionId");
+		sbc.salvarCodigoFonte(metricas, dateS, fileName, classe, projId, sessionId);
 		for (int i = 0; i < metricas.size(); i++) {
 			for (int j = 0; j < metricas.get(i).getDicas().size(); j++) {
 				jsonResponse.put(metricas.get(i).getSigla(),  metricas.get(i).getDicas().get(j).getDescricao());
