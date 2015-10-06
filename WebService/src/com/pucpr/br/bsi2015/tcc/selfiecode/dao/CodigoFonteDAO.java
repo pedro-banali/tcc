@@ -52,7 +52,7 @@ public class CodigoFonteDAO {
 				while (rs.next()) {
 					cfo = new CodigoFonte();
 
-					cfo.setDataColecao(rs.getDate("DATA_COLECAO"));
+					cfo.setDataColecao(rs.getTimestamp("DATA_COLECAO"));
 					cfo.setNomeClasse(rs.getString("NOME_CLASSE"));
 					cfo.setId(rs.getInt("ID_CODIGO"));
 

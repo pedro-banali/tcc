@@ -661,11 +661,17 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             				for(var i = 0; i < response.data.length; i++)
             				{
             					var fu = response.data[i];
-            					var dateS = fu.dataColecao.split('-');
+            					//var dateS = fu.dataColecao.split('-');
             					
             					//var date =  new Intl.DateTimeFormat(new Date(dateS[0]+"/"+(dateS[1] - 1)+"/"+dateS[2]));
+            					var hours = fu.dataColecao.split(' ');
+            					var dateS = hours[0].split('-');
+            					var res = hours[1].replace(/:/g, ",");
+            					var res = res.replace(".", "");
+            					var d = res.split(',');
             					var date =  new Date(dateS[0], (dateS[1] - 1) , dateS[2]);
-            					
+            					date.setHours(d[0], d[1], d[2]);
+            					date.setMinutes(d[1]);
             					//date.format('dd/MM/yyyy');
             					//date = formatDate(date);
             					//date = new Date(date);
@@ -778,13 +784,13 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             							 		y: metrica.valorMetrica
             								})
             								break;
-            							case "I":
+            							case "RMI":
             								ins.push({
 	        									x: date,
 	        							 		y: metrica.valorMetrica
 	        								})
             								break;
-            							case "A":
+            							case "RMA":
             								abs.push({
 	        									x: date,
 	        							 		y: metrica.valorMetrica
@@ -884,12 +890,12 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             				dataSeries.dataPoints = ce;
             			    data.push(dataSeries);
 
-            			    var dataSeries = { type: "spline" , legendText: "I", showInLegend: true };
+            			    var dataSeries = { type: "spline" , legendText: "RMI", showInLegend: true };
             				var dataPoints = [];
             				dataSeries.dataPoints = ins;
             			    data.push(dataSeries);
             			    
-            			    var dataSeries = { type: "spline" , legendText: "A", showInLegend: true };
+            			    var dataSeries = { type: "spline" , legendText: "RMA", showInLegend: true };
             				var dataPoints = [];
             				dataSeries.dataPoints = abs;
             			    data.push(dataSeries);
@@ -900,7 +906,7 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             						text: "Todas as Métricas" 
             					},
             					axisX :{
-            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						valueFormatString:  "DD/MM/YYYY HH:mm:ss", // move comma to change formatting
             						labelAngle: -30,
             						interval: 1,
             					},
@@ -928,7 +934,7 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             						text: "Métrica CCM" 
             					},
             					axisX :{
-            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						valueFormatString:  "DD/MM/YYYY HH:mm:ss", // move comma to change formatting
             						labelAngle: -30,
             						interval: 1,
             					},
@@ -956,7 +962,7 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             						text: "Métricas WMC" 
             					},
             					axisX :{
-            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						valueFormatString:  "DD/MM/YYYY HH:mm:ss", // move comma to change formatting
             						labelAngle: -30,
             						interval: 1,
             					},
@@ -984,7 +990,7 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             						text: "Métricas LCOM" 
             					},
             					axisX :{
-            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						valueFormatString:  "DD/MM/YYYY HH:mm:ss", // move comma to change formatting
             						labelAngle: -30,
             						interval: 1,
             					},
@@ -1027,7 +1033,7 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             						text: "Métricas NBD" 
             					},
             					axisX :{
-            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						valueFormatString:  "DD/MM/YYYY HH:mm:ss", // move comma to change formatting
             						labelAngle: -30,
             						interval: 1,
             						intervalType: "day"
@@ -1056,7 +1062,7 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             						text: "Métricas NBD" 
             					},
             					axisX :{
-            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						valueFormatString:  "DD/MM/YYYY HH:mm:ss", // move comma to change formatting
             						labelAngle: -30,
             						interval: 1,
             					},
@@ -1084,7 +1090,7 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             						text: "Métricas DIT" 
             					},
             					axisX :{
-            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						valueFormatString:  "DD/MM/YYYY HH:mm:ss", // move comma to change formatting
             						labelAngle: -30,
             						interval: 1,
             					},
@@ -1113,7 +1119,7 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             						text: "Métricas NOC" 
             					},
             					axisX :{
-            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						valueFormatString:  "DD/MM/YYYY HH:mm:ss", // move comma to change formatting
             						labelAngle: -30,
             						interval: 1,
             					},
@@ -1141,7 +1147,7 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             						text: "Métricas NORM" 
             					},
             					axisX :{
-            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						valueFormatString:  "DD/MM/YYYY HH:mm:ss", // move comma to change formatting
             						labelAngle: -30,
             						interval: 1,
             					},
@@ -1171,7 +1177,7 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             						text: "Métricas SIX" 
             					},
             					axisX :{
-            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						valueFormatString:  "DD/MM/YYYY HH:mm:ss", // move comma to change formatting
             						labelAngle: -30,
             						interval: 1,
             					},
@@ -1202,7 +1208,7 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             						text: "Métricas MLOC" 
             					},
             					axisX :{
-            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						valueFormatString:  "DD/MM/YYYY HH:mm:ss", // move comma to change formatting
             						labelAngle: -30,
             						interval: 1,
             					},
@@ -1232,7 +1238,7 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             						text: "Métricas NAC" 
             					},
             					axisX :{
-            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						valueFormatString:  "DD/MM/YYYY HH:mm:ss", // move comma to change formatting
             						labelAngle: -30,
             						interval: 1,
             					},
@@ -1262,7 +1268,7 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             						text: "Métricas NSF" 
             					},
             					axisX :{
-            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						valueFormatString:  "DD/MM/YYYY HH:mm:ss", // move comma to change formatting
             						labelAngle: -30,
             						interval: 1,
             					},
@@ -1292,7 +1298,7 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             						text: "Métricas NSM" 
             					},
             					axisX :{
-            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						valueFormatString:  "DD/MM/YYYY HH:mm:ss", // move comma to change formatting
             						labelAngle: -30,
             						interval: 1,
             					},
@@ -1322,7 +1328,7 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             						text: "Métricas PAR" 
             					},
             					axisX :{
-            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						valueFormatString:  "DD/MM/YYYY HH:mm:ss", // move comma to change formatting
             						labelAngle: -30,
             						interval: 1,
             					},
@@ -1352,7 +1358,7 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             						text: "Métricas NOI" 
             					},
             					axisX :{
-            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						valueFormatString:  "DD/MM/YYYY HH:mm:ss", // move comma to change formatting
             						labelAngle: -30,
             						interval: 1,
             					},
@@ -1382,7 +1388,7 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             						text: "Métricas NOP" 
             					},
             					axisX :{
-            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						valueFormatString:  "DD/MM/YYYY HH:mm:ss", // move comma to change formatting
             						labelAngle: -30,
             						interval: 1,
             					},
@@ -1412,7 +1418,7 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             						text: "Métricas Ca" 
             					},
             					axisX :{
-            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						valueFormatString:  "DD/MM/YYYY HH:mm:ss", // move comma to change formatting
             						labelAngle: -30,
             						interval: 1,
             					},
@@ -1442,7 +1448,7 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             						text: "Métricas Ce" 
             					},
             					axisX :{
-            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						valueFormatString:  "DD/MM/YYYY HH:mm:ss", // move comma to change formatting
             						labelAngle: -30,
             						interval: 1,
             					},
@@ -1472,7 +1478,7 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             						text: "Métricas I" 
             					},
             					axisX :{
-            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						valueFormatString:  "DD/MM/YYYY HH:mm:ss", // move comma to change formatting
             						labelAngle: -30,
             						interval: 1,
             					},
@@ -1502,7 +1508,7 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             						text: "Métricas ABS" 
             					},
             					axisX :{
-            						valueFormatString:  "DD/MM/YYYY", // move comma to change formatting
+            						valueFormatString:  "DD/MM/YYYY HH:mm:ss", // move comma to change formatting
             						labelAngle: -30,
             						interval: 1,
             					},
