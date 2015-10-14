@@ -54,6 +54,7 @@ public class ProjetoDAO {
 					projeto.setInicio(rs.getDate("Inicio"));
 					projeto.setFim(rs.getDate("Fim"));
 					projeto.setStatus(rs.getString("Status_projeto"));
+					projeto.setTempoParaColeta(rs.getInt("Tempo_Coleta"));
 					
 					System.out.println(projeto.getNome());
 					

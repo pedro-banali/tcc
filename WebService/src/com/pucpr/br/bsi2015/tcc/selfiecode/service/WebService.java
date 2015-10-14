@@ -92,6 +92,8 @@ public class WebService {
 					jp = new JSONObject();
 					jp.put("nome", projs.get(i).getNome());
 					jp.put("codigoProj", projs.get(i).getId());
+					jp.put("tempoColeta", projs.get(i).getTempoParaColeta());
+
 
 				}
 				ja = new JSONArray();

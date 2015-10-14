@@ -1,0 +1,103 @@
+
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header">Cadastro</h1>
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">Cadastro de Treino</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						<form role="form" ng-submit="cadastrarTreino()" name="myForm"
+							novalidate>
+							<div>
+								<alert ng-repeat="alert in alertsS" type="{{sucesso.type}}"
+									close="closeAlertS($index)">{{sucesso.msg}}</alert>
+							</div>
+							<div>
+								<alert ng-repeat="alert in alertsE" type="{{errorMsg.type}}"
+									close="closeAlertE($index)">{{errorMsg.msg}}</alert>
+							</div>
+							<div class="form-group">
+								<label>Descri&ccedil;&atilde;o</label> <input
+									class="form-control" type="text" ng-model="treino.descricao"
+									name="descricao" required ng-minlength="3" ng-maxlength="50">
+								<p ng-show="myForm.descricao.$error.minlength"
+									class="help-block">Descri&ccedil;&atilde;o &eacute; muito
+									curto.</p>
+								<p ng-show="myForm.nome.$error.maxlength" class="help-block">Descri&ccedil;&atilde;o
+									&eacute; muito longo.</p>
+
+
+							</div>
+							<div class="form-group">
+								<label>Dura&ccedil;&atilde;o em dias</label> <input
+									class="form-control" type="number" name="duracao"
+									ng-model="treino.duracao" placeholder="Dura&ccedil;&atilde;o" required
+									ng-minlength="1" ng-maxlength="2"> <span
+									style="color: red"
+									ng-show="myForm.duracao.$dirty && myForm.duracao.$invalid"> <span
+									ng-show="myForm.duracao.$error.required">CPF &eacute;
+										obrigat&oacute;rio.</span>
+								</span>
+								<p ng-show="myForm.duracao.$error.minlength" class="help-block">Dura&ccedil;&atilde;o
+									&eacute; muito curto.</p>
+								<p ng-show="myForm.duracao.$error.maxlength" class="help-block">Dura&ccedil;&atilde;o
+									&eacute; muito longo.</p>
+							</div>
+							<div class="form-group">
+							
+							      <label for="sel2">Assunto do Treino:</label>
+								      <select multiple class="form-control" id="sel2">
+										<option value="CCM">	Complexidade Ciclom&aacute;tica	</option>
+										<option value="WMC ">	M&eacute;todos Ponderados por Classe  </option>
+										<option	value="LCOM*">	Falta de Coes&atilde;o em M&eacute;todos  </option>
+										<option	value="NBD">	Profundidade de Blocos Aninhados    </option>
+										<option	value="DIT">	Profundidade da &Aacute;rvore de Heran&ccedil;a    </option>
+										<option	value="NOC">	N&uacute;mero de Classes    </option>
+										<option	value="NORM">	M&eacute;todos Sobrescritos   </option>
+										<option	value="SIX">	&Iacute;ndice de Especializa&ccedil;&atilde;o    </option>
+										<option	value="MLOC">	Linhas de C&oacute;digo por M&eacute;todos   </option>
+										<option	value="NOF">	N&uacute;mero de Atributos por Classe    </option>
+										<option	value="NSF">	N&uacute;mero de Atributos Est&aacute;ticos    </option>
+										<option	value="NSM">	N&uacute;mero de M&eacute;todos Est&aacute;ticos    </option>
+										<option	value="PAR">	N&uacute;mero de Par&acirc;metros    </option>
+										<option	value="NOI">	N&uacute;mero de Interfaces    </option>
+										<option	value="NOP">	N&uacute;mero de Pacotes    </option>
+										<option	value="Ca">		Acoplamento Aferente     </option>
+										<option	value="Ce">		Acoplamento Eferente     </option>
+										<option	value="RMI">	Instabilidade    </option>
+										<option	value="RMA">	Abstra&ccedil;&atilde;o    </option>
+										<option	value="NSC">	N&uacute;mero de filhos    </option>
+										<option	value="RMD">	Dist&acirc;ncia Normalizada    </option>
+								      </select>
+								<label>Professor</label> 
+									 <select class="form-control" id="sel2">
+									 {{i.dev}}
+									 </select>
+								<p ng-show="myForm.login.$error.minlength" class="help-block">Login
+									&eacute; muito curto.</p>
+								<p ng-show="myForm.login.$error.maxlength" class="help-block">Login
+									&eacute; muito longo.</p>
+							</div>
+							<button type="submit" class="btn btn-default"
+								ng-disabled="!myForm.$valid">Cadastrar</button>
+							<button type="reset" class="btn btn-default">Cancelar</button>
+						</form>
+					</div>
+					<!-- /.col-lg-6 (nested) -->
+				</div>
+				<!-- /.row (nested) -->
+			</div>
+			<!-- /.panel-body -->
+		</div>
+		<!-- /.panel -->
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->

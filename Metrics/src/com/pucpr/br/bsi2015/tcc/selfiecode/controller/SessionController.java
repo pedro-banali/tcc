@@ -1,19 +1,21 @@
 package com.pucpr.br.bsi2015.tcc.selfiecode.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Session;
 
 public class SessionController {
 	
 	private static SessionController instance = new SessionController();
 	private Session session;
-	
+
 	private SessionController ()
 	{
 		session = new Session();
+		
+		
 	}
+	
+	
+	
 	
 	public static SessionController getInstance()
 	{

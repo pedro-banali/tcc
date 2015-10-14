@@ -10,6 +10,11 @@ angular.module('admin',  ['ngCookies'])
 		authenticationSvc.login($scope.usuario, $scope.password);
 	}
 	
+	$scope.verifyType = function()
+	{
+		return authenticationSvc.getUserInfo().type;
+	}
+	
 	$scope.logout = function()
 	{	
 		authenticationSvc.logout();
@@ -1532,3 +1537,153 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             	}
 				
             }]);
+
+angular.module('treino',  [])
+.controller('treinoCtrl', ['$scope','$http', '$location', '$window','$cookies', '$routeParams', 'authenticationSvc', 'managerSrvc', 'projectSvc',  '$modal',
+                          function ($scope, $http, $location, $window, $cookies , $routeParams, authenticationSvc, managerSrvc, projectSvc, $modal) {
+	$scope.error = "";
+	$scope.toSearch = false;
+	
+
+
+	$scope.validate = function()
+	{
+
+		if($scope.session == "" && $window.location.pathname != "/WebService/pages/index.html")
+			$window.location.assign('http://localhost/WebService/pages/index.html');
+	}
+	
+	
+	$scope.listarProj = function()
+	{
+		projectSvc.list(authenticationSvc.getUserInfo().accessToken, function(result) {  // this is only run after $http completes
+		       $scope.projetos = result;
+		       console.log("scope" + $scope.usuarios);
+		    });
+	}
+
+	
+	$scope.checkDates = function()
+	{
+		return $scope.projeto.dataFim < $scope.projeto.dataInicio;
+	}
+	
+	$scope.cadastroProj = function()
+	{
+		
+		
+		if(!myForm.$valid)
+		{
+			
+			
+			
+			$scope.projeto.inicio = $scope.projeto.inicio.toLocaleDateString();
+			$scope.projeto.fim = $scope.projeto.fim.toLocaleDateString();
+
+			
+			var projeto = JSON.stringify($scope.projeto);
+			$http({
+			  method: 'POST',
+			  url:'http://localhost/WebService/selfieCode/service/cadastroProj',
+			  headers: { 'projeto': projeto , 'key': authenticationSvc.getUserInfo().accessToken }
+			}).
+			  then(function(response) {
+				 
+			    // this callback will be called asynchronously
+			    // when the response is available
+				console.log("result" + response);
+				if(response.data.result == true)
+				{
+					$scope.projeto = {};
+      				$scope.alertsS = [];
+    				$scope.sucesso = [];
+					$scope.sucesso.msg = 'Projeto cadastrado com sucesso.';
+					$scope.sucesso.type = 'success';
+					$scope.alertsS.push($scope.sucesso);
+				}
+				else
+				{
+					$scope.alertsE = [];
+     				  
+   				  	$scope.errorMsg = [];
+//         			$scope.errorMsg.msg = 'Usuário inexistente.';
+ 					$scope.errorMsg.type = 'danger';
+ 					
+					
+ 					$scope.errorMsg.msg = 'Ocorreu um erro inesperado';
+					$scope.alertsE.push($scope.errorMsg);
+				}
+			  }, function(response) {
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			  });
+		}
+		else
+		{
+			$scope.errorValid = true;
+		}
+	}
+	
+	$scope.open = function(projeto)
+	{
+		$scope.projeto = projeto;
+		var modalInstance = $modal.open({
+			 templateUrl: 'myModalContent.html',
+             controller: 'MyModalInstanceController',
+		      scope: $scope
+		    });
+		
+		 modalInstance.result.then(
+   		      function(result) {
+   		    	var projeto = JSON.stringify($scope.projeto);
+   		        //Happy path - The user clicked okay.
+   		    	$http({
+      			  method: 'POST',
+      			  url:'http://localhost/WebService/selfieCode/service/excluirProj',
+      			  headers: { 'projeto': projeto , 'key': authenticationSvc.getUserInfo().accessToken }
+      			}).
+      			  then(function(response) {
+      				 
+      			    // this callback will be called asynchronously
+      			    // when the response is available
+      				console.log("result" + response);
+      				if(response.data.result == true)
+    				{
+    					$scope.projeto = {};
+          				$scope.alertsS = [];
+        				$scope.sucesso = [];
+    					$scope.sucesso.msg = 'Projeto excluído com sucesso.';
+    					$scope.sucesso.type = 'success';
+    					$scope.alertsS.push($scope.sucesso);
+    					$scope.listarProj();
+    				}
+    				else
+    				{
+    					$scope.alertsE = [];
+         				  
+       				  	$scope.errorMsg = [];
+//             			$scope.errorMsg.msg = 'Usuário inexistente.';
+     					$scope.errorMsg.type = 'danger';
+     					
+    					
+     					$scope.errorMsg.msg = 'Projeto inexistente';
+    					$scope.alertsE.push($scope.errorMsg);
+    				}
+      			  }, function(response) {
+      			    // called asynchronously if an error occurs
+      			    // or server returns response with an error status.
+      			  });
+   		      }, function(err) {
+   		        //Sad path - The user probably canceled.
+   		    });
+	}
+	
+	$scope.closeAlertE = function(index) {
+	    $scope.alertsE.splice(index, 1);
+	};
+	
+	$scope.closeAlertS = function(index) {
+	    $scope.alertsS.splice(index, 1);
+	};
+}]);
+	

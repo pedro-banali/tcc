@@ -111,7 +111,7 @@ public class LoginDialog {
 				try {
 
 						
-						if(!MetricsController.getInstance().login(user, password))
+						if(MetricsController.getInstance().login(user, password) == 1)
 						{
 							//JOptionPane.showMessageDialog(null, "Login inválido tente novamente");
 							shell.close();
@@ -119,6 +119,13 @@ public class LoginDialog {
 							
 							loginMessage.setText("Login Inválido");
 							//shell.redraw();
+						}
+						else if(MetricsController.getInstance().login(user, password) == 2)
+						{
+							shell.close();
+							createContents(1);
+							loginMessage.setText("Gerente não pode utilizar o SelfieCode");
+							
 						}
 						else
 						{

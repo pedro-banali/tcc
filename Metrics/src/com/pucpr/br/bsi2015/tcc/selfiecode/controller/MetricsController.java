@@ -1,5 +1,7 @@
 package com.pucpr.br.bsi2015.tcc.selfiecode.controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -13,6 +15,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Observable;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JOptionPane;
 
@@ -49,6 +53,7 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import com.jcraft.jsch.SftpException;
+import com.pucpr.br.bsi2015.tcc.selfiecode.model.ProjectTime;
 
 import net.sourceforge.metrics.core.sources.AbstractMetricSource;
 
@@ -59,6 +64,8 @@ public class MetricsController extends Observable {
 	private final String USER_AGENT = "Mozilla/5.0";
 	private String session;
 	private List<String> dicas = new ArrayList<String>();
+	private ProjectTime pr;
+	private List<Thread> threads = new ArrayList<Thread>();
 
 	private MetricsController() {
 
@@ -100,7 +107,7 @@ public class MetricsController extends Observable {
 
 	}
 
-	public boolean login(String usuario, String password) throws Exception {
+	public int login(String usuario, String password) throws Exception {
 		String result;
 		// String url =
 		// "http://192.168.112.129:8080/WebService/selfieCode/service/login?user="+usuario+"&pass="+password;
@@ -144,21 +151,22 @@ public class MetricsController extends Observable {
 			data = new Date();
 			nome = jsonObject.getString("username");
 			df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-
+			if (jsonObject.getInt("tipo") <= 2)
+				return 2;
 			sc.getSession().setUserName(nome);
 			sc.getSession().setUserId(jsonObject.getInt("tipo"));
 			sc.getSession().setSessionId(result);
 			projetos = jsonObject.getJSONArray("projetos");
 			for (int i = 0; i < projetos.length(); i++) {
-				sc.getSession().getProjetos().put(projetos.getJSONObject(i).getInt("codigoProj"),
-						projetos.getJSONObject(i).getString("nome"));
+				sc.getSession().getProjetos().put(projetos.getJSONObject(i).getInt("codigoProj"), new ProjectTime(
+						projetos.getJSONObject(i).getString("nome"), projetos.getJSONObject(i).getInt("tempoColeta")));
 			}
 
 			lc.gerarLog("Usuário: " + nome + " logou " + df.format(data) + "\n");
-			return true;
+			return 0;
 
 		} else
-			return false;
+			return 1;
 
 	}
 
@@ -167,7 +175,7 @@ public class MetricsController extends Observable {
 		Date data;
 		SimpleDateFormat df;
 		JSONObject json = new JSONObject();
-		
+
 		json.put("handle", c.getPath());
 		json.put("values", c.getValues());
 		json.put("fileName", fileName);
@@ -175,26 +183,26 @@ public class MetricsController extends Observable {
 		String projeto;
 		int r = 0;
 		Integer key;
-		String value;
+		ProjectTime value;
 		SessionController sc = SessionController.getInstance();
 		Iterator entries = sc.getSession().getProjetos().entrySet().iterator();
 		json.put("sessionId", sc.getSession().getSessionId());
 		while (entries.hasNext()) {
 			Entry thisEntry = (Entry) entries.next();
 			key = (Integer) thisEntry.getKey();
-			value = (String) thisEntry.getValue();
-			if (currentElm.getJavaProject().getElementName().equals(value)) {
+			value = (ProjectTime) thisEntry.getValue();
+			if (currentElm.getJavaProject().getElementName().equals(value.getNomeProjeto())) {
 				r = 1;
 				json.put("projId", key);
 			}
 			// ...
 		}
-//		for (int i = 0; i < sc.getSession().getProjetos().size(); i++) {
-//			projeto = sc.getSession().getProjetos().get(i);
-//			if (currentElm.getJavaProject().getElementName().equals(projeto)) {
-//				r = 1;
-//			}
-//		}
+		// for (int i = 0; i < sc.getSession().getProjetos().size(); i++) {
+		// projeto = sc.getSession().getProjetos().get(i);
+		// if (currentElm.getJavaProject().getElementName().equals(projeto)) {
+		// r = 1;
+		// }
+		// }
 		if (r == 0)
 			return "naoachou";
 
@@ -270,6 +278,49 @@ public class MetricsController extends Observable {
 
 	public List<String> getDicas() {
 		return dicas;
+	}
+
+	public List<Thread> getThreads() {
+		return threads;
+	}
+
+	public boolean addThreads(Thread e) {
+		return threads.add(e);
+	}
+
+	public void setThreads(List<Thread> threads) {
+		this.threads = threads;
+	}
+
+	public void setPr(ProjectTime pr) {
+		// TODO Auto-generated method stub
+		this.pr = pr;
+		Timer t = new Timer();
+		TimerTask ts = new TimerTask() {
+			
+			@Override
+			public void run() {
+				// your code here, and if you have to refresh UI put this code:
+				for (Thread t : threads) {
+					if (t.isAlive()) {
+						try {
+							t.join();
+							
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+				pr.reset();
+				threads = new ArrayList<Thread>();
+				//this.cancel();
+			}
+		};
+		t.schedule(ts, 5000);
+		
+		
+		
 	}
 
 }

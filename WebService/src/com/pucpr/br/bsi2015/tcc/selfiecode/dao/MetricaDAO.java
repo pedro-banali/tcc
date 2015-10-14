@@ -62,7 +62,7 @@ public class MetricaDAO {
 			JOptionPane.showConfirmDialog(null, "ERRRROUUU");
 		else {
 			String selectSQL = "SELECT ID_METRICA, NOME_METRICA, SIGLA, VALOR_METRICA FROM METRICA M, CODIGO_METRICA CM where CM.FK_ID_METRICA = M.ID_METRICA "
-					+ "AND CM.FK_ID_CODIGO = ?";
+					+ "AND CM.FK_ID_CODIGO = ? ";
 
 			PreparedStatement preparedStatement;
 			try {

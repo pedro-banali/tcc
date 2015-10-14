@@ -8,7 +8,7 @@ public class Session {
 	private String userName;
 	private int userId;
 	private String sessionId;
-	private Map<Integer, String> projetos = new HashMap<Integer, String>();
+	private Map<Integer, ProjectTime> projetos = new HashMap<Integer, ProjectTime>();
 	public String getUserName() {
 		return userName;
 	}
@@ -21,10 +21,10 @@ public class Session {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public Map<Integer, String> getProjetos() {
+	public Map<Integer, ProjectTime> getProjetos() {
 		return projetos;
 	}
-	public void setProjetos(Map<Integer, String> projetos) {
+	public void setProjetos(Map<Integer, ProjectTime> projetos) {
 		this.projetos = projetos;
 	}
 	public String getSessionId() {

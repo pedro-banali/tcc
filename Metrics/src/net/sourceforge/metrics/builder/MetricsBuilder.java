@@ -58,6 +58,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 
 import com.pucpr.br.bsi2015.tcc.selfiecode.controller.LoginDialog;
+import com.pucpr.br.bsi2015.tcc.selfiecode.controller.MetricsController;
 import com.pucpr.br.bsi2015.tcc.selfiecode.controller.ThreadMetricsControl;
 import com.pucpr.br.bsi2015.tcc.selfiecode.filecontroller.FileController;
 
@@ -728,13 +729,16 @@ public class MetricsBuilder extends IncrementalProjectBuilder {
 								notifier.fireMoved(currentElm, current.getMovedFrom());
 							notifier.fireCompleted(currentElm, current.getResult());
 							//PEDRO-BANALI
-						 
+
 				        	ThreadMetricsControl tm = new ThreadMetricsControl(currentElm);
+				        	
 				        	tm.setMetricsList(current.getResult());
 				        	tm.start();
 				        	//tm.notify();
 
-
+				        	MetricsController mc = MetricsController.getInstance();
+				        	mc.addThreads(tm);
+				        	
 							//PEDRO-BANALI
 							if (currentElm.getElementType() == IJavaElement.JAVA_PROJECT) {
 								synchronized(currentProjects) {

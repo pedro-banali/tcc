@@ -6,6 +6,7 @@ var app = angular.module('selfiecode', [
   'dev',
   'proj',
   'atr',
+  'treino',
   'devInfo',
   'modal',
   'devGraph'
@@ -192,6 +193,23 @@ var app = angular.module('selfiecode', [
 		                      }
 		                  }
 		      		  }).
+		      		 when('/cadastro-treino', {
+			        	 
+			              templateUrl: 'cadastro-treino.html',
+			              controller: 'treinoCtrl',
+			              resolve: {
+			                  auth: function ($q, authenticationSvc) {
+			                	  
+			                      var userInfo = authenticationSvc.getUserInfo();
+			                      if (userInfo) {
+			                    	  authenticationSvc.verifySession(2);
+			                          return $q.when(userInfo);
+			                      } else {
+			                          return $q.reject({ authenticated: false });
+			                      }
+			                  }
+			              }
+			            }).
 		      otherwise({
 		    	  templateUrl: 'admin-default.html',
 		    	  controller: 'adminCtrl',
@@ -238,14 +256,8 @@ app.factory("authenticationSvc", ["$http","$q","$window",function ($http, $q, $w
                 };
                 $window.sessionStorage["userInfo"] = JSON.stringify(userInfo);
                 deferred.resolve(userInfo);
-                if(userInfo.type <= 2)
-                {
-                	$window.location.assign("http://localhost/WebService/pages/admin.html");
-                }
-                else
-                {
-                	$window.location.assign("http://localhost/WebService/pages/flot.html");
-                }
+                $window.location.assign("http://localhost/WebService/pages/admin.html");
+                
             }, function (error) {
                 deferred.reject(error);
             });
@@ -269,11 +281,7 @@ app.factory("authenticationSvc", ["$http","$q","$window",function ($http, $q, $w
         		{
 	                logout();
         		}
-            	if(tipoPage < userInfo.type)
-            	{
-            		$window.location.assign("http://localhost/WebService/pages/flot.html");
-            	}
-                
+
             }, function (error) {
                 deferred.reject(error);
             });
