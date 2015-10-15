@@ -298,9 +298,9 @@
                               
                         	</ul>
                         </li>
-                        <li ng-if="verifyType() <= 1">
+                        <li ng-hide="verifyType() > 2">
                             <a href="#"><i class="fa fa-user fa-fw" ></i>Treino<span class="fa arrow"></span></a>
-                             <ul class="nav nav-second-level">
+                             <ul class="nav nav-second-level" >
                                <li>
                                    <a href="#/cadastro-treino">Cadastrar</a>
                                </li>
