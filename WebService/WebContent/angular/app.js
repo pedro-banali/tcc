@@ -210,6 +210,23 @@ var app = angular.module('selfiecode', [
 			                  }
 			              }
 			            }).
+			      		when('/list-treino', {
+				        	 
+				              templateUrl: 'list-treino.html',
+				              controller: 'treinoCtrl',
+				              resolve: {
+				                  auth: function ($q, authenticationSvc) {
+				                	  
+				                      var userInfo = authenticationSvc.getUserInfo();
+				                      if (userInfo) {
+				                    	  authenticationSvc.verifySession(2);
+				                          return $q.when(userInfo);
+				                      } else {
+				                          return $q.reject({ authenticated: false });
+				                      }
+				                  }
+				              }
+				            }).
 		      otherwise({
 		    	  templateUrl: 'admin-default.html',
 		    	  controller: 'adminCtrl',
@@ -430,5 +447,51 @@ app.factory("projectSvc", ["$http","$window", "authenticationSvc", function ($ht
         	listCpf: listCpf,
         	projetos: getProjetos
         };
+}]);
+
+app.factory("treinoSvc", ["$http","$window", "authenticationSvc", function ($http, $window, authenticationSvc ) {
+	   
+	//var projetos = listKey(authenticationSvc.getUserInfo().accessToken);   
+	    	
+	function getProjetos()
+	{   	
+		return  $http({
+            method: "POST",
+            url: 'http://localhost/WebService/selfieCode/service/listarTreino',
+            headers: {
+                "key": authenticationSvc.getUserInfo().accessToken
+            }
+   	 	}).
+           then(function (result) {
+           	projetos = result.data;
+           	return result.data;
+           }, function (error) {
+               
+           });
+		
+	}
+	
+    function list(key, callback) {
+       
+    	 $http({
+             method: "POST",
+             url: 'http://localhost/WebService/selfieCode/service/listarTreino',
+             headers: {
+                 "key": key
+             }
+    	 	}).
+            then(function (result) {
+            	projetos = result.data;
+            	callback(result.data);
+            }, function (error) {
+                
+            });
+    }
+    
+    
+    return {
+    	list: list,
+    	projetos: getProjetos
+    };
 }]);
 

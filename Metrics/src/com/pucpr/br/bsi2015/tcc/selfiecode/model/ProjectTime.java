@@ -23,7 +23,6 @@ public class ProjectTime {
 
 		int delay = 1000;
 		int period = 1000;
-		timer = new Timer(this.nomeProjeto);
 		interval = (intervaloN * 60);
 		timer.scheduleAtFixedRate(new TimerTask() {
 

@@ -31,6 +31,7 @@ import org.json.JSONObject;
 import com.pucpr.br.bsi2015.tcc.selfiecode.controller.SelfieCodeBC;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Metrica;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Projeto;
+import com.pucpr.br.bsi2015.tcc.selfiecode.model.Treino;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Usuario;
 import com.pucpr.br.bsi2015.tcc.selfiecode.session.SessionController;
 import com.sun.jersey.core.header.FormDataContentDisposition;
@@ -438,28 +439,66 @@ public class WebService {
 		return Response.status(200).entity(output).build();
 
 	}
-//	
-//	// save uploaded file to new location
-//		private void writeToFile(InputStream uploadedInputStream,
-//			String uploadedFileLocation) {
-//
-//			try {
-//				OutputStream out = new FileOutputStream(new File(
-//						uploadedFileLocation));
-//				int read = 0;
-//				byte[] bytes = new byte[1024];
-//
-//				out = new FileOutputStream(new File(uploadedFileLocation));
-//				while ((read = uploadedInputStream.read(bytes)) != -1) {
-//					out.write(bytes, 0, read);
-//				}
-//				out.flush();
-//				out.close();
-//			} catch (IOException e) {
-//
-//				e.printStackTrace();
-//			}
-//
-//		}
+	
+	@Path("cadastroTreino")
+	@POST
+	//@GET
+	//@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response cadastroTreino(@HeaderParam("treino") String treino, @HeaderParam("key") String key ) throws JSONException {
+		SessionController sc = SessionController.getInstance();
+		boolean result;
+		JSONObject jsonObject = new JSONObject(treino);
+
+		SelfieCodeBC sbc = SelfieCodeBC.getInstance();
+		
+		Usuario u = sc.getUser(key);
+		result = sbc.cadastrarTreino(jsonObject, u );
+
+		
+		jsonObject = new JSONObject();
+		jsonObject.put("result", result);
+		
+
+		return Response.status(200).entity(jsonObject.toString()).build();
+		//return ;
+	}
+	
+	@Path("editTreino")
+	@POST
+	//@GET
+	//@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response editTreino(@HeaderParam("usuario") String usuario, @HeaderParam("key") String key ) throws JSONException {
+		SessionController sc = SessionController.getInstance();
+		boolean result;
+		JSONObject jsonObject = new JSONObject(usuario);
+		JSONObject jsonResponse;
+		SelfieCodeBC sbc = SelfieCodeBC.getInstance();
+		
+		Usuario u = sc.getUser(key);
+		
+		jsonResponse = sbc.editDev(jsonObject, u );
+
+		return Response.status(200).entity(jsonResponse.toString()).build();
+		//return ;
+	}
+	
+	@Path("listarTreino")
+	@POST
+	@Produces("application/json")
+	public Response listarTreino(@HeaderParam("key") String key) throws JSONException {
+		SessionController sc = SessionController.getInstance();
+		JSONArray list;
+		JSONObject jSon = new JSONObject();
+		Usuario usuario = sc.getUser(key);
+		SelfieCodeBC sbc = SelfieCodeBC.getInstance();
+		List<Treino> tss = sbc.listarTreino();
+		
+		list = new JSONArray(tss);
+		jSon.put("treino", list);
+		return Response.status(200).entity(jSon.toString()).build();
+	}
+		
 
 }

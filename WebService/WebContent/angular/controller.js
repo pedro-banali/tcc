@@ -1539,8 +1539,8 @@ selfieMyappDev.controller('devGraphCtrl', ['$scope','$http', '$location', '$wind
             }]);
 
 angular.module('treino',  [])
-.controller('treinoCtrl', ['$scope','$http', '$location', '$window','$cookies', '$routeParams', 'authenticationSvc', 'managerSrvc', 'projectSvc',  '$modal',
-                          function ($scope, $http, $location, $window, $cookies , $routeParams, authenticationSvc, managerSrvc, projectSvc, $modal) {
+.controller('treinoCtrl', ['$scope','$http', '$location', '$window','$cookies', '$routeParams', 'authenticationSvc', 'managerSrvc', 'projectSvc','treinoSvc',   '$modal',
+                          function ($scope, $http, $location, $window, $cookies , $routeParams, authenticationSvc, managerSrvc, projectSvc,treinoSvc, $modal) {
 	$scope.error = "";
 	$scope.toSearch = false;
 	
@@ -1554,11 +1554,11 @@ angular.module('treino',  [])
 	}
 	
 	
-	$scope.listarProj = function()
+	$scope.listarTreino = function()
 	{
-		projectSvc.list(authenticationSvc.getUserInfo().accessToken, function(result) {  // this is only run after $http completes
-		       $scope.projetos = result;
-		       console.log("scope" + $scope.usuarios);
+		treinoSvc.list(authenticationSvc.getUserInfo().accessToken, function(result) {  // this is only run after $http completes
+		       $scope.treinos = result;
+		       console.log("scope" + $scope.treinos);
 		    });
 	}
 
@@ -1568,7 +1568,16 @@ angular.module('treino',  [])
 		return $scope.projeto.dataFim < $scope.projeto.dataInicio;
 	}
 	
-	$scope.cadastroProj = function()
+	$scope.listarDev = function()
+	{
+		managerSrvc.list(authenticationSvc.getUserInfo().accessToken, function(result) {  // this is only run after $http completes
+		       $scope.usuarios = result;
+		       console.log("scope" + $scope.usuarios);
+		    });
+	}
+	
+	
+	$scope.cadastrarTreino = function()
 	{
 		
 		
@@ -1577,15 +1586,14 @@ angular.module('treino',  [])
 			
 			
 			
-			$scope.projeto.inicio = $scope.projeto.inicio.toLocaleDateString();
-			$scope.projeto.fim = $scope.projeto.fim.toLocaleDateString();
+		
 
 			
-			var projeto = JSON.stringify($scope.projeto);
+			var treino = JSON.stringify($scope.treino);
 			$http({
 			  method: 'POST',
-			  url:'http://localhost/WebService/selfieCode/service/cadastroProj',
-			  headers: { 'projeto': projeto , 'key': authenticationSvc.getUserInfo().accessToken }
+			  url:'http://localhost/WebService/selfieCode/service/cadastroTreino',
+			  headers: { 'treino': treino , 'key': authenticationSvc.getUserInfo().accessToken }
 			}).
 			  then(function(response) {
 				 
@@ -1594,10 +1602,10 @@ angular.module('treino',  [])
 				console.log("result" + response);
 				if(response.data.result == true)
 				{
-					$scope.projeto = {};
+					$scope.treino = {};
       				$scope.alertsS = [];
     				$scope.sucesso = [];
-					$scope.sucesso.msg = 'Projeto cadastrado com sucesso.';
+					$scope.sucesso.msg = 'Treino cadastrado com sucesso.';
 					$scope.sucesso.type = 'success';
 					$scope.alertsS.push($scope.sucesso);
 				}

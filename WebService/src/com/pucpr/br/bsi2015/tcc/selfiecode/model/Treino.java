@@ -1,10 +1,11 @@
 package com.pucpr.br.bsi2015.tcc.selfiecode.model;
 
 public class Treino {
+	private int idTreino;
 	private String descricaoTreino;
 	private int duracaoTreino;
-	private int topicoTreino;
-	
+	private String assunto;
+	private String professor;
 	
 	public void cadastrarTreino()
 	{
@@ -32,13 +33,33 @@ public class Treino {
 	}
 
 
-	public int getTopicoTreino() {
-		return topicoTreino;
+	public String getAssunto() {
+		return assunto;
 	}
 
 
-	public void setTopicoTreino(int topicoTreino) {
-		this.topicoTreino = topicoTreino;
+	public void setAssunto(String string) {
+		this.assunto = string;
+	}
+
+
+	public int getIdTreino() {
+		return idTreino;
+	}
+
+
+	public void setIdTreino(int idTreino) {
+		this.idTreino = idTreino;
+	}
+
+
+	public String getProfessor() {
+		return professor;
+	}
+
+
+	public void setProfessor(String professor) {
+		this.professor = professor;
 	}
 	
 }

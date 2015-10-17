@@ -302,7 +302,7 @@ public class MetricsController extends Observable {
 			public void run() {
 				// your code here, and if you have to refresh UI put this code:
 				for (Thread t : threads) {
-					if (t.isAlive()) {
+					if (!t.isAlive()) {
 						try {
 							t.join();
 							

@@ -17,6 +17,7 @@ import com.pucpr.br.bsi2015.tcc.selfiecode.dao.DesenvolvedorDAO;
 import com.pucpr.br.bsi2015.tcc.selfiecode.dao.DicaDAO;
 import com.pucpr.br.bsi2015.tcc.selfiecode.dao.MetricaDAO;
 import com.pucpr.br.bsi2015.tcc.selfiecode.dao.ProjetoDAO;
+import com.pucpr.br.bsi2015.tcc.selfiecode.dao.TreinoDAO;
 import com.pucpr.br.bsi2015.tcc.selfiecode.dao.UsuarioDAO;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.CodigoFonte;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Desenvolvedor;
@@ -24,6 +25,7 @@ import com.pucpr.br.bsi2015.tcc.selfiecode.model.Dica;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Metrica;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Projeto;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.TipoUsuario;
+import com.pucpr.br.bsi2015.tcc.selfiecode.model.Treino;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Usuario;
 
 public class SelfieCodeBC {
@@ -369,6 +371,29 @@ public class SelfieCodeBC {
 		}
 		
 		return new JSONArray(cfs);
+	}
+
+	public boolean cadastrarTreino(JSONObject jsonObject, Usuario u) {
+		// TODO Auto-generated method stub
+		Treino treino = new Treino();
+		TreinoDAO tDao = new TreinoDAO();
+		
+		treino.setDescricaoTreino(jsonObject.getString("descricao"));
+		treino.setAssunto(jsonObject.getJSONArray("assunto").toString());
+		treino.setProfessor(jsonObject.getString("professor"));
+		treino.setDuracaoTreino(jsonObject.getInt("duracao"));
+		boolean result = tDao.inserirTreino(treino);
+		
+		
+		return result;
+
+	}
+
+	public List<Treino> listarTreino() {
+		// TODO Auto-generated method stub
+		TreinoDAO tDao = new TreinoDAO();
+		
+		return tDao.selectTreinos();
 	}
 
 
