@@ -11,23 +11,22 @@ import javax.swing.JOptionPane;
 
 import com.mysql.jdbc.Statement;
 import com.pucpr.br.bsi2015.tcc.selfiecode.connection.ConnectionFactory;
+import com.pucpr.br.bsi2015.tcc.selfiecode.model.Desenvolvedor;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Projeto;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Treino;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Usuario;
 
 public class TreinoDAO {
-public boolean inserirTreino(Treino treino) {
-		
-				
+	public boolean inserirTreino(Treino treino) {
+
 		Connection cf = ConnectionFactory.getConnection();
-		
-		if(cf == null)
+
+		if (cf == null)
 			JOptionPane.showConfirmDialog(null, "ERRRROUUU");
-		else
-		{
-			
+		else {
+
 			String selectSQL = "INSERT INTO TREINO ( DESCRICAO, DURACAO, ASSUNTO, PROFESSOR  ) VALUES (?,?,?,?)";
-			
+
 			PreparedStatement preparedStatement;
 			try {
 				preparedStatement = cf.prepareStatement(selectSQL, Statement.RETURN_GENERATED_KEYS);
@@ -36,22 +35,18 @@ public boolean inserirTreino(Treino treino) {
 				preparedStatement.setString(3, treino.getAssunto());
 				preparedStatement.setString(4, treino.getProfessor());
 
-				
 				int rs = preparedStatement.executeUpdate();
 				ResultSet rsKeys = preparedStatement.getGeneratedKeys();
-				
+
 				if (rsKeys.next()) {
 					treino.setIdTreino(rsKeys.getInt(1));
 				}
-				if(rs > 0)
-				{
+				if (rs > 0) {
 					return true;
-				}
-				else
-				{
+				} else {
 					return false;
 				}
-				
+
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -60,43 +55,111 @@ public boolean inserirTreino(Treino treino) {
 		return false;
 
 	}
-public List<Treino> selectTreinos() {
-	Treino treino;
-	
 
-	Connection cf = ConnectionFactory.getConnection();
-	List treinos = new ArrayList<Treino>();
-	
-	if(cf == null)
-		JOptionPane.showConfirmDialog(null, "ERRRROUUU");
-	else
-	{
-		String selectSQL = "SELECT * FROM TREINO";
-		PreparedStatement preparedStatement;
-		try {
-			preparedStatement = cf.prepareStatement(selectSQL);
-			//JOptionPane.showMessageDialog(null, BigInteger.valueOf(7700147981l));
-			//preparedStatement.setLong(1, 7700147981l);
+	public List<Treino> selectTreinos() {
+		Treino treino;
 
-			//preparedStatement.setString(1, "Pedro Henrique Banali");
-			ResultSet rs = preparedStatement.executeQuery();
-			while (rs.next()) {
-				treino = new Treino();
-				treino.setIdTreino(rs.getInt("ID_TREINO"));
-				treino.setDescricaoTreino(rs.getString("DESCRICAO"));
-				treino.setDuracaoTreino(rs.getInt("DURACAO"));
-				treino.setAssunto(rs.getString("ASSUNTO"));
-								
-				
-				treinos.add(treino);
-								
+		Connection cf = ConnectionFactory.getConnection();
+		List treinos = new ArrayList<Treino>();
+
+		if (cf == null)
+			JOptionPane.showConfirmDialog(null, "ERRRROUUU");
+		else {
+			String selectSQL = "SELECT * FROM TREINO";
+			PreparedStatement preparedStatement;
+			try {
+				preparedStatement = cf.prepareStatement(selectSQL);
+				// JOptionPane.showMessageDialog(null,
+				// BigInteger.valueOf(7700147981l));
+				// preparedStatement.setLong(1, 7700147981l);
+
+				// preparedStatement.setString(1, "Pedro Henrique Banali");
+				ResultSet rs = preparedStatement.executeQuery();
+				while (rs.next()) {
+					treino = new Treino();
+					treino.setIdTreino(rs.getInt("ID_TREINO"));
+					treino.setDescricaoTreino(rs.getString("DESCRICAO"));
+					treino.setDuracaoTreino(rs.getInt("DURACAO"));
+					treino.setAssunto(rs.getString("ASSUNTO"));
+
+					treinos.add(treino);
+
+				}
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return treinos;
+	}
+
+	public int checkDevTreino(Desenvolvedor usuario, Treino treino) {
+
+		Connection cf = ConnectionFactory.getConnection();
+
+		if (cf == null)
+			JOptionPane.showConfirmDialog(null, "ERRRROUUU");
+		else {
+
+			String selectSQL = "SELECT * FROM TREINO_USUARIO WHERE CPF_USUARIO = ? AND ID_TREINO = ?";
+
+			PreparedStatement preparedStatement;
+			try {
+
+				preparedStatement = cf.prepareStatement(selectSQL);
+
+				preparedStatement.setLong(1, usuario.getCpf());
+				preparedStatement.setInt(2, treino.getIdTreino());
+
+				ResultSet rs = preparedStatement.executeQuery();
+				while (rs.next())
+					return 0;
+
+				cf.close();
+				return 1;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				return 1;
+				// e.printStackTrace();
+			}
+
+		}
+		return 1;
+
+	}
+
+	public int inserDevTreino(Desenvolvedor usuario, Treino treino) {
+		Projeto projeto;
+
+		Connection cf = ConnectionFactory.getConnection();
+
+		if (cf == null)
+			JOptionPane.showConfirmDialog(null, "ERRRROUUU");
+		else {
+
+			String selectSQL = "INSERT INTO TREINO_USUARIO ( CPF_USUARIO, ID_TREINO) VALUES (?, ?)";
+
+			PreparedStatement preparedStatement;
+
+			try {
+				preparedStatement = cf.prepareStatement(selectSQL);
+			
+
+			preparedStatement.setLong(1, usuario.getCpf());
+			preparedStatement.setInt(2, treino.getIdTreino());
+
+			preparedStatement.executeUpdate();
+			return 0;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return 1;
 			}
 			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 		}
+		return 1;
+
 	}
-	return treinos;
-}
 }

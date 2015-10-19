@@ -29,70 +29,65 @@ import com.pucpr.br.bsi2015.tcc.selfiecode.model.Treino;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Usuario;
 
 public class SelfieCodeBC {
-	
+
 	private static SelfieCodeBC selfieCodeBC = new SelfieCodeBC();
-	
-	private SelfieCodeBC()
-	{
-		
+
+	private SelfieCodeBC() {
+
 	}
-	
-	public static SelfieCodeBC getInstance()
-	{
-		return selfieCodeBC;	
+
+	public static SelfieCodeBC getInstance() {
+		return selfieCodeBC;
 	}
-	
-	public Usuario login(String usuario, String senha)
-	{
-		
+
+	public Usuario login(String usuario, String senha) {
+
 		Usuario u = new Usuario();
 		u.setLogin(usuario);
 		u.setSenha(senha);
-		
+
 		UsuarioDAO uDao = new UsuarioDAO();
-		
+
 		return uDao.login(u);
-		
-		//return true;
+
+		// return true;
 	}
-	
-	public List<Metrica> dicas(JSONObject jsonObject)
-	{
+
+	public List<Metrica> dicas(JSONObject jsonObject) {
 		List<Metrica> metricas = new ArrayList<Metrica>();
 		List<Dica> dicas = new ArrayList<Dica>();
 		Metrica m;
-		
+
 		MetricaDAO md = new MetricaDAO();
 		DicaDAO dd = new DicaDAO();
 		Iterator<String> iter = jsonObject.keys();
 		while (iter.hasNext()) {
-		    String key = iter.next();
-		    try {
-		        Float value = new Float((String) jsonObject.get(key));
-		        m = new Metrica();
-		        m.setSigla(key);
-		        m.setValorMetrica(value);
-		        
-		       
-		        md.preencherIntervalos(m);
-		       	
-		        dd.buscarDicas(m);
-		        
-		        metricas.add(m);
-		       
-		    } catch (JSONException e) {
-		        // Something went wrong!
-		    }
+			String key = iter.next();
+			try {
+				Float value = new Float((String) jsonObject.get(key));
+				m = new Metrica();
+				m.setSigla(key);
+				m.setValorMetrica(value);
+
+				md.preencherIntervalos(m);
+
+				dd.buscarDicas(m);
+
+				metricas.add(m);
+
+			} catch (JSONException e) {
+				// Something went wrong!
+			}
 		}
-		
+
 		return metricas;
 	}
-	
-	public void salvarCodigoFonte(List<Metrica> metricas, String date, String fileName, String classe, int projId, String sessionId)
-	{
+
+	public void salvarCodigoFonte(List<Metrica> metricas, String date, String fileName, String classe, int projId,
+			String sessionId) {
 		CodigoFonte cf = new CodigoFonte();
 		cf.setMetricas(metricas);
-		Date d ;
+		Date d;
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:sss");
 		try {
 			d = df.parse(date);
@@ -100,41 +95,35 @@ public class SelfieCodeBC {
 			cf.setCodigoFonte(fileName);
 			cf.setNomeClasse(classe);
 			CodigoFonteDAO cfd = new CodigoFonteDAO();
-			int ret = cfd.inserirCodigoFonte(cf, projId, sessionId );
-			
+			int ret = cfd.inserirCodigoFonte(cf, projId, sessionId);
+
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-	}
-	
-	public List<Usuario> listarDesenvolvedores(Usuario u)
-	{
-		
-		
-		
-		UsuarioDAO uDao = new UsuarioDAO();
-		
-		return uDao.listarDev(u);
-		
-		//return true;
-	}
-	
-	public List<Projeto> listarProjetos(Usuario u)
-	{
-			
-		ProjetoDAO pDao = new ProjetoDAO();
-		
-		return pDao.selectProjetos(u);
-		
-		//return true;
+
 	}
 
-	public boolean cadastrarDev(JSONObject u, Usuario g)
-	{
-		
+	public List<Usuario> listarDesenvolvedores(Usuario u) {
+
+		UsuarioDAO uDao = new UsuarioDAO();
+
+		return uDao.listarDev(u);
+
+		// return true;
+	}
+
+	public List<Projeto> listarProjetos(Usuario u) {
+
+		ProjetoDAO pDao = new ProjetoDAO();
+
+		return pDao.selectProjetos(u);
+
+		// return true;
+	}
+
+	public boolean cadastrarDev(JSONObject u, Usuario g) {
+
 		Desenvolvedor ds = new Desenvolvedor();
 		Projeto proj = new Projeto();
 		TipoUsuario tu = new TipoUsuario();
@@ -156,33 +145,24 @@ public class SelfieCodeBC {
 		DesenvolvedorDAO dDao = new DesenvolvedorDAO();
 		ProjetoDAO pDao = new ProjetoDAO();
 		UsuarioDAO uDao = new UsuarioDAO();
-		
-			
-		if(dDao.selectDev(ds) != null)
-		{
+
+		if (dDao.selectDev(ds) != null) {
 			result = false;
-		}
-		else if(dDao.selectDevByLogin(ds) != null)
-		{
+		} else if (dDao.selectDevByLogin(ds) != null) {
 			result = false;
-		}
-		else if(dDao.selectDevInativo(ds) != null)
-		{
+		} else if (dDao.selectDevInativo(ds) != null) {
 			result = false;
-		}
-		else
-		{
+		} else {
 			result = dDao.cadastrarDev(ds);
 			uDao.insertTipo(ds);
 			pDao.inserDevProj(ds);
 		}
-		
+
 		return result;
 	}
-	
-	public JSONObject editDev(JSONObject u, Usuario g)
-	{
-		
+
+	public JSONObject editDev(JSONObject u, Usuario g) {
+
 		Desenvolvedor ds = new Desenvolvedor();
 		JSONObject r = new JSONObject();
 		ds.setNome(u.getString("nome"));
@@ -190,66 +170,55 @@ public class SelfieCodeBC {
 		ds.setCpf(u.getLong("cpfNovo"));
 		ds.setDataNascimento(new Date(u.getString("dataNascimento")));
 
-
-		DesenvolvedorDAO dDao = new DesenvolvedorDAO();	
+		DesenvolvedorDAO dDao = new DesenvolvedorDAO();
 		Usuario us = dDao.selectDev(ds);
 		Usuario usl = dDao.selectDevByLogin(ds);
 
-		if(us != null && us.getCpf() != u.getLong("cpf"))
-		{
+		if (us != null && us.getCpf() != u.getLong("cpf")) {
+			r.put("result", "existe");
+		} else if (usl != null && usl.getCpf() != u.getLong("cpf")) {
 			r.put("result", "existe");
 		}
-		else if(usl != null && usl.getCpf() != u.getLong("cpf"))
-		{
-			r.put("result", "existe");
-		}
-//		else if( (us = dDao.selectDevInativo(ds))!= null)
-//		{
-//			r.put("result", "inativo");
-//			r.put("usuario", us);
-//		}
-		else
-		{
+		// else if( (us = dDao.selectDevInativo(ds))!= null)
+		// {
+		// r.put("result", "inativo");
+		// r.put("usuario", us);
+		// }
+		else {
 			dDao.editarDev(ds, u.getLong("cpf"));
 			r.put("result", true);
 		}
-		return r ;
+		return r;
 	}
-	
-	public boolean cadastrarProj(JSONObject p, Usuario g)
-	{
-		
+
+	public boolean cadastrarProj(JSONObject p, Usuario g) {
 
 		Projeto proj = new Projeto();
-	
-		
+
 		proj.setNome(p.getString("nome"));
 		proj.setInicio(new Date(p.getString("inicio")));
 		proj.setFim(new Date(p.getString("fim")));
-		
+
 		proj.setStatus(p.getString("status"));
 		proj.setDescricao(p.getString("descricao"));
 		TipoUsuario tu = new TipoUsuario();
 
+		ProjetoDAO pDao = new ProjetoDAO();
 
-		ProjetoDAO pDao = new ProjetoDAO();			
-		
 		boolean result = pDao.inserirProjeto(proj);
 		pDao.inserirGerProj(g, proj);
-		
+
 		return result;
 	}
-	
-	public boolean editarProj(JSONObject p, Usuario g)
-	{
-		
+
+	public boolean editarProj(JSONObject p, Usuario g) {
 
 		Projeto proj = new Projeto();
 		proj.setId(p.getInt("id"));
 		proj.setNome(p.getString("nome"));
 		SimpleDateFormat sm = new SimpleDateFormat("dd/MM/yyyy");
-	    // myDate is the java.util.Date in yyyy-mm-dd format
-	    // Converting it into String using formatter
+		// myDate is the java.util.Date in yyyy-mm-dd format
+		// Converting it into String using formatter
 		Date inicio = null;
 		Date fim = null;
 		try {
@@ -267,65 +236,92 @@ public class SelfieCodeBC {
 		proj.setStatus(p.getString("status"));
 		proj.setDescricao(p.getString("descricao"));
 
-		ProjetoDAO pDao = new ProjetoDAO();			
-		
+		ProjetoDAO pDao = new ProjetoDAO();
+
 		boolean result = pDao.alterarProjeto(proj);
 
-		
 		return result;
 	}
 
 	public boolean excluirDev(JSONObject u, Usuario g) {
 		Desenvolvedor ds = new Desenvolvedor();
-		
+
 		ds.setNome(u.getString("nome"));
 		ds.setLogin(u.getString("login"));
 		ds.setCpf(u.getLong("cpf"));
 
-
-
 		DesenvolvedorDAO dDao = new DesenvolvedorDAO();
 		return dDao.excluirDev(ds);
 	}
-	
+
 	public boolean excluirProj(JSONObject p, Usuario g) {
 		Projeto proj = new Projeto();
 		ProjetoDAO pDao = new ProjetoDAO();
-		
-		proj.setId(p.getInt("id"));
 
+		proj.setId(p.getInt("id"));
 
 		return pDao.excluirProj(proj);
 	}
-	
-	public boolean atribuirDev(JSONObject a,  String key)
-	{
-		
+
+	public boolean atribuirDev(JSONObject a, String key) {
+
 		Desenvolvedor ds = new Desenvolvedor();
 		Projeto proj = new Projeto();
 		List<Projeto> projetos = new ArrayList<Projeto>();
-		
+
 		boolean result = true;
-		
+
 		proj.setId(a.getInt("proj"));
 		projetos.add(proj);
 		ds.setCpf(a.getLong("dev"));
 		ds.setProjetos(projetos);
-		
+
 		ProjetoDAO pDao = new ProjetoDAO();
-		
+
 		int rP = pDao.checkDevProj(ds);
-		
-		if(rP > 0)
-		{
+
+		if (rP > 0) {
 			rP = pDao.inserDevProj(ds);
-		
-			if(rP > 0)
+
+			if (rP > 0)
+				result = false;
+		} else
+			result = false;
+
+		return result;
+	}
+
+	public boolean atribuirTreino(JSONObject a, String key) {
+
+		Desenvolvedor ds = new Desenvolvedor();
+		Treino treino = new Treino();
+		List<Desenvolvedor> dss = new ArrayList<Desenvolvedor>();
+
+		boolean result = true;
+
+		treino.setIdTreino(a.getInt("treino"));
+		JSONArray ja = a.getJSONArray("dev");
+		for (int i = 0; i < ja.length(); i++) {
+			ds = new Desenvolvedor();
+
+			ds.setCpf(ja.getLong(i));
+			dss.add(ds);
+		}
+
+		TreinoDAO tDao = new TreinoDAO();
+
+		for (int i = 0; i < dss.size(); i++) {
+			int rP = tDao.checkDevTreino(dss.get(i), treino);
+
+			if (rP > 0) {
+				rP = tDao.inserDevTreino(dss.get(i), treino);
+
+				if (rP > 0)
+					result = false;
+			} else
 				result = false;
 		}
-		else
-			result = false;
-		
+
 		return result;
 	}
 
@@ -339,37 +335,36 @@ public class SelfieCodeBC {
 		CodigoFonte cf = new CodigoFonte();
 		List<Metrica> metricas = new ArrayList<Metrica>();
 		Metrica metrica;
-		
+
 		proj.setId(projeto.getInt("proj"));
-		
-		//seleciona Dev
+
+		// seleciona Dev
 		DesenvolvedorDAO dDao = new DesenvolvedorDAO();
 		ds.setCpf(usuario.getLong("dev"));
-		
-		ds = dDao.selectDev(ds);
-		
 
-		//seleciona Projeto
+		ds = dDao.selectDev(ds);
+
+		// seleciona Projeto
 		ProjetoDAO pDao = new ProjetoDAO();
-		
+
 		proj = pDao.selectProjeto(proj);
-		
+
 		projetos.add(proj);
 		ds.setProjetos(projetos);
-		
+
 		CodigoFonteDAO cDao = new CodigoFonteDAO();
-		cfs = cDao.selectCodigosFonte( ds , proj);
+		cfs = cDao.selectCodigosFonte(ds, proj);
 		proj.setCodigoFonte(cfs);
-		
+
 		MetricaDAO mDao = new MetricaDAO();
-		
+
 		for (int i = 0; i < cfs.size(); i++) {
 			cf = cfs.get(i);
 			metricas = mDao.selectMetricas(cfs.get(i));
 			cf.setMetricas(metricas);
 			metricas = null;
 		}
-		
+
 		return new JSONArray(cfs);
 	}
 
@@ -377,14 +372,13 @@ public class SelfieCodeBC {
 		// TODO Auto-generated method stub
 		Treino treino = new Treino();
 		TreinoDAO tDao = new TreinoDAO();
-		
+
 		treino.setDescricaoTreino(jsonObject.getString("descricao"));
 		treino.setAssunto(jsonObject.getJSONArray("assunto").toString());
 		treino.setProfessor(jsonObject.getString("professor"));
 		treino.setDuracaoTreino(jsonObject.getInt("duracao"));
 		boolean result = tDao.inserirTreino(treino);
-		
-		
+
 		return result;
 
 	}
@@ -392,9 +386,8 @@ public class SelfieCodeBC {
 	public List<Treino> listarTreino() {
 		// TODO Auto-generated method stub
 		TreinoDAO tDao = new TreinoDAO();
-		
+
 		return tDao.selectTreinos();
 	}
-
 
 }

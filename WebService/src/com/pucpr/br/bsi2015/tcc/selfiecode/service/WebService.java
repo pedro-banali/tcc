@@ -499,6 +499,32 @@ public class WebService {
 		jSon.put("treino", list);
 		return Response.status(200).entity(jSon.toString()).build();
 	}
+	
+	@Path("atribuirTreino")
+	@POST
+	//@GET
+	//@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response atribuirTreino(@HeaderParam("atribuicao") String atribuicao, @HeaderParam("key") String key ) throws JSONException {
+		SessionController sc = SessionController.getInstance();
+		boolean result;
+		JSONObject a = new JSONObject(atribuicao);
+
+		SelfieCodeBC sbc = SelfieCodeBC.getInstance();
+		
+		Usuario u = sc.getUser(key);
+		result = sbc.atribuirTreino(a, key);
+
+		
+		a = new JSONObject();
+
+		a.put("result", result);
 		
 
+		return Response.status(200).entity(a.toString()).build();
+		//return ;
+	}
+	
+
 }
+

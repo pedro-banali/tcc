@@ -1,292 +1,252 @@
 
-            <div class="row" ng-init="verificarChart()">
-                <div class="col-lg-12">
-                    <h1 class="page-header">M&eacute;tricas</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                           Visualizar Projetos
-                        </div>
-                        <div class="panel-body">
-	                      	<div class="row">
-								<div class="col-lg-12">
-				                    <div class="panel panel-default">
-				                        <div class="panel-heading">
-				                            Todas as M&eacute;tricas
-				                        </div>
-				                        <!-- /.panel-heading -->
-				                        <div class="panel-body">
-				                            <div id="allContainer" style="width:100%; height:500px;"></div>
-				                        </div>
-				                        <!-- /.panel-body -->
-				                    </div>
-				                    <!-- /.panel -->
-				                </div>	                      	
-                        		<div class="col-lg-6">
-				                    <div class="panel panel-default">
-				                        <div class="panel-heading">
-				                            Gr&aacute;fico CCM 
-				                        </div>
-				                        <!-- /.panel-heading -->
-				                        <div class="panel-body">
-				                            <div id="ccmContainer" style="width:430px; height:400px;"></div>
-				                        </div>
-				                        <!-- /.panel-body -->
-				                    </div>
-				                    <!-- /.panel -->
-				                </div>
-				                <div class="col-lg-6">
-				                    <div class="panel panel-default">
-				                        <div class="panel-heading">
-				                           Gr&aacute;fico WMC 
-				                        </div>
-				                        <!-- /.panel-heading -->
-				                        <div class="panel-body">
-				                            <div id="wmcContainer" style="width:430px; height:400px;"></div>
-				                        </div>
-				                        <!-- /.panel-body -->
-				                    </div>
-				                    <!-- /.panel -->
-				                </div>
-				                <div class="col-lg-6">
-				                    <div class="panel panel-default">
-				                        <div class="panel-heading">
-				                            Gr&aacute;fico LCOM 
-				                        </div>
-				                        <!-- /.panel-heading -->
-				                        <div class="panel-body">
-				                            <div id="lcomContainer" style="width:430px; height:400px;"></div>
-				                        </div>
-				                        <!-- /.panel-body -->
-				                    </div>
-				                    <!-- /.panel -->
-				                </div>
-				                <div class="col-lg-6">
-				                    <div class="panel panel-default">
-				                        <div class="panel-heading">
-				                            Gr&aacute;fico NBD 
-				                        </div>
-				                        <!-- /.panel-heading -->
-				                        <div class="panel-body">
-				                            <div id="nbdContainer" style="width:430px; height:400px;"></div>
-				                        </div>
-				                        <!-- /.panel-body -->
-				                    </div>
-				                    <!-- /.panel -->
-				                </div>
-				                <div class="col-lg-6">
-				                    <div class="panel panel-default">
-				                        <div class="panel-heading">
-				                            Gr&aacute;fico DIT 
-				                        </div>
-				                        <!-- /.panel-heading -->
-				                        <div class="panel-body">
-				                            <div id="ditContainer" style="width:430px; height:400px;"></div>
-				                        </div>
-				                        <!-- /.panel-body -->
-				                    </div>
-				                    <!-- /.panel -->
-				                </div>
-				                <div class="col-lg-6">
-				                    <div class="panel panel-default">
-				                        <div class="panel-heading">
-				                            Gr&aacute;fico NOC 
-				                        </div>
-				                        <!-- /.panel-heading -->
-				                        <div class="panel-body">
-				                            <div id="nocContainer" style="width:430px; height:400px;"></div>
-				                        </div>
-				                        <!-- /.panel-body -->
-				                    </div>
-				                    <!-- /.panel -->
-				                </div>
-				                <div class="col-lg-6">
-				                    <div class="panel panel-default">
-				                        <div class="panel-heading">
-				                            Gr&aacute;fico NORM 
-				                        </div>
-				                        <!-- /.panel-heading -->
-				                        <div class="panel-body">
-				                            <div id="normContainer" style="width:430px; height:400px;"></div>
-				                        </div>
-				                        <!-- /.panel-body -->
-				                    </div>
-				                    <!-- /.panel -->
-				                </div>
-				                <div class="col-lg-6">
-				                    <div class="panel panel-default">
-				                        <div class="panel-heading">
-				                            Gr&aacute;fico SIX 
-				                        </div>
-				                        <!-- /.panel-heading -->
-				                        <div class="panel-body">
-				                            <div id="sixContainer" style="width:430px; height:400px;"></div>
-				                        </div>
-				                        <!-- /.panel-body -->
-				                    </div>
-				                    <!-- /.panel -->
-				                </div>	
-				                <div class="col-lg-6">
-				                    <div class="panel panel-default">
-				                        <div class="panel-heading">
-				                            Gr&aacute;fico MLOC 
-				                        </div>
-				                        <!-- /.panel-heading -->
-				                        <div class="panel-body">
-				                            <div id="mlocContainer" style="width:430px; height:400px;"></div>
-				                        </div>
-				                        <!-- /.panel-body -->
-				                    </div>
-				                    <!-- /.panel -->
-				                </div>
-				                <div class="col-lg-6">
-				                    <div class="panel panel-default">
-				                        <div class="panel-heading">
-				                            Gr&aacute;fico NAC 
-				                        </div>
-				                        <!-- /.panel-heading -->
-				                        <div class="panel-body">
-				                            <div id="nacContainer" style="width:430px; height:400px;"></div>
-				                        </div>
-				                        <!-- /.panel-body -->
-				                    </div>
-				                    <!-- /.panel -->
-				                </div>
-				                <div class="col-lg-6">
-				                    <div class="panel panel-default">
-				                        <div class="panel-heading">
-				                            Gr&aacute;fico NSF 
-				                        </div>
-				                        <!-- /.panel-heading -->
-				                        <div class="panel-body">
-				                            <div id="nsfContainer" style="width:430px; height:400px;"></div>
-				                        </div>
-				                        <!-- /.panel-body -->
-				                    </div>
-				                    <!-- /.panel -->
-				                </div>	
-								<div class="col-lg-6">
-				                    <div class="panel panel-default">
-				                        <div class="panel-heading">
-				                            Gr&aacute;fico NSM 
-				                        </div>
-				                        <!-- /.panel-heading -->
-				                        <div class="panel-body">
-				                            <div id="nsmContainer" style="width:430px; height:400px;"></div>
-				                        </div>
-				                        <!-- /.panel-body -->
-				                    </div>
-				                    <!-- /.panel -->
-				                </div>	
-				                <div class="col-lg-6">
-				                    <div class="panel panel-default">
-				                        <div class="panel-heading">
-				                            Gr&aacute;fico PAR 
-				                        </div>
-				                        <!-- /.panel-heading -->
-				                        <div class="panel-body">
-				                            <div id="parContainer" style="width:430px; height:400px;"></div>
-				                        </div>
-				                        <!-- /.panel-body -->
-				                    </div>
-				                    <!-- /.panel -->
-				                </div>
-				                <div class="col-lg-6">
-				                    <div class="panel panel-default">
-				                        <div class="panel-heading">
-				                            Gr&aacute;fico NOI 
-				                        </div>
-				                        <!-- /.panel-heading -->
-				                        <div class="panel-body">
-				                            <div id="noiContainer" style="width:430px; height:400px;"></div>
-				                        </div>
-				                        <!-- /.panel-body -->
-				                    </div>
-				                    <!-- /.panel -->
-				                </div>	
-				                <div class="col-lg-6">
-				                    <div class="panel panel-default">
-				                        <div class="panel-heading">
-				                            Gr&aacute;fico NOP 
-				                        </div>
-				                        <!-- /.panel-heading -->
-				                        <div class="panel-body">
-				                            <div id="nopContainer" style="width:430px; height:400px;"></div>
-				                        </div>
-				                        <!-- /.panel-body -->
-				                    </div>
-				                    <!-- /.panel -->
-				                </div>	
-				                <div class="col-lg-6">
-				                    <div class="panel panel-default">
-				                        <div class="panel-heading">
-				                            Gr&aacute;fico Ca 
-				                        </div>
-				                        <!-- /.panel-heading -->
-				                        <div class="panel-body">
-				                            <div id="caContainer" style="width:430px; height:400px;"></div>
-				                        </div>
-				                        <!-- /.panel-body -->
-				                    </div>
-				                    <!-- /.panel -->
-				                </div>
-				                <div class="col-lg-6">
-				                    <div class="panel panel-default">
-				                        <div class="panel-heading">
-				                            Gr&aacute;fico Ce 
-				                        </div>
-				                        <!-- /.panel-heading -->
-				                        <div class="panel-body">
-				                            <div id="ceContainer" style="width:430px; height:400px;"></div>
-				                        </div>
-				                        <!-- /.panel-body -->
-				                    </div>
-				                    <!-- /.panel -->
-				                </div>	
-				                <div class="col-lg-6">
-				                    <div class="panel panel-default">
-				                        <div class="panel-heading">
-				                            Gr&aacute;fico de Instabilidade
-				                        </div>
-				                        <!-- /.panel-heading -->
-				                        <div class="panel-body">
-				                            <div id="insContainer" style="width:430px; height:400px;"></div>
-				                        </div>
-				                        <!-- /.panel-body -->
-				                    </div>
-				                    <!-- /.panel -->
-				                </div>
-				                <div class="col-lg-6">
-				                    <div class="panel panel-default">
-				                        <div class="panel-heading">
-				                            Gr&aacute;fico de Abstra&ccedil;&atilde;o
-				                        </div>
-				                        <!-- /.panel-heading -->
-				                        <div class="panel-body">
-				                            <div id="absContainer" style="width:430px; height:400px;"></div>
-				                        </div>
-				                        <!-- /.panel-body -->
-				                    </div>
-				                    <!-- /.panel -->
-				                </div>					                						                				                					                					                						                				                						                						                
-	                       	</div>
-                                <!-- /.col-lg-6 (nested) -->
-                            <!-- /.row (nested) -->
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            
-	    <script type="text/ng-template" id="myModalContent.html">
+<div class="row" ng-init="verificarChart()">
+	<div class="col-lg-12">
+		<h1 class="page-header">M&eacute;tricas</h1>
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">Visualizar Projetos</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">Todas as M&eacute;tricas</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+								<div id="allContainer" style="width: 100%; height: 500px;"></div>
+							</div>
+							<!-- /.panel-body -->
+						</div>
+						<!-- /.panel -->
+					</div>
+					<div class="col-lg-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">Gr&aacute;fico CCM</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+								<div id="ccmContainer" style="width: 430px; height: 400px;"></div>
+							</div>
+							<!-- /.panel-body -->
+						</div>
+						<!-- /.panel -->
+					</div>
+					<div class="col-lg-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">Gr&aacute;fico WMC</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+								<div id="wmcContainer" style="width: 430px; height: 400px;"></div>
+							</div>
+							<!-- /.panel-body -->
+						</div>
+						<!-- /.panel -->
+					</div>
+					<div class="col-lg-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">Gr&aacute;fico LCOM</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+								<div id="lcomContainer" style="width: 430px; height: 400px;"></div>
+							</div>
+							<!-- /.panel-body -->
+						</div>
+						<!-- /.panel -->
+					</div>
+					<div class="col-lg-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">Gr&aacute;fico NBD</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+								<div id="nbdContainer" style="width: 430px; height: 400px;"></div>
+							</div>
+							<!-- /.panel-body -->
+						</div>
+						<!-- /.panel -->
+					</div>
+					<div class="col-lg-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">Gr&aacute;fico DIT</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+								<div id="ditContainer" style="width: 430px; height: 400px;"></div>
+							</div>
+							<!-- /.panel-body -->
+						</div>
+						<!-- /.panel -->
+					</div>
+					<div class="col-lg-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">Gr&aacute;fico NOC</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+								<div id="nocContainer" style="width: 430px; height: 400px;"></div>
+							</div>
+							<!-- /.panel-body -->
+						</div>
+						<!-- /.panel -->
+					</div>
+					<div class="col-lg-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">Gr&aacute;fico NORM</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+								<div id="normContainer" style="width: 430px; height: 400px;"></div>
+							</div>
+							<!-- /.panel-body -->
+						</div>
+						<!-- /.panel -->
+					</div>
+					<div class="col-lg-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">Gr&aacute;fico SIX</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+								<div id="sixContainer" style="width: 430px; height: 400px;"></div>
+							</div>
+							<!-- /.panel-body -->
+						</div>
+						<!-- /.panel -->
+					</div>
+					<div class="col-lg-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">Gr&aacute;fico MLOC</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+								<div id="mlocContainer" style="width: 430px; height: 400px;"></div>
+							</div>
+							<!-- /.panel-body -->
+						</div>
+						<!-- /.panel -->
+					</div>
+					<div class="col-lg-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">Gr&aacute;fico NAC</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+								<div id="nacContainer" style="width: 430px; height: 400px;"></div>
+							</div>
+							<!-- /.panel-body -->
+						</div>
+						<!-- /.panel -->
+					</div>
+					<div class="col-lg-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">Gr&aacute;fico NSF</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+								<div id="nsfContainer" style="width: 430px; height: 400px;"></div>
+							</div>
+							<!-- /.panel-body -->
+						</div>
+						<!-- /.panel -->
+					</div>
+					<div class="col-lg-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">Gr&aacute;fico NSM</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+								<div id="nsmContainer" style="width: 430px; height: 400px;"></div>
+							</div>
+							<!-- /.panel-body -->
+						</div>
+						<!-- /.panel -->
+					</div>
+					<div class="col-lg-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">Gr&aacute;fico PAR</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+								<div id="parContainer" style="width: 430px; height: 400px;"></div>
+							</div>
+							<!-- /.panel-body -->
+						</div>
+						<!-- /.panel -->
+					</div>
+					<div class="col-lg-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">Gr&aacute;fico NOI</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+								<div id="noiContainer" style="width: 430px; height: 400px;"></div>
+							</div>
+							<!-- /.panel-body -->
+						</div>
+						<!-- /.panel -->
+					</div>
+					<div class="col-lg-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">Gr&aacute;fico NOP</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+								<div id="nopContainer" style="width: 430px; height: 400px;"></div>
+							</div>
+							<!-- /.panel-body -->
+						</div>
+						<!-- /.panel -->
+					</div>
+					<div class="col-lg-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">Gr&aacute;fico Ca</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+								<div id="caContainer" style="width: 430px; height: 400px;"></div>
+							</div>
+							<!-- /.panel-body -->
+						</div>
+						<!-- /.panel -->
+					</div>
+					<div class="col-lg-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">Gr&aacute;fico Ce</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+								<div id="ceContainer" style="width: 430px; height: 400px;"></div>
+							</div>
+							<!-- /.panel-body -->
+						</div>
+						<!-- /.panel -->
+					</div>
+					<div class="col-lg-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">Gr&aacute;fico de Instabilidade
+							</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+								<div id="insContainer" style="width: 430px; height: 400px;"></div>
+							</div>
+							<!-- /.panel-body -->
+						</div>
+						<!-- /.panel -->
+					</div>
+					<div class="col-lg-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">Gr&aacute;fico de
+								Abstra&ccedil;&atilde;o</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+								<div id="absContainer" style="width: 430px; height: 400px;"></div>
+							</div>
+							<!-- /.panel-body -->
+						</div>
+						<!-- /.panel -->
+					</div>
+				</div>
+				<!-- /.col-lg-6 (nested) -->
+				<!-- /.row (nested) -->
+			</div>
+			<!-- /.panel-body -->
+		</div>
+		<!-- /.panel -->
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+
+<script type="text/ng-template" id="myModalContent.html">
         <div class="modal-header">
             <h3 class="modal-title">Deseja deletar este Projeto</h3>
         </div>

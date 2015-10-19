@@ -9,6 +9,7 @@ var app = angular.module('selfiecode', [
   'treino',
   'devInfo',
   'modal',
+  'modalLoad',
   'devGraph'
 //  'ui.mask'
 ]).config(['$routeProvider',
@@ -227,6 +228,41 @@ var app = angular.module('selfiecode', [
 				                  }
 				              }
 				            }).
+				      		when('/atrib-dev-treino/:idTreino/:descricaoTreino', {
+					        	 
+					              templateUrl: 'atribuir-dev-treino.html',
+					              controller: 'treinoCtrl',
+					              resolve: {
+					                  auth: function ($q, authenticationSvc) {
+					                	  
+					                      var userInfo = authenticationSvc.getUserInfo();
+					                      if (userInfo) {
+					                    	  authenticationSvc.verifySession(2);
+					                          return $q.when(userInfo);
+					                      } else {
+					                          return $q.reject({ authenticated: false });
+					                      }
+					                  }
+					              }
+					            }).
+					            
+					      		when('/atrib-dev-treino', {
+						        	 
+						              templateUrl: 'atribuir-dev-treino.html',
+						              controller: 'treinoCtrl',
+						              resolve: {
+						                  auth: function ($q, authenticationSvc) {
+						                	  
+						                      var userInfo = authenticationSvc.getUserInfo();
+						                      if (userInfo) {
+						                    	  authenticationSvc.verifySession(2);
+						                          return $q.when(userInfo);
+						                      } else {
+						                          return $q.reject({ authenticated: false });
+						                      }
+						                  }
+						              }
+						            }).
 		      otherwise({
 		    	  templateUrl: 'admin-default.html',
 		    	  controller: 'adminCtrl',
