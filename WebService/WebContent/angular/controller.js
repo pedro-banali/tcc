@@ -17,10 +17,31 @@ angular
                 projectSvc, $modal) {
                 $scope.error = "";
                 $scope.toSearch = false;
+                $scope.isOpen = false;
+                // Modal Loading
+                $scope.openLoad = function() {
+                	if($scope.isOpen == false)
+                	{
+	                	$scope.isOpen = true;
+	                	$scope.modalInstance = $modal.open({
+	                        templateUrl: 'loading.html',
+	                        controller: 'modalLoading',
+	                        scope: $scope
+	                    });
+                	}
+                 };
 
+                $scope.cancel = function() {
+                	if($scope.isOpen == true)
+                		$scope.modalInstance.close();
+                	$scope.isOpen = false;
+                };
+                // Modal Loading
                 $scope.login = function() {
+                	$scope.openLoad();
                     authenticationSvc.login($scope.usuario,
                         $scope.password);
+                	$scope.cancel();
                 }
 
                 $scope.verifyType = function() {
@@ -28,13 +49,16 @@ angular
                 }
 
                 $scope.logout = function() {
+                	$scope.openLoad();
                     authenticationSvc.logout();
+                    $scope.cancel();
 
                 }
 
                 $scope.showList = function() {
-
+                	
                     if (!$scope.toSearch) {
+                    	$scope.openLoad();
                         $scope.toSearch = true;
                         managerSrvc.list(authenticationSvc
                             .getUserInfo().accessToken,
@@ -44,21 +68,28 @@ angular
                                 // completes
                                 $scope.usuarios = result;
                                 console.log("scope" + $scope.usuarios);
+                                $scope.cancel();
                             });
-
+                    
                     } else {
                         $scope.toSearch = false;
                     }
+                   
                 }
 
                 $scope.validate = function() {
-
+                	$scope.openLoad();
                     if ($scope.session == "" && $window.location.pathname != "/WebService/pages/index.html")
-                        $window.location
-                        .assign('http://localhost/WebService/pages/index.html');
+                	{
+                    	$scope.cancel();
+	                    $window.location
+	                    .assign('http://localhost/WebService/pages/index.html');
+	                    
+                	}
                 }
 
                 $scope.listarProj = function() {
+                	$scope.openLoad();
                     projectSvc
                         .list(
                             authenticationSvc.getUserInfo().accessToken,
@@ -69,7 +100,9 @@ angular
                                 // completes
                                 $scope.projetos = result;
                                 console.log("scope" + $scope.usuarios);
+                                $scope.cancel();
                             });
+                   
                 }
 
                 $scope.checkDates = function() {
@@ -77,9 +110,9 @@ angular
                 }
 
                 $scope.cadastroProj = function() {
-
+                	
                     if (!myForm.$valid) {
-
+                    	$scope.openLoad();
                         $scope.projeto.inicio = $scope.projeto.inicio
                             .toLocaleDateString();
                         $scope.projeto.fim = $scope.projeto.fim
@@ -124,6 +157,7 @@ angular
                                         $scope.errorMsg.msg = 'Ocorreu um erro inesperado';
                                         $scope.alertsE
                                             .push($scope.errorMsg);
+                                        $scope.cancel();
                                     }
                                 },
                                 function(response) {
@@ -138,15 +172,16 @@ angular
                     }
                 }
 
+                
                 $scope.open = function(projeto) {
                     $scope.projeto = projeto;
-                    var modalInstance = $modal.open({
+                    var modalInstance2 = $modal.open({
                         templateUrl: 'myModalContent.html',
                         controller: 'MyModalInstanceController',
                         scope: $scope
                     });
 
-                    modalInstance.result
+                    modalInstance2.result
                         .then(
                             function(result) {
                                 var projeto = JSON
@@ -253,11 +288,32 @@ selfieMyappDev
             function($scope, $http, $location, $window,
                 $routeParams, authenticationSvc, managerSrvc,
                 projectSvc, $modal) {
+            	
+                // Modal Loading
+                $scope.openLoad = function() {
+                	if($scope.isOpen == false)
+                	{
+	                	$scope.isOpen = true;
+	                	$scope.modalInstance = $modal.open({
+	                        templateUrl: 'loading.html',
+	                        controller: 'modalLoading',
+	                        scope: $scope
+	                    });
+                	}
+                 };
 
+                $scope.cancel = function() {
+                	if($scope.isOpen == true)
+                		$scope.modalInstance.close();
+                	$scope.isOpen = false;
+                };
+                // Modal Loading
+            	
                 $scope.cadastroDev = function() {
 
                     var user = JSON.stringify($scope.usuario);
                     if (!myForm.$valid) {
+                    	$scope.$scope.openLoad();
                         $http({
                                 method: 'POST',
                                 url: 'http://localhost/WebService/selfieCode/service/cadastroDev',
@@ -297,6 +353,7 @@ selfieMyappDev
                                         $scope.alertsE
                                             .push($scope.errorMsg);
                                     }
+                                    $scope.cancel();
                                 },
                                 function(response) {
                                     // called asynchronously
@@ -311,6 +368,7 @@ selfieMyappDev
                 }
 
                 $scope.getUsuario = function() {
+                	$scope.openLoad();
                     managerSrvc
                         .list(
                             authenticationSvc.getUserInfo().accessToken,
@@ -337,12 +395,15 @@ selfieMyappDev
                                 $scope.errorMsg.type = 'danger';
                                 $scope.alertsE
                                     .push($scope.errorMsg);
+                                $scope.cancel();
                             });
+                    
                 }
 
                 $scope.editDev = function() {
                     var user = JSON.stringify($scope.usuario);
                     if (!myForm.$valid) {
+                    	$scope.openLoad();
                         $http({
                                 method: 'POST',
                                 url: 'http://localhost/WebService/selfieCode/service/editDev',
@@ -397,6 +458,7 @@ selfieMyappDev
                                         $scope.alertsE
                                             .push($scope.errorMsg);
                                     }
+                                    $scope.cancel();
                                 },
                                 function(response) {
                                     // called asynchronously
@@ -422,6 +484,7 @@ selfieMyappDev
                 };
 
                 $scope.listarDev = function() {
+                	$scope.openLoad();
                     managerSrvc.list(authenticationSvc
                         .getUserInfo().accessToken,
                         function(
@@ -429,6 +492,7 @@ selfieMyappDev
                             // $http completes
                             $scope.usuarios = result;
                             console.log("scope" + $scope.usuarios);
+                            $scope.cancel();
                         });
                 }
 
@@ -571,11 +635,33 @@ selfieMyappDev
             'projectSvc',
             'authenticationSvc',
             'managerSrvc',
+            '$modal',
             function($scope, $http, $location, $window,
                 $routeParams, projectSvc, authenticationSvc,
-                managerSrvc) {
+                managerSrvc,$modal) {
+                $scope.isOpen = false;
+                $scope.modalInstance = [];
+                
+                $scope.open = function() {
+                	if($scope.isOpen == false)
+                	{
+	                	$scope.isOpen = true;
+	                	$scope.modalInstance = $modal.open({
+	                        templateUrl: 'loading.html',
+	                        controller: 'modalLoading',
+	                        scope: $scope
+	                    });
+                	}
+                 };
 
+                $scope.cancel = function() {
+                	if($scope.isOpen == true)
+                		$scope.modalInstance.close();
+                	$scope.isOpen = false;
+                };
+                
                 $scope.listarProj = function() {
+                	$scope.open();
                     projectSvc
                         .list(
                             authenticationSvc.getUserInfo().accessToken,
@@ -586,10 +672,12 @@ selfieMyappDev
                                 // completes
                                 $scope.projetos = result;
                                 console.log("scope" + $scope.usuarios);
+                                $scope.cancel();
                             });
                 }
 
                 $scope.listarDev = function() {
+                	$scope.open();
                     managerSrvc.list(authenticationSvc
                         .getUserInfo().accessToken,
                         function(
@@ -597,13 +685,14 @@ selfieMyappDev
                             // $http completes
                             $scope.usuarios = result;
                             console.log("scope" + $scope.usuarios);
+                            $scope.cancel();
                         });
                 }
 
                 $scope.atribuir = function() {
                     var atribuicao = JSON
                         .stringify($scope.atribuicao);
-
+                    $scope.open();
                     $http({
                             method: 'POST',
                             url: 'http://localhost/WebService/selfieCode/service/atribuir',
@@ -641,7 +730,9 @@ selfieMyappDev
                                     // $scope.sucesso =
                                     // false;
                                     $scope.errorInvalid = true;
+                                    
                                 }
+                                $scope.cancel();
                             },
                             function(response) {
                                 // called asynchronously if
@@ -673,14 +764,36 @@ selfieMyappDev
             '$routeParams',
             'projectSvc',
             'authenticationSvc',
+            '$modal',
             function($scope, $http, $location, $window,
-                $routeParams, projectSvc, authenticationSvc) {
+                $routeParams, projectSvc, authenticationSvc,$modal) {
                 $scope.error = "";
                 $scope.session = "";
                 $scope.errorMsg = "";
-                $scope.errorInvalid = false;
+                $scope.errorInvalid = false;               
+                $scope.isOpen = false;
+                $scope.modalInstance = [];
+                
+                $scope.open = function() {
+                	if($scope.isOpen == false)
+                	{
+	                	$scope.isOpen = true;
+	                	$scope.modalInstance = $modal.open({
+	                        templateUrl: 'loading.html',
+	                        controller: 'modalLoading',
+	                        scope: $scope
+	                    });
+                	}
+                 };
+
+                $scope.cancel = function() {
+                	if($scope.isOpen == true)
+                		$scope.modalInstance.close();
+                	$scope.isOpen = false;
+                };
 
                 $scope.getProjeto = function() {
+                	$scope.open();
                     var projetos = projectSvc.projetos();
                     projetos
                         .then(function() {
@@ -694,9 +807,11 @@ selfieMyappDev
                                     var arr = $scope.projeto.fim
                                         .split("-");
                                     $scope.projeto.fim = arr[2] + "/" + arr[1] + "/" + arr[0];
+                                    $scope.cancel();
                                     return;
                                 }
                             }
+                            $scope.cancel();
                             $scope.alertsE = [];
                             $scope.errorValid = true;
                             $scope.errorMsg = [];
@@ -704,6 +819,7 @@ selfieMyappDev
                             $scope.errorMsg.type = 'danger';
                             $scope.alertsE
                                 .push($scope.errorMsg);
+                            
 
                         });
 
@@ -711,6 +827,7 @@ selfieMyappDev
 
                 $scope.atualizarProj = function() {
                     var proj = JSON.stringify($scope.projeto);
+                    $scope.open();
                     $http({
                             method: 'POST',
                             url: 'http://localhost/WebService/selfieCode/service/editProj',
@@ -751,6 +868,7 @@ selfieMyappDev
                                     // false;
                                     $scope.errorInvalid = true;
                                 }
+                                $scope.cancel();
                             },
                             function(response) {
                                 // called asynchronously if
@@ -784,10 +902,33 @@ selfieMyappDev.controller('devInfoCtrl', [
     '$routeParams',
     'projectSvc',
     'authenticationSvc',
+    '$modal',
     function($scope, $http, $location, $window, $routeParams, projectSvc,
-        authenticationSvc) {
+        authenticationSvc, $modal) {
+        $scope.isOpen = false;
+        $scope.modalInstance = [];
+        
+        $scope.open = function() {
+        	if($scope.isOpen == false)
+        	{
+            	$scope.isOpen = true;
+            	$scope.modalInstance = $modal.open({
+                    templateUrl: 'loading.html',
+                    controller: 'modalLoading',
+                    scope: $scope
+                });
+        	}
+         };
+
+        $scope.cancel = function() {
+        	if($scope.isOpen == true)
+        		$scope.modalInstance.close();
+        	$scope.isOpen = false;
+        };
         $scope.cpf = $routeParams.cpf;
+       
         $scope.listarProj = function() {
+        	$scope.open();
             projectSvc.listCpf($scope.cpf,
                 authenticationSvc.getUserInfo().accessToken,
                 function(
@@ -795,6 +936,7 @@ selfieMyappDev.controller('devInfoCtrl', [
                     // completes
                     $scope.projetos = result;
                     console.log("scope" + $scope.usuarios);
+                    $scope.cancel();
                 });
         }
 
@@ -812,11 +954,32 @@ selfieMyappDev
             '$routeParams',
             'projectSvc',
             'authenticationSvc',
+            '$modal',
             function($scope, $http, $location, $window,
-                $routeParams, projectSvc, authenticationSvc) {
+                $routeParams, projectSvc, authenticationSvc, $modal) {
                 $scope.cpf = $routeParams.cpf;
                 $scope.proj = $routeParams.proj;
+                $scope.isOpen = false;
+                $scope.modalInstance = [];
+                $scope.open = function() {
+                	if($scope.isOpen == false)
+                	{
+	                	$scope.isOpen = true;
+	                	$scope.modalInstance = $modal.open({
+	                        templateUrl: 'loading.html',
+	                        controller: 'modalLoading',
+	                        scope: $scope
+	                    });
+                	}
+                 };
 
+                $scope.cancel = function() {
+                	if($scope.isOpen == true)
+                		$scope.modalInstance.close();
+                	$scope.isOpen = false;
+                };
+
+                
                 $scope.verificarChart = function() {
                     var p = {
                         "proj": $scope.proj
@@ -826,6 +989,7 @@ selfieMyappDev
                     };
                     var proj = JSON.stringify(p);
                     var usuario = JSON.stringify(d);
+                    $scope.open();
                     $http({
                             method: 'POST',
                             url: 'http://localhost/WebService/selfieCode/service/exibirMetricas',
@@ -1975,6 +2139,7 @@ selfieMyappDev
                                         });
 
                                     $scope.abs.render();
+                                    $scope.cancel();
 
                                 }
                             },
@@ -2026,7 +2191,7 @@ angular
                 	{
 	                	$scope.isOpen = true;
 	                	$scope.modalInstance = $modal.open({
-	                        templateUrl: 'myModalContent.html',
+	                        templateUrl: 'loading.html',
 	                        controller: 'modalLoading',
 	                        scope: $scope
 	                    });
