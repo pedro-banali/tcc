@@ -1,9 +1,8 @@
 package com.pucpr.br.bsi2015.tcc.selfiecode.controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -19,30 +18,28 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.swing.JOptionPane;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jdt.core.IJavaElement;
-import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.internal.core.PackageFragmentRoot;
-import org.eclipse.jdt.internal.ui.packageview.PackageFragmentRootContainer;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.ui.ISelectionService;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.internal.Workbench;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.osgi.framework.Bundle;
@@ -54,6 +51,25 @@ import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import com.jcraft.jsch.SftpException;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.ProjectTime;
+
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.SAXException; 
+import org.xml.sax.SAXParseException;
+import org.xml.sax.helpers.*;
+
+
+import java.io.File;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+
+
+import org.w3c.dom.Document;
+import org.w3c.dom.DocumentType;
+import org.w3c.dom.Element;
+import org.w3c.dom.Entity;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import net.sourceforge.metrics.core.sources.AbstractMetricSource;
 
@@ -160,14 +176,84 @@ public class MetricsController extends Observable {
 			for (int i = 0; i < projetos.length(); i++) {
 				sc.getSession().getProjetos().put(projetos.getJSONObject(i).getInt("codigoProj"), new ProjectTime(
 						projetos.getJSONObject(i).getString("nome"), projetos.getJSONObject(i).getInt("tempoColeta")));
+					this.lerXml(projetos.getJSONObject(i).getString("nome"));
 			}
 
+			
 			lc.gerarLog("Usuário: " + nome + " logou " + df.format(data) + "\n");
 			return 0;
 
 		} else
 			return 1;
 
+	}
+	
+	public void lerXml(String nomeProjeto)
+	{
+		//get object which represents the workspace
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+ 
+		//get location of workspace (java.io.File)
+		File workspaceDirectory = workspace.getRoot().getLocation().toFile();
+		
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		
+		try {
+			DocumentBuilder db = dbf.newDocumentBuilder(); 
+			Document doc = db.parse(new File(workspaceDirectory.getPath()+"/"+nomeProjeto+"/.project"));
+			NodeList n = doc.getElementsByTagName("name");
+			
+				if(n.item(0).getTextContent().equals(nomeProjeto))
+				{
+					for (int i = 1; i < n.getLength(); i++) {
+						if(n.item(i).getTextContent().equals("net.sourceforge.metrics.builder"))
+							return;
+					}
+				}
+			NodeList n2 = doc.getElementsByTagName("buildSpec");
+			Element buildCommand = doc.createElement("buildCommand");
+			Element name = doc.createElement("name");
+			name.setTextContent("net.sourceforge.metrics.builder");
+			Element arguments = doc.createElement("arguments");
+			buildCommand.appendChild(name);
+			buildCommand.appendChild(arguments);
+			
+
+			n2.item(0).appendChild(buildCommand);
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			Transformer transformer;
+			transformer = transformerFactory.newTransformer();
+
+			DOMSource source = new DOMSource(doc);
+			StreamResult result = new StreamResult(new File(workspaceDirectory.getPath()+"/"+nomeProjeto+"/.project"));
+
+			// Output to console for testing
+			// StreamResult result = new StreamResult(System.out);
+
+			transformer.transform(source, result);
+
+			System.out.println("File saved!");
+
+			
+		} 
+		catch (TransformerConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (FileNotFoundException e) {
+			// TODO: handle exception
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TransformerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public String dicas(AbstractMetricSource c, String fileName, String date, IJavaElement currentElm)
@@ -312,7 +398,7 @@ public class MetricsController extends Observable {
 						}
 					}
 				}
-				pr.reset();
+				pr.restart();
 				threads = new ArrayList<Thread>();
 				//this.cancel();
 			}

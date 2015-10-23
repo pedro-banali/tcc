@@ -83,13 +83,13 @@
                             <a href="#"><i class="fa fa-user fa-fw" ></i>Projeto<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                               <li>
-                                  <a href="#/page-project">Cadastrar</a>
+                                  <a href="#/page-project" ng-if="verifyType() <= 2">Cadastrar</a>
                               </li>
                               <li>
                                   <a href="#/listar-proj" ng-click="listarProj()">Visualizar</a>
                               </li>
                               <li>
-                                  <a href="#/atribuir">Atribuir Desenvolvedor</a>
+                                  <a href="#/atribuir" ng-if="verifyType() <= 2">Atribuir Desenvolvedor</a>
                               </li>
                               
                         	</ul>
@@ -112,7 +112,7 @@
                             <a href="#"><i class="fa fa-user fa-fw" ></i>Desenvolvedor<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                <li>
-                                   <a href="#/page-dev">Cadastrar</a>
+                                   <a href="#/page-dev" ng-if="verifyType() <= 2">Cadastrar</a>
                                </li>
                                <li>
                                      <a href="#/listar-dev">Visualizar</a>

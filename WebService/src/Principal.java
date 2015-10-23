@@ -5,36 +5,63 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.pucpr.br.bsi2015.tcc.selfiecode.dao.ProjetoDAO;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Usuario;
 
 public class Principal {
+	static void teste()
+	{
+		tt.cancel();
+		t.cancel();
+		t = new Timer();
+		
+		start();
+	}
+	static int i = 0;
+	static Timer t = new Timer();
+	static TimerTask tt;
+	static void start(){
+		tt = new TimerTask() {
+		    @Override
+		    public void run() {
+		        //do something
+		    	System.out.println(i++);
+		    	if(i > 10){i =0;teste();}
+		    };
+		};
+		 
+		t.schedule(tt,1000,1000);
+	}
 	public static void main(String[] args) {
-		String host = "127.0.0.1";
-
-		ServerSocket serverSocket;
-		try {
-			serverSocket = new ServerSocket(15123);
-
-			Socket socket = serverSocket.accept();
-
-			System.out.println("Accepted connection : " + socket);
-			File transferFile = new File("C:\\selfieCode\\test.txt");
-			byte[] bytearray = new byte[(int) transferFile.length()];
-			FileInputStream fin = new FileInputStream(transferFile);
-			BufferedInputStream bin = new BufferedInputStream(fin);
-			bin.read(bytearray, 0, bytearray.length);
-			OutputStream os = socket.getOutputStream();
-			System.out.println("Sending Files...");
-			os.write(bytearray, 0, bytearray.length);
-			os.flush();
-			socket.close();
-			System.out.println("File transfer complete");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		start();
+//		String host = "127.0.0.1";
+//
+//		ServerSocket serverSocket;
+//		try {
+//			serverSocket = new ServerSocket(15123);
+//
+//			Socket socket = serverSocket.accept();
+//
+//			System.out.println("Accepted connection : " + socket);
+//			File transferFile = new File("C:\\selfieCode\\test.txt");
+//			byte[] bytearray = new byte[(int) transferFile.length()];
+//			FileInputStream fin = new FileInputStream(transferFile);
+//			BufferedInputStream bin = new BufferedInputStream(fin);
+//			bin.read(bytearray, 0, bytearray.length);
+//			OutputStream os = socket.getOutputStream();
+//			System.out.println("Sending Files...");
+//			os.write(bytearray, 0, bytearray.length);
+//			os.flush();
+//			socket.close();
+//			System.out.println("File transfer complete");
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 }

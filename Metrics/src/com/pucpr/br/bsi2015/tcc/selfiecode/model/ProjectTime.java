@@ -10,7 +10,7 @@ public class ProjectTime {
 	static int interval, intervaloN;
 
 	static Timer timer;
-
+	static TimerTask tt;
 	public ProjectTime(String nome, int min) {
 		this.nomeProjeto = nome;
 		intervaloN = min;
@@ -24,21 +24,28 @@ public class ProjectTime {
 		int delay = 1000;
 		int period = 1000;
 		interval = (intervaloN * 60);
-		timer.scheduleAtFixedRate(new TimerTask() {
+		timer = new Timer(this.nomeProjeto); 
+		tt = new TimerTask() {
 
 			public void run() {
 				setInterval();
 
-			}
-		}, delay, period);
+			};
+		};
+		timer.schedule(tt, delay, period);
 
 	}
-
-	private final int setInterval() {
+	public void restart()
+	{
 		if (interval < 0)
 		{
+			tt.cancel();
 			timer.cancel();
+			timer.purge();
+			this.reset();
 		}
+	}
+	private final int setInterval() {
 		return --interval;
 	}
 
