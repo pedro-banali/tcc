@@ -32,6 +32,18 @@
 									class="help-block errorSC">Nome &eacute; muito longo.</p>
 							</div>
 							<div class="form-group">
+								<label>Tempo de Coleta</label> <input class="form-control" type="number"
+									name="coleta" ng-model="projeto.tempoParaColeta" placeholder="Tempo de Coleta" required
+									ng-minlength="1" ng-maxlength="3"> <span
+									style="color: red"
+									ng-show="myForm.coleta.$dirty && myForm.coleta.$invalid"> <span
+									ng-show="myForm.coleta.$error.required">N&uacute;mero &eacute;
+										obrigat&oacute;rio.</span>
+								</span>
+								<p ng-show="myForm.coleta.$error.minlength" class="help-block">N&uacute;mero muito curto.</p>
+								<p ng-show="myForm.coleta.$error.maxlength" class="help-block">N&uacute;mero muito longo.</p>
+							</div>
+							<div class="form-group">
 								<label>Status</label> <select class="form-control" name="status"
 									ng-model="projeto.status" required>
 									<option value="1">Desenvolvendo</option>

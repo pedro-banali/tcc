@@ -24,7 +24,7 @@
 			                      	<div data-ng-repeat="i in usuarios.devs">
 				                       	<div class="panel panel-info">
 					                      	<div class="panel-heading">
-					                          {{i.nome}} <button type="button" class="close" ng-click="open(i)" data-dismiss="alert" aria-hidden="true">&times;</button>
+					                          {{i.nome}} <button type="button"  ng-if="verifyType() <= 2" class="close" ng-click="open(i)" data-dismiss="alert" aria-hidden="true">&times;</button>
 					                     	</div>
 					                      	<div class="panel-body">
 						                      	<p><span>CPF: </span>{{i.cpf}}</p>

@@ -38,6 +38,7 @@ public class DicaDAO {
 				
 				
 				
+				//System.out.println(preparedStatement.toString());
 				ResultSet rs = preparedStatement.executeQuery();
 				while(rs.next())
 				{

@@ -272,6 +272,255 @@ angular
             }
         ]);
 
+var selfieMyappDev = angular.module('ger', []);
+selfieMyappDev
+    .controller(
+        'gerCtrl', [
+            '$scope',
+            '$http',
+            '$location',
+            '$window',
+            '$routeParams',
+            'authenticationSvc',
+            'managerSrvc',
+            'projectSvc',
+            '$modal',
+            function($scope, $http, $location, $window,
+                $routeParams, authenticationSvc, managerSrvc,
+                projectSvc, $modal) {
+            	
+                // Modal Loading
+                $scope.openLoad = function() {
+                	if($scope.isOpen == false)
+                	{
+	                	$scope.isOpen = true;
+	                	$scope.modalInstance = $modal.open({
+	                        templateUrl: 'loading.html',
+	                        controller: 'modalLoading',
+	                        scope: $scope
+	                    });
+                	}
+                 };
+
+                $scope.cancel = function() {
+                	if($scope.isOpen == true)
+                		$scope.modalInstance.close();
+                	$scope.isOpen = false;
+                };
+                // Modal Loading
+            	
+                $scope.cadastroGer = function() {
+
+                    var user = JSON.stringify($scope.usuario);
+                    if (!myForm.$valid) {
+                    	$scope.openLoad();
+                        $http({
+                                method: 'POST',
+                                url: 'http://localhost/WebService/selfieCode/service/cadastroGer',
+                                headers: {
+                                    'usuario': user,
+                                    'key': authenticationSvc
+                                        .getUserInfo().accessToken
+                                }
+                            })
+                            .then(
+                                function(response) {
+
+                                    // this callback will be
+                                    // called asynchronously
+                                    // when the response is
+                                    // available
+                                    console.log("result" + response);
+                                    $scope.alertsS = [];
+                                    $scope.alertsE = [];
+                                    if (response.data.result == true) {
+                                        $scope.usuario = {};
+
+                                        $scope.sucesso = [];
+                                        $scope.sucesso.msg = 'Usuário cadastrado com sucesso.';
+                                        $scope.sucesso.type = 'success';
+                                        $scope.alertsS
+                                            .push($scope.sucesso);
+                                    } else {
+
+                                        $scope.errorMsg = [];
+                                        // $scope.errorMsg.msg
+                                        // = 'Usuário
+                                        // inexistente.';
+                                        $scope.errorMsg.type = 'danger';
+
+                                        $scope.errorMsg.msg = 'CPF ou Login já existente.';
+                                        $scope.alertsE
+                                            .push($scope.errorMsg);
+                                    }
+                                    $scope.cancel();
+                                },
+                                function(response) {
+                                    // called asynchronously
+                                    // if an error occurs
+                                    // or server returns
+                                    // response with an
+                                    // error status.
+                                });
+                    } else {
+                        $scope.errorValid = true;
+                    }
+                }
+
+                $scope.getUsuario = function() {
+                	$scope.openLoad();
+                    managerSrvc
+                        .listGer(
+                            authenticationSvc.getUserInfo().accessToken,
+                            function(result) { // this is
+                                // only run
+                                // after
+                                // $http
+                                // completes
+                                $scope.usuarios = result.ger;
+
+                                var u = $scope.usuarios;
+
+                                for (var i = 0; i < u.length; i++) {
+                                	$scope.usuario = u[i];
+                                    if ($routeParams.cpf == u[i].cpf) {
+//                                        var cpf = $scope.usuario.cpf + "";
+//                                        if(cpf.length != 11)
+//                                        {
+//                                        	for(var i = 0; i < (11 - cpf.length); i++)
+//                                        	{
+//                                        		cpf = "0" + cpf;
+//                                        	}
+//                                        	$scope.usuario.cpf = cpf;
+//                                        }
+//                                    	
+                                        
+                                        $scope.usuario.cpfNovo = $scope.usuario.cpf;
+                                        $scope.cancel();
+                                        return;
+                                    }
+                                }
+                                $scope.alertsE = [];
+                                $scope.errorValid = true;
+                                $scope.errorMsg = [];
+                                $scope.errorMsg.msg = 'Usuário inexistente.';
+                                $scope.errorMsg.type = 'danger';
+                                $scope.alertsE
+                                    .push($scope.errorMsg);
+                                $scope.cancel();
+                            });
+                    
+                }
+
+                $scope.editGer = function() {
+                    var user = JSON.stringify($scope.usuario);
+                    if (!myForm.$valid) {
+                    	$scope.openLoad();
+                        $http({
+                                method: 'POST',
+                                url: 'http://localhost/WebService/selfieCode/service/editGer',
+                                headers: {
+                                    'usuario': user,
+                                    'key': authenticationSvc
+                                        .getUserInfo().accessToken
+                                }
+                            })
+                            .then(
+                                function(response) {
+
+                                    // this callback will be
+                                    // called asynchronously
+                                    // when the response is
+                                    // available
+                                    console.log("result" + response);
+                                    $scope.alertsE = [];
+                                    $scope.alertsS = [];
+                                    if (response.data.result == true) {
+                                        $scope.usuario.cpf = $scope.usuario.cpfNovo;
+
+                                        $scope.sucesso = [];
+                                        $scope.sucesso.msg = 'Usuário alterado com sucesso.';
+                                        $scope.sucesso.type = 'success';
+                                        $scope.alertsS
+                                            .push($scope.sucesso);
+                                        $scope.usuario = {};
+                                        // $location.path("/page-dev");
+                                    } else if (response.data.result == 'existe') {
+
+                                        $scope.errorValid = true;
+                                        $scope.errorMsg = [];
+                                        $scope.errorMsg.msg = 'Este CPF ou Login já existe no sistema.';
+                                        $scope.errorMsg.type = 'danger';
+                                        $scope.alertsE
+                                            .push($scope.errorMsg);
+                                    } else if (response.data.result == 'inativo') {
+                                        $scope.usuario = response.data.usuario;
+                                        $scope.errorValid = true;
+                                        $scope.errorMsg = [];
+                                        $scope.errorMsg.msg = 'Este CPF: usuario.cpf já existe no sistema, favor reativálo.';
+                                        $scope.errorMsg.type = 'danger';
+                                        $scope.alertsE
+                                            .push($scope.errorMsg);
+                                    } else {
+
+                                        $scope.errorValid = true;
+                                        $scope.errorMsg = [];
+                                        $scope.errorMsg.msg = 'Usuário inexistente.';
+                                        $scope.errorMsg.type = 'danger';
+                                        $scope.alertsE
+                                            .push($scope.errorMsg);
+                                    }
+                                    $scope.cancel();
+                                },
+                                function(response) {
+                                    // called asynchronously
+                                    // if an error occurs
+                                    // or server returns
+                                    // response with an
+                                    // error status.
+
+                                });
+                    } else {
+                        $scope.alertsE = [];
+                        $scope.errorValid = true;
+                        $scope.errorMsg = [];
+                        $scope.errorMsg.msg = 'Usuário inexistente.';
+                        $scope.errorMsg.type = 'danger';
+                        $scope.alertsE.push($scope.errorMsg);
+                    }
+
+                }
+
+                $scope.go = function(path) {
+                    $location.path(path);
+                };
+
+                $scope.listarGer = function() {
+                	$scope.openLoad();
+                    managerSrvc.listGer(authenticationSvc
+                        .getUserInfo().accessToken,
+                        function(
+                            result) { // this is only run after
+                            // $http completes
+                            $scope.usuarios = result;
+                            console.log("scope" + $scope.usuarios);
+                            $scope.cancel();
+                        });
+                }
+
+       
+
+                $scope.closeAlertE = function(index) {
+                    $scope.alertsE.splice(index, 1);
+                };
+
+                $scope.closeAlertS = function(index) {
+                    $scope.alertsS.splice(index, 1);
+                };
+
+            }
+        ]);
+
 var selfieMyappDev = angular.module('dev', []);
 selfieMyappDev
     .controller(
@@ -313,7 +562,7 @@ selfieMyappDev
 
                     var user = JSON.stringify($scope.usuario);
                     if (!myForm.$valid) {
-                    	$scope.$scope.openLoad();
+                    	$scope.openLoad();
                         $http({
                                 method: 'POST',
                                 url: 'http://localhost/WebService/selfieCode/service/cadastroDev',
@@ -631,17 +880,17 @@ selfieMyappDev
             '$http',
             '$location',
             '$window',
+            '$route',
             '$routeParams',
             'projectSvc',
             'authenticationSvc',
             'managerSrvc',
             '$modal',
-            function($scope, $http, $location, $window,
+            function($scope, $http, $location, $window, $route,
                 $routeParams, projectSvc, authenticationSvc,
                 managerSrvc,$modal) {
                 $scope.isOpen = false;
                 $scope.modalInstance = [];
-                
                 $scope.open = function() {
                 	if($scope.isOpen == false)
                 	{
@@ -684,8 +933,20 @@ selfieMyappDev
                             result) { // this is only run after
                             // $http completes
                             $scope.usuarios = result;
-                            console.log("scope" + $scope.usuarios);
                             $scope.cancel();
+                        });
+                }
+                
+                $scope.listarDevProj = function() {
+                	$scope.open();
+                    managerSrvc.listDevProj(authenticationSvc
+                        .getUserInfo().accessToken,
+                        function(
+                            result) { // this is only run after
+                            // $http completes
+                            $scope.devsProj = result;
+                            $scope.cancel();
+                           
                         });
                 }
 
@@ -717,10 +978,28 @@ selfieMyappDev
                                     $scope.sucesso = [];
                                     $scope.sucesso.msg = 'Usuário atribuido com sucesso.';
                                     $scope.sucesso.type = 'success';
-                                    $scope.alertsS
-                                        .push($scope.sucesso);
-                                    $scope.sucessoValid = true;
-                                    $scope.errorInvalid
+                                    $scope.alertsS.push($scope.sucesso);
+//                                    alert($scope.sucesso.msg);
+//                                    $route.reload();
+                                  	 $http({
+                                         method: "POST",
+                                         url: 'http://localhost/WebService/selfieCode/service/listarDevProj',
+                                         headers: {
+                                             "key": authenticationSvc
+                                             .getUserInfo().accessToken
+                                         }
+                                	 	}).
+                                        then(function (result) {
+                                        	console.log("function" + result.data);
+                                        	var devs = result.data.devsProj;
+                                        	
+                                      
+                                        	
+                                        	$scope.devsProj = result.data;
+                                        }, function (error) {
+                                            
+                                        });
+                                    
                                 } else {
                                     $scope.errorMsg = [];
                                     $scope.errorMsg.msg = 'Usuário já está cadastrado neste projeto.';
@@ -2329,7 +2608,7 @@ angular
                                     $scope.alertsS
                                         .push($scope.sucesso);
                                     $scope.sucessoValid = true;
-                                    $scope.errorInvalid
+                                    
                                 } else {
                                     $scope.errorMsg = [];
                                     $scope.errorMsg.msg = 'Usuário já está cadastrado neste projeto.';

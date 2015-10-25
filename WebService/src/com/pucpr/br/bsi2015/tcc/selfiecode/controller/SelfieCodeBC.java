@@ -27,6 +27,7 @@ import com.pucpr.br.bsi2015.tcc.selfiecode.model.Projeto;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.TipoUsuario;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Treino;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Usuario;
+import com.pucpr.br.bsi2015.tcc.selfiecode.model.UsuarioProj;
 
 public class SelfieCodeBC {
 
@@ -112,6 +113,24 @@ public class SelfieCodeBC {
 
 		// return true;
 	}
+	
+	public List<Usuario> listarGerentes(Usuario u) {
+
+		UsuarioDAO uDao = new UsuarioDAO();
+
+		return uDao.listarGer(u);
+
+		// return true;
+	}
+	
+	public List<UsuarioProj> listarDevProj(Usuario u) {
+
+		UsuarioDAO uDao = new UsuarioDAO();
+
+		return uDao.listarDevProj(u);
+
+		// return true;
+	}
 
 	public List<Projeto> listarProjetos(Usuario u) {
 
@@ -160,7 +179,40 @@ public class SelfieCodeBC {
 
 		return result;
 	}
+	
+	public boolean cadastrarGer(JSONObject u, Usuario g) {
 
+		Desenvolvedor ds = new Desenvolvedor();
+		TipoUsuario tu = new TipoUsuario();
+		boolean result;
+		ds.setNome(u.getString("nome"));
+		ds.setLogin(u.getString("login"));
+		ds.setCpf(u.getLong("cpf"));
+		ds.setDataNascimento(new Date(u.getString("dataNascimento")));
+		ds.setSenha(u.getString("senha"));
+		tu.setId(2);
+		ds.setTipoUsuario(tu);
+		ds.setDataCadastro(new Date());
+
+
+
+		DesenvolvedorDAO dDao = new DesenvolvedorDAO();
+		UsuarioDAO uDao = new UsuarioDAO();
+
+		if (dDao.selectDev(ds) != null) {
+			result = false;
+		} else if (dDao.selectDevByLogin(ds) != null) {
+			result = false;
+		} else if (dDao.selectDevInativo(ds) != null) {
+			result = false;
+		} else {
+			result = dDao.cadastrarGer(ds);
+			uDao.insertTipo(ds);
+		}
+
+		return result;
+	}
+	
 	public JSONObject editDev(JSONObject u, Usuario g) {
 
 		Desenvolvedor ds = new Desenvolvedor();
@@ -190,6 +242,36 @@ public class SelfieCodeBC {
 		}
 		return r;
 	}
+	
+	public JSONObject editGer(JSONObject u, Usuario g) {
+
+		Desenvolvedor ds = new Desenvolvedor();
+		JSONObject r = new JSONObject();
+		ds.setNome(u.getString("nome"));
+		ds.setLogin(u.getString("login"));
+		ds.setCpf(u.getLong("cpfNovo"));
+		ds.setDataNascimento(new Date(u.getString("dataNascimento")));
+
+		DesenvolvedorDAO dDao = new DesenvolvedorDAO();
+		Usuario us = dDao.selectGer(ds);
+		Usuario usl = dDao.selectGervByLogin(ds);
+
+		if (us != null && us.getCpf() != u.getLong("cpf")) {
+			r.put("result", "existe");
+		} else if (usl != null && usl.getCpf() != u.getLong("cpf")) {
+			r.put("result", "existe");
+		}
+		// else if( (us = dDao.selectDevInativo(ds))!= null)
+		// {
+		// r.put("result", "inativo");
+		// r.put("usuario", us);
+		// }
+		else {
+			dDao.editarGer(ds, u.getLong("cpf"));
+			r.put("result", true);
+		}
+		return r;
+	}
 
 	public boolean cadastrarProj(JSONObject p, Usuario g) {
 
@@ -198,7 +280,7 @@ public class SelfieCodeBC {
 		proj.setNome(p.getString("nome"));
 		proj.setInicio(new Date(p.getString("inicio")));
 		proj.setFim(new Date(p.getString("fim")));
-
+		proj.setTempoParaColeta(p.getInt("tempoParaColeta"));
 		proj.setStatus(p.getString("status"));
 		proj.setDescricao(p.getString("descricao"));
 		TipoUsuario tu = new TipoUsuario();

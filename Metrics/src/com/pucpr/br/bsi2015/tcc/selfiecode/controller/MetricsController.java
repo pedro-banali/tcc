@@ -35,11 +35,14 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.IJavaProject;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.osgi.framework.Bundle;
@@ -53,15 +56,13 @@ import com.jcraft.jsch.SftpException;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.ProjectTime;
 
 import org.xml.sax.ErrorHandler;
-import org.xml.sax.SAXException; 
+import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.*;
-
 
 import java.io.File;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-
 
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentType;
@@ -82,6 +83,7 @@ public class MetricsController extends Observable {
 	private List<String> dicas = new ArrayList<String>();
 	private ProjectTime pr;
 	private List<Thread> threads = new ArrayList<Thread>();
+	private IJavaProject projeto;
 
 	private MetricsController() {
 
@@ -176,10 +178,9 @@ public class MetricsController extends Observable {
 			for (int i = 0; i < projetos.length(); i++) {
 				sc.getSession().getProjetos().put(projetos.getJSONObject(i).getInt("codigoProj"), new ProjectTime(
 						projetos.getJSONObject(i).getString("nome"), projetos.getJSONObject(i).getInt("tempoColeta")));
-					this.lerXml(projetos.getJSONObject(i).getString("nome"));
+				this.lerXml(projetos.getJSONObject(i).getString("nome"));
 			}
 
-			
 			lc.gerarLog("Usuário: " + nome + " logou " + df.format(data) + "\n");
 			return 0;
 
@@ -187,29 +188,27 @@ public class MetricsController extends Observable {
 			return 1;
 
 	}
-	
-	public void lerXml(String nomeProjeto)
-	{
-		//get object which represents the workspace
+
+	public void lerXml(String nomeProjeto) {
+		// get object which represents the workspace
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
- 
-		//get location of workspace (java.io.File)
+
+		// get location of workspace (java.io.File)
 		File workspaceDirectory = workspace.getRoot().getLocation().toFile();
-		
+
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		
+
 		try {
-			DocumentBuilder db = dbf.newDocumentBuilder(); 
-			Document doc = db.parse(new File(workspaceDirectory.getPath()+"/"+nomeProjeto+"/.project"));
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			Document doc = db.parse(new File(workspaceDirectory.getPath() + "/" + nomeProjeto + "/.project"));
 			NodeList n = doc.getElementsByTagName("name");
-			
-				if(n.item(0).getTextContent().equals(nomeProjeto))
-				{
-					for (int i = 1; i < n.getLength(); i++) {
-						if(n.item(i).getTextContent().equals("net.sourceforge.metrics.builder"))
-							return;
-					}
+
+			if (n.item(0).getTextContent().equals(nomeProjeto)) {
+				for (int i = 1; i < n.getLength(); i++) {
+					if (n.item(i).getTextContent().equals("net.sourceforge.metrics.builder"))
+						return;
 				}
+			}
 			NodeList n2 = doc.getElementsByTagName("buildSpec");
 			Element buildCommand = doc.createElement("buildCommand");
 			Element name = doc.createElement("name");
@@ -217,7 +216,6 @@ public class MetricsController extends Observable {
 			Element arguments = doc.createElement("arguments");
 			buildCommand.appendChild(name);
 			buildCommand.appendChild(arguments);
-			
 
 			n2.item(0).appendChild(buildCommand);
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -225,7 +223,8 @@ public class MetricsController extends Observable {
 			transformer = transformerFactory.newTransformer();
 
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File(workspaceDirectory.getPath()+"/"+nomeProjeto+"/.project"));
+			StreamResult result = new StreamResult(
+					new File(workspaceDirectory.getPath() + "/" + nomeProjeto + "/.project"));
 
 			// Output to console for testing
 			// StreamResult result = new StreamResult(System.out);
@@ -234,15 +233,13 @@ public class MetricsController extends Observable {
 
 			System.out.println("File saved!");
 
-			
-		} 
-		catch (TransformerConfigurationException e) {
+		} catch (TransformerConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}catch (SAXException e) {
+		} catch (SAXException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			// TODO: handle exception
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -362,6 +359,18 @@ public class MetricsController extends Observable {
 
 	}
 
+	public void setProject(IJavaProject projeto) {
+		this.projeto = projeto;
+	}
+
+	public void addDicas(String dica) {
+
+		dicas.add(dica);
+
+		// dicas.add(dica);
+
+	}
+
 	public List<String> getDicas() {
 		return dicas;
 	}
@@ -383,7 +392,7 @@ public class MetricsController extends Observable {
 		this.pr = pr;
 		Timer t = new Timer();
 		TimerTask ts = new TimerTask() {
-			
+
 			@Override
 			public void run() {
 				// your code here, and if you have to refresh UI put this code:
@@ -391,7 +400,24 @@ public class MetricsController extends Observable {
 					if (!t.isAlive()) {
 						try {
 							t.join();
-							
+//							String dicaI, dicaJ;
+//							boolean achou = false;
+//							for (int i = 0; i <  dicas.size(); i++) {
+//								dicaI = dicas.get(i);
+//								achou = false;
+//								for (int j = i; j <  dicas.size(); j++) {
+//									dicaJ = dicas.get(j);
+//									if (dicaI.equals(dicaJ)) {
+//										achou = true;
+//									}
+//								}
+//								if(achou != true)
+//								writeMarkers(projeto, dicaI);
+//							}
+//							for (String dica : dicas)
+//								writeMarkers(projeto, dica);
+//
+//							dicas.clear();
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -399,14 +425,27 @@ public class MetricsController extends Observable {
 					}
 				}
 				pr.restart();
+				
+				
+
 				threads = new ArrayList<Thread>();
-				//this.cancel();
+				// this.cancel();
 			}
 		};
 		t.schedule(ts, 5000);
-		
-		
-		
+
 	}
 
+	private void writeMarkers(IJavaProject type, String message) {
+		try {
+			IResource resource = type.getUnderlyingResource();
+			IMarker marker = resource.createMarker(IMarker.PROBLEM);
+			marker.setAttribute(IMarker.MESSAGE, message);
+		
+			// marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_NORMAL);
+			marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_INFO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

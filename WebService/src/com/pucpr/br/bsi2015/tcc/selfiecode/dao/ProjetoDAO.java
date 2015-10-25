@@ -248,7 +248,7 @@ public class ProjetoDAO {
 		else
 		{
 			
-			String selectSQL = "INSERT INTO PROJETO ( NomeProjeto, Descricao, Inicio, Fim, Status_projeto, Ativo  ) VALUES (?, ?, ?, ?, ?, 0 )";
+			String selectSQL = "INSERT INTO PROJETO ( NomeProjeto, Descricao, Inicio, Fim, Status_projeto, Ativo,Tempo_Coleta  ) VALUES (?, ?, ?, ?, ?, 0, ? )";
 			
 			PreparedStatement preparedStatement;
 			try {
@@ -258,6 +258,7 @@ public class ProjetoDAO {
 				preparedStatement.setDate(3, dataIni);
 				preparedStatement.setDate(4, dataFim);
 				preparedStatement.setString(5, proj.getStatus());
+				preparedStatement.setInt(6, proj.getTempoParaColeta());
 				
 				int rs = preparedStatement.executeUpdate();
 				ResultSet rsKeys = preparedStatement.getGeneratedKeys();

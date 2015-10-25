@@ -8,8 +8,16 @@ import java.net.Socket;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.ws.rs.core.Response;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.pucpr.br.bsi2015.tcc.selfiecode.controller.SelfieCodeBC;
 import com.pucpr.br.bsi2015.tcc.selfiecode.dao.ProjetoDAO;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Usuario;
+import com.pucpr.br.bsi2015.tcc.selfiecode.service.WebService;
+import com.pucpr.br.bsi2015.tcc.selfiecode.session.SessionController;
 
 public class Principal {
 	static void teste()
@@ -37,7 +45,25 @@ public class Principal {
 	}
 	public static void main(String[] args) {
 		
-		start();
+		
+		SessionController sc = SessionController.getInstance();
+		JSONArray result;
+		JSONObject jSonProjeto = new JSONObject("{proj:1}");
+		JSONObject jSonUsuario = new JSONObject("{dev:22222222223}");
+		JSONObject jsonObject;
+		
+		SelfieCodeBC sbc = SelfieCodeBC.getInstance();
+		
+		Usuario u = new Usuario();
+		result = sbc.exibirMetricas( jSonUsuario, jSonProjeto, u );
+
+		
+		jsonObject = new JSONObject();
+		jsonObject.put("result", result);
+		
+
+		//return Response.status(200).entity(result.toString()).build();
+//		start();
 //		String host = "127.0.0.1";
 //
 //		ServerSocket serverSocket;

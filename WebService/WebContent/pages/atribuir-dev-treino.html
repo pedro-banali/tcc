@@ -22,35 +22,34 @@
 						</div>
 						<form role="form" ng-submit="atribuir()" name="myForm">
 							<div class="form-group">
-								<label>Treino</label> 
-								<select class="form-control" name="treino"
+								<label>Treino</label> <select class="form-control" name="treino"
 									ng-model="$parent.atribuicao.treino" required
 									ng-if="idTreino === undefined">
 									<option ng-repeat="n in treinos.treino" value="{{n.idTreino}}">
-										{{n.descricaoTreino}}
-									</option>
-								</select>
-								<input type="hidden" name ="treino" ng-model="atribuicao.treino" ng-value="{{idTreino}}" ng-if="idTreino !== undefined">
+										{{n.descricaoTreino}}</option>
+								</select> <input type="hidden" name="treino" ng-model="atribuicao.treino"
+									ng-value="{{idTreino}}" ng-if="idTreino !== undefined">
 
-								<div  ng-if="idTreino !== undefined">{{descricaoTreino}}</div>
+								<div ng-if="idTreino !== undefined">{{descricaoTreino}}</div>
 							</div>
 							<div class="form-group">
-								<label>Desenvolvedor</label> 
-								<select multiple="multiple"
+								<label>Desenvolvedor</label> <select multiple="multiple"
 									class="form-control" name="dev" ng-model="atribuicao.dev"
 									required>
 									<option ng-repeat="n in usuarios.devs" value="{{n.cpf}}">
-										{{n.nome}}
-									</option>
+										{{n.nome}}</option>
 								</select>
 							</div>
 							<button type="submit" class="btn btn-default"
 								ng-disabled="!myForm.$valid">Cadastrar</button>
-							<button type="reset" ng-clikc="doTheBack()" class="btn btn-default">Cancelar</button>
+							<button type="reset" ng-clikc="doTheBack()"
+								class="btn btn-default">Cancelar</button>
 						</form>
+
 					</div>
 					<!-- /.col-lg-6 (nested) -->
 				</div>
+				
 				<!-- /.row (nested) -->
 			</div>
 			<!-- /.panel-body -->
@@ -60,7 +59,7 @@
 	<!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
-	    <script type="text/ng-template" id="loading.html">
+<script type="text/ng-template" id="loading.html">
         <div class="modal-header">
             <h3 class="modal-title">Loading</h3>
         </div>

@@ -33,6 +33,7 @@ import com.pucpr.br.bsi2015.tcc.selfiecode.model.Metrica;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Projeto;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Treino;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Usuario;
+import com.pucpr.br.bsi2015.tcc.selfiecode.model.UsuarioProj;
 import com.pucpr.br.bsi2015.tcc.selfiecode.session.SessionController;
 import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataParam;
@@ -177,20 +178,37 @@ public class WebService {
 		Usuario u = sc.getUser(key);
 		
 		result = sbc.cadastrarDev(jsonObject, u );
-
-		
-		
-		
 		
 		jsonObject = new JSONObject();
 		jsonObject.put("result", result);
 		
-
 		return Response.status(200).entity(jsonObject.toString()).build();
 		//return ;
 	}
 	
 	
+	@Path("cadastroGer")
+	@POST
+	//@GET
+	//@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response cadastroGer(@HeaderParam("usuario") String usuario, @HeaderParam("key") String key ) throws JSONException {
+		SessionController sc = SessionController.getInstance();
+		boolean result;
+		JSONObject jsonObject = new JSONObject(usuario);
+
+		SelfieCodeBC sbc = SelfieCodeBC.getInstance();
+		
+		Usuario u = sc.getUser(key);
+		
+		result = sbc.cadastrarGer(jsonObject, u );
+		
+		jsonObject = new JSONObject();
+		jsonObject.put("result", result);
+		
+		return Response.status(200).entity(jsonObject.toString()).build();
+		//return ;
+	}
 	
 	@Path("atribuir")
 	@POST
@@ -263,6 +281,27 @@ public class WebService {
 		//return ;
 	}
 	
+	@Path("editGer")
+	@POST
+	//@GET
+	//@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response editGer(@HeaderParam("usuario") String usuario, @HeaderParam("key") String key ) throws JSONException {
+		SessionController sc = SessionController.getInstance();
+		boolean result;
+		JSONObject jsonObject = new JSONObject(usuario);
+		JSONObject jsonResponse;
+		SelfieCodeBC sbc = SelfieCodeBC.getInstance();
+		
+		Usuario u = sc.getUser(key);
+		
+		jsonResponse = sbc.editGer(jsonObject, u );
+
+		return Response.status(200).entity(jsonResponse.toString()).build();
+		//return ;
+	}
+	
+	
 	@Path("listarDev")
 	@POST
 	@Produces("application/json")
@@ -276,6 +315,38 @@ public class WebService {
 		
 		list = new JSONArray(uss);
 		jSon.put("devs", list);
+		return Response.status(200).entity(jSon.toString()).build();
+	}
+	
+	@Path("listarGer")
+	@POST
+	@Produces("application/json")
+	public Response listarGer(@HeaderParam("key") String key) throws JSONException {
+		SessionController sc = SessionController.getInstance();
+		JSONArray list;
+		JSONObject jSon = new JSONObject();
+		Usuario usuario = sc.getUser(key);
+		SelfieCodeBC sbc = SelfieCodeBC.getInstance();
+		List<Usuario> uss = sbc.listarGerentes(usuario);
+		
+		list = new JSONArray(uss);
+		jSon.put("ger", list);
+		return Response.status(200).entity(jSon.toString()).build();
+	}
+	
+	@Path("listarDevProj")
+	@POST
+	@Produces("application/json")
+	public Response listarDevProj(@HeaderParam("key") String key) throws JSONException {
+		SessionController sc = SessionController.getInstance();
+		JSONArray list;
+		JSONObject jSon = new JSONObject();
+		Usuario usuario = sc.getUser(key);
+		SelfieCodeBC sbc = SelfieCodeBC.getInstance();
+		List<UsuarioProj> uss = sbc.listarDevProj(usuario);
+		
+		list = new JSONArray(uss);
+		jSon.put("devsProj", list);
 		return Response.status(200).entity(jSon.toString()).build();
 	}
 	
