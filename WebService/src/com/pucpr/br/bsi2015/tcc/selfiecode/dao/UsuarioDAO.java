@@ -124,12 +124,12 @@ public class UsuarioDAO {
 		else {
 			String selectSQL;
 			if (usuario.getTipoUsuario().getId() == 3) {
-				selectSQL = "SELECT U.CPF, U.NOME, U.Nascimento, U.Login, UT.DATA_CADASTRO, UT.FK_TIPO_USUARIO, TU.DESCRICAO"
+				selectSQL = "SELECT U.CPF, U.NOME, U.Nascimento, U.Login,U.Senha, UT.DATA_CADASTRO, UT.FK_TIPO_USUARIO, TU.DESCRICAO"
 						+ " FROM USUARIO as U, USUARIO_TIPO as UT, TIPO_USUARIO as TU" + " WHERE U.CPF = UT.FK_CPF "
 						+ " AND TU.ID_TIPO_USUARIO = UT.FK_TIPO_USUARIO " + " AND U.CPF = ? "
 						+ " AND UT.FK_TIPO_USUARIO = 3" + " AND U.Ativo = 0";
 			} else {
-				selectSQL = "SELECT U.CPF, U.NOME, U.Nascimento, U.Login, UT.DATA_CADASTRO, UT.FK_TIPO_USUARIO, TU.DESCRICAO"
+				selectSQL = "SELECT U.CPF, U.NOME, U.Nascimento, U.Login,U.Senha, UT.DATA_CADASTRO, UT.FK_TIPO_USUARIO, TU.DESCRICAO"
 						+ " FROM USUARIO as U, USUARIO_TIPO as UT, TIPO_USUARIO as TU" + " WHERE U.CPF = UT.FK_CPF "
 						+ " AND TU.ID_TIPO_USUARIO = UT.FK_TIPO_USUARIO " + " AND U.Gerente = ? "
 						+ " AND UT.FK_TIPO_USUARIO = 3" + " AND U.Ativo = 0";
@@ -148,6 +148,7 @@ public class UsuarioDAO {
 					tu = new TipoUsuario();
 
 					u.setNome(rs.getString("Nome"));
+					u.setSenha(rs.getString("Senha"));
 					u.setCpf(rs.getLong("Cpf"));
 					u.setDataNascimento(rs.getDate("Nascimento"));
 					u.setLogin(rs.getString("Login"));
@@ -185,7 +186,7 @@ public class UsuarioDAO {
 		else {
 			String selectSQL;
 
-				selectSQL = "SELECT U.CPF, U.NOME, U.Nascimento, U.Login, UT.DATA_CADASTRO, UT.FK_TIPO_USUARIO, TU.DESCRICAO"
+				selectSQL = "SELECT U.CPF, U.NOME, U.Nascimento, U.Login, U.Senha, UT.DATA_CADASTRO, UT.FK_TIPO_USUARIO, TU.DESCRICAO"
 						+ " FROM USUARIO as U, USUARIO_TIPO as UT, TIPO_USUARIO as TU" + " WHERE U.CPF = UT.FK_CPF "
 						+ " AND TU.ID_TIPO_USUARIO = UT.FK_TIPO_USUARIO "
 						+ " AND UT.FK_TIPO_USUARIO = 2" + " AND U.Ativo = 0";
@@ -204,6 +205,7 @@ public class UsuarioDAO {
 					tu = new TipoUsuario();
 
 					u.setNome(rs.getString("Nome"));
+					u.setSenha(rs.getString("Senha"));
 					u.setCpf(rs.getLong("Cpf"));
 					u.setDataNascimento(rs.getDate("Nascimento"));
 					u.setLogin(rs.getString("Login"));

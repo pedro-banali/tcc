@@ -41,7 +41,7 @@ public class CodigoFonteDAO {
 		else {
 			String selectSQL = "SELECT ID_CODIGO, DATA_COLECAO, NOME_CLASSE, FK_US_PROJ FROM CODIGOFONTE CF,"
 					+ " USUARIO_PROJETO UP where CF.FK_US_PROJ = UP.ID " + " AND UP.FK_USUARIO = ? "
-					+ " AND UP.FK_PROJETO = ?";
+					+ " AND UP.FK_PROJETO = ? ORDER BY DATA_COLECAO";
 			PreparedStatement preparedStatement;
 			try {
 				preparedStatement = cf.prepareStatement(selectSQL);

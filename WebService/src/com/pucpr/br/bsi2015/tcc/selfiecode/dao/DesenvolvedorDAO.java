@@ -77,7 +77,7 @@ public class DesenvolvedorDAO {
 		if (cf == null)
 			JOptionPane.showConfirmDialog(null, "ERRRROUUU");
 		else {
-			String selectSQL = "SELECT U.CPF, U.NOME, U.Nascimento, U.Login, UT.DATA_CADASTRO, UT.FK_TIPO_USUARIO, TU.DESCRICAO"
+			String selectSQL = "SELECT U.CPF, U.NOME, U.Nascimento, U.Login, U.Senha, UT.DATA_CADASTRO, UT.FK_TIPO_USUARIO, TU.DESCRICAO"
 					+ " FROM USUARIO as U, USUARIO_TIPO as UT, TIPO_USUARIO as TU" + " WHERE U.CPF = UT.FK_CPF "
 					+ " AND TU.ID_TIPO_USUARIO = UT.FK_TIPO_USUARIO " + " AND U.CPF = ? AND Ativo = 0";
 
@@ -95,6 +95,7 @@ public class DesenvolvedorDAO {
 					tu = new TipoUsuario();
 
 					u.setNome(rs.getString("Nome"));
+					u.setSenha(rs.getString("Senha"));
 					u.setCpf(rs.getLong("Cpf"));
 					u.setDataNascimento(rs.getDate("Nascimento"));
 
@@ -230,7 +231,7 @@ public class DesenvolvedorDAO {
 		if (cf == null)
 			JOptionPane.showConfirmDialog(null, "ERRRROUUU");
 		else {
-			String selectSQL = "SELECT U.CPF, U.NOME, U.Nascimento, U.Login, UT.DATA_CADASTRO, UT.FK_TIPO_USUARIO, TU.DESCRICAO"
+			String selectSQL = "SELECT U.CPF, U.NOME, U.Nascimento, U.Login, U.Senha, UT.DATA_CADASTRO, UT.FK_TIPO_USUARIO, TU.DESCRICAO"
 					+ " FROM USUARIO as U, USUARIO_TIPO as UT, TIPO_USUARIO as TU" + " WHERE U.CPF = UT.FK_CPF "
 					+ " AND TU.ID_TIPO_USUARIO = UT.FK_TIPO_USUARIO " + " AND U.Login = ?";
 
@@ -248,6 +249,7 @@ public class DesenvolvedorDAO {
 					tu = new TipoUsuario();
 
 					u.setNome(rs.getString("Nome"));
+					u.setSenha(rs.getString("Senha"));
 					u.setCpf(rs.getLong("Cpf"));
 					u.setDataNascimento(rs.getDate("Nascimento"));
 
@@ -408,7 +410,7 @@ public class DesenvolvedorDAO {
 		if (cf == null)
 			JOptionPane.showConfirmDialog(null, "ERRRROUUU");
 		else {
-			String selectSQL = "UPDATE USUARIO SET CPF = ? , Nome = ?, Nascimento = ?, Login = ? WHERE CPF=?";
+			String selectSQL = "UPDATE USUARIO SET CPF = ? , Nome = ?, Nascimento = ?, Login = ?, Senha = ? WHERE CPF=?";
 			
 			PreparedStatement preparedStatement;
 			
@@ -423,7 +425,8 @@ public class DesenvolvedorDAO {
 				preparedStatement.setDate(3, dataSql);
 				
 				preparedStatement.setString(4, u.getLogin());
-				preparedStatement.setLong(5, cpf);
+				preparedStatement.setString(5, u.getSenha());
+				preparedStatement.setLong(6, cpf);
 
 				// preparedStatement.setString(1, "Pedro Henrique Banali");
 

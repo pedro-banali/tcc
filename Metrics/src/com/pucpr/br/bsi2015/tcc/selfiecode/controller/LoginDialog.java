@@ -111,7 +111,7 @@ public class LoginDialog {
 				try {
 
 						
-						if(MetricsController.getInstance().login(user, password) == 1)
+						if(MetricsController.getInstance().login(user, password) > 0 )
 						{
 							//JOptionPane.showMessageDialog(null, "Login inválido tente novamente");
 							shell.close();

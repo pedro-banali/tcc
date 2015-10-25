@@ -142,7 +142,7 @@ public class SelfieCodeBC {
 	}
 
 	public boolean cadastrarDev(JSONObject u, Usuario g) {
-
+		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		Desenvolvedor ds = new Desenvolvedor();
 		Projeto proj = new Projeto();
 		TipoUsuario tu = new TipoUsuario();
@@ -151,7 +151,12 @@ public class SelfieCodeBC {
 		ds.setNome(u.getString("nome"));
 		ds.setLogin(u.getString("login"));
 		ds.setCpf(u.getLong("cpf"));
-		ds.setDataNascimento(new Date(u.getString("dataNascimento")));
+		try {
+			ds.setDataNascimento(df.parse(u.getString("dataNascimento")));
+		} catch (JSONException | ParseException e) {
+			// TODO Auto-generated catch block
+			e.getMessage();
+		}
 		ds.setSenha(u.getString("senha"));
 		tu.setId(3);
 		ds.setTipoUsuario(tu);
@@ -181,14 +186,19 @@ public class SelfieCodeBC {
 	}
 	
 	public boolean cadastrarGer(JSONObject u, Usuario g) {
-
+		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		Desenvolvedor ds = new Desenvolvedor();
 		TipoUsuario tu = new TipoUsuario();
 		boolean result;
 		ds.setNome(u.getString("nome"));
 		ds.setLogin(u.getString("login"));
 		ds.setCpf(u.getLong("cpf"));
-		ds.setDataNascimento(new Date(u.getString("dataNascimento")));
+		try {
+			ds.setDataNascimento(df.parse(u.getString("dataNascimento")));
+		} catch (JSONException | ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ds.setSenha(u.getString("senha"));
 		tu.setId(2);
 		ds.setTipoUsuario(tu);
@@ -216,11 +226,18 @@ public class SelfieCodeBC {
 	public JSONObject editDev(JSONObject u, Usuario g) {
 
 		Desenvolvedor ds = new Desenvolvedor();
+		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		JSONObject r = new JSONObject();
 		ds.setNome(u.getString("nome"));
 		ds.setLogin(u.getString("login"));
 		ds.setCpf(u.getLong("cpfNovo"));
-		ds.setDataNascimento(new Date(u.getString("dataNascimento")));
+		ds.setSenha(u.getString("senha"));
+		try {
+			ds.setDataNascimento(df.parse(u.getString("dataNascimento")));
+		} catch (JSONException | ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		DesenvolvedorDAO dDao = new DesenvolvedorDAO();
 		Usuario us = dDao.selectDev(ds);
@@ -244,13 +261,19 @@ public class SelfieCodeBC {
 	}
 	
 	public JSONObject editGer(JSONObject u, Usuario g) {
-
+		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		Desenvolvedor ds = new Desenvolvedor();
 		JSONObject r = new JSONObject();
 		ds.setNome(u.getString("nome"));
 		ds.setLogin(u.getString("login"));
 		ds.setCpf(u.getLong("cpfNovo"));
-		ds.setDataNascimento(new Date(u.getString("dataNascimento")));
+		ds.setSenha(u.getString("senha"));
+		try {
+			ds.setDataNascimento(df.parse(u.getString("dataNascimento")));
+		} catch (JSONException | ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		DesenvolvedorDAO dDao = new DesenvolvedorDAO();
 		Usuario us = dDao.selectGer(ds);
@@ -276,10 +299,16 @@ public class SelfieCodeBC {
 	public boolean cadastrarProj(JSONObject p, Usuario g) {
 
 		Projeto proj = new Projeto();
-
+		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyy");
 		proj.setNome(p.getString("nome"));
-		proj.setInicio(new Date(p.getString("inicio")));
-		proj.setFim(new Date(p.getString("fim")));
+		try {
+			proj.setInicio(df.parse(p.getString("inicio")));
+			proj.setFim(df.parse(p.getString("fim")));
+		} catch (JSONException | ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		proj.setTempoParaColeta(p.getInt("tempoParaColeta"));
 		proj.setStatus(p.getString("status"));
 		proj.setDescricao(p.getString("descricao"));

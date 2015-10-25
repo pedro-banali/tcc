@@ -32,12 +32,14 @@
                                         </div>
                                         <div class="form-group">
                                             <label>CPF</label>
-                                            <input class="form-control" type="number" name="cpf" ng-model="usuario.cpfNovo" placeholder="CPF" required ng-minlength="11" ng-maxlength="11">
+                                            <input class="form-control" type="text" name="cpf" ng-model="usuario.cpfNovo" placeholder="CPF" ui-validate="{cpf: 'validaCpf($value)'}" required
+									maxlength="11" minlength="11">
                                             <span style="color:red"  ng-show="myForm.cpf.$dirty && myForm.cpf.$invalid">
  												<span ng-show="myForm.cpf.$error.required">CPF &eacute; obrigat&oacute;rio.</span>
  											</span>
  											<p ng-show="myForm.cpf.$error.minlength" class="help-block">Cpf &eacute; muito curto.</p>
 								           	<p ng-show="myForm.cpf.$error.maxlength" class="help-block">Cpf &eacute; muito longo.</p>
+								           	<p class="help-block" ng-show="myForm.cpf.$error.cpf && !myForm.cpf.$error.required">CPF inv&aacute;lido.</p>
                                         </div>
                                         <div class="form-group">
                                             <label>Login</label>
@@ -58,10 +60,15 @@
                                         	<fieldset disabled>
 	                                            <label for="disabledSelect" >Tipo do Usu&aacute;rio</label>
 	                                            <select id="disabledSelect" class="form-control">
-	                                                <option value="3">Desenvolvedor</option>
+	                                                <option value="2">Gerente</option>
 	                                            </select>
                                             </fieldset>
                                         </div>
+                                        <div class="form-group">
+											<label>Senha</label> <input class="form-control" type="password"
+												name="senha" ng-model="usuario.senha"
+												placeholder="Digite senha" required>
+										</div>
                                         <button type="submit" class="btn btn-default" ng-disabled="!myForm.$valid">Atualizar</button>
                                         <button type="reset" class="btn btn-default" ng-click="go('/listar-dev')">Cancelar</button>
                                     </form>

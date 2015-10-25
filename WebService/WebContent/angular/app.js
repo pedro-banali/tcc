@@ -1,7 +1,7 @@
 var app = angular.module(
 		'selfiecode',
 		[ 'ngAnimate', 'ui.bootstrap', 'ngRoute', 'admin', 'dev', 'proj', 'ger',
-				'atr', 'treino', 'devInfo', 'modal', 'modalLoad', 'devGraph'
+				'atr', 'treino', 'devInfo', 'modal', 'modalLoad', 'devGraph','ui.validate','ui.bootstrap',
 		// 'ui.mask'
 		]).config([ '$routeProvider', function($routeProvider) {
 	$routeProvider.when('/page-dev', {

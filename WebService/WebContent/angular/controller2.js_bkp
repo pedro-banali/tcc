@@ -139,8 +139,6 @@ angular
                                     console.log("result" + response);
                                     if (response.data.result == true) {
                                         $scope.projeto = {};
-                                        $scope.projeto.inicio = new Date('2014-03-08T00:00:00');
-                                        $scope.projeto.fim = new Date('2014-03-08T00:00:00');
                                         $scope.alertsS = [];
                                         $scope.sucesso = [];
                                         $scope.sucesso.msg = 'Projeto cadastrado com sucesso.';
@@ -274,293 +272,6 @@ angular
             }
         ]);
 
-var selfieMyappDev = angular.module('ger', []);
-selfieMyappDev
-    .controller(
-        'gerCtrl', [
-            '$scope',
-            '$http',
-            '$location',
-            '$window',
-            '$routeParams',
-            'authenticationSvc',
-            'managerSrvc',
-            'projectSvc',
-            '$modal',
-            function($scope, $http, $location, $window,
-                $routeParams, authenticationSvc, managerSrvc,
-                projectSvc, $modal) {
-            	
-                // Modal Loading
-                $scope.openLoad = function() {
-                	if($scope.isOpen == false)
-                	{
-	                	$scope.isOpen = true;
-	                	$scope.modalInstance = $modal.open({
-	                        templateUrl: 'loading.html',
-	                        controller: 'modalLoading',
-	                        scope: $scope
-	                    });
-                	}
-                 };
-                 
-                 $scope.validaCpf = function (cpf) {
-                     if (!cpf) {
-                         return false;
-                     }
-                     var soma;
-                     var resto;
-                     soma = 0;
-                     if (    cpf =="00000000000"   ||
-                    		 cpf =="11111111111"	||
-                    		 cpf =="22222222222"	||
-                    		 cpf =="33333333333"	||
-                    		 cpf =="44444444444"	||
-                    		 cpf =="55555555555"	||
-                    		 cpf =="66666666666"	||
-                    		 cpf =="77777777777"	||
-                    		 cpf =="88888888888"	||
-                    		 cpf =="9999999999" )
-                         return false;
-                     for (i = 1; i <= 9; i++)
-                         soma = soma + parseInt(cpf.substring(i - 1, i)) * (11 - i);
-                     resto = (soma * 10) % 11;
-                     if ((resto === 10) || (resto === 11))
-                         resto = 0;
-                     if (resto !== parseInt(cpf.substring(9, 10)))
-                         return false;
-                     soma = 0;
-                     for (i = 1; i <= 10; i++)
-                         soma = soma + parseInt(cpf.substring(i - 1, i)) * (12 - i);
-                     resto = (soma * 10) % 11;
-                     if ((resto === 10) || (resto === 11))
-                         resto = 0;
-                     if (resto !== parseInt(cpf.substring(10, 11)))
-                         return false;
-                     return true;
-                 };
-                 
-
-                 
-                $scope.cancel = function() {
-                	if($scope.isOpen == true)
-                		$scope.modalInstance.close();
-                	$scope.isOpen = false;
-                };
-                // Modal Loading
-            	
-                $scope.cadastroGer = function() {
-
-                    var user = JSON.stringify($scope.usuario);
-                    if (!myForm.$valid) {
-                    	$scope.openLoad();
-                        $http({
-                                method: 'POST',
-                                url: 'http://localhost/WebService/selfieCode/service/cadastroGer',
-                                headers: {
-                                    'usuario': user,
-                                    'key': authenticationSvc
-                                        .getUserInfo().accessToken
-                                }
-                            })
-                            .then(
-                                function(response) {
-
-                                    // this callback will be
-                                    // called asynchronously
-                                    // when the response is
-                                    // available
-                                    console.log("result" + response);
-                                    $scope.alertsS = [];
-                                    $scope.alertsE = [];
-                                    if (response.data.result == true) {
-                                        $scope.usuario = {};
-
-                                        $scope.sucesso = [];
-                                        $scope.sucesso.msg = 'Usuário cadastrado com sucesso.';
-                                        $scope.sucesso.type = 'success';
-                                        $scope.alertsS
-                                            .push($scope.sucesso);
-                                    } else {
-
-                                        $scope.errorMsg = [];
-                                        // $scope.errorMsg.msg
-                                        // = 'Usuário
-                                        // inexistente.';
-                                        $scope.errorMsg.type = 'danger';
-
-                                        $scope.errorMsg.msg = 'CPF ou Login já existente.';
-                                        $scope.alertsE
-                                            .push($scope.errorMsg);
-                                    }
-                                    $scope.cancel();
-                                },
-                                function(response) {
-                                    // called asynchronously
-                                    // if an error occurs
-                                    // or server returns
-                                    // response with an
-                                    // error status.
-                                });
-                    } else {
-                        $scope.errorValid = true;
-                    }
-                }
-
-                $scope.getUsuario = function() {
-                	$scope.openLoad();
-                    managerSrvc
-                        .listGer(
-                            authenticationSvc.getUserInfo().accessToken,
-                            function(result) { // this is
-                                // only run
-                                // after
-                                // $http
-                                // completes
-                                $scope.usuarios = result.ger;
-
-                                var u = $scope.usuarios;
-
-                                for (var i = 0; i < u.length; i++) {
-                                	$scope.usuario = u[i];
-                                    if ($routeParams.cpf == u[i].cpf) {
-                                        var cpf = $scope.usuario.cpf + "";
-                                        if(cpf.length != 11)
-                                        {
-                                        	for(var i = 0; i < (11 - cpf.length); i++)
-                                        	{
-                                        		cpf = "0" + cpf;
-                                        	}
-                                        	$scope.usuario.cpf = cpf;
-                                        }
-                                    	
-                                        
-                                        $scope.usuario.cpfNovo = $scope.usuario.cpf;
-                                        $scope.cancel();
-                                        return;
-                                    }
-                                }
-                                $scope.alertsE = [];
-                                $scope.errorValid = true;
-                                $scope.errorMsg = [];
-                                $scope.errorMsg.msg = 'Usuário inexistente.';
-                                $scope.errorMsg.type = 'danger';
-                                $scope.alertsE
-                                    .push($scope.errorMsg);
-                                $scope.cancel();
-                            });
-                    
-                }
-
-                $scope.editGer = function() {
-                    var user = JSON.stringify($scope.usuario);
-                    if (!myForm.$valid) {
-                    	$scope.openLoad();
-                        $http({
-                                method: 'POST',
-                                url: 'http://localhost/WebService/selfieCode/service/editGer',
-                                headers: {
-                                    'usuario': user,
-                                    'key': authenticationSvc
-                                        .getUserInfo().accessToken
-                                }
-                            })
-                            .then(
-                                function(response) {
-
-                                    // this callback will be
-                                    // called asynchronously
-                                    // when the response is
-                                    // available
-                                    console.log("result" + response);
-                                    $scope.alertsE = [];
-                                    $scope.alertsS = [];
-                                    if (response.data.result == true) {
-                                        $scope.usuario.cpf = $scope.usuario.cpfNovo;
-
-                                        $scope.sucesso = [];
-                                        $scope.sucesso.msg = 'Usuário alterado com sucesso.';
-                                        $scope.sucesso.type = 'success';
-                                        $scope.alertsS
-                                            .push($scope.sucesso);
-                                        $scope.usuario = {};
-                                        // $location.path("/page-dev");
-                                    } else if (response.data.result == 'existe') {
-
-                                        $scope.errorValid = true;
-                                        $scope.errorMsg = [];
-                                        $scope.errorMsg.msg = 'Este CPF ou Login já existe no sistema.';
-                                        $scope.errorMsg.type = 'danger';
-                                        $scope.alertsE
-                                            .push($scope.errorMsg);
-                                    } else if (response.data.result == 'inativo') {
-                                        $scope.usuario = response.data.usuario;
-                                        $scope.errorValid = true;
-                                        $scope.errorMsg = [];
-                                        $scope.errorMsg.msg = 'Este CPF: usuario.cpf já existe no sistema, favor reativálo.';
-                                        $scope.errorMsg.type = 'danger';
-                                        $scope.alertsE
-                                            .push($scope.errorMsg);
-                                    } else {
-
-                                        $scope.errorValid = true;
-                                        $scope.errorMsg = [];
-                                        $scope.errorMsg.msg = 'Usuário inexistente.';
-                                        $scope.errorMsg.type = 'danger';
-                                        $scope.alertsE
-                                            .push($scope.errorMsg);
-                                    }
-                                    $scope.cancel();
-                                },
-                                function(response) {
-                                    // called asynchronously
-                                    // if an error occurs
-                                    // or server returns
-                                    // response with an
-                                    // error status.
-
-                                });
-                    } else {
-                        $scope.alertsE = [];
-                        $scope.errorValid = true;
-                        $scope.errorMsg = [];
-                        $scope.errorMsg.msg = 'Usuário inexistente.';
-                        $scope.errorMsg.type = 'danger';
-                        $scope.alertsE.push($scope.errorMsg);
-                    }
-
-                }
-
-                $scope.go = function(path) {
-                    $location.path(path);
-                };
-
-                $scope.listarGer = function() {
-                	$scope.openLoad();
-                    managerSrvc.listGer(authenticationSvc
-                        .getUserInfo().accessToken,
-                        function(
-                            result) { // this is only run after
-                            // $http completes
-                            $scope.usuarios = result;
-                            console.log("scope" + $scope.usuarios);
-                            $scope.cancel();
-                        });
-                }
-
-       
-
-                $scope.closeAlertE = function(index) {
-                    $scope.alertsE.splice(index, 1);
-                };
-
-                $scope.closeAlertS = function(index) {
-                    $scope.alertsS.splice(index, 1);
-                };
-
-            }
-        ]);
-
 var selfieMyappDev = angular.module('dev', []);
 selfieMyappDev
     .controller(
@@ -590,42 +301,6 @@ selfieMyappDev
 	                    });
                 	}
                  };
-                 
-                 $scope.validaCpf = function (cpf) {
-                     if (!cpf) {
-                         return false;
-                     }
-                     var soma;
-                     var resto;
-                     soma = 0;
-                     if (    cpf =="00000000000"   ||
-                    		 cpf =="11111111111"	||
-                    		 cpf =="22222222222"	||
-                    		 cpf =="33333333333"	||
-                    		 cpf =="44444444444"	||
-                    		 cpf =="55555555555"	||
-                    		 cpf =="66666666666"	||
-                    		 cpf =="77777777777"	||
-                    		 cpf =="88888888888"	||
-                    		 cpf =="9999999999" )
-                         return false;
-                     for (i = 1; i <= 9; i++)
-                         soma = soma + parseInt(cpf.substring(i - 1, i)) * (11 - i);
-                     resto = (soma * 10) % 11;
-                     if ((resto === 10) || (resto === 11))
-                         resto = 0;
-                     if (resto !== parseInt(cpf.substring(9, 10)))
-                         return false;
-                     soma = 0;
-                     for (i = 1; i <= 10; i++)
-                         soma = soma + parseInt(cpf.substring(i - 1, i)) * (12 - i);
-                     resto = (soma * 10) % 11;
-                     if ((resto === 10) || (resto === 11))
-                         resto = 0;
-                     if (resto !== parseInt(cpf.substring(10, 11)))
-                         return false;
-                     return true;
-                 };
 
                 $scope.cancel = function() {
                 	if($scope.isOpen == true)
@@ -635,12 +310,10 @@ selfieMyappDev
                 // Modal Loading
             	
                 $scope.cadastroDev = function() {
-                	$scope.usuario.dataNascimento = $scope.usuario.dataNascimento
-                    .toLocaleDateString();
+
                     var user = JSON.stringify($scope.usuario);
                     if (!myForm.$valid) {
-                    	$scope.openLoad();
-                        
+                    	$scope.$scope.openLoad();
                         $http({
                                 method: 'POST',
                                 url: 'http://localhost/WebService/selfieCode/service/cadastroDev',
@@ -1149,10 +822,6 @@ selfieMyappDev
                 	$scope.isOpen = false;
                 };
 
-                $scope.validaData = function (data) {
-               	 
-                    return true;
-                };
                 $scope.getProjeto = function() {
                 	$scope.open();
                     var projetos = projectSvc.projetos();
@@ -1573,7 +1242,7 @@ selfieMyappDev
 
                                     var data = []
                                     var dataSeries = {
-                                        type: "line",
+                                        type: "spline",
                                         legendText: "WMC",
                                         showInLegend: true
                                     };
@@ -1583,7 +1252,7 @@ selfieMyappDev
                                     data.push(dataSeries);
 
                                     var dataSeries = {
-                                        type: "line",
+                                        type: "spline",
                                         legendText: "CCM",
                                         showInLegend: true
                                     };
@@ -1592,7 +1261,7 @@ selfieMyappDev
                                     data.push(dataSeries);
 
                                     var dataSeries = {
-                                        type: "line",
+                                        type: "spline",
                                         legendText: "LCOM",
                                         showInLegend: true
                                     };
@@ -1601,7 +1270,7 @@ selfieMyappDev
                                     data.push(dataSeries);
 
                                     var dataSeries = {
-                                        type: "line",
+                                        type: "spline",
                                         legendText: "NBD",
                                         showInLegend: true
                                     };
@@ -1610,7 +1279,7 @@ selfieMyappDev
                                     data.push(dataSeries);
 
                                     var dataSeries = {
-                                        type: "line",
+                                        type: "spline",
                                         legendText: "DIT",
                                         showInLegend: true
                                     };
@@ -1619,7 +1288,7 @@ selfieMyappDev
                                     data.push(dataSeries);
 
                                     var dataSeries = {
-                                        type: "line",
+                                        type: "spline",
                                         legendText: "NOC",
                                         showInLegend: true
                                     };
@@ -1628,7 +1297,7 @@ selfieMyappDev
                                     data.push(dataSeries);
 
                                     var dataSeries = {
-                                        type: "line",
+                                        type: "spline",
                                         legendText: "NORM",
                                         showInLegend: true
                                     };
@@ -1637,7 +1306,7 @@ selfieMyappDev
                                     data.push(dataSeries);
 
                                     var dataSeries = {
-                                        type: "line",
+                                        type: "spline",
                                         legendText: "SIX",
                                         showInLegend: true
                                     };
@@ -1646,7 +1315,7 @@ selfieMyappDev
                                     data.push(dataSeries);
 
                                     var dataSeries = {
-                                        type: "line",
+                                        type: "spline",
                                         legendText: "MLOC",
                                         showInLegend: true
                                     };
@@ -1655,7 +1324,7 @@ selfieMyappDev
                                     data.push(dataSeries);
 
                                     var dataSeries = {
-                                        type: "line",
+                                        type: "spline",
                                         legendText: "NAC",
                                         showInLegend: true
                                     };
@@ -1664,7 +1333,7 @@ selfieMyappDev
                                     data.push(dataSeries);
 
                                     var dataSeries = {
-                                        type: "line",
+                                        type: "spline",
                                         legendText: "NSF",
                                         showInLegend: true
                                     };
@@ -1673,7 +1342,7 @@ selfieMyappDev
                                     data.push(dataSeries);
 
                                     var dataSeries = {
-                                        type: "line",
+                                        type: "spline",
                                         legendText: "NSM",
                                         showInLegend: true
                                     };
@@ -1682,7 +1351,7 @@ selfieMyappDev
                                     data.push(dataSeries);
 
                                     var dataSeries = {
-                                        type: "line",
+                                        type: "spline",
                                         legendText: "PAR",
                                         showInLegend: true
                                     };
@@ -1691,7 +1360,7 @@ selfieMyappDev
                                     data.push(dataSeries);
 
                                     var dataSeries = {
-                                        type: "line",
+                                        type: "spline",
                                         legendText: "NOI",
                                         showInLegend: true
                                     };
@@ -1700,7 +1369,7 @@ selfieMyappDev
                                     data.push(dataSeries);
 
                                     var dataSeries = {
-                                        type: "line",
+                                        type: "spline",
                                         legendText: "NOP",
                                         showInLegend: true
                                     };
@@ -1709,7 +1378,7 @@ selfieMyappDev
                                     data.push(dataSeries);
 
                                     var dataSeries = {
-                                        type: "line",
+                                        type: "spline",
                                         legendText: "Ce",
                                         showInLegend: true
                                     };
@@ -1718,7 +1387,7 @@ selfieMyappDev
                                     data.push(dataSeries);
 
                                     var dataSeries = {
-                                        type: "line",
+                                        type: "spline",
                                         legendText: "Ce",
                                         showInLegend: true
                                     };
@@ -1727,7 +1396,7 @@ selfieMyappDev
                                     data.push(dataSeries);
 
                                     var dataSeries = {
-                                        type: "line",
+                                        type: "spline",
                                         legendText: "RMI",
                                         showInLegend: true
                                     };
@@ -1736,7 +1405,7 @@ selfieMyappDev
                                     data.push(dataSeries);
 
                                     var dataSeries = {
-                                        type: "line",
+                                        type: "spline",
                                         legendText: "RMA",
                                         showInLegend: true
                                     };
@@ -1773,7 +1442,7 @@ selfieMyappDev
 
                                     var data = [];
                                     var dataSeries = {
-                                        type: "line"
+                                        type: "spline"
                                     };
                                     var dataPoints = [];
                                     dataSeries.dataPoints = ccm;
@@ -2693,7 +2362,7 @@ angular
                                     
                                 } else {
                                     $scope.errorMsg = [];
-                                    $scope.errorMsg.msg = 'Usuário já está cadastrado neste treino.';
+                                    $scope.errorMsg.msg = 'Usuário já está cadastrado neste projeto.';
                                     $scope.errorMsg.type = 'danger';
                                     $scope.alertsE
                                         .push($scope.errorMsg);

@@ -32,12 +32,13 @@
                                         </div>
                                         <div class="form-group">
                                             <label>CPF</label>
-                                            <input class="form-control" type="number" name="cpf" ng-model="usuario.cpf" placeholder="CPF" required  ng-minlength="11" ng-maxlength="11">
+                                            <input class="form-control" type="text" name="cpf" ng-model="usuario.cpf" placeholder="CPF" ui-validate="{cpf: 'validaCpf($value)'}" required  ng-minlength="11" ng-maxlength="11" minlength="11" maxlength="11">
                                             <span style="color:red"  ng-show="myForm.cpf.$dirty && myForm.cpf.$invalid">
  												<span ng-show="myForm.cpf.$error.required">CPF &eacute; obrigat&oacute;rio.</span>
  											</span>
  											<p ng-show="myForm.cpf.$error.minlength" class="help-block">Cpf &eacute; muito curto.</p>
 								           	<p ng-show="myForm.cpf.$error.maxlength" class="help-block">Cpf &eacute; muito longo.</p>
+								           	<p class="help-block" ng-show="myForm.cpf.$error.cpf && !myForm.cpf.$error.required">CPF inv&aacute;lido.</p>
                                         </div>
                                         <div class="form-group">
                                             <label>Login</label>
