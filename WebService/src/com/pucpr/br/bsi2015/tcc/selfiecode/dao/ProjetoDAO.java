@@ -296,7 +296,7 @@ public class ProjetoDAO {
 		else
 		{
 			
-			String selectSQL = "UPDATE PROJETO SET NomeProjeto = ?, Descricao = ?, Inicio = ?, Fim= ?, Status_projeto = ? WHERE ID_PROJETO = ? ";
+			String selectSQL = "UPDATE PROJETO SET NomeProjeto = ?, Descricao = ?, Inicio = ?, Fim= ?, Status_projeto = ?, Tempo_Coleta = ? WHERE ID_PROJETO = ? ";
 			
 			PreparedStatement preparedStatement;
 			try {
@@ -306,7 +306,8 @@ public class ProjetoDAO {
 				preparedStatement.setDate(3, dataIni);
 				preparedStatement.setDate(4, dataFim);
 				preparedStatement.setString(5, proj.getStatus());
-				preparedStatement.setInt(6, proj.getId());
+				preparedStatement.setInt(6, proj.getTempoParaColeta());
+				preparedStatement.setInt(7, proj.getId());
 				
 				int rs = preparedStatement.executeUpdate();
 				ResultSet rsKeys = preparedStatement.getGeneratedKeys();
@@ -356,6 +357,45 @@ public class ProjetoDAO {
 					return false;
 				
 
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+
+	public boolean updateProjeto(long cpf, int id) {
+		// TODO Auto-generated method stub
+
+		
+		Connection cf = ConnectionFactory.getConnection();
+		
+		if(cf == null)
+			JOptionPane.showConfirmDialog(null, "ERRRROUUU");
+		else
+		{
+			
+			String selectSQL = "UPDATE USUARIO_PROJETO SET FK_PROJETO = ? WHERE FK_USUARIO = ? ";
+			
+			PreparedStatement preparedStatement;
+			try {
+				preparedStatement = cf.prepareStatement(selectSQL, Statement.RETURN_GENERATED_KEYS);
+				preparedStatement.setInt(1, id);
+				preparedStatement.setLong(2, cpf);
+
+				
+				int rs = preparedStatement.executeUpdate();
+
+				if(rs > 0)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

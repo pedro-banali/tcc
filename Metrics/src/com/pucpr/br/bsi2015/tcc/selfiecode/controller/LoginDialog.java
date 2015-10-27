@@ -110,8 +110,8 @@ public class LoginDialog {
 				
 				try {
 
-						
-						if(MetricsController.getInstance().login(user, password) > 0 )
+						int i = MetricsController.getInstance().login(user, password);
+						if(i == 1 )
 						{
 							//JOptionPane.showMessageDialog(null, "Login inválido tente novamente");
 							shell.close();
@@ -120,7 +120,7 @@ public class LoginDialog {
 							loginMessage.setText("Login Inválido");
 							//shell.redraw();
 						}
-						else if(MetricsController.getInstance().login(user, password) == 2)
+						else if( i == 2)
 						{
 							shell.close();
 							createContents(1);

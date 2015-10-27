@@ -28,6 +28,7 @@ import com.pucpr.br.bsi2015.tcc.selfiecode.model.TipoUsuario;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Treino;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Usuario;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.UsuarioProj;
+import com.pucpr.br.bsi2015.tcc.selfiecode.model.UsuarioTreino;
 
 public class SelfieCodeBC {
 
@@ -131,6 +132,15 @@ public class SelfieCodeBC {
 
 		// return true;
 	}
+	
+	public List<UsuarioTreino> listarDevTreino(Usuario u) {
+
+		UsuarioDAO uDao = new UsuarioDAO();
+
+		return uDao.listarDevTreino(u);
+
+		// return true;
+	}
 
 	public List<Projeto> listarProjetos(Usuario u) {
 
@@ -226,6 +236,7 @@ public class SelfieCodeBC {
 	public JSONObject editDev(JSONObject u, Usuario g) {
 
 		Desenvolvedor ds = new Desenvolvedor();
+		ProjetoDAO pDao = new ProjetoDAO();
 		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		JSONObject r = new JSONObject();
 		ds.setNome(u.getString("nome"));
@@ -255,6 +266,7 @@ public class SelfieCodeBC {
 		// }
 		else {
 			dDao.editarDev(ds, u.getLong("cpf"));
+			//pDao.updateProjeto(u.getLong("cpf"), u.getInt("projeto"));
 			r.put("result", true);
 		}
 		return r;
@@ -344,6 +356,7 @@ public class SelfieCodeBC {
 		}
 		proj.setInicio(inicio);
 		proj.setFim(fim);
+		proj.setTempoParaColeta(p.getInt("tempoParaColeta"));
 		proj.setStatus(p.getString("status"));
 		proj.setDescricao(p.getString("descricao"));
 

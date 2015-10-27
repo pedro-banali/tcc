@@ -34,6 +34,7 @@ import com.pucpr.br.bsi2015.tcc.selfiecode.model.Projeto;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Treino;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Usuario;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.UsuarioProj;
+import com.pucpr.br.bsi2015.tcc.selfiecode.model.UsuarioTreino;
 import com.pucpr.br.bsi2015.tcc.selfiecode.session.SessionController;
 import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataParam;
@@ -74,7 +75,7 @@ public class WebService {
 		//List<String> lista =  new ArrayList<String>();
 		loginStatus = sbc.login(user, pass);
 		JSONObject jp = new JSONObject();
-		if (loginStatus != null) {
+		if (loginStatus != null && loginStatus.getCpf() != 0 ) {
 			
 			MessageDigest md;
 			Date date = new Date();
@@ -90,16 +91,18 @@ public class WebService {
 				jsonObject.put("tipo", loginStatus.getTipoUsuario().getId());
 				List<Projeto> projs = sbc.listarProjetos(loginStatus);
 				//ja = new JSONArray(projs);
+				
+				ja = new JSONArray();
 				for (int i = 0; i < projs.size(); i++) {
 					jp = new JSONObject();
 					jp.put("nome", projs.get(i).getNome());
 					jp.put("codigoProj", projs.get(i).getId());
 					jp.put("tempoColeta", projs.get(i).getTempoParaColeta());
-
+					ja.put(jp);
 
 				}
-				ja = new JSONArray();
-				ja.put(jp);
+				
+				
 				jsonObject.put("projetos", ja);
 				
 				sc.addSession(loginResult, loginStatus);
@@ -347,6 +350,22 @@ public class WebService {
 		
 		list = new JSONArray(uss);
 		jSon.put("devsProj", list);
+		return Response.status(200).entity(jSon.toString()).build();
+	}
+	
+	@Path("listarDevTreino")
+	@POST
+	@Produces("application/json")
+	public Response listarDevTreino(@HeaderParam("key") String key) throws JSONException {
+		SessionController sc = SessionController.getInstance();
+		JSONArray list;
+		JSONObject jSon = new JSONObject();
+		Usuario usuario = sc.getUser(key);
+		SelfieCodeBC sbc = SelfieCodeBC.getInstance();
+		List<UsuarioTreino> uss = sbc.listarDevTreino(usuario);
+		
+		list = new JSONArray(uss);
+		jSon.put("devsTreino", list);
 		return Response.status(200).entity(jSon.toString()).build();
 	}
 	

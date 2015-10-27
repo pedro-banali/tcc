@@ -15,6 +15,7 @@ import com.pucpr.br.bsi2015.tcc.selfiecode.model.Projeto;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.TipoUsuario;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.Usuario;
 import com.pucpr.br.bsi2015.tcc.selfiecode.model.UsuarioProj;
+import com.pucpr.br.bsi2015.tcc.selfiecode.model.UsuarioTreino;
 
 public class UsuarioDAO {
 	public Usuario login(Usuario usuario) {
@@ -78,7 +79,7 @@ public class UsuarioDAO {
 
 			selectSQL = "SELECT U.Nome, P.NomeProjeto FROM USUARIO AS U" + "	, PROJETO AS P, USUARIO_PROJETO AS UP"
 					+ "	WHERE UP.FK_USUARIO = U.CPF AND UP.FK_PROJETO = P.ID_PROJETO AND Gerente = ? "
-					+ " AND U.Ativo = 0 ORDER BY U.Nome";
+					+ " AND U.Ativo = 0 AND P.Ativo = 0 ORDER BY U.Nome";
 
 			PreparedStatement preparedStatement;
 			try {
@@ -94,6 +95,58 @@ public class UsuarioDAO {
 
 					u.setNome(rs.getString("Nome"));
 					u.setNomeProjeto(rs.getString("NomeProjeto"));
+
+					preparedStatement = cf.prepareStatement(selectSQL);
+
+					usuarios.add(u);
+
+				}
+
+				cf.close();
+				return usuarios;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return null;
+	}
+	
+	public List<UsuarioTreino> listarDevTreino(Usuario usuario) {
+
+		Connection cf = ConnectionFactory.getConnection();
+		UsuarioTreino u;
+		;
+		List<UsuarioTreino> usuarios = new ArrayList<UsuarioTreino>();
+
+		if (cf == null)
+			JOptionPane.showConfirmDialog(null, "ERRRROUUU");
+		else {
+			String selectSQL;
+			if(usuario.getTipoUsuario().getId()  < 3)
+			selectSQL = "SELECT U.Nome, T.DESCRICAO, T.ASSUNTO FROM USUARIO AS U" + "	, TREINO AS T, TREINO_USUARIO AS UT"
+					+ "	WHERE UT.CPF_USUARIO = U.CPF AND UT.ID_TREINO = T.ID_TREINO AND Gerente = ? "
+					+ " AND U.Ativo = 0 ORDER BY U.Nome";
+			else
+				selectSQL = "SELECT U.Nome, T.DESCRICAO, T.ASSUNTO FROM USUARIO AS U" + "	, TREINO AS T, TREINO_USUARIO AS UT"
+						+ "	WHERE UT.CPF_USUARIO = U.CPF AND UT.ID_TREINO = T.ID_TREINO AND U.CPF = ? "
+						+ " AND U.Ativo = 0 ORDER BY U.Nome";
+			PreparedStatement preparedStatement;
+			try {
+				preparedStatement = cf.prepareStatement(selectSQL);
+
+				preparedStatement.setLong(1, usuario.getCpf());
+
+				// preparedStatement.setString(1, "Pedro Henrique Banali");
+				ResultSet rs = preparedStatement.executeQuery();
+				while (rs.next()) {
+
+					u = new UsuarioTreino();
+
+					u.setNome(rs.getString("Nome"));
+					u.setDescricao(rs.getString("DESCRICAO"));
+					u.setAssunto(rs.getString("ASSUNTO"));
 
 					preparedStatement = cf.prepareStatement(selectSQL);
 

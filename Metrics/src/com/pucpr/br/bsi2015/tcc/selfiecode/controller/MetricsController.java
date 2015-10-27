@@ -400,24 +400,24 @@ public class MetricsController extends Observable {
 					if (!t.isAlive()) {
 						try {
 							t.join();
-//							String dicaI, dicaJ;
-//							boolean achou = false;
-//							for (int i = 0; i <  dicas.size(); i++) {
-//								dicaI = dicas.get(i);
-//								achou = false;
-//								for (int j = i; j <  dicas.size(); j++) {
-//									dicaJ = dicas.get(j);
-//									if (dicaI.equals(dicaJ)) {
-//										achou = true;
-//									}
-//								}
-//								if(achou != true)
-//								writeMarkers(projeto, dicaI);
-//							}
-//							for (String dica : dicas)
-//								writeMarkers(projeto, dica);
-//
-//							dicas.clear();
+							// String dicaI, dicaJ;
+							// boolean achou = false;
+							// for (int i = 0; i < dicas.size(); i++) {
+							// dicaI = dicas.get(i);
+							// achou = false;
+							// for (int j = i; j < dicas.size(); j++) {
+							// dicaJ = dicas.get(j);
+							// if (dicaI.equals(dicaJ)) {
+							// achou = true;
+							// }
+							// }
+							// if(achou != true)
+							// writeMarkers(projeto, dicaI);
+							// }
+							// for (String dica : dicas)
+							// writeMarkers(projeto, dica);
+							//
+							// dicas.clear();
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -425,8 +425,6 @@ public class MetricsController extends Observable {
 					}
 				}
 				pr.restart();
-				
-				
 
 				threads = new ArrayList<Thread>();
 				// this.cancel();
@@ -441,7 +439,7 @@ public class MetricsController extends Observable {
 			IResource resource = type.getUnderlyingResource();
 			IMarker marker = resource.createMarker(IMarker.PROBLEM);
 			marker.setAttribute(IMarker.MESSAGE, message);
-		
+
 			// marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_NORMAL);
 			marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_INFO);
 		} catch (Exception e) {

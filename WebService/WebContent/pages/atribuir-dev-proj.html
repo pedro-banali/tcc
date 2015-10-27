@@ -21,7 +21,7 @@
 							<alert ng-repeat="alert in alertsE" type="{{errorMsg.type}}"
 								close="closeAlertE($index)">{{errorMsg.msg}}</alert>
 						</div>
-						<form role="form" ng-submit="atribuir()" name="myForm">
+ 						<form role="form" ng-submit="atribuir()" name="myForm">
 							<div class="form-group">
 								<label>Desenvolvedor</label> <select class="form-control"
 									name="dev" ng-model="atribuicao.dev" required>
@@ -38,7 +38,7 @@
 							</div>
 							<button type="submit" ng-cligk="listarDevProj();" class="btn btn-default"
 								ng-disabled="!myForm.$valid">Cadastrar</button>
-							<button type="reset" class="btn btn-default">Cancelar</button>
+							<button type="button" class="btn btn-default" onclick="location.href='#/admin-default';">Cancelar</button>
 						</form>
 					</div>
 					<!-- /.col-lg-6 (nested) -->

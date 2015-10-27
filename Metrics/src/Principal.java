@@ -2,16 +2,71 @@ import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
+
 public class Principal {
 
 	private String nomeProjeto;
 	static int interval, intervaloN;
 
-	static Timer timer;
+	private Timer timer;
 
 	public static void main(String[] args) {
-		Principal p = new Principal("Teste", 10);
-		
+		//Principal p = new Principal("Teste", 10);
+//		IProgressMonitor progressMonitor = new NullProgressMonitor();
+//
+//		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+//
+//		IProject project = root.getProject("NovoProjeto");
+//
+//		project.create(progressMonitor);
+//
+//		project.open(progressMonitor);
+//
+//
+//
+//
+//
+//		IProjectDescription description = project.getDescription();
+//
+//		String[] natures = description.getNatureIds();
+//
+//		String[] newNatures = new String[natures.length + 1];
+//
+//		System.arraycopy(natures, 0, newNatures, 0, natures.length);
+//
+//		newNatures[natures.length] = JavaCore.NATURE_ID;
+//
+//		description.setNatureIds(newNatures);
+//
+//		project.setDescription(description, progressMonitor);
+//
+//
+//
+//
+//		IJavaProject javaProject = JavaCore.create(project);
+//
+//
+//
+//
+//		Set<IClasspathEntry> entries = new HashSet<IClasspathEntry>();
+//
+//		entries.addAll(Arrays.asList(javaProject.getRawClasspath()));
+//
+//		IVMInstall vmInstall= JavaRuntime.getDefaultVMInstall();
+//
+//		LibraryLocation[] locations= JavaRuntime.getLibraryLocations(vmInstall);
+//
+//		for (LibraryLocation element : locations) {
+//
+//		entries.add(JavaCore.newLibraryEntry(element.getSystemLibraryPath(), null, null));
+//
+//		}
+//
+//		javaProject.setRawClasspath(entries.toArray(new IClasspathEntry[entries.size()]), progressMonitor);
 	}
 	
 	public Principal(String nome, int min) {

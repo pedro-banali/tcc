@@ -389,6 +389,7 @@ app
 															.assign("http://localhost/WebService/pages/admin.html");
 
 												}, function(error) {
+													$scope.error = "Login / Senha Inválidos"
 													deferred.reject(error);
 												});
 
@@ -570,10 +571,30 @@ app
 
 								});
 							}
+							
+							function listDevTreino(key, callback) {
+
+								$http(
+										{
+											method : "POST",
+											url : 'http://localhost/WebService/selfieCode/service/listarDevTreino',
+											headers : {
+												"key" : key
+											}
+										}).then(function(result) {
+									console.log("function" + result.data);
+									var devs = result.data.devsTreino;
+
+									callback(result.data);
+								}, function(error) {
+
+								});
+							}
 
 							return {
 								list : list,
 								listGer : listGer,
+								listDevTreino: listDevTreino,
 								listDevProj : listDevProj
 							};
 						} ]);

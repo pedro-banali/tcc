@@ -7,10 +7,10 @@ import com.pucpr.br.bsi2015.tcc.selfiecode.controller.SessionController;
 
 public class ProjectTime {
 	private String nomeProjeto;
-	static int interval, intervaloN;
+	private int interval, intervaloN;
 
-	static Timer timer;
-	static TimerTask tt;
+	private Timer timer;
+	private TimerTask tt;
 	public ProjectTime(String nome, int min) {
 		this.nomeProjeto = nome;
 		intervaloN = min;
@@ -50,7 +50,7 @@ public class ProjectTime {
 		return --interval;
 	}
 
-	public static int getInterval() {
+	public int getInterval() {
 		return interval;
 	}
 

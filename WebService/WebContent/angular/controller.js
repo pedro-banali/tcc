@@ -113,10 +113,6 @@ angular
                 	
                     if (!myForm.$valid) {
                     	$scope.openLoad();
-                        $scope.projeto.inicio = $scope.projeto.inicio
-                            .toLocaleDateString();
-                        $scope.projeto.fim = $scope.projeto.fim
-                            .toLocaleDateString();
 
                         var projeto = JSON
                             .stringify($scope.projeto);
@@ -139,14 +135,16 @@ angular
                                     console.log("result" + response);
                                     if (response.data.result == true) {
                                         $scope.projeto = {};
-                                        $scope.projeto.inicio = new Date('2014-03-08T00:00:00');
-                                        $scope.projeto.fim = new Date('2014-03-08T00:00:00');
+//                                        $scope.projeto.inicio = new Date('2014-03-08T00:00:00');
+//                                        $scope.projeto.fim = new Date('2014-03-08T00:00:00');
                                         $scope.alertsS = [];
                                         $scope.sucesso = [];
                                         $scope.sucesso.msg = 'Projeto cadastrado com sucesso.';
                                         $scope.sucesso.type = 'success';
                                         $scope.alertsS
                                             .push($scope.sucesso);
+                                        $scope.cancel();
+                                        
                                     } else {
                                         $scope.alertsE = [];
 
@@ -635,8 +633,8 @@ selfieMyappDev
                 // Modal Loading
             	
                 $scope.cadastroDev = function() {
-                	$scope.usuario.dataNascimento = $scope.usuario.dataNascimento
-                    .toLocaleDateString();
+//                	$scope.usuario.dataNascimento = $scope.usuario.dataNascimento
+//                    .toLocaleDateString();
                     var user = JSON.stringify($scope.usuario);
                     if (!myForm.$valid) {
                     	$scope.openLoad();
@@ -711,7 +709,7 @@ selfieMyappDev
                                 for (var i = 0; i < u.length; i++) {
                                     if ($routeParams.cpf == u[i].cpf) {
                                         $scope.usuario = u[i];
-                                        $scope.usuario.cpfNovo = $scope.usuario.cpf;
+                                        $scope.usuario.cpfNovo = $scope.usuario.cpf + "";
                                         return;
                                     }
                                 }
@@ -2565,6 +2563,19 @@ angular
                 	$scope.isOpen = false;
                 };
 
+                $scope.listarDevTreino = function() {
+                	$scope.open();
+                    managerSrvc.listDevTreino(authenticationSvc
+                        .getUserInfo().accessToken,
+                        function(
+                            result) { // this is only run after
+                            // $http completes
+                            $scope.devsTreino = result;
+                            $scope.cancel();
+                           
+                        });
+                }
+
                 $scope.listarTreino = function() {
                 	$scope.open();
                     treinoSvc
@@ -2690,6 +2701,24 @@ angular
                                     $scope.alertsS
                                         .push($scope.sucesso);
                                     $scope.sucessoValid = true;
+                                    $http({
+                                        method: "POST",
+                                        url: 'http://localhost/WebService/selfieCode/service/listarDevTreino',
+                                        headers: {
+                                            "key": authenticationSvc
+                                            .getUserInfo().accessToken
+                                        }
+                               	 	}).
+                                       then(function (result) {
+                                       	console.log("function" + result.data);
+                                       	var devs = result.data.devsTreino;
+                                       	
+                                     
+                                       	
+                                       	$scope.devsTreino = result.data;
+                                       }, function (error) {
+                                           
+                                       });
                                     
                                 } else {
                                     $scope.errorMsg = [];
