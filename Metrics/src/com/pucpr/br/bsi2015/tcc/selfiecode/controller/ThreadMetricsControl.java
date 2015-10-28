@@ -72,19 +72,19 @@ public class ThreadMetricsControl extends Thread {
 					System.out.println("deu menos q 0");
 					this.pr = pr;
 					
-//					IMarker[] markers;
-//					try {
-//						markers = ResourcesPlugin.getWorkspace().getRoot().findMarkers(IMarker.PROBLEM, true,
-//								IResource.DEPTH_INFINITE);
-//						if (markers.length > 0) {
-//							for (int i = 0; i < markers.length; i++) {
-//								markers[i].delete();
-//							}
-//						}
-//					} catch (CoreException e1) {
-//						// TODO Auto-generated catch block
-//						e1.printStackTrace();
-//					}
+					IMarker[] markers;
+					try {
+						markers = ResourcesPlugin.getWorkspace().getRoot().findMarkers(IMarker.PROBLEM, true,
+								IResource.DEPTH_INFINITE);
+						if (markers.length > 0) {
+							for (int i = 0; i < markers.length; i++) {
+								markers[i].delete();
+							}
+						}
+					} catch (CoreException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 				else {
 					System.out.println("deu mais q 0");
@@ -103,11 +103,12 @@ public class ThreadMetricsControl extends Thread {
 				try {
 					info = fileName.split("#:@:@:#");
 					String result = mc.dicas(c, info[0], info[1], currentElm);
-					if (result.equals("naoachou")) {
+					String result2[] = result.split("@#:#@");
+					if (result2[0].equals("naoachou")) {
 						Object firstElement = currentElm.getJavaProject();
 						if (firstElement instanceof IJavaProject) {
 							IJavaProject type = (IJavaProject) firstElement;
-							writeMarkers(type, "Projeto inexistente não foi possivel verificar as métricas");
+							writeMarkers(type, "Projeto inexistente não foi possivel verificar as métricas", "");
 
 							// for nested objects iteration if required
 
@@ -116,7 +117,7 @@ public class ThreadMetricsControl extends Thread {
 					}
 					// mc.uploadFile(fc.getFilePath());
 
-					JSONObject json = new JSONObject(result);
+					JSONObject json = new JSONObject(result2[0]);
 					Object firstElement = currentElm.getJavaProject();
 					IJavaProject type = (IJavaProject) firstElement;
 					MetricsController.getInstance().setProject(type);
@@ -131,7 +132,7 @@ public class ThreadMetricsControl extends Thread {
 						if (firstElement instanceof IJavaProject) {
 
 							// MetricsController.getInstance().addDicas(value);
-							writeMarkers(type, value);
+							writeMarkers(type, value, result2[1]);
 
 							// for nested objects iteration if required
 
@@ -152,7 +153,7 @@ public class ThreadMetricsControl extends Thread {
 		}
 	}
 
-	private void writeMarkers(IJavaProject type, String message) {
+	private void writeMarkers(IJavaProject type, String message, String source) {
 		try {
 			IMarker[] markers = ResourcesPlugin.getWorkspace().getRoot().findMarkers(IMarker.PROBLEM, true,
 					IResource.DEPTH_INFINITE);
@@ -164,26 +165,11 @@ public class ThreadMetricsControl extends Thread {
 				}
 			}
 			IResource resource = type.getUnderlyingResource();
-			IMarker marker = resource.createMarker(IMarker.TEXT);
+			IMarker marker = resource.createMarker(IMarker.PROBLEM);
 			marker.setAttribute(IMarker.MESSAGE, message);
-//			IExtensionPoint point =
-//			Platform.getExtensionRegistry().getExtensionPoint(ResourcesPlugin.PI_RESOURCES,
-//			ResourcesPlugin.PT_MARKERS);
-//			
-//			IExtension [] extensions = point.getExtensions();
-//			String label;
-//			for (IExtension extension : extensions) {
-//			String id = extension.getUniqueIdentifier();
-//			
-//			if ("org.eclipse.jdt.core.problem".equals(id)) {
-//			 label = extension.getLabel();
-//			
-//			 // TODO save the label
-//				}
-//			}
-	
-			marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_NORMAL);
-			marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_NORMAL);
+			marker.setAttribute(IMarker.LOCATION, source);
+
+			// marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_NORMAL);
 			marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_INFO);
 		} catch (Exception e) {
 			e.printStackTrace();

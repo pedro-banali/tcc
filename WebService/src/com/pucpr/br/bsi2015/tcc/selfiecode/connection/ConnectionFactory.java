@@ -19,8 +19,8 @@ public class ConnectionFactory {
 	private static final String DB_USER = "root";
 //	private static final String DB_USER = "tcc";
 //	 private static final String DB_PASSWORD = "tcc@051526"; // localServer
-//	 private static final String DB_PASSWORD = "tcc@6274262"; //AWS??
-	private static final String DB_PASSWORD = "tcc051526"; // localhost
+	 private static final String DB_PASSWORD = "tcc@6274262"; //AWS??
+//	private static final String DB_PASSWORD = "tcc051526"; // localhost
 
 	private static Session session;
 

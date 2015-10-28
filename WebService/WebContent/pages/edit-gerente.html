@@ -1,4 +1,17 @@
-
+<script>
+$(document).ready(function() {
+    $("#nasc").keyup(function(e){
+    
+    		if ($(this).val().length == 2){
+                $(this).val($(this).val() + "/");
+            }else if ($(this).val().length == 5){
+                $(this).val($(this).val() + "/");
+            }
+    
+        
+    });
+});
+</script>
 <div class="row" ng-init="getUsuario()">
 	<div class="col-lg-12">
 		<h1 class="page-header">Cadastro</h1>
@@ -74,7 +87,7 @@
 							<!--                                             <input class="form-control" type="password" name="senha" ng-model="usuario.senha" placeholder="Digite senha" required> -->
 							<!--                                         </div> -->
 							<div class="form-group">
-								<label>Data de Nascimento</label> <input class="form-control"
+								<label>Data de Nascimento</label> <input class="form-control" id="nasc"
 									name="dataNascimento" ng-model="usuario.dataNascimento"
 									required placeholder="dd/mm/yyyy"
 									ng-pattern='/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/'

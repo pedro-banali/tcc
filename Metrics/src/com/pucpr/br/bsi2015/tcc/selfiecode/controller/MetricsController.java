@@ -329,7 +329,7 @@ public class MetricsController extends Observable {
 			e.printStackTrace();
 		}
 
-		return result;
+		return result + "@#:#@" + c.getPath();
 
 	}
 

@@ -1370,20 +1370,21 @@ selfieMyappDev
                                 if (response.data) {
                                     $scope.response = response.data;
                                     console.log(response);
-                                    var ccm = [];
+//                                    var ccm = [];
                                     var wmc = [];
-                                    var lcom = [];
-                                    var nbd = [];
-                                    var dit = [];
+//                                    var lcom = [];
+//                                    var nbd = [];
+//                                    var dit = [];
                                     var noc = [];
                                     var norm = [];
-                                    var six = [];
+//                                    var six = [];
                                     var mloc = [];
-                                    var nac = [];
+//                                    var nac = [];
                                     var nsf = [];
                                     var nsm = [];
-                                    var par = [];
+//                                    var par = [];
                                     var noi = [];
+                                    var nom = [];
                                     var nop = [];
                                     var ca = [];
                                     var ce = [];
@@ -1430,13 +1431,13 @@ selfieMyappDev
                                         for (var k = 0; k < fu.metricas.length; k++) {
                                             var metrica = fu.metricas[k];
                                             switch (metrica.sigla) {
-                                                case "CCM":
-                                                    ccm
-                                                        .push({
-                                                            x: date,
-                                                            y: metrica.valorMetrica
-                                                        })
-                                                    break;
+//                                                case "CCM":
+//                                                    ccm
+//                                                        .push({
+//                                                            x: date,
+//                                                            y: metrica.valorMetrica
+//                                                        })
+//                                                    break;
                                                 case "WMC":
                                                     wmc
                                                         .push({
@@ -1444,27 +1445,27 @@ selfieMyappDev
                                                             y: metrica.valorMetrica
                                                         })
                                                     break;
-                                                case "LCOM*":
-                                                    lcom
-                                                        .push({
-                                                            x: date,
-                                                            y: metrica.valorMetrica
-                                                        })
-                                                    break;
-                                                case "NBD":
-                                                    nbd
-                                                        .push({
-                                                            x: date,
-                                                            y: metrica.valorMetrica
-                                                        })
-                                                    break;
-                                                case "DIT":
-                                                    dit
-                                                        .push({
-                                                            x: date,
-                                                            y: metrica.valorMetrica
-                                                        })
-                                                    break;
+//                                                case "LCOM*":
+//                                                    lcom
+//                                                        .push({
+//                                                            x: date,
+//                                                            y: metrica.valorMetrica
+//                                                        })
+//                                                    break;
+//                                                case "NBD":
+//                                                    nbd
+//                                                        .push({
+//                                                            x: date,
+//                                                            y: metrica.valorMetrica
+//                                                        })
+//                                                    break;
+//                                                case "DIT":
+//                                                    dit
+//                                                        .push({
+//                                                            x: date,
+//                                                            y: metrica.valorMetrica
+//                                                        })
+//                                                    break;
                                                 case "NOC":
                                                     noc
                                                         .push({
@@ -1479,13 +1480,20 @@ selfieMyappDev
                                                             y: metrica.valorMetrica
                                                         })
                                                     break;
-                                                case "SIX":
-                                                    six
+                                                case "NOM":
+                                                    nom
                                                         .push({
                                                             x: date,
                                                             y: metrica.valorMetrica
                                                         })
                                                     break;
+//                                                case "SIX":
+//                                                    six
+//                                                        .push({
+//                                                            x: date,
+//                                                            y: metrica.valorMetrica
+//                                                        })
+//                                                    break;
                                                 case "MLOC":
                                                     mloc
                                                         .push({
@@ -1493,13 +1501,13 @@ selfieMyappDev
                                                             y: metrica.valorMetrica
                                                         })
                                                     break;
-                                                case "NAC":
-                                                    nac
-                                                        .push({
-                                                            x: date,
-                                                            y: metrica.valorMetrica
-                                                        })
-                                                    break;
+//                                                case "NAC":
+//                                                    nac
+//                                                        .push({
+//                                                            x: date,
+//                                                            y: metrica.valorMetrica
+//                                                        })
+//                                                    break;
                                                 case "NSF":
                                                     nsf
                                                         .push({
@@ -1514,13 +1522,13 @@ selfieMyappDev
                                                             y: metrica.valorMetrica
                                                         })
                                                     break;
-                                                case "PAR":
-                                                    par
-                                                        .push({
-                                                            x: date,
-                                                            y: metrica.valorMetrica
-                                                        })
-                                                    break;
+//                                                case "PAR":
+//                                                    par
+//                                                        .push({
+//                                                            x: date,
+//                                                            y: metrica.valorMetrica
+//                                                        })
+//                                                    break;
                                                 case "NOI":
                                                     noi
                                                         .push({
@@ -1580,41 +1588,41 @@ selfieMyappDev
                                     dataSeries.dataPoints = wmc;
                                     data.push(dataSeries);
 
-                                    var dataSeries = {
-                                        type: "line",
-                                        legendText: "CCM",
-                                        showInLegend: true
-                                    };
-                                    var dataPoints = [];
-                                    dataSeries.dataPoints = ccm;
-                                    data.push(dataSeries);
+//                                    var dataSeries = {
+//                                        type: "line",
+//                                        legendText: "CCM",
+//                                        showInLegend: true
+//                                    };
+//                                    var dataPoints = [];
+//                                    dataSeries.dataPoints = ccm;
+//                                    data.push(dataSeries);
+//
+//                                    var dataSeries = {
+//                                        type: "line",
+//                                        legendText: "LCOM",
+//                                        showInLegend: true
+//                                    };
+//                                    var dataPoints = [];
+//                                    dataSeries.dataPoints = lcom;
+//                                    data.push(dataSeries);
+//
+//                                    var dataSeries = {
+//                                        type: "line",
+//                                        legendText: "NBD",
+//                                        showInLegend: true
+//                                    };
+//                                    var dataPoints = [];
+//                                    dataSeries.dataPoints = nbd;
+//                                    data.push(dataSeries);
 
-                                    var dataSeries = {
-                                        type: "line",
-                                        legendText: "LCOM",
-                                        showInLegend: true
-                                    };
-                                    var dataPoints = [];
-                                    dataSeries.dataPoints = lcom;
-                                    data.push(dataSeries);
-
-                                    var dataSeries = {
-                                        type: "line",
-                                        legendText: "NBD",
-                                        showInLegend: true
-                                    };
-                                    var dataPoints = [];
-                                    dataSeries.dataPoints = nbd;
-                                    data.push(dataSeries);
-
-                                    var dataSeries = {
-                                        type: "line",
-                                        legendText: "DIT",
-                                        showInLegend: true
-                                    };
-                                    var dataPoints = [];
-                                    dataSeries.dataPoints = dit;
-                                    data.push(dataSeries);
+//                                    var dataSeries = {
+//                                        type: "line",
+//                                        legendText: "DIT",
+//                                        showInLegend: true
+//                                    };
+//                                    var dataPoints = [];
+//                                    dataSeries.dataPoints = dit;
+//                                    data.push(dataSeries);
 
                                     var dataSeries = {
                                         type: "line",
@@ -1634,14 +1642,14 @@ selfieMyappDev
                                     dataSeries.dataPoints = norm;
                                     data.push(dataSeries);
 
-                                    var dataSeries = {
-                                        type: "line",
-                                        legendText: "SIX",
-                                        showInLegend: true
-                                    };
-                                    var dataPoints = [];
-                                    dataSeries.dataPoints = six;
-                                    data.push(dataSeries);
+//                                    var dataSeries = {
+//                                        type: "line",
+//                                        legendText: "SIX",
+//                                        showInLegend: true
+//                                    };
+//                                    var dataPoints = [];
+//                                    dataSeries.dataPoints = six;
+//                                    data.push(dataSeries);
 
                                     var dataSeries = {
                                         type: "line",
@@ -1652,14 +1660,14 @@ selfieMyappDev
                                     dataSeries.dataPoints = mloc;
                                     data.push(dataSeries);
 
-                                    var dataSeries = {
-                                        type: "line",
-                                        legendText: "NAC",
-                                        showInLegend: true
-                                    };
-                                    var dataPoints = [];
-                                    dataSeries.dataPoints = nac;
-                                    data.push(dataSeries);
+//                                    var dataSeries = {
+//                                        type: "line",
+//                                        legendText: "NAC",
+//                                        showInLegend: true
+//                                    };
+//                                    var dataPoints = [];
+//                                    dataSeries.dataPoints = nac;
+//                                    data.push(dataSeries);
 
                                     var dataSeries = {
                                         type: "line",
@@ -1679,14 +1687,14 @@ selfieMyappDev
                                     dataSeries.dataPoints = nsm;
                                     data.push(dataSeries);
 
-                                    var dataSeries = {
-                                        type: "line",
-                                        legendText: "PAR",
-                                        showInLegend: true
-                                    };
-                                    var dataPoints = [];
-                                    dataSeries.dataPoints = par;
-                                    data.push(dataSeries);
+//                                    var dataSeries = {
+//                                        type: "line",
+//                                        legendText: "PAR",
+//                                        showInLegend: true
+//                                    };
+//                                    var dataPoints = [];
+//                                    dataSeries.dataPoints = par;
+//                                    data.push(dataSeries);
 
                                     var dataSeries = {
                                         type: "line",
@@ -1769,40 +1777,40 @@ selfieMyappDev
 
                                     $scope.todas.render();
 
-                                    var data = [];
-                                    var dataSeries = {
-                                        type: "line"
-                                    };
-                                    var dataPoints = [];
-                                    dataSeries.dataPoints = ccm;
-                                    data.push(dataSeries);
+//                                    var data = [];
+//                                    var dataSeries = {
+//                                        type: "line"
+//                                    };
+//                                    var dataPoints = [];
+//                                    dataSeries.dataPoints = ccm;
+//                                    data.push(dataSeries);
 
-                                    $scope.ccm = new CanvasJS.Chart(
-                                        "ccmContainer", {
-                                            zoomEnabled: true,
-                                            title: {
-                                                text: "Métrica CCM"
-                                            },
-                                            axisX: {
-                                                valueFormatString: "DD/MM/YYYY HH:mm:ss", // move
-                                                // comma
-                                                // to
-                                                // change
-                                                // formatting
-                                                labelAngle: -30,
-                                                interval: 1,
-                                            },
-                                            axisY: {
-                                                includeZero: false
-                                            },
-                                            legend: {
-                                                horizontalAlign: "right",
-                                                verticalAlign: "center"
-                                            },
-                                            data: data,
-                                        });
-
-                                    $scope.ccm.render();
+//                                    $scope.ccm = new CanvasJS.Chart(
+//                                        "ccmContainer", {
+//                                            zoomEnabled: true,
+//                                            title: {
+//                                                text: "Métrica CCM"
+//                                            },
+//                                            axisX: {
+//                                                valueFormatString: "DD/MM/YYYY HH:mm:ss", // move
+//                                                // comma
+//                                                // to
+//                                                // change
+//                                                // formatting
+//                                                labelAngle: -30,
+//                                                interval: 1,
+//                                            },
+//                                            axisY: {
+//                                                includeZero: false
+//                                            },
+//                                            legend: {
+//                                                horizontalAlign: "right",
+//                                                verticalAlign: "center"
+//                                            },
+//                                            data: data,
+//                                        });
+//
+//                                    $scope.ccm.render();
 
                                     var data = []
                                     var dataSeries = {
@@ -1839,163 +1847,163 @@ selfieMyappDev
 
                                     $scope.wmc.render();
 
-                                    var data = []
-                                    var dataSeries = {
-                                        type: "line"
-                                    };
-                                    var dataPoints = [];
-                                    dataSeries.dataPoints = lcom;
-                                    data.push(dataSeries);
+//                                    var data = []
+//                                    var dataSeries = {
+//                                        type: "line"
+//                                    };
+//                                    var dataPoints = [];
+//                                    dataSeries.dataPoints = lcom;
+//                                    data.push(dataSeries);
+//
+//                                    $scope.lcom = new CanvasJS.Chart(
+//                                        "lcomContainer", {
+//                                            zoomEnabled: true,
+//                                            title: {
+//                                                text: "Métricas LCOM"
+//                                            },
+//                                            axisX: {
+//                                                valueFormatString: "DD/MM/YYYY HH:mm:ss", // move
+//                                                // comma
+//                                                // to
+//                                                // change
+//                                                // formatting
+//                                                labelAngle: -30,
+//                                                interval: 1,
+//                                            },
+//                                            axisY: {
+//                                                includeZero: false
+//                                            },
+//                                            legend: {
+//                                                horizontalAlign: "right",
+//                                                verticalAlign: "center"
+//                                            },
+//                                            data: data,
+//                                        });
+//
+//                                    $scope.lcom.render();
 
-                                    $scope.lcom = new CanvasJS.Chart(
-                                        "lcomContainer", {
-                                            zoomEnabled: true,
-                                            title: {
-                                                text: "Métricas LCOM"
-                                            },
-                                            axisX: {
-                                                valueFormatString: "DD/MM/YYYY HH:mm:ss", // move
-                                                // comma
-                                                // to
-                                                // change
-                                                // formatting
-                                                labelAngle: -30,
-                                                interval: 1,
-                                            },
-                                            axisY: {
-                                                includeZero: false
-                                            },
-                                            legend: {
-                                                horizontalAlign: "right",
-                                                verticalAlign: "center"
-                                            },
-                                            data: data,
-                                        });
+//                                    var data = []
+//                                    var dataSeries = {
+//                                        type: "line"
+//                                    };
+//                                    var dataPoints = [];
+//                                    dataSeries.dataPoints = nbd;
+//                                    data.push(dataSeries);
+//
+//                                    CanvasJS
+//                                        .addColorSet(
+//                                            "color", [ // colorSet
+//                                                // Array
+//                                                "#cccccc",
+//                                                "#EC5657",
+//                                                "#1BCDD1",
+//                                                "#8FAABB",
+//                                                "#B08BEB",
+//                                                "#3EA0DD",
+//                                                "#F5A52A",
+//                                                "#23BFAA",
+//                                                "#FAA586",
+//                                                "#EB8CC6",
+//                                            ]);
+//
+//                                    $scope.nbd = new CanvasJS.Chart(
+//                                        "nbdContainer", {
+//                                            zoomEnabled: true,
+//                                            colorSet: "color",
+//                                            title: {
+//                                                text: "Métricas NBD"
+//                                            },
+//                                            axisX: {
+//                                                valueFormatString: "DD/MM/YYYY HH:mm:ss", // move
+//                                                // comma
+//                                                // to
+//                                                // change
+//                                                // formatting
+//                                                labelAngle: -30,
+//                                                interval: 1,
+//                                                intervalType: "day"
+//                                            },
+//                                            axisY: {
+//                                                includeZero: false
+//                                            },
+//                                            legend: {
+//                                                horizontalAlign: "right",
+//                                                verticalAlign: "center"
+//                                            },
+//                                            data: data,
+//                                        });
+//
+//                                    $scope.lcom.render();
 
-                                    $scope.lcom.render();
+//                                    var data = []
+//                                    var dataSeries = {
+//                                        type: "line"
+//                                    };
+//                                    var dataPoints = [];
+//                                    dataSeries.dataPoints = nbd;
+//                                    data.push(dataSeries);
+//
+//                                    $scope.nbd = new CanvasJS.Chart(
+//                                        "nbdContainer", {
+//                                            zoomEnabled: true,
+//                                            title: {
+//                                                text: "Métricas NBD"
+//                                            },
+//                                            axisX: {
+//                                                valueFormatString: "DD/MM/YYYY HH:mm:ss", // move
+//                                                // comma
+//                                                // to
+//                                                // change
+//                                                // formatting
+//                                                labelAngle: -30,
+//                                                interval: 1,
+//                                            },
+//                                            axisY: {
+//                                                includeZero: false
+//                                            },
+//                                            legend: {
+//                                                horizontalAlign: "right",
+//                                                verticalAlign: "center"
+//                                            },
+//                                            data: data,
+//                                        });
+//
+//                                    $scope.nbd.render();
 
-                                    var data = []
-                                    var dataSeries = {
-                                        type: "line"
-                                    };
-                                    var dataPoints = [];
-                                    dataSeries.dataPoints = nbd;
-                                    data.push(dataSeries);
-
-                                    CanvasJS
-                                        .addColorSet(
-                                            "color", [ // colorSet
-                                                // Array
-                                                "#cccccc",
-                                                "#EC5657",
-                                                "#1BCDD1",
-                                                "#8FAABB",
-                                                "#B08BEB",
-                                                "#3EA0DD",
-                                                "#F5A52A",
-                                                "#23BFAA",
-                                                "#FAA586",
-                                                "#EB8CC6",
-                                            ]);
-
-                                    $scope.nbd = new CanvasJS.Chart(
-                                        "nbdContainer", {
-                                            zoomEnabled: true,
-                                            colorSet: "color",
-                                            title: {
-                                                text: "Métricas NBD"
-                                            },
-                                            axisX: {
-                                                valueFormatString: "DD/MM/YYYY HH:mm:ss", // move
-                                                // comma
-                                                // to
-                                                // change
-                                                // formatting
-                                                labelAngle: -30,
-                                                interval: 1,
-                                                intervalType: "day"
-                                            },
-                                            axisY: {
-                                                includeZero: false
-                                            },
-                                            legend: {
-                                                horizontalAlign: "right",
-                                                verticalAlign: "center"
-                                            },
-                                            data: data,
-                                        });
-
-                                    $scope.lcom.render();
-
-                                    var data = []
-                                    var dataSeries = {
-                                        type: "line"
-                                    };
-                                    var dataPoints = [];
-                                    dataSeries.dataPoints = nbd;
-                                    data.push(dataSeries);
-
-                                    $scope.nbd = new CanvasJS.Chart(
-                                        "nbdContainer", {
-                                            zoomEnabled: true,
-                                            title: {
-                                                text: "Métricas NBD"
-                                            },
-                                            axisX: {
-                                                valueFormatString: "DD/MM/YYYY HH:mm:ss", // move
-                                                // comma
-                                                // to
-                                                // change
-                                                // formatting
-                                                labelAngle: -30,
-                                                interval: 1,
-                                            },
-                                            axisY: {
-                                                includeZero: false
-                                            },
-                                            legend: {
-                                                horizontalAlign: "right",
-                                                verticalAlign: "center"
-                                            },
-                                            data: data,
-                                        });
-
-                                    $scope.nbd.render();
-
-                                    var data = []
-                                    var dataSeries = {
-                                        type: "line"
-                                    };
-                                    var dataPoints = [];
-                                    dataSeries.dataPoints = dit;
-                                    data.push(dataSeries);
-
-                                    $scope.dit = new CanvasJS.Chart(
-                                        "ditContainer", {
-                                            zoomEnabled: true,
-                                            title: {
-                                                text: "Métricas DIT"
-                                            },
-                                            axisX: {
-                                                valueFormatString: "DD/MM/YYYY HH:mm:ss", // move
-                                                // comma
-                                                // to
-                                                // change
-                                                // formatting
-                                                labelAngle: -30,
-                                                interval: 1,
-                                            },
-                                            axisY: {
-                                                includeZero: false
-                                            },
-                                            legend: {
-                                                horizontalAlign: "right",
-                                                verticalAlign: "center"
-                                            },
-                                            data: data,
-                                        });
-
-                                    $scope.dit.render();
+//                                    var data = []
+//                                    var dataSeries = {
+//                                        type: "line"
+//                                    };
+//                                    var dataPoints = [];
+//                                    dataSeries.dataPoints = dit;
+//                                    data.push(dataSeries);
+//
+//                                    $scope.dit = new CanvasJS.Chart(
+//                                        "ditContainer", {
+//                                            zoomEnabled: true,
+//                                            title: {
+//                                                text: "Métricas DIT"
+//                                            },
+//                                            axisX: {
+//                                                valueFormatString: "DD/MM/YYYY HH:mm:ss", // move
+//                                                // comma
+//                                                // to
+//                                                // change
+//                                                // formatting
+//                                                labelAngle: -30,
+//                                                interval: 1,
+//                                            },
+//                                            axisY: {
+//                                                includeZero: false
+//                                            },
+//                                            legend: {
+//                                                horizontalAlign: "right",
+//                                                verticalAlign: "center"
+//                                            },
+//                                            data: data,
+//                                        });
+//
+//                                    $scope.dit.render();
 
                                     var data = []
                                     var dataSeries = {
@@ -2067,41 +2075,41 @@ selfieMyappDev
 
                                     $scope.norm.render();
 
-                                    var data = []
-                                    var dataSeries = {
-                                        type: "line"
-                                    };
-                                    var dataPoints = [];
-                                    dataSeries.dataPoints = six;
-                                    data.push(dataSeries);
-
-                                    $scope.six = new CanvasJS.Chart(
-                                        "sixContainer", {
-                                            zoomEnabled: true,
-                                            colorSet: "color",
-                                            title: {
-                                                text: "Métricas SIX"
-                                            },
-                                            axisX: {
-                                                valueFormatString: "DD/MM/YYYY HH:mm:ss", // move
-                                                // comma
-                                                // to
-                                                // change
-                                                // formatting
-                                                labelAngle: -30,
-                                                interval: 1,
-                                            },
-                                            axisY: {
-                                                includeZero: false
-                                            },
-                                            legend: {
-                                                horizontalAlign: "right",
-                                                verticalAlign: "center"
-                                            },
-                                            data: data,
-                                        });
-
-                                    $scope.six.render();
+//                                    var data = []
+//                                    var dataSeries = {
+//                                        type: "line"
+//                                    };
+//                                    var dataPoints = [];
+//                                    dataSeries.dataPoints = six;
+//                                    data.push(dataSeries);
+//
+//                                    $scope.six = new CanvasJS.Chart(
+//                                        "sixContainer", {
+//                                            zoomEnabled: true,
+//                                            colorSet: "color",
+//                                            title: {
+//                                                text: "Métricas SIX"
+//                                            },
+//                                            axisX: {
+//                                                valueFormatString: "DD/MM/YYYY HH:mm:ss", // move
+//                                                // comma
+//                                                // to
+//                                                // change
+//                                                // formatting
+//                                                labelAngle: -30,
+//                                                interval: 1,
+//                                            },
+//                                            axisY: {
+//                                                includeZero: false
+//                                            },
+//                                            legend: {
+//                                                horizontalAlign: "right",
+//                                                verticalAlign: "center"
+//                                            },
+//                                            data: data,
+//                                        });
+//
+//                                    $scope.six.render();
 
                                     var data = []
                                     var dataSeries = {
@@ -2139,41 +2147,41 @@ selfieMyappDev
 
                                     $scope.mloc.render();
 
-                                    var data = []
-                                    var dataSeries = {
-                                        type: "line"
-                                    };
-                                    var dataPoints = [];
-                                    dataSeries.dataPoints = nac;
-                                    data.push(dataSeries);
-
-                                    $scope.nac = new CanvasJS.Chart(
-                                        "nacContainer", {
-                                            zoomEnabled: true,
-                                            colorSet: "color",
-                                            title: {
-                                                text: "Métricas NAC"
-                                            },
-                                            axisX: {
-                                                valueFormatString: "DD/MM/YYYY HH:mm:ss", // move
-                                                // comma
-                                                // to
-                                                // change
-                                                // formatting
-                                                labelAngle: -30,
-                                                interval: 1,
-                                            },
-                                            axisY: {
-                                                includeZero: false
-                                            },
-                                            legend: {
-                                                horizontalAlign: "right",
-                                                verticalAlign: "center"
-                                            },
-                                            data: data,
-                                        });
-
-                                    $scope.nac.render();
+//                                    var data = []
+//                                    var dataSeries = {
+//                                        type: "line"
+//                                    };
+//                                    var dataPoints = [];
+//                                    dataSeries.dataPoints = nac;
+//                                    data.push(dataSeries);
+//
+//                                    $scope.nac = new CanvasJS.Chart(
+//                                        "nacContainer", {
+//                                            zoomEnabled: true,
+//                                            colorSet: "color",
+//                                            title: {
+//                                                text: "Métricas NAC"
+//                                            },
+//                                            axisX: {
+//                                                valueFormatString: "DD/MM/YYYY HH:mm:ss", // move
+//                                                // comma
+//                                                // to
+//                                                // change
+//                                                // formatting
+//                                                labelAngle: -30,
+//                                                interval: 1,
+//                                            },
+//                                            axisY: {
+//                                                includeZero: false
+//                                            },
+//                                            legend: {
+//                                                horizontalAlign: "right",
+//                                                verticalAlign: "center"
+//                                            },
+//                                            data: data,
+//                                        });
+//
+//                                    $scope.nac.render();
 
                                     var data = []
                                     var dataSeries = {
@@ -2247,41 +2255,41 @@ selfieMyappDev
 
                                     $scope.nsm.render();
 
-                                    var data = []
-                                    var dataSeries = {
-                                        type: "line"
-                                    };
-                                    var dataPoints = [];
-                                    dataSeries.dataPoints = par;
-                                    data.push(dataSeries);
-
-                                    $scope.par = new CanvasJS.Chart(
-                                        "parContainer", {
-                                            zoomEnabled: true,
-                                            colorSet: "color",
-                                            title: {
-                                                text: "Métricas PAR"
-                                            },
-                                            axisX: {
-                                                valueFormatString: "DD/MM/YYYY HH:mm:ss", // move
-                                                // comma
-                                                // to
-                                                // change
-                                                // formatting
-                                                labelAngle: -30,
-                                                interval: 1,
-                                            },
-                                            axisY: {
-                                                includeZero: false
-                                            },
-                                            legend: {
-                                                horizontalAlign: "right",
-                                                verticalAlign: "center"
-                                            },
-                                            data: data,
-                                        });
-
-                                    $scope.par.render();
+//                                    var data = []
+//                                    var dataSeries = {
+//                                        type: "line"
+//                                    };
+//                                    var dataPoints = [];
+//                                    dataSeries.dataPoints = par;
+//                                    data.push(dataSeries);
+//
+//                                    $scope.par = new CanvasJS.Chart(
+//                                        "parContainer", {
+//                                            zoomEnabled: true,
+//                                            colorSet: "color",
+//                                            title: {
+//                                                text: "Métricas PAR"
+//                                            },
+//                                            axisX: {
+//                                                valueFormatString: "DD/MM/YYYY HH:mm:ss", // move
+//                                                // comma
+//                                                // to
+//                                                // change
+//                                                // formatting
+//                                                labelAngle: -30,
+//                                                interval: 1,
+//                                            },
+//                                            axisY: {
+//                                                includeZero: false
+//                                            },
+//                                            legend: {
+//                                                horizontalAlign: "right",
+//                                                verticalAlign: "center"
+//                                            },
+//                                            data: data,
+//                                        });
+//
+//                                    $scope.par.render();
 
                                     var data = []
                                     var dataSeries = {
@@ -2496,8 +2504,41 @@ selfieMyappDev
                                             },
                                             data: data,
                                         });
-
+                                    
                                     $scope.abs.render();
+                                    
+                                    var dataPoints = [];
+                                    dataSeries.dataPoints = nom;
+                                    data.push(dataSeries);
+
+                                    $scope.nom = new CanvasJS.Chart(
+                                        "nomContainer", {
+                                            zoomEnabled: true,
+                                            colorSet: "color",
+                                            title: {
+                                                text: "Métricas NOM"
+                                            },
+                                            axisX: {
+                                                valueFormatString: "DD/MM/YYYY HH:mm:ss", // move
+                                                // comma
+                                                // to
+                                                // change
+                                                // formatting
+                                                labelAngle: -30,
+                                                interval: 1,
+                                            },
+                                            axisY: {
+                                                includeZero: false
+                                            },
+                                            legend: {
+                                                horizontalAlign: "right",
+                                                verticalAlign: "center"
+                                            },
+                                            data: data,
+                                        });
+
+                                    $scope.nom.render();
+                                    
                                     $scope.cancel();
 
                                 }

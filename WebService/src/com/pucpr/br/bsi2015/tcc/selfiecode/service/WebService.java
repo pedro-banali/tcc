@@ -152,6 +152,7 @@ public class WebService {
 		int projId = jsonObject.getInt("projId");
 		String sessionId = jsonObject.getString("sessionId");
 		sbc.salvarCodigoFonte(metricas, dateS, fileName, classe, projId, sessionId);
+		
 		for (int i = 0; i < metricas.size(); i++) {
 			for (int j = 0; j < metricas.get(i).getDicas().size(); j++) {
 				jsonResponse.put(metricas.get(i).getSigla(),  metricas.get(i).getDicas().get(j).getDescricao());
