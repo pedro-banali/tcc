@@ -18,9 +18,9 @@ public class ConnectionFactory {
 //	private static final String DB_CONNECTION = "jdbc:mysql://selfiecodetcc.cono6s1iznze.us-west-2.rds.amazonaws.com:3306/selfiecode";
 	private static final String DB_USER = "root";
 //	private static final String DB_USER = "tcc";
-	// private static final String DB_PASSWORD = "tcc@051526";
-	 private static final String DB_PASSWORD = "tcc@6274262";
-//	private static final String DB_PASSWORD = "tcc051526";
+//	 private static final String DB_PASSWORD = "tcc@051526"; // localServer
+//	 private static final String DB_PASSWORD = "tcc@6274262"; //AWS??
+	private static final String DB_PASSWORD = "tcc051526"; // localhost
 
 	private static Session session;
 

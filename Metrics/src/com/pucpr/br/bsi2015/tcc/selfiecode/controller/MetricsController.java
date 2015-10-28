@@ -43,6 +43,8 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.PlatformUI;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.osgi.framework.Bundle;
@@ -230,6 +232,13 @@ public class MetricsController extends Observable {
 			// StreamResult result = new StreamResult(System.out);
 
 			transformer.transform(source, result);
+			
+			PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
+			    @Override
+			    public void run() {
+			        PlatformUI.getWorkbench().restart();
+			    }
+			});
 
 			System.out.println("File saved!");
 
