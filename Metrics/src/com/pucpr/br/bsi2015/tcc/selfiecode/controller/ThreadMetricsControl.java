@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.Platform;
@@ -39,6 +40,7 @@ public class ThreadMetricsControl extends Thread {
 		System.out.println("Thread startou");
 		String fileName = "";
 
+		
 		String info[];
 		if (o == null) {
 			try {
@@ -68,6 +70,20 @@ public class ThreadMetricsControl extends Thread {
 				{
 					System.out.println("deu menos q 0");
 					this.pr = pr;
+					
+					IMarker[] markers;
+					try {
+						markers = ResourcesPlugin.getWorkspace().getRoot().findMarkers(IMarker.PROBLEM, true,
+								IResource.DEPTH_INFINITE);
+						if (markers.length > 0) {
+							for (int i = 0; i < markers.length; i++) {
+								markers[i].delete();
+							}
+						}
+					} catch (CoreException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 				else {
 					System.out.println("deu mais q 0");

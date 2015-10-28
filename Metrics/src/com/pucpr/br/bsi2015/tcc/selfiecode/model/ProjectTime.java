@@ -46,7 +46,6 @@ public class ProjectTime {
 		}
 	}
 	private final int setInterval() {
-		System.out.println(interval);
 		return --interval;
 	}
 

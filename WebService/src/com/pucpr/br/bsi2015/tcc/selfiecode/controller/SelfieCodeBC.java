@@ -66,7 +66,10 @@ public class SelfieCodeBC {
 		while (iter.hasNext()) {
 			String key = iter.next();
 			try {
-				Float value = new Float((String) jsonObject.get(key));
+				String teste = (String) jsonObject.get(key);
+				teste = teste.replaceAll(",", ".");
+				
+				Float value = new Float(teste);
 				m = new Metrica();
 				m.setSigla(key);
 				m.setValorMetrica(value);
