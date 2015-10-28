@@ -1,5 +1,6 @@
 package com.pucpr.br.bsi2015.tcc.selfiecode.controller;
 
+import java.awt.Image;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -71,19 +72,19 @@ public class ThreadMetricsControl extends Thread {
 					System.out.println("deu menos q 0");
 					this.pr = pr;
 					
-					IMarker[] markers;
-					try {
-						markers = ResourcesPlugin.getWorkspace().getRoot().findMarkers(IMarker.PROBLEM, true,
-								IResource.DEPTH_INFINITE);
-						if (markers.length > 0) {
-							for (int i = 0; i < markers.length; i++) {
-								markers[i].delete();
-							}
-						}
-					} catch (CoreException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+//					IMarker[] markers;
+//					try {
+//						markers = ResourcesPlugin.getWorkspace().getRoot().findMarkers(IMarker.PROBLEM, true,
+//								IResource.DEPTH_INFINITE);
+//						if (markers.length > 0) {
+//							for (int i = 0; i < markers.length; i++) {
+//								markers[i].delete();
+//							}
+//						}
+//					} catch (CoreException e1) {
+//						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+//					}
 				}
 				else {
 					System.out.println("deu mais q 0");
@@ -163,7 +164,7 @@ public class ThreadMetricsControl extends Thread {
 				}
 			}
 			IResource resource = type.getUnderlyingResource();
-			IMarker marker = resource.createMarker(IMarker.PROBLEM);
+			IMarker marker = resource.createMarker(IMarker.TEXT);
 			marker.setAttribute(IMarker.MESSAGE, message);
 //			IExtensionPoint point =
 //			Platform.getExtensionRegistry().getExtensionPoint(ResourcesPlugin.PI_RESOURCES,
@@ -180,7 +181,8 @@ public class ThreadMetricsControl extends Thread {
 //			 // TODO save the label
 //				}
 //			}
-
+	
+			marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_NORMAL);
 			marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_NORMAL);
 			marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_INFO);
 		} catch (Exception e) {
