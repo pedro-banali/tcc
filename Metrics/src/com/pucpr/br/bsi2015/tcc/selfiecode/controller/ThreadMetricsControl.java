@@ -39,19 +39,7 @@ public class ThreadMetricsControl extends Thread {
 	public void run() {
 		System.out.println("Thread startou");
 		String fileName = "";
-		IMarker[] markers;
-		try {
-			markers = ResourcesPlugin.getWorkspace().getRoot().findMarkers(IMarker.PROBLEM, true,
-					IResource.DEPTH_INFINITE);
-			if (markers.length > 0) {
-				for (int i = 0; i < markers.length; i++) {
-					markers[i].delete();
-				}
-			}
-		} catch (CoreException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+
 		
 		String info[];
 		if (o == null) {
@@ -82,6 +70,20 @@ public class ThreadMetricsControl extends Thread {
 				{
 					System.out.println("deu menos q 0");
 					this.pr = pr;
+					
+					IMarker[] markers;
+					try {
+						markers = ResourcesPlugin.getWorkspace().getRoot().findMarkers(IMarker.PROBLEM, true,
+								IResource.DEPTH_INFINITE);
+						if (markers.length > 0) {
+							for (int i = 0; i < markers.length; i++) {
+								markers[i].delete();
+							}
+						}
+					} catch (CoreException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 				else {
 					System.out.println("deu mais q 0");

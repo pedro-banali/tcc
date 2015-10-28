@@ -2216,7 +2216,7 @@ selfieMyappDev
                                         type: "line"
                                     };
                                     var dataPoints = [];
-                                    dataSeries.dataPoints = nsf;
+                                    dataSeries.dataPoints = nsm;
                                     data.push(dataSeries);
 
                                     $scope.nsm = new CanvasJS.Chart(
